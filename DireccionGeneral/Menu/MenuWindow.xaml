@@ -1,0 +1,24 @@
+﻿<Window x:Class="DireccionGeneral.Menu.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DireccionGeneral.Menu"
+        mc:Ignorable="d"
+        Title="Dirección General" MinWidth="800" MinHeight="600">
+    <DockPanel LastChildFill="True">
+
+        <StackPanel DockPanel.Dock="Left">
+            <Button x:Name="btn_Usuarios" Content="Usuarios" VerticalAlignment="Top" Click="btn_Usuarios_Click" />
+            <Button x:Name="btn_Delegaciones" Content="Delegaciones" VerticalAlignment="Top" Click="btn_Delegaciones_Click" />
+            <Button x:Name="btn_Reportes" Content="Reportes" VerticalAlignment="Top" Click="btn_Reportes_Click" />
+            <Button x:Name="btn_Chat" Content="Sala Chat" VerticalAlignment="Top" Click="btn_Chat_Click" />
+            <Button x:Name="btn_CerrarSesion" Content="Cerrar Sesión" VerticalAlignment="Top" Click="btn_CerrarSesion_Click"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Label FontSize="24">Gestor de Reportes de Siniestros Vehiculares</Label>
+        </StackPanel>
+        <Frame x:Name="frame_Content" NavigationUIVisibility="Hidden"/>
+
+    </DockPanel>
+</Window>

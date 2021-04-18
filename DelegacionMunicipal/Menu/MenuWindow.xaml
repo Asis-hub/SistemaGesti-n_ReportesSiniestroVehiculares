@@ -1,0 +1,24 @@
+﻿<Window x:Class="DelegacionMunicipal.Menu.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DelegacionMunicipal.Menu"
+        mc:Ignorable="d"
+        Title="Menu" MinWidth="800" MinHeight="600">
+    <DockPanel LastChildFill="True">
+        
+        <StackPanel DockPanel.Dock="Left">
+            <Button x:Name="btn_Conductores" Content="Conductores" VerticalAlignment="Top" Click="btn_Conductores_Click" />
+            <Button x:Name="btn_Vehiculos" Content="Vehículos" VerticalAlignment="Top" Click="btn_Vehiculos_Click" />
+            <Button x:Name="btn_Reportes" Content="Reportes" VerticalAlignment="Top" Click="btn_Reportes_Click" />
+            <Button x:Name="btn_Chat" Content="Sala Chat" VerticalAlignment="Top" Click="btn_Chat_Click" />
+            <Button x:Name="btn_CerrarSesion" Content="Cerrar Sesión" VerticalAlignment="Top" Click="btn_CerrarSesion_Click"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Label FontSize="24">Gestor de Reportes de Siniestros Vehiculares</Label>
+        </StackPanel>
+        <Frame x:Name="frame_Content" NavigationUIVisibility="Hidden"/>
+        
+    </DockPanel>
+</Window>
