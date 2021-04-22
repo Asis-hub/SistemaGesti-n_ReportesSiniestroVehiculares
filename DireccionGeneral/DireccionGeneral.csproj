@@ -67,6 +67,12 @@
     <Compile Include="Reportes\ConsultarReportes.xaml.cs">
       <DependentUpon>ConsultarReportes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\DetallesReporte.xaml.cs">
+      <DependentUpon>DetallesReporte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\DictaminarReporte.xaml.cs">
+      <DependentUpon>DictaminarReporte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalaChat\Chat.xaml.cs">
       <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
@@ -101,6 +107,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Reportes\ConsultarReportes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reportes\DetallesReporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reportes\DictaminarReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
