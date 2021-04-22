@@ -24,5 +24,21 @@ namespace DireccionGeneral.Reportes
         {
             InitializeComponent();
         }
+
+        private void btn_BuscarReportes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_DictaminarReporte_Click(object sender, RoutedEventArgs e)
+        {
+            DictaminarReporte ventanaDictaminarReporte = new DictaminarReporte();
+            ventanaDictaminarReporte.ShowDialog();
+        }
     }
 }
