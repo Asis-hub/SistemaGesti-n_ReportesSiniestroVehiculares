@@ -61,6 +61,9 @@
     <Compile Include="Reportes\ConsultarReportes.xaml.cs">
       <DependentUpon>ConsultarReportes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\FormReporteSiniestro.xaml.cs">
+      <DependentUpon>FormReporteSiniestro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalaChat\Chat.xaml.cs">
       <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Reportes\ConsultarReportes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reportes\FormReporteSiniestro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
