@@ -28,7 +28,8 @@ namespace DelegacionMunicipal.Reportes
         
         private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
         {
-
+            DetallesReporte ventanaDetalles = new DetallesReporte();
+            ventanaDetalles.ShowDialog();
         }
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
