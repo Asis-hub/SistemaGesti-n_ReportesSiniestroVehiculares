@@ -31,7 +31,7 @@
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="348,206,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Tipo" HorizontalAlignment="Left" Margin="431,206,0,0" VerticalAlignment="Top" Width="205"/>
 
-        <Button x:Name="btn_RegistrarDelegacion" Content="Registrar" HorizontalAlignment="Left" Margin="456,277,0,0" VerticalAlignment="Top" Width="76" Click="btn_RegistrarUsuario_Click"/>
+        <Button x:Name="btn_RegistrarDelegacion" Content="Registrar" HorizontalAlignment="Left" Margin="456,277,0,0" VerticalAlignment="Top" Width="76" Click="btn_RegistrarDelegacion_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="561,277,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
 
     </Grid>

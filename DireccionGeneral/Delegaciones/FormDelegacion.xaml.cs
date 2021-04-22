@@ -35,5 +35,6 @@ namespace DireccionGeneral.Delegaiciones
             this.DialogResult = false;
             this.Close();
         }
+
     }
 }
