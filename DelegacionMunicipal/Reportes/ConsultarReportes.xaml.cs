@@ -24,5 +24,22 @@ namespace DelegacionMunicipal.Reportes
         {
             InitializeComponent();
         }
+
+        
+        private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
+        {
+            FormReporteSiniestro formReporteSiniestro = new FormReporteSiniestro();
+            formReporteSiniestro.ShowDialog();
+        }
+
+        private void btn_BuscarReportes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
