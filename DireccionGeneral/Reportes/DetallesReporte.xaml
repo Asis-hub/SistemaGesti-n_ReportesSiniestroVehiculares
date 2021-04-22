@@ -14,6 +14,10 @@
         <Label Content="Delegacion" HorizontalAlignment="Left" Margin="70,200,0,0" VerticalAlignment="Top"/>
         <Label Content="Usuario" HorizontalAlignment="Left" Margin="70,239,0,0" VerticalAlignment="Top"/>
         <Label Content="Detalles de reporte&#xD;&#xA;" HorizontalAlignment="Left" Margin="281,19,0,0" VerticalAlignment="Top" Height="34" Width="206" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Dictamen" HorizontalAlignment="Left" Margin="70,270,0,0" VerticalAlignment="Top"/>
+        <Button Content="Abrir dictamen" HorizontalAlignment="Left" Margin="309,276,0,0" VerticalAlignment="Top" Width="95" Click="Button_Click"/>
+        <Label Content="Conductores" HorizontalAlignment="Left" Margin="525,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vehiculos" HorizontalAlignment="Left" Margin="639,103,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>
