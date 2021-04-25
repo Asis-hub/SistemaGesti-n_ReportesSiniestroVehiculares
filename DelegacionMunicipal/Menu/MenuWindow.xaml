@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegacionMunicipal.Menu"
         mc:Ignorable="d"
-        Title="Menu" MinWidth="800" MinHeight="600">
+        Title="Delegacción Municipal" MinWidth="800" MinHeight="600">
     <DockPanel LastChildFill="True">
         
         <StackPanel DockPanel.Dock="Left">
