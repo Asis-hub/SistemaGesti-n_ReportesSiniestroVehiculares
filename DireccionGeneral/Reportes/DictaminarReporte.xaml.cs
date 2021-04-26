@@ -30,7 +30,8 @@ namespace DireccionGeneral.Reportes
             this.Close();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        
+        private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             this.Close();

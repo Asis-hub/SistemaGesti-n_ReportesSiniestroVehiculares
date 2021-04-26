@@ -63,5 +63,22 @@ namespace DireccionGeneral.Menu
         {
 
         }
+
+        private void CerrarVentana(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MinimizarVentana(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Minimized;
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+            }
+        }
     }
 }
