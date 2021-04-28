@@ -105,7 +105,7 @@
         <StackPanel DockPanel.Dock="Top" Background="White">
             <Label FontSize="24" FontWeight="Bold">Delegacción Municipal</Label>
         </StackPanel>
-        <Frame x:Name="frame_Content" NavigationUIVisibility="Hidden"/>
+        <Frame   x:Name="frame_Content" NavigationUIVisibility="Hidden"/>
         
     </DockPanel>
 </Window>

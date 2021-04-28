@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"name": "Proyecto",
 	"ownedElements": [
 		{
 			"_type": "ERDDataModel",
@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Data Model1",
+			"name": "Modelo Relacional",
 			"ownedElements": [
 				{
 					"_type": "ERDDiagram",
@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF4vPrS4Awsv7s="
 					},
-					"name": "ERDDiagram1",
+					"name": "Diagrama",
 					"ownedViews": [
 						{
 							"_type": "ERDEntityView",
