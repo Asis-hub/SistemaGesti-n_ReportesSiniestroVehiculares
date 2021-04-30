@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DelegacionMunicipal.Vehiculos
+namespace DelegacionMunicipal.Conductores
 {
-    class VehiculoDAO
+    class ConductoresDAO
     {
+
     }
 }
