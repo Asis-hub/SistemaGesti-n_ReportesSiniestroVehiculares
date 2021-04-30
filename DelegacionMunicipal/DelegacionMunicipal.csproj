@@ -59,7 +59,6 @@
     <Compile Include="Conductores\FormConductor.xaml.cs">
       <DependentUpon>FormConductor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="db\ConexionBD.cs" />
     <Compile Include="Reportes\ConsultarReportes.xaml.cs">
       <DependentUpon>ConsultarReportes.xaml</DependentUpon>
     </Compile>
@@ -160,6 +159,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Conexion\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
