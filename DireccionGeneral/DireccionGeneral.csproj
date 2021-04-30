@@ -58,7 +58,7 @@
     <Compile Include="Delegaciones\ConsultarDelegaciones.xaml.cs">
       <DependentUpon>ConsultarDelegaciones.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Delegaciones\DelegacionesDAO.cs" />
+    <Compile Include="Delegaciones\DelegacionDAO.cs" />
     <Compile Include="Delegaciones\FormDelegacion.xaml.cs">
       <DependentUpon>FormDelegacion.xaml</DependentUpon>
     </Compile>
@@ -83,7 +83,7 @@
     <Compile Include="Usuarios\FormUsuario.xaml.cs">
       <DependentUpon>FormUsuario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\UsuariosDAO.cs" />
+    <Compile Include="Usuarios\UsuarioDAO.cs" />
     <Page Include="Delegaciones\ConsultarDelegaciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

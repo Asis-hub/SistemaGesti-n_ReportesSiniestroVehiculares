@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.Delegaciones
 {
-    class DelegacionesDAO
+    class DelegacionDAO
     {
     }
 }
