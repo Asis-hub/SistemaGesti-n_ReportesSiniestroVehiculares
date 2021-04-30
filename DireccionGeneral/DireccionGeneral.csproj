@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="db\ConexionBD.cs" />
     <Compile Include="Delegaciones\ConsultarDelegaciones.xaml.cs">
       <DependentUpon>ConsultarDelegaciones.xaml</DependentUpon>
     </Compile>
@@ -159,8 +160,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Conexion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
