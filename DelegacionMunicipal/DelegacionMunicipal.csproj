@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Conductores\ConductoresDAO.cs" />
     <Compile Include="Conductores\FormConductor.xaml.cs">
       <DependentUpon>FormConductor.xaml</DependentUpon>
     </Compile>
@@ -76,6 +77,7 @@
     <Compile Include="Vehiculos\FormVehiculo.xaml.cs">
       <DependentUpon>FormVehiculo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vehiculos\VehiculosDAO.cs" />
     <Page Include="Conductores\ConsultarConductores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
