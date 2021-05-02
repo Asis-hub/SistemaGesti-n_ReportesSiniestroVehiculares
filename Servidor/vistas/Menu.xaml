@@ -1,13 +1,13 @@
-﻿<Window x:Class="Servidor.vistas.Servidor"
+﻿<Window x:Class="Servidor.vistas.Menu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Servidor.vistas"
-        mc:Ignorable="d"
-        Title="Servidor" Height="450" Width="800">
+        mc:Ignorable="d" Closing="ApagarServicios"
+        Title="Servidor" Height="450" Width="800" >
     <Grid>
         <Label Content="Servidor" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_ServicioLogin" Content="Encender" HorizontalAlignment="Left" Margin="155,90,0,0" VerticalAlignment="Top" Width="75" Click="btn_ServicioLogin_Click"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DelegacionMunicipal.modelo.poco;
+using System.Windows;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -12,9 +13,21 @@ namespace DelegacionMunicipal.vistas
         private ConsultarReportes consultarReportes;
         private SalaChat salaChat;
 
+        private Usuario usuarioConectado;
         public MenuPrincipal()
         {
             InitializeComponent();
+            consultarConductores = new ConsultarConductores();
+            consultarVehiculos = new ConsultarVehiculos();
+            consultarReportes = new ConsultarReportes();
+            salaChat = new SalaChat();
+            frame_Content.Content = consultarConductores;
+        }
+        
+        public MenuPrincipal(Usuario usuarioConectado)
+        {
+            InitializeComponent();
+            this.usuarioConectado = usuarioConectado;
             consultarConductores = new ConsultarConductores();
             consultarVehiculos = new ConsultarVehiculos();
             consultarReportes = new ConsultarReportes();

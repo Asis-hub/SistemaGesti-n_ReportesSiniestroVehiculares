@@ -83,11 +83,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="modelo\dao\DelegacionDAO.cs" />
     <Compile Include="modelo\db\ConexionBD.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
+    <Compile Include="modelo\poco\Usuario.cs" />
+    <Compile Include="servicios\Paquete.cs" />
     <Compile Include="servicios\SocketBD.cs" />
-    <Page Include="vistas\Servidor.xaml">
+    <Page Include="vistas\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,8 +98,8 @@
     </Compile>
     <Compile Include="servicios\SocketChat.cs" />
     <Compile Include="servicios\SocketLogin.cs" />
-    <Compile Include="vistas\Servidor.xaml.cs">
-      <DependentUpon>Servidor.xaml</DependentUpon>
+    <Compile Include="vistas\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

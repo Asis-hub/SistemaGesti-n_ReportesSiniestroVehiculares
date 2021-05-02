@@ -83,9 +83,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="conexion\Paquete.cs" />
+    <Compile Include="conexion\SocketLogin.cs" />
     <Compile Include="modelo\dao\ConductorDAO.cs" />
+    <Compile Include="modelo\dao\DelegacionDAO.cs" />
+    <Compile Include="modelo\dao\UsuarioDAO.cs" />
     <Compile Include="modelo\dao\VehiculoDAO.cs" />
     <Compile Include="modelo\poco\Conductor.cs" />
+    <Compile Include="modelo\poco\Delegacion.cs" />
+    <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="modelo\poco\Vehiculo.cs" />
     <Compile Include="vistas\FormConductor.xaml.cs">
       <DependentUpon>FormConductor.xaml</DependentUpon>
@@ -190,8 +196,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="conexion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

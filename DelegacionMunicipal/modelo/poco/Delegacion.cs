@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servidor.modelo.poco
+namespace DelegacionMunicipal.modelo.poco
 {
     public class Delegacion
     {
