@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="conexion\Paquete.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
     <Compile Include="vistas\ConsultarDelegaciones.xaml.cs">
@@ -188,8 +189,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="conexion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
