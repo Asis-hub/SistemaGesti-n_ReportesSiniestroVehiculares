@@ -84,6 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="conexion\Paquete.cs" />
+    <Compile Include="conexion\SocketBD.cs" />
     <Compile Include="conexion\SocketLogin.cs" />
     <Compile Include="modelo\dao\ConductorDAO.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />

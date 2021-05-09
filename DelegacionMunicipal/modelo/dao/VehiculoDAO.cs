@@ -32,7 +32,7 @@ namespace DelegacionMunicipal.modelo.dao
             return true;
         }
 
-        public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketLogin socketServidor)
+        public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketBD socketServidor)
         {
             ObservableCollection<Vehiculo> listaVehiculos = null;
             string mensaje = "";
@@ -42,7 +42,7 @@ namespace DelegacionMunicipal.modelo.dao
 
             paquete.Consulta = consulta;
             paquete.TipoQuery = TipoConsulta.Select;
-            paquete.TipoDominio = TipoDato.Delegacion;
+            paquete.TipoDominio = TipoDato.Vehiculo;
 
             mensaje = JsonSerializer.Serialize(paquete);
 

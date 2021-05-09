@@ -17,7 +17,9 @@ namespace DelegacionMunicipal.conexion
     public enum TipoDato
     {
         Usuario,
-        Delegacion
+        Delegacion,
+        Vehiculo,
+        Conductor
     }
 
     public class Paquete

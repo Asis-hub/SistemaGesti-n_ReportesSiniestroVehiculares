@@ -16,7 +16,10 @@ namespace DireccionGeneral.conexion
 
     public enum TipoDato
     {
-        Usuario
+        Usuario,
+        Delegacion,
+        Vehiculo,
+        Conductor
     }
 
     public class Paquete
