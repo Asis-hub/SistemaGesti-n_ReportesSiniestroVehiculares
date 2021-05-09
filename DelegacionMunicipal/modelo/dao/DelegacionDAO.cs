@@ -14,6 +14,7 @@ namespace DelegacionMunicipal.modelo.dao
 {
     class DelegacionDAO
     {
+        // Podría ser el parametro un (Socket y no SocketLogin o SocketBD)
         public static ObservableCollection<Delegacion> ConsultarDelegaciones(SocketLogin socketServidor)
         {
             ObservableCollection<Delegacion> listaDelegaciones = null;
