@@ -1,11 +1,13 @@
-﻿using System;
+﻿using DelegacionMunicipal.conexion;
+using DelegacionMunicipal.modelo.poco;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using DelegacionMunicipal.modelo.poco;
 
 
 namespace DelegacionMunicipal.modelo.dao
@@ -29,10 +31,28 @@ namespace DelegacionMunicipal.modelo.dao
             return true;
         }
 
-        public static Conductor buscarConductor(String parametro)
+        public static ObservableCollection<Conductor> BuscarConductores(SocketLogin socketServidor)
         {
-            return null;
-        }
+            ObservableCollection<Conductor> listaConductores = null;
+            string mensaje = "";
+            Paquete paquete = new Paquete();
 
+            String consulta = "SELECT x.numLicenciaConducir, x.telCelular, x.nombreCompleto, x.fechaNacimiento FROM dbo.conductor x";
+
+            paquete.Consulta = consulta;
+            paquete.TipoQuery = TipoConsulta.Select;
+            paquete.TipoDominio = TipoDato.Delegacion;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socketServidor.EnviarMensaje(mensaje);
+            string respuesta = socketServidor.RecibirMensaje();
+
+            if (respuesta.Length > 0)
+            {
+                listaConductores = (ObservableCollection<Conductor>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Delegacion>)); ;
+            }
+             return listaConductores;
+        }
     }
 }
