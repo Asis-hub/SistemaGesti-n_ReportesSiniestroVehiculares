@@ -9,39 +9,39 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-
 namespace DelegacionMunicipal.modelo.dao
 {
-    public class ConductorDAO
+    class DictamenDAO
     {
         //Los parametros de los métodos pueden cambiarse
-        public static bool Registrar(Conductor nuevoConductor)
+        public static bool Registrar(Dictamen nuevoDictamen)
         {
 
             return true;
         }
 
-        public static bool Actualizar(Conductor conductor)
+        public static bool Actualizar(Dictamen dictamen)
         {
             return true;
         }
 
-        public static bool Eliminar(Conductor conductor)
+        public static bool Eliminar(Dictamen dictamen)
         {
             return true;
         }
 
-        public static ObservableCollection<Conductor> BuscarConductores(SocketLogin socketServidor)
+        public static ObservableCollection<Dictamen> BuscarDictamenes(SocketBD socketServidor)
         {
-            ObservableCollection<Conductor> listaConductores = null;
+            ObservableCollection<Dictamen> listaDictamenes = null;
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            String consulta = "SELECT x.numLicenciaConducir, x.telCelular, x.nombreCompleto, x.fechaNacimiento FROM dbo.conductor x";
+            String consulta = "SELECT x.Folio, x.Descripcion, x.FechaHora, x.IdReporte, x.Username FROM dbo.Dictamen x, " +
+                "dbo.ReporteSiniestro y, dbo.Usuario z WHERE x.IdReporte = y.IdReporte AND x.Username = z.Username";
 
             paquete.Consulta = consulta;
             paquete.TipoQuery = TipoConsulta.Select;
-            paquete.TipoDominio = TipoDato.Delegacion;
+            paquete.TipoDominio = TipoDato.Dictamen;
 
             mensaje = JsonSerializer.Serialize(paquete);
 
@@ -50,9 +50,9 @@ namespace DelegacionMunicipal.modelo.dao
 
             if (respuesta.Length > 0)
             {
-                listaConductores = (ObservableCollection<Conductor>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Delegacion>)); ;
+                listaDictamenes = (ObservableCollection<Dictamen>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Dictamen>)); ;
             }
-             return listaConductores;
+            return listaDictamenes;
         }
     }
 }

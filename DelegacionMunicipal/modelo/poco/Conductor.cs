@@ -17,5 +17,14 @@ namespace DelegacionMunicipal.modelo.poco
         public string Celular { get => celular; set => celular = value; }
         public string NombreCompleto { get => nombreCompleto; set => nombreCompleto = value; }
         public string FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
+
+        public Conductor()
+        {
+        }
+
+        public override string ToString()
+        {
+            return numeroLicencia + " - " + nombreCompleto;
+        }
     }
 }
