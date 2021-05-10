@@ -17,7 +17,12 @@ namespace Servidor.servicios
     public enum TipoDato
     {
         Usuario,
-        Delegacion
+        Delegacion,
+        Vehiculo,
+        Conductor,
+        Municipio,
+        Dictamen,
+        Reporte
     }
 
     public class Paquete

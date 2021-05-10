@@ -9,42 +9,39 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-
 namespace DelegacionMunicipal.modelo.dao
 {
-    public class VehiculoDAO
+    class MunicipioDAO
     {
-
         //Los parametros de los métodos pueden cambiarse
-        public static bool Registrar(Vehiculo nuevoVehiculo)
+        public static bool Registrar(Municipio nuevoMunicipio)
         {
 
             return true;
         }
 
-        public static bool Actualizar(Vehiculo vehiculo)
+        public static bool Actualizar(Municipio municipio)
         {
             return true;
         }
 
-        public static bool Eliminar(Vehiculo vehiculo)
+        public static bool Eliminar(Municipio municipio)
         {
             return true;
         }
 
-        public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketBD socketServidor)
+        public static ObservableCollection<Municipio> BuscarMunicipios(SocketBD socketServidor)
         {
-            ObservableCollection<Vehiculo> listaVehiculos = null;
+            ObservableCollection<Municipio> listaMunicipios = null;
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            String consulta = "SELECT x.numPlaca, x.marca, x.modelo, x.color, x.numPolizaSeguro" +
-                ", x.nombreAseguradora, x.ano, x.numLicenciaConducir FROM dbo.vehiculo x" +
-                ", dbo.conductor y WHERE x.numLicenciaConducir = y.numLicenciaConducir";
+            String consulta = "SELECT x.idMunicipio, x.nombre, x.idDelegacion FROM dbo.Municipio x, dbo.Delegacion y WHERE " +
+                "x.idDelegacion = y.idDelegacion";
 
             paquete.Consulta = consulta;
             paquete.TipoQuery = TipoConsulta.Select;
-            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.TipoDominio = TipoDato.Municipio;
 
             mensaje = JsonSerializer.Serialize(paquete);
 
@@ -53,9 +50,9 @@ namespace DelegacionMunicipal.modelo.dao
 
             if (respuesta.Length > 0)
             {
-                listaVehiculos = (ObservableCollection<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Vehiculo>)); ;
+                listaMunicipios = (ObservableCollection<Municipio>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Municipio>)); ;
             }
-            return listaVehiculos;
+            return listaMunicipios;
         }
     }
 }

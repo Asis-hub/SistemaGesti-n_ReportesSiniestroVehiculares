@@ -19,7 +19,10 @@ namespace DelegacionMunicipal.conexion
         Usuario,
         Delegacion,
         Vehiculo,
-        Conductor
+        Conductor,
+        Municipio,
+        Dictamen,
+        Reporte
     }
 
     public class Paquete

@@ -20,7 +20,8 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            String consulta = "SELECT x.idDelegacion, x.idMunicipio, x.nombre, x.correo, x.codigoPostal, x.colonia, x.calle, x.numero, x.tipo FROM dbo.Delegacion x";
+            String consulta = "SELECT x.idDelegacion, x.idMunicipio, x.nombre, x.correo, x.codigoPostal, x.colonia," +
+                " x.calle, x.numero, x.tipo FROM dbo.Delegacion x, dbo.Municipio y WHERE x.idMunicipio = y.idMunicipio";
 
             paquete.Consulta = consulta;
             paquete.TipoQuery = TipoConsulta.Select;
