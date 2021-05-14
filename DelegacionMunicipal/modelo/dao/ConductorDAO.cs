@@ -33,8 +33,10 @@ namespace DelegacionMunicipal.modelo.dao
 
         public static ObservableCollection<Conductor> BuscarConductores(SocketLogin socketServidor)
         {
+            
             ObservableCollection<Conductor> listaConductores = null;
-            string mensaje = "";
+            
+            /*string mensaje = "";
             Paquete paquete = new Paquete();
 
             String consulta = "SELECT x.numLicenciaConducir, x.telCelular, x.nombreCompleto, x.fechaNacimiento FROM dbo.conductor x";
@@ -52,6 +54,7 @@ namespace DelegacionMunicipal.modelo.dao
             {
                 listaConductores = (ObservableCollection<Conductor>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Delegacion>)); ;
             }
+            */
              return listaConductores;
         }
     }

@@ -46,9 +46,9 @@ namespace Servidor.servicios
                     //Recibir mensaje
                     while (true)
                     {
-                        Byte[] bytesRecibidos = new byte[1024];
+                        Byte[] bytesRecibidos = new byte[socketClienteRemoto.SendBufferSize];
                         int datos = socketClienteRemoto.Receive(bytesRecibidos);
-                        mensaje += Encoding.ASCII.GetString(bytesRecibidos, 0, datos);
+                        mensaje = Encoding.ASCII.GetString(bytesRecibidos, 0, datos);
                         if (mensaje.IndexOf("<EOF>") > -1)
                         {
                             break;
@@ -73,16 +73,9 @@ namespace Servidor.servicios
 
         public void TerminarConexion()
         {
-            try
-            {
-                //socketServer.Shutdown(SocketShutdown.Both);
-            }
-            finally
-            {
-                socketServer.Close();
-                socketServer.Dispose();
-                encendido = false;
-            }
+            socketServer.Close();
+            socketServer.Dispose();
+            encendido = false;
             
             Console.WriteLine("Conexión del servidor terminada");
         }
@@ -108,7 +101,7 @@ namespace Servidor.servicios
 
                 if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
                 {
-                    ObservableCollection<Delegacion> listaDelegaciones = new ObservableCollection<Delegacion>();
+                    List<Delegacion> listaDelegaciones = new List<Delegacion>();
                     while (dataReader.Read())
                     {
                         Delegacion delegacion = new Delegacion();

@@ -14,10 +14,12 @@ namespace DelegacionMunicipal.modelo.dao
 {
     class DelegacionDAO
     {
-        // Podría ser el parametro un (Socket y no SocketLogin o SocketBD)
-        public static ObservableCollection<Delegacion> ConsultarDelegaciones(SocketLogin socketServidor)
+        public static List<Delegacion> GetDelegacionesLogin()
         {
-            ObservableCollection<Delegacion> listaDelegaciones = null;
+            List<Delegacion> listaDelegaciones = new List<Delegacion>();
+            SocketLogin socket;
+            socket = new SocketLogin();
+            
             string mensaje = "";
             Paquete paquete = new Paquete();
 
@@ -29,13 +31,15 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoDominio = TipoDato.Delegacion;
 
             mensaje = JsonSerializer.Serialize(paquete);
-
-            socketServidor.EnviarMensaje(mensaje);
-            string respuesta = socketServidor.RecibirMensaje();
+            
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
 
             if(respuesta.Length > 0)
             {
-                listaDelegaciones = (ObservableCollection<Delegacion>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Delegacion>)); ;
+                listaDelegaciones = (List<Delegacion>)JsonSerializer.Deserialize(respuesta, typeof(List<Delegacion>)); ;
             }
             return listaDelegaciones;
         }

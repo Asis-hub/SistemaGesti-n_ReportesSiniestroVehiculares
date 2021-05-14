@@ -35,6 +35,7 @@ namespace DelegacionMunicipal.modelo.dao
         public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketBD socketServidor)
         {
             ObservableCollection<Vehiculo> listaVehiculos = null;
+            /*
             string mensaje = "";
             Paquete paquete = new Paquete();
 
@@ -55,6 +56,7 @@ namespace DelegacionMunicipal.modelo.dao
             {
                 listaVehiculos = (ObservableCollection<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Vehiculo>)); ;
             }
+            */
             return listaVehiculos;
         }
     }

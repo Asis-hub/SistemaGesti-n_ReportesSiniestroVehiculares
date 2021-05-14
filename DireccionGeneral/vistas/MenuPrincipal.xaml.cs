@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DireccionGeneral.modelo.poco;
+using System.Windows;
 
 namespace DireccionGeneral.vistas
 {
@@ -11,6 +12,7 @@ namespace DireccionGeneral.vistas
         private ConsultarDelegaciones ventanaConsultarDelegaciones;
         private ConsultarReportes ventanaConsultarReportes;
         private SalaChat ventanaSalaChat;
+        private Usuario usuarioConectado;
 
         public MenuPrincipal()
         {
@@ -21,6 +23,19 @@ namespace DireccionGeneral.vistas
             ventanaSalaChat = new SalaChat();
 
             frame_Content.Content = ventanaConsultarUsuarios;
+        }
+
+        public MenuPrincipal(Usuario usuarioConectado)
+        {
+            InitializeComponent();
+            this.usuarioConectado = usuarioConectado;
+            ventanaConsultarUsuarios = new ConsultarUsuarios();
+            ventanaConsultarDelegaciones = new ConsultarDelegaciones();
+            ventanaConsultarReportes = new ConsultarReportes();
+            ventanaSalaChat = new SalaChat();
+
+            frame_Content.Content = ventanaConsultarUsuarios;
+            
         }
 
         private void btn_Usuarios_Click(object sender, RoutedEventArgs e)

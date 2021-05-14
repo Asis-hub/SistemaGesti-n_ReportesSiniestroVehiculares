@@ -33,6 +33,7 @@ namespace DelegacionMunicipal.modelo.dao
         public static ObservableCollection<Municipio> BuscarMunicipios(SocketBD socketServidor)
         {
             ObservableCollection<Municipio> listaMunicipios = null;
+            /*
             string mensaje = "";
             Paquete paquete = new Paquete();
 
@@ -52,6 +53,7 @@ namespace DelegacionMunicipal.modelo.dao
             {
                 listaMunicipios = (ObservableCollection<Municipio>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Municipio>)); ;
             }
+            */
             return listaMunicipios;
         }
     }

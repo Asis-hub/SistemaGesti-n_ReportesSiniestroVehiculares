@@ -87,7 +87,9 @@
     <Compile Include="conexion\SocketBD.cs" />
     <Compile Include="conexion\SocketLogin.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />
+    <Compile Include="modelo\dao\UsuarioDAO.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
+    <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="vistas\ConsultarDelegaciones.xaml.cs">
       <DependentUpon>ConsultarDelegaciones.xaml</DependentUpon>
     </Compile>

@@ -36,7 +36,8 @@ namespace DelegacionMunicipal.conexion
             {
                 mensaje += "<EOF>";
                 byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
-                socketCliente.Send(msjEnviar, 0, msjEnviar.Length, 0);
+                socketCliente.SendBufferSize = msjEnviar.Length;
+                socketCliente.Send(msjEnviar, 0, socketCliente.SendBufferSize, 0);
                 Console.WriteLine("Mensaje enviado");
             }
         }

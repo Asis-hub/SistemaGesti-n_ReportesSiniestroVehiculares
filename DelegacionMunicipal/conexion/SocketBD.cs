@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
-    class SocketBD
+    public class SocketBD
     {
     }
 }

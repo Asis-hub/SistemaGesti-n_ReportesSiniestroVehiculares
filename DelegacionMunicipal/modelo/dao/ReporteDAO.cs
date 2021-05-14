@@ -33,6 +33,8 @@ namespace DelegacionMunicipal.modelo.dao
         public static ObservableCollection<ReporteSiniestro> BuscarReportes(SocketBD socketServidor)
         {
             ObservableCollection<ReporteSiniestro> listaReportes = null;
+            
+            /*
             string mensaje = "";
             Paquete paquete = new Paquete();
 
@@ -53,6 +55,7 @@ namespace DelegacionMunicipal.modelo.dao
             {
                 listaReportes = (ObservableCollection<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Reporte>)); ;
             }
+            */
             return listaReportes;
         }
     }
