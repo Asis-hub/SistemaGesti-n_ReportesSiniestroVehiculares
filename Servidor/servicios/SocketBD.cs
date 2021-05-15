@@ -55,6 +55,7 @@ namespace Servidor.servicios
                         }
 
                         //Recibir imágenes en el caso de un reporte
+
                     }
 
                     
@@ -83,10 +84,27 @@ namespace Servidor.servicios
             return encendido;
         }
 
-        /*
-        private void ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
+        
+        private void ProcesarPaquete(Socket clienteRemoto, Paquete paquete)
         {
+            if(paquete.TipoQuery == TipoConsulta.Select)
+            {
+                ProcesarSeleccion(clienteRemoto, paquete);
+            }
+            else if(paquete.TipoQuery == TipoConsulta.Insert)
+            {
+                ProcesarModificacion(clienteRemoto, paquete);
+            }
+            else if(paquete.TipoQuery == TipoConsulta.Delete)
+            {
+                ProcesarModificacion(clienteRemoto, paquete);
+            }
+            else if(paquete.TipoQuery == TipoConsulta.Update)
+            {
+                ProcesarModificacion(clienteRemoto, paquete);
+            }
 
+            /*
             SqlConnection conn = ConexionBD.GetConnection();
             string mensaje = "";
             if (conn != null)
@@ -141,9 +159,19 @@ namespace Servidor.servicios
             else
             {
                 Console.WriteLine("Conexion fallida");
-            }
+            }*/
 
         }
-        */
+
+        private void ProcesarSeleccion(Socket clienteRemoto, Paquete paquete) 
+        {
+            
+        }
+
+        private void ProcesarModificacion(Socket clienteRemoto, Paquete paquete)
+        {
+            
+        }
+
     }
 }

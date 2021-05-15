@@ -135,7 +135,6 @@ namespace Servidor.servicios
                 }
 
                 mensaje += "<EOF>";
-                Console.WriteLine("Server RES: " + mensaje);
                 byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
                 clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
                 Console.WriteLine("Consulta enviada");

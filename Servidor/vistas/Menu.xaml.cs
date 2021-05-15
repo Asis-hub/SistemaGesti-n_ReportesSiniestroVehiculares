@@ -41,15 +41,11 @@ namespace Servidor.vistas
 
             if (socketLogin != null && socketLogin.ConexionActiva())
             {
-                Console.WriteLine("aaaa");
-                
                 socketLogin.TerminarConexion();
                 btn_ServicioLogin.Content = "Encender";
             }
             else
             {
-                Console.WriteLine("bbb");
-
                 socketLogin = new SocketLogin();
                 socketLogin.IniciarConexion();
                 Thread procesoLogin = new Thread(new ThreadStart(socketLogin.RecibirMensaje));

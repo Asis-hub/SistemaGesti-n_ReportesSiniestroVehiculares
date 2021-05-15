@@ -22,7 +22,10 @@ namespace DelegacionMunicipal.conexion
         Conductor,
         Municipio,
         Dictamen,
-        Reporte
+        Reporte,
+        DelegacionTipo,
+        Cargo,
+        Fotografia
     }
 
     public class Paquete

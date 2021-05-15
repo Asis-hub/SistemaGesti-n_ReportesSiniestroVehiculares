@@ -22,7 +22,10 @@ namespace Servidor.servicios
         Conductor,
         Municipio,
         Dictamen,
-        Reporte
+        Reporte,
+        DelegacionTipo,
+        Cargo,
+        Fotografia
     }
 
     public class Paquete
