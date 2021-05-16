@@ -11,5 +11,32 @@ namespace DelegacionMunicipal.vistas
         {
             InitializeComponent();
         }
+
+        private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
+        {
+            //Agregar vehiculos involucrados que se seleccionan en combobox
+
+        }
+
+        private void btn_AgregarImagen_Click(object sender, RoutedEventArgs e)
+        {
+            //Agregar imagenes, minimo 3 y maximo 8
+
+        }
+
+        private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
+        {
+            //Validar campos 
+            //Validar cantidad de imagenes
+            //Registrar con DAO, que retorne booleano
+
+
+
+        }
+
+        private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
+        {
+            //Cerrar ventana
+        }
     }
 }
