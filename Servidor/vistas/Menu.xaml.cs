@@ -23,13 +23,11 @@ namespace Servidor.vistas
     public partial class Menu : Window
     {
         SocketLogin socketLogin;
-        
+        SocketBD socketBD;
 
         public Menu()
         {
             InitializeComponent();
-            
-
         }
 
         private void btn_ServicioLogin_Click(object sender, RoutedEventArgs e)
@@ -54,12 +52,44 @@ namespace Servidor.vistas
             }
         }
 
+        private void btn_ServicioBaseDatos_Click(object sender, RoutedEventArgs e)
+        {
+            if (socketBD != null)
+            {
+                Console.WriteLine(socketBD.ConexionActiva());
+            }
+
+            if (socketBD != null && socketBD.ConexionActiva())
+            {
+                socketBD.TerminarConexion();
+                btn_ServicioBaseDatos.Content = "Encender";
+            }
+            else
+            {
+                socketBD = new SocketBD();
+                socketBD.IniciarConexion();
+                Thread procesoBaseDatos = new Thread(new ThreadStart(socketBD.RecibirMensaje));
+                btn_ServicioBaseDatos.Content = "Apagar";
+                procesoBaseDatos.Start();
+            }
+        }
+
+        private void btn_ServicioSalaChat_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void ApagarServicios(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(socketLogin != null && socketLogin.ConexionActiva())
             {
                 socketLogin.TerminarConexion();
             }
-        }
+
+            if (socketBD != null && socketBD.ConexionActiva())
+            {
+                socketBD.TerminarConexion();
+            }
+        }  
     }
 }

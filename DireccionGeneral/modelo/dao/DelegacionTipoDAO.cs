@@ -1,5 +1,5 @@
-﻿using DelegacionMunicipal.conexion;
-using DelegacionMunicipal.modelo.poco;
+﻿using DireccionGeneral.conexion;
+using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace DelegacionMunicipal.modelo.dao
+namespace DireccionGeneral.modelo.dao
 {
     public class DelegacionTipoDAO
     {

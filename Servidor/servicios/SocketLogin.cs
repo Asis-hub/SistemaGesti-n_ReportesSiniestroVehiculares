@@ -47,8 +47,10 @@ namespace Servidor.servicios
                     while (true)
                     {
                         Byte[] bytesRecibidos = new byte[socketClienteRemoto.SendBufferSize];
-                        int datos = socketClienteRemoto.Receive(bytesRecibidos);
+                        int datos = socketClienteRemoto.Receive(bytesRecibidos,0,bytesRecibidos.Length,0);
+                        Array.Resize(ref bytesRecibidos, datos);
                         mensaje = Encoding.ASCII.GetString(bytesRecibidos, 0, datos);
+                        
                         if (mensaje.IndexOf("<EOF>") > -1)
                         {
                             break;
@@ -106,7 +108,7 @@ namespace Servidor.servicios
                     {
                         Delegacion delegacion = new Delegacion();
                         delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                        delegacion.IdMunicipio = (!dataReader.IsDBNull(1)) ? dataReader.GetInt32(1) : 0;
+                        delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
                         delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
                         delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
                         delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";

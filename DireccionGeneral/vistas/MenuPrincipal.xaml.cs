@@ -17,11 +17,7 @@ namespace DireccionGeneral.vistas
         public MenuPrincipal()
         {
             InitializeComponent();
-            ventanaConsultarUsuarios = new ConsultarUsuarios();
-            ventanaConsultarDelegaciones = new ConsultarDelegaciones();
-            ventanaConsultarReportes = new ConsultarReportes();
             ventanaSalaChat = new SalaChat();
-
             frame_Content.Content = ventanaConsultarUsuarios;
         }
 
@@ -29,27 +25,35 @@ namespace DireccionGeneral.vistas
         {
             InitializeComponent();
             this.usuarioConectado = usuarioConectado;
-            ventanaConsultarUsuarios = new ConsultarUsuarios();
-            ventanaConsultarDelegaciones = new ConsultarDelegaciones();
-            ventanaConsultarReportes = new ConsultarReportes();
             ventanaSalaChat = new SalaChat();
-
+            ventanaConsultarUsuarios = new ConsultarUsuarios();
             frame_Content.Content = ventanaConsultarUsuarios;
-            
         }
 
         private void btn_Usuarios_Click(object sender, RoutedEventArgs e)
         {
+            if(ventanaConsultarUsuarios == null)
+            {
+                ventanaConsultarUsuarios = new ConsultarUsuarios();
+            }
             frame_Content.Content = ventanaConsultarUsuarios;
         }
 
         private void btn_Delegaciones_Click(object sender, RoutedEventArgs e)
         {
+            if(ventanaConsultarDelegaciones == null)
+            {
+                ventanaConsultarDelegaciones = new ConsultarDelegaciones();
+            }
             frame_Content.Content = ventanaConsultarDelegaciones;
         }
 
         private void btn_Reportes_Click(object sender, RoutedEventArgs e)
         {
+            if(ventanaConsultarReportes == null)
+            {
+                ventanaConsultarReportes = new ConsultarReportes();
+            }
             frame_Content.Content = ventanaConsultarReportes;
         }
 
@@ -60,7 +64,9 @@ namespace DireccionGeneral.vistas
 
         private void btn_CerrarSesion_Click(object sender, RoutedEventArgs e)
         {
-
+            InicioSesion ventanaInicioSesion = new InicioSesion();
+            ventanaInicioSesion.Show();
+            this.Close();
         }
 
         private void CerrarVentana(object sender, RoutedEventArgs e)

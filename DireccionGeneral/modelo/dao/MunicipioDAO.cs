@@ -1,15 +1,13 @@
-﻿using DelegacionMunicipal.conexion;
-using DelegacionMunicipal.modelo.poco;
+﻿using DireccionGeneral.conexion;
+using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace DelegacionMunicipal.modelo.dao
+namespace DireccionGeneral.modelo.dao
 {
     public class MunicipioDAO
     {
@@ -22,7 +20,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.Consulta = "SELECT idMunicipio, nombre FROM dbo.municipio";
             paquete.TipoDominio = TipoDato.Municipio;
             paquete.TipoQuery = TipoConsulta.Select;
-
+            
             mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();

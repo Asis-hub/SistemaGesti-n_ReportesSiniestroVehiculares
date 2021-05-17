@@ -85,6 +85,8 @@
     </ApplicationDefinition>
     <Compile Include="modelo\db\ConexionBD.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
+    <Compile Include="modelo\poco\DelegacionTipo.cs" />
+    <Compile Include="modelo\poco\Municipio.cs" />
     <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="servicios\Paquete.cs" />
     <Compile Include="servicios\SocketBD.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DireccionGeneral.modelo.dao;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DireccionGeneral.vistas
@@ -11,11 +12,14 @@ namespace DireccionGeneral.vistas
         public ConsultarDelegaciones()
         {
             InitializeComponent();
+            CargarTabla();
         }
 
         private void btn_RegistrarDelegacion_Click(object sender, RoutedEventArgs e)
         {
+
             FormDelegacion formularioNuevaDelegacion = new FormDelegacion();
+            formularioNuevaDelegacion.Owner = Window.GetWindow(this);
             formularioNuevaDelegacion.ShowDialog();
         }
 
@@ -27,6 +31,11 @@ namespace DireccionGeneral.vistas
         private void btn_EliminarDelgacion_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void CargarTabla()
+        {
+            tbl_Delegaciones.ItemsSource = DelegacionDAO.ConsultarDelegaciones();
         }
     }
 }
