@@ -7,7 +7,23 @@
         Title="Servidor" Height="450" Width="800" >
     <Grid>
         <Label Content="Servidor" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_ServicioLogin" Content="Encender" HorizontalAlignment="Left" Margin="155,90,0,0" VerticalAlignment="Top" Width="75" Click="btn_ServicioLogin_Click"/>
 
+        <Label Content="Servicio login:" HorizontalAlignment="Left" Margin="31,52,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_ServicioLogin" Content="Encender" HorizontalAlignment="Left" Margin="120,55,0,0" VerticalAlignment="Top" Width="75" Click="btn_ServicioLogin_Click" RenderTransformOrigin="0.396,0.5"/>
+        
+        <Label Content="Base de Datos:" HorizontalAlignment="Left" Margin="230,52,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_ServicioBaseDatos" Content="Encender" HorizontalAlignment="Left" Margin="323,55,0,0" VerticalAlignment="Top" Width="75" Click="btn_ServicioBaseDatos_Click"/>
+        
+        <Label Content="Sala Chat" HorizontalAlignment="Left" Margin="441,52,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_ServicioSalaChat" Content="Encender" HorizontalAlignment="Left" Margin="505,55,0,0" VerticalAlignment="Top" Width="75" Click="btn_ServicioSalaChat_Click"/>
+        
+        <Grid Margin="20,90,20,20">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <StackPanel >
+
+                </StackPanel>
+            </Border>
+        </Grid>
+        
     </Grid>
 </Window>

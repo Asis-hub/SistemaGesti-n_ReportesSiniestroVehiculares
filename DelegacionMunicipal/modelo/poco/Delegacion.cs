@@ -9,7 +9,7 @@ namespace DelegacionMunicipal.modelo.poco
     public class Delegacion
     {
         private int idDelegacion;
-        private int idMunicipio;
+        private string municipio;
         private string nombre;
         private string correo;
         private string codigoPostal;
@@ -19,7 +19,7 @@ namespace DelegacionMunicipal.modelo.poco
         private string tipo;
 
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
-        public int IdMunicipio { get => idMunicipio; set => idMunicipio = value; }
+        public string Municipio { get => municipio; set => municipio = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Correo { get => correo; set => correo = value; }
         public string CodigoPostal { get => codigoPostal; set => codigoPostal = value; }

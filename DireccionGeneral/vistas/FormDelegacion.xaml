@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DireccionGeneral.vistas"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  WindowStartupLocation="CenterOwner"
         Title="Delegacion" Height="354.375" Width="684.688">
     <Grid>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
