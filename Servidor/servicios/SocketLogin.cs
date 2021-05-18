@@ -97,11 +97,11 @@ namespace Servidor.servicios
                 conn = ConexionBD.GetConnection();
                 if (conn != null)
                 {
-                    SqlCommand command;
+                    SqlCommand comando;
                     SqlDataReader dataReader;
 
-                    command = new SqlCommand(paquete.Consulta, conn);
-                    dataReader = command.ExecuteReader();
+                    comando = new SqlCommand(paquete.Consulta, conn);
+                    dataReader = comando.ExecuteReader();
 
                     if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
                     {
@@ -122,12 +122,12 @@ namespace Servidor.servicios
                         }
                         mensaje = JsonSerializer.Serialize(listaDelegaciones);
                         dataReader.Close();
-                        command.Dispose();
+                        comando.Dispose();
 
                     }
                     else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
                     {
-                        while (dataReader.Read())
+                        if (dataReader.Read())
                         {
                             Usuario usuario = new Usuario();
                             usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
@@ -138,12 +138,8 @@ namespace Servidor.servicios
                             mensaje = JsonSerializer.Serialize(usuario);
                         }
                         dataReader.Close();
-                        command.Dispose();
+                        comando.Dispose();
                     }
-                    mensaje += "<EOF>";
-                    byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
-                    clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
-                    Console.WriteLine("Consulta enviada");
                 }
             }
             catch(Exception e)
@@ -157,6 +153,12 @@ namespace Servidor.servicios
                     conn.Close();
                 }
             }
+
+            //Si ourre un error solo se enviaria el mensaje <EOF>
+            mensaje += "<EOF>";
+            byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
+            clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
+            Console.WriteLine("Consulta enviada");
         }
     }
 }

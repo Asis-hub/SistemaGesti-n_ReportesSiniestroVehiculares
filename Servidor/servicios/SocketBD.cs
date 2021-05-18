@@ -112,11 +112,11 @@ namespace Servidor.servicios
             {
                 if (conexionBD != null)
                 {
-                    SqlCommand command;
+                    SqlCommand comando;
                     SqlDataReader dataReader;
 
-                    command = new SqlCommand(paquete.Consulta, conexionBD);
-                    dataReader = command.ExecuteReader();
+                    comando = new SqlCommand(paquete.Consulta, conexionBD);
+                    dataReader = comando.ExecuteReader();
 
                     //Lista de Delegaciones
                     if (paquete.TipoDominio == TipoDato.Delegacion)
@@ -187,11 +187,9 @@ namespace Servidor.servicios
                         respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
                     }
                     dataReader.Close();
-                    command.Dispose();
+                    comando.Dispose();
                 }
-                respuesta += "<EOF>";
-                byte[] msgRespuesta = Encoding.Default.GetBytes(respuesta);
-                clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+                
             }
             catch(Exception e)
             {
@@ -203,6 +201,11 @@ namespace Servidor.servicios
                     conexionBD.Close();
                 }
             }
+
+            //Si oucrre un error solo se enviaria <EOF>
+            respuesta += "<EOF>";
+            byte[] msgRespuesta = Encoding.Default.GetBytes(respuesta);
+            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
 
         /*
@@ -233,8 +236,7 @@ namespace Servidor.servicios
                         resultado = -1;
                     }
                 }
-                byte[] msgRespuesta = Encoding.Default.GetBytes(resultado + "<EOF>");
-                clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+                
             }
             catch(Exception e)
             {
@@ -247,6 +249,9 @@ namespace Servidor.servicios
                     conexionBD.Close();
                 }
             }
+
+            byte[] msgRespuesta = Encoding.Default.GetBytes(resultado + "<EOF>");
+            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
     }
 }
