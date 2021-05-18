@@ -90,62 +90,73 @@ namespace Servidor.servicios
 
         private void ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
         {
-            
-            SqlConnection conn = ConexionBD.GetConnection();
+            SqlConnection conn = null;
             string mensaje = "";
-            if (conn != null)
+            try
             {
-                SqlCommand command;
-                SqlDataReader dataReader;
-
-                command = new SqlCommand(paquete.Consulta, conn);
-                dataReader = command.ExecuteReader();
-
-                if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
+                conn = ConexionBD.GetConnection();
+                if (conn != null)
                 {
-                    List<Delegacion> listaDelegaciones = new List<Delegacion>();
-                    while (dataReader.Read())
+                    SqlCommand command;
+                    SqlDataReader dataReader;
+
+                    command = new SqlCommand(paquete.Consulta, conn);
+                    dataReader = command.ExecuteReader();
+
+                    if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
                     {
-                        Delegacion delegacion = new Delegacion();
-                        delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                        delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                        delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                        delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                        delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                        delegacion.Colonia = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                        delegacion.Calle = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                        delegacion.Numero = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                        delegacion.Tipo = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
-                        listaDelegaciones.Add(delegacion);
+                        List<Delegacion> listaDelegaciones = new List<Delegacion>();
+                        while (dataReader.Read())
+                        {
+                            Delegacion delegacion = new Delegacion();
+                            delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                            delegacion.Colonia = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                            delegacion.Calle = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
+                            delegacion.Numero = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
+                            delegacion.Tipo = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
+                            listaDelegaciones.Add(delegacion);
+                        }
+                        mensaje = JsonSerializer.Serialize(listaDelegaciones);
+                        dataReader.Close();
+                        command.Dispose();
+
                     }
-
-                    mensaje = JsonSerializer.Serialize(listaDelegaciones);
-
-                }
-                else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
-                {
-                    if (dataReader.Read())
+                    else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
                     {
-                        Usuario usuario = new Usuario();
-                        usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                        usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                        usuario.IdDelegacion = (!dataReader.IsDBNull(2)) ? dataReader.GetInt32(2) : 0;
-                        usuario.Cargo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                        while (dataReader.Read())
+                        {
+                            Usuario usuario = new Usuario();
+                            usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
+                            usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            usuario.IdDelegacion = (!dataReader.IsDBNull(2)) ? dataReader.GetInt32(2) : 0;
+                            usuario.Cargo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
 
-                        mensaje = JsonSerializer.Serialize(usuario);
+                            mensaje = JsonSerializer.Serialize(usuario);
+                        }
+                        dataReader.Close();
+                        command.Dispose();
                     }
+                    mensaje += "<EOF>";
+                    byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
+                    clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
+                    Console.WriteLine("Consulta enviada");
                 }
-
-                mensaje += "<EOF>";
-                byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
-                clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
-                Console.WriteLine("Consulta enviada");
             }
-            else
+            catch(Exception e)
             {
-                Console.WriteLine("Conexion fallida");
+                Console.WriteLine("Conexion fallida: " + e.Message);
             }
-            
+            finally
+            {
+                if(conn != null)
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

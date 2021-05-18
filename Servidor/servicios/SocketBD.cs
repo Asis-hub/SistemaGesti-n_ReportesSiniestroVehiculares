@@ -108,92 +108,101 @@ namespace Servidor.servicios
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
             string respuesta = "";
-            if (conexionBD != null)
+            try
             {
-                SqlCommand command;
-                SqlDataReader dataReader;
-
-                command = new SqlCommand(paquete.Consulta, conexionBD);
-                dataReader = command.ExecuteReader();
-
-                //Lista de Delegaciones
-                if(paquete.TipoDominio == TipoDato.Delegacion)
+                if (conexionBD != null)
                 {
-                    List<Delegacion> listaDelegaciones = new List<Delegacion>();
-                    while (dataReader.Read())
+                    SqlCommand command;
+                    SqlDataReader dataReader;
+
+                    command = new SqlCommand(paquete.Consulta, conexionBD);
+                    dataReader = command.ExecuteReader();
+
+                    //Lista de Delegaciones
+                    if (paquete.TipoDominio == TipoDato.Delegacion)
                     {
-                        Delegacion delegacion = new Delegacion();
-                        delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                        delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                        delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                        delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                        delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                        delegacion.Colonia = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                        delegacion.Calle = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                        delegacion.Numero = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                        delegacion.Tipo = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
-                        listaDelegaciones.Add(delegacion);
+                        List<Delegacion> listaDelegaciones = new List<Delegacion>();
+                        while (dataReader.Read())
+                        {
+                            Delegacion delegacion = new Delegacion();
+                            delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                            delegacion.Colonia = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                            delegacion.Calle = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
+                            delegacion.Numero = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
+                            delegacion.Tipo = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
+                            listaDelegaciones.Add(delegacion);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaDelegaciones);
                     }
 
-                    respuesta = JsonSerializer.Serialize(listaDelegaciones);
+                    //Lista de Usuarios
+                    if (paquete.TipoDominio == TipoDato.Usuario)
+                    {
+                        List<Usuario> listaUsuarios = new List<Usuario>();
+                        while (dataReader.Read())
+                        {
+                            Usuario usuario = new Usuario();
+                            usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
+                            usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            usuario.Password = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            usuario.IdDelegacion = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
+                            usuario.Cargo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+
+                            listaUsuarios.Add(usuario);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaUsuarios);
+                    }
+
+                    //Lista Municipios
+                    if (paquete.TipoDominio == TipoDato.Municipio)
+                    {
+                        List<Municipio> listaMunicipios = new List<Municipio>();
+                        while (dataReader.Read())
+                        {
+                            Municipio municipio = new Municipio();
+                            municipio.IdMunicipio = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            municipio.Nombre = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+
+                            listaMunicipios.Add(municipio);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaMunicipios);
+                    }
+
+                    //Lista Tipos de Delegaciones
+                    if (paquete.TipoDominio == TipoDato.DelegacionTipo)
+                    {
+                        List<DelegacionTipo> listaTiposDelegacion = new List<DelegacionTipo>();
+                        while (dataReader.Read())
+                        {
+                            DelegacionTipo delegacionTipo = new DelegacionTipo();
+                            delegacionTipo.IdTipoDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            delegacionTipo.TipoDelegacion = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+
+                            listaTiposDelegacion.Add(delegacionTipo);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
+                    }
+                    dataReader.Close();
+                    command.Dispose();
                 }
-
-                //Lista de Usuarios
-                if (paquete.TipoDominio == TipoDato.Usuario)
+                respuesta += "<EOF>";
+                byte[] msgRespuesta = Encoding.Default.GetBytes(respuesta);
+                clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }finally
+            {
+                if (conexionBD != null)
                 {
-                    List<Usuario> listaUsuarios = new List<Usuario>();
-                    while (dataReader.Read())
-                    {
-                        Usuario usuario = new Usuario();
-                        usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                        usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                        usuario.Password = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                        usuario.IdDelegacion = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
-                        usuario.Cargo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-
-                        listaUsuarios.Add(usuario);
-                    }
-                    respuesta = JsonSerializer.Serialize(listaUsuarios);
-                }
-
-                //Lista Municipios
-                if(paquete.TipoDominio == TipoDato.Municipio)
-                {
-                    List<Municipio> listaMunicipios = new List<Municipio>();
-                    while (dataReader.Read())
-                    {
-                        Municipio municipio = new Municipio();
-                        municipio.IdMunicipio = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                        municipio.Nombre = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-
-                        listaMunicipios.Add(municipio);
-                    }
-                    respuesta = JsonSerializer.Serialize(listaMunicipios);
-                }
-
-                //Lista Tipos de Delegaciones
-                if(paquete.TipoDominio == TipoDato.DelegacionTipo)
-                {
-                    List<DelegacionTipo> listaTiposDelegacion = new List<DelegacionTipo>();
-                    while (dataReader.Read())
-                    {
-                        DelegacionTipo delegacionTipo = new DelegacionTipo();
-                        delegacionTipo.IdTipoDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                        delegacionTipo.TipoDelegacion = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-
-                        listaTiposDelegacion.Add(delegacionTipo);
-                    }
-                    respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
+                    conexionBD.Close();
                 }
             }
-            else
-            {
-                Console.WriteLine("Conexion fallida");
-            }
-
-            respuesta += "<EOF>";
-            byte[] msgRespuesta = Encoding.Default.GetBytes(respuesta);
-            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
 
         /*
@@ -205,31 +214,40 @@ namespace Servidor.servicios
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
             int resultado = 0;
-            if (conexionBD != null)
+            try
             {
-                try
+                if (conexionBD != null)
                 {
-                    if (paquete.TipoDominio == TipoDato.Usuario)
+                    try
                     {
-                        SqlCommand comando = new SqlCommand(paquete.Consulta, conexionBD);
-                        resultado = comando.ExecuteNonQuery();
+                        if (paquete.TipoDominio == TipoDato.Usuario)
+                        {
+                            SqlCommand comando = new SqlCommand(paquete.Consulta, conexionBD);
+                            resultado = comando.ExecuteNonQuery();
+                            comando.Dispose();
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error de Modificación en la Base de Datos");
+                        resultado = -1;
                     }
                 }
-                catch (SqlException ex)
+                byte[] msgRespuesta = Encoding.Default.GetBytes(resultado + "<EOF>");
+                clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "No es posible conectarse a la base de datos, Base de datos no disponible");
+            }
+            finally
+            {
+                if(conexionBD != null)
                 {
-                    MessageBox.Show(ex.Message, "Error de Modificación en la Base de Datos");
-                    resultado = -1;
+                    conexionBD.Close();
                 }
             }
-            else
-            {
-                MessageBox.Show("No es posible conectarse a la base de datos", "Base de datos no disponible");
-            }
-
-            byte[] msgRespuesta = Encoding.Default.GetBytes(resultado + "<EOF>");
-            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
-
     }
 }
 
