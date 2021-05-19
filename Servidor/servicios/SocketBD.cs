@@ -186,6 +186,43 @@ namespace Servidor.servicios
                         }
                         respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
                     }
+
+                    //Lista de Conductores
+                    if (paquete.TipoDominio == TipoDato.Conductor)
+                    {
+                        List<Conductor> listaConductores = new List<Conductor>();
+                        while (dataReader.Read())
+                        {
+                            Conductor conductor = new Conductor();
+                            conductor.NumeroLicencia = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
+                            conductor.Celular = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            conductor.NombreCompleto = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            conductor.FechaNacimiento = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            listaConductores.Add(conductor);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaConductores);
+                    }
+
+                    //Lista de Vehiculos
+                    if (paquete.TipoDominio == TipoDato.Vehiculo)
+                    {
+                        List<Vehiculo> listaVehiculos = new List<Vehiculo>();
+                        while (dataReader.Read())
+                        {
+                            Vehiculo vehiculo = new Vehiculo();
+                            vehiculo.NumPlaca = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
+                            vehiculo.Marca = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            vehiculo.Modelo = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            vehiculo.Color = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            vehiculo.NumPolizaSeguro = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                            vehiculo.NombreAseguradora = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                            vehiculo.Año = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
+                            vehiculo.NumLicenciaConducir = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
+                            listaVehiculos.Add(vehiculo);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaVehiculos);
+                    }
+
                     dataReader.Close();
                     comando.Dispose();
                 }
@@ -223,12 +260,9 @@ namespace Servidor.servicios
                 {
                     try
                     {
-                        if (paquete.TipoDominio == TipoDato.Usuario)
-                        {
                             SqlCommand comando = new SqlCommand(paquete.Consulta, conexionBD);
                             resultado = comando.ExecuteNonQuery();
                             comando.Dispose();
-                        }
                     }
                     catch (SqlException ex)
                     {

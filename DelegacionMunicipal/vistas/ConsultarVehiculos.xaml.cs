@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DelegacionMunicipal.modelo.dao;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DelegacionMunicipal.vistas
@@ -11,6 +12,7 @@ namespace DelegacionMunicipal.vistas
         public ConsultarVehiculos()
         {
             InitializeComponent();
+            CargarTabla();
         }
 
         private void btn_RegistrarVehiculo_Click(object sender, RoutedEventArgs e)
@@ -27,6 +29,11 @@ namespace DelegacionMunicipal.vistas
         private void btn_EliminarVehiculo_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void CargarTabla()
+        {
+            tbl_Vehiculos.ItemsSource = VehiculoDAO.ConsultarVehiculos();
         }
     }
 }

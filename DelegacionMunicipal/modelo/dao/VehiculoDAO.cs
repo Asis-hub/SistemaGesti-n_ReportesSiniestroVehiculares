@@ -14,22 +14,81 @@ namespace DelegacionMunicipal.modelo.dao
 {
     public class VehiculoDAO
     {
+        public static List<Vehiculo> ConsultarVehiculos()
+        {
+            List<Vehiculo> listaVehiculos = new List<Vehiculo>();
+            SocketBD socket = new SocketBD();
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+            paquete.Consulta = "SELECT numeroPlaca AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
+                "nombreAseguradora, ano, numeroLicenciaConducir FROM dbo.vehiculo";
+            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.TipoQuery = TipoConsulta.Select;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaVehiculos = (List<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(List<Vehiculo>)); ;
+            }
+
+            return listaVehiculos;
+        }
 
         //Los parametros de los métodos pueden cambiarse
-        public static bool Registrar(Vehiculo nuevoVehiculo)
+        public static int RegistrarVehiculo(Vehiculo nuevoVehiculo)
         {
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.TipoQuery = TipoConsulta.Insert;
+            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.Consulta = String.Format("INSERT vehiculo (numeroPlaca, marca, modelo, color, numeroPolizaSeguro, nombreAseguradora, ano, numeroLicenciaConducir) " +
+                                             "VALUES ('{0}', '{1}', '{2}', {3},  {4}, {5}, {6}, {7}))",
+                                             nuevoVehiculo.NumPlaca, nuevoVehiculo.Marca, nuevoVehiculo.Modelo, nuevoVehiculo.Color,
+                                             nuevoVehiculo.NumPolizaSeguro, nuevoVehiculo.NombreAseguradora, nuevoVehiculo.Año,
+                                             nuevoVehiculo.NumLicenciaConducir);
 
-            return true;
+            string mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            resultado = int.Parse(respuesta);
+            return resultado;
         }
 
-        public static bool Actualizar(Vehiculo vehiculo)
+        public static int ActualizarVehiculo(string numPlaca)
         {
-            return true;
+            int resultado = 0;
+            return resultado;
         }
 
-        public static bool Eliminar(Vehiculo vehiculo)
+        public static int EliminarVehiculo(string numPlaca)
         {
-            return true;
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.Consulta = String.Format("DELETE FROM dbo.vehiculo WHERE numeroPlaca = '{0}'", numPlaca);
+            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.TipoQuery = TipoConsulta.Delete;
+
+            string mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            resultado = int.Parse(respuesta);
+            return resultado;
         }
 
         public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketBD socketServidor)

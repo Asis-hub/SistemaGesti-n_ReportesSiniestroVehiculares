@@ -34,7 +34,7 @@ namespace DireccionGeneral.vistas
             if(tbl_Usuarios.SelectedIndex > -1)
             {
                 string username = ((Usuario)tbl_Usuarios.SelectedItem).Username;
-                int resultado = UsuarioDAO.EliminararUsuario(username);
+                int resultado = UsuarioDAO.EliminarUsuario(username);
                 if(resultado == 1)
                 {
                     MessageBox.Show("El usuario fue eliminado exitosamente.", "Usuario eliminado");

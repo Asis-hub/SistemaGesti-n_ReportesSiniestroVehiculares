@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DelegacionMunicipal.modelo.dao;
+using DelegacionMunicipal.modelo.poco;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,13 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class ConsultarConductores : Page
     {
+        List<Conductor> conductores;
+
+
         public ConsultarConductores()
         {
             InitializeComponent();
+            CargarTablaConductores();
         }
 
         private void btn_RegistrarConductor_Click(object sender, RoutedEventArgs e)
@@ -40,6 +46,12 @@ namespace DelegacionMunicipal.vistas
         private void btn_EliminarConductor_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CargarTablaConductores()
+        {
+            conductores = ConductorDAO.ConsultarConductores();
+            tbl_Conductores.ItemsSource = conductores;
         }
     }
 }

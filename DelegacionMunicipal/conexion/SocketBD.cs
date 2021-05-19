@@ -19,7 +19,7 @@ namespace DelegacionMunicipal.conexion
             {
                 socketCliente = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                IPEndPoint direccionConexion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1235);
+                IPEndPoint direccionConexion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1236);
                 socketCliente.Connect(direccionConexion);
                 Console.WriteLine("Conectado");
                 conectado = true;

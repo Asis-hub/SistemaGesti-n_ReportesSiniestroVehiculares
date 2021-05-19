@@ -92,7 +92,7 @@ namespace DireccionGeneral.modelo.dao
             return 0;
         }
         
-        public static int EliminararUsuario(string username)
+        public static int EliminarUsuario(string username)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();

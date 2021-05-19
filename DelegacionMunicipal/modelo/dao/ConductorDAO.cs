@@ -14,11 +14,54 @@ namespace DelegacionMunicipal.modelo.dao
 {
     public class ConductorDAO
     {
-        //Los parametros de los métodos pueden cambiarse
-        public static bool Registrar(Conductor nuevoConductor)
+        public static List<Conductor> ConsultarConductores()
         {
+            List<Conductor> listaConductores = new List<Conductor>();
+            string mensaje = "";
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.Consulta = "SELECT a.numeroLicenciaConducir AS numeroLicencia, a.telefonoCelular AS celular, a.nombreCompleto, a.fechaNacimiento FROM dbo.conductor a";
+            paquete.TipoQuery = TipoConsulta.Select;
+            paquete.TipoDominio = TipoDato.Conductor;
 
-            return true;
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            Console.WriteLine("Mensaje DAO: " + mensaje);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaConductores = (List<Conductor>)JsonSerializer.Deserialize(respuesta, typeof(List<Conductor>)); ;
+            }
+            return listaConductores;
+        }
+
+        //Los parametros de los métodos pueden cambiarse
+        public static int RegistrarConductor(Conductor nuevoConductor)
+        {
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.TipoQuery = TipoConsulta.Insert;
+            paquete.TipoDominio = TipoDato.Conductor;
+            paquete.Consulta = String.Format("INSERT conductor (numeroLicencia, celular, nombrecompleto, fechaNacimiento) " +
+                                             "VALUES ('{0}', '{1}', '{2}', {3})",
+                                             nuevoConductor.NumeroLicencia, nuevoConductor.Celular, nuevoConductor.NombreCompleto,
+                                             nuevoConductor.FechaNacimiento);
+
+            string mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            resultado = int.Parse(respuesta);
+            return resultado;
         }
 
         public static bool Actualizar(Conductor conductor)
@@ -26,36 +69,25 @@ namespace DelegacionMunicipal.modelo.dao
             return true;
         }
 
-        public static bool Eliminar(Conductor conductor)
+        public static int EliminarConductor(string numeroLicencia)
         {
-            return true;
-        }
-
-        public static ObservableCollection<Conductor> BuscarConductores(SocketLogin socketServidor)
-        {
-            
-            ObservableCollection<Conductor> listaConductores = null;
-            
-            /*string mensaje = "";
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
+            paquete.Consulta = String.Format("DELETE FROM dbo.conductor WHERE numeroLicenciaConducir = '{0}'", numeroLicencia);
+            paquete.TipoDominio = TipoDato.Conductor;
+            paquete.TipoQuery = TipoConsulta.Delete;
 
-            String consulta = "SELECT x.numLicenciaConducir, x.telCelular, x.nombreCompleto, x.fechaNacimiento FROM dbo.conductor x";
+            string mensaje = JsonSerializer.Serialize(paquete);
 
-            paquete.Consulta = consulta;
-            paquete.TipoQuery = TipoConsulta.Select;
-            paquete.TipoDominio = TipoDato.Delegacion;
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
 
-            mensaje = JsonSerializer.Serialize(paquete);
-
-            socketServidor.EnviarMensaje(mensaje);
-            string respuesta = socketServidor.RecibirMensaje();
-
-            if (respuesta.Length > 0)
-            {
-                listaConductores = (ObservableCollection<Conductor>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Delegacion>)); ;
-            }
-            */
-             return listaConductores;
+            resultado = int.Parse(respuesta);
+            return resultado;
         }
+
     }
 }
