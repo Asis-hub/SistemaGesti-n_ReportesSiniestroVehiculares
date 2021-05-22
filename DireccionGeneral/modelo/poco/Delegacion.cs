@@ -9,6 +9,7 @@ namespace DireccionGeneral.modelo.poco
     public class Delegacion
     {
         private int idDelegacion;
+        private int idMunicipio;
         private string municipio;
         private string nombre;
         private string correo;
@@ -16,6 +17,7 @@ namespace DireccionGeneral.modelo.poco
         private string calle;
         private string colonia;
         private string numero;
+        private int idTipo;
         private string tipo;
 
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
@@ -27,7 +29,9 @@ namespace DireccionGeneral.modelo.poco
         public string Colonia { get => colonia; set => colonia = value; }
         public string Numero { get => numero; set => numero = value; }
         public string Tipo { get => tipo; set => tipo = value; }
-        
+        public int IdMunicipio { get => idMunicipio; set => idMunicipio = value; }
+        public int IdTipo { get => idTipo; set => idTipo = value; }
+
         public Delegacion()
         {
 

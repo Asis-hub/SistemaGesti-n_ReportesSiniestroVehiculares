@@ -20,7 +20,7 @@ namespace DelegacionMunicipal.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Select;
             paquete.TipoDominio = TipoDato.Usuario;
-            paquete.Consulta = String.Format("SELECT a.username, a.password, a.idDelegacion , b.tipoCargo AS cargo " +
+            paquete.Consulta = String.Format("SELECT a.username, a.nombreCompleto, a.idDelegacion , b.idCargo, b.tipoCargo AS cargo " +
                                              "FROM dbo.usuario a INNER JOIN dbo.cargo b ON a.idCargo = b.idCargo " +
                                              "WHERE a.username = '{0}' AND a.password = '{1}' AND a.idDelegacion = '{2}'",
                                              username, password, idDelegacion);

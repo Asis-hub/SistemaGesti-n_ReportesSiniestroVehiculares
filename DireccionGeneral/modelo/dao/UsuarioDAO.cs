@@ -19,8 +19,8 @@ namespace DireccionGeneral.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Select;
             paquete.TipoDominio = TipoDato.Usuario;
-            paquete.Consulta = String.Format("SELECT a.username, a.password, a.idDelegacion , b.tipoCargo AS cargo " +
-                                             "FROM dbo.usuario a INNER JOIN dbo.cargo b ON a.idCargo = b.idCargo " +
+            paquete.Consulta = String.Format("SELECT a.username, a.nombreCompleto, a.idDelegacion , b.idCargo, b.tipoCargo AS cargo " +
+                                             "FROM dbo.usuario a INNER JOIN dbo.cargo b ON a.idCargo = b.idCargo  " +
                                              "WHERE a.username = '{0}' AND a.password = '{1}'",
                                              username, password);
 
@@ -46,7 +46,7 @@ namespace DireccionGeneral.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Select;
             paquete.TipoDominio = TipoDato.Usuario;
-            paquete.Consulta = "SELECT a.username, a.nombreCompleto, a.password, a.idDelegacion, b.tipoCargo FROM dbo.usuario a INNER JOIN dbo.cargo b ON a.idCargo = b.idCargo";
+            paquete.Consulta = "SELECT a.username, a.nombreCompleto, a.password, a.idDelegacion, b.idCargo, b.tipoCargo FROM dbo.usuario a INNER JOIN dbo.cargo b ON a.idCargo = b.idCargo";
 
             string mensaje = JsonSerializer.Serialize(paquete);
 
@@ -71,9 +71,9 @@ namespace DireccionGeneral.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.Usuario;
             paquete.Consulta = String.Format("INSERT usuario (username, nombreCompleto, password, idDelegacion, idCargo) " +
-                                             "VALUES ('{0}', '{1}', '{2}', {3},(SELECT idCargo FROM cargo WHERE tipoCargo = '{4}'))",
+                                             "VALUES ('{0}', '{1}', '{2}', {3}, {4})",
                                              nuevoUsuario.Username, nuevoUsuario.NombreCompleto, nuevoUsuario.Password, 
-                                             nuevoUsuario.IdDelegacion, nuevoUsuario.Cargo);
+                                             nuevoUsuario.IdDelegacion, nuevoUsuario.IdCargo);
             
             string mensaje = JsonSerializer.Serialize(paquete);
 
