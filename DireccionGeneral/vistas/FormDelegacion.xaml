@@ -17,7 +17,7 @@
         <TextBox x:Name="txt_CodigoPostal" HorizontalAlignment="Left" Height="23" Margin="93,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
 
         <Label Content="Calle" HorizontalAlignment="Left" Margin="15,206,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Usuario" HorizontalAlignment="Left" Height="22" Margin="103,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+        <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="22" Margin="93,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
 
         <Label Content="Número" HorizontalAlignment="Left" Margin="348,34,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="22" Margin="431,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
@@ -31,7 +31,7 @@
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="348,206,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Tipo" HorizontalAlignment="Left" Margin="431,206,0,0" VerticalAlignment="Top" Width="205"/>
 
-        <Button x:Name="btn_RegistrarDelegacion" Content="Registrar" HorizontalAlignment="Left" Margin="456,277,0,0" VerticalAlignment="Top" Width="76" Click="btn_RegistrarDelegacion_Click"/>
+        <Button x:Name="btn_GuardarDelegacion" Content="Guardar" HorizontalAlignment="Left" Margin="456,277,0,0" VerticalAlignment="Top" Width="76" Click="btn_GuardarDelegacion_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="561,277,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
 
     </Grid>
