@@ -1,6 +1,7 @@
 ﻿using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,9 +12,12 @@ namespace DireccionGeneral.vistas
     /// </summary>
     public partial class ConsultarUsuarios : Page
     {
+        List<Usuario> usuarios;
+
         public ConsultarUsuarios()
         {
             InitializeComponent();
+            usuarios = new List<Usuario>();
             CargarTabla();
         }
 
@@ -45,7 +49,8 @@ namespace DireccionGeneral.vistas
 
         public void CargarTabla()
         {
-            tbl_Usuarios.ItemsSource = UsuarioDAO.ConsultarUsuarios();
+            usuarios = UsuarioDAO.ConsultarUsuarios();
+            tbl_Usuarios.ItemsSource = usuarios;
         }
     }
 }

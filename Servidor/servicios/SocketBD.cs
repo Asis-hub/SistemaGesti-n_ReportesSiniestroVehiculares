@@ -152,7 +152,8 @@ namespace Servidor.servicios
                             usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
                             usuario.Password = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
                             usuario.IdDelegacion = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
-                            usuario.Cargo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                            usuario.IdCargo = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
+                            usuario.Cargo = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
 
                             listaUsuarios.Add(usuario);
                         }
