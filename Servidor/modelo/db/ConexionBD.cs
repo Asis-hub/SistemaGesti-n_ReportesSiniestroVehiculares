@@ -11,8 +11,8 @@ namespace Servidor.modelo.db
     {
         private static String SERVER = "maisonbleue2020.ddns.net";
         private static String PORT = "1433";
-        private static String DATABASE = "sgrsv";
-        private static String USER = "sgrsv";
+        private static String DATABASE = "sgsrv";
+        private static String USER = "sgsrv";
         private static String PASSWORD = "14052021";
         //private static String USER = "db_sgrsv";
         //private static String PASSWORD = "01052021";

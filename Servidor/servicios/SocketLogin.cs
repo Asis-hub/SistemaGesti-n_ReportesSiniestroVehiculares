@@ -110,14 +110,16 @@ namespace Servidor.servicios
                         {
                             Delegacion delegacion = new Delegacion();
                             delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            delegacion.Municipio = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            delegacion.Nombre = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            delegacion.Correo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                            delegacion.CodigoPostal = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                            delegacion.Colonia = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                            delegacion.Calle = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                            delegacion.Numero = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                            delegacion.Tipo = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
+                            delegacion.IdMunicipio = (!dataReader.IsDBNull(1)) ? dataReader.GetInt32(1) : 0;
+                            delegacion.Municipio = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            delegacion.Nombre = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            delegacion.Correo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                            delegacion.CodigoPostal = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                            delegacion.Colonia = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
+                            delegacion.Calle = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
+                            delegacion.Numero = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
+                            delegacion.IdTipo = (!dataReader.IsDBNull(9)) ? dataReader.GetInt32(9) : 0;
+                            delegacion.Tipo = (!dataReader.IsDBNull(10)) ? dataReader.GetString(10) : "";
                             listaDelegaciones.Add(delegacion);
                         }
                         mensaje = JsonSerializer.Serialize(listaDelegaciones);
@@ -133,7 +135,8 @@ namespace Servidor.servicios
                             usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
                             usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
                             usuario.IdDelegacion = (!dataReader.IsDBNull(2)) ? dataReader.GetInt32(2) : 0;
-                            usuario.Cargo = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            usuario.IdCargo = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
+                            usuario.Cargo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
 
                             mensaje = JsonSerializer.Serialize(usuario);
                         }

@@ -23,8 +23,8 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            String consulta = "SELECT a.idDelegacion, c.nombre as municipio, a.nombre, a.correo, a.codigoPostal, a.calle, a.colonia, a.numero, b.tipoDelegacion " +
-                              "FROM dbo.delegacion a INNER JOIN dbo.tipoDelegacion b ON a.tipo = b.idTipoDelegacion INNER JOIN dbo.municipio c ON a.idMunicipio = c.idMunicipio";
+            String consulta = "SELECT a.idDelegacion, c.idMunicipio, c.nombre as municipio, a.nombre, a.correo, a.codigoPostal, a.calle, a.colonia, a.numero, b.idTipoDelegacion, b.tipoDelegacion " +
+                "FROM dbo.delegacion a INNER JOIN dbo.tipoDelegacion b ON a.tipo = b.idTipoDelegacion INNER JOIN dbo.municipio c ON a.idMunicipio = c.idMunicipio";
             paquete.Consulta = consulta;
             paquete.TipoQuery = TipoConsulta.Select;
             paquete.TipoDominio = TipoDato.Delegacion;
@@ -49,8 +49,8 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
-            paquete.Consulta = "SELECT a.idDelegacion, c.nombre as municipio, a.nombre, a.correo, a.codigoPostal, a.calle, a.colonia, a.numero, b.tipoDelegacion " +
-                               "FROM dbo.delegacion a INNER JOIN dbo.tipoDelegacion b ON a.tipo = b.idTipoDelegacion INNER JOIN dbo.municipio c ON a.idMunicipio = c.idMunicipio";
+            paquete.Consulta = "SELECT a.idDelegacion, c.idMunicipio, c.nombre as municipio, a.nombre, a.correo, a.codigoPostal, a.calle, a.colonia, a.numero, b.idTipoDelegacion, b.tipoDelegacion " +
+                "FROM dbo.delegacion a INNER JOIN dbo.tipoDelegacion b ON a.tipo = b.idTipoDelegacion INNER JOIN dbo.municipio c ON a.idMunicipio = c.idMunicipio";
             paquete.TipoQuery = TipoConsulta.Select;
             paquete.TipoDominio = TipoDato.Delegacion;
 

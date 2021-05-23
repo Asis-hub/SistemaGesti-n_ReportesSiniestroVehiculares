@@ -12,6 +12,7 @@ namespace DireccionGeneral.modelo.poco
         private string password;
         private string nombreCompleto;
         private int idDelegacion;
+        private int idCargo;
         private string cargo;
 
         public string Username { get => username; set => username = value; }
@@ -19,7 +20,7 @@ namespace DireccionGeneral.modelo.poco
         public string NombreCompleto { get => nombreCompleto; set => nombreCompleto = value; }
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
         public string Cargo { get => cargo; set => cargo = value; }
-        
+        public int IdCargo { get => idCargo; set => idCargo = value; }
 
         public Usuario()
         {
