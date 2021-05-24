@@ -8,5 +8,6 @@ namespace DelegacionMunicipal.conexion
 {
     class ConectorFTP
     {
+
     }
 }
