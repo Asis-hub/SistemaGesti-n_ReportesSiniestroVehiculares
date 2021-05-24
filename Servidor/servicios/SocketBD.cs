@@ -200,7 +200,7 @@ namespace Servidor.servicios
                             conductor.NumeroLicencia = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
                             conductor.Celular = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
                             conductor.NombreCompleto = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            conductor.FechaNacimiento = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            conductor.FechaNacimiento = (!dataReader.IsDBNull(3)) ? dataReader.GetDateTime(3) : System.DateTime.MinValue;
                             listaConductores.Add(conductor);
                         }
                         respuesta = JsonSerializer.Serialize(listaConductores);

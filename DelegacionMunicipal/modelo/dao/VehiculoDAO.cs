@@ -49,7 +49,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.Vehiculo;
             paquete.Consulta = String.Format("INSERT vehiculo (numeroPlaca, marca, modelo, color, numeroPolizaSeguro, nombreAseguradora, ano, numeroLicenciaConducir) " +
-                                             "VALUES ('{0}', '{1}', '{2}', {3},  {4}, {5}, {6}, {7}))",
+                                             "VALUES ('{0}', '{1}', '{2}', '{3}',  '{4}', '{5}', '{6}', {7})",
                                              nuevoVehiculo.NumPlaca, nuevoVehiculo.Marca, nuevoVehiculo.Modelo, nuevoVehiculo.Color,
                                              nuevoVehiculo.NumPolizaSeguro, nuevoVehiculo.NombreAseguradora, nuevoVehiculo.Año,
                                              nuevoVehiculo.NumLicenciaConducir);
@@ -61,24 +61,23 @@ namespace DelegacionMunicipal.modelo.dao
             string respuesta = socket.RecibirMensaje();
             socket.TerminarConexion();
 
-            resultado = int.Parse(respuesta);
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
+
             return resultado;
         }
 
-        public static int ActualizarVehiculo(string numPlaca)
-        {
-            int resultado = 0;
-            return resultado;
-        }
-
-        public static int EliminarVehiculo(string numPlaca)
+        public static int EditarVehiculo(Vehiculo vehiculo)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
-            paquete.Consulta = String.Format("DELETE FROM dbo.vehiculo WHERE numeroPlaca = '{0}'", numPlaca);
+            paquete.TipoQuery = TipoConsulta.Update;
             paquete.TipoDominio = TipoDato.Vehiculo;
-            paquete.TipoQuery = TipoConsulta.Delete;
+            paquete.Consulta = String.Format("UPDATE dbo.vehiculo SET numeroPlaca='{0}', marca='{1}', color='{2}', numeroPolizaSeguro='{3}', nombreAseguradora='{4}', ano='{5}', numeroLicenciaConducir='{6}' WHERE numeroPlaca={7}",
+                                             vehiculo.NumPlaca, vehiculo.Marca, vehiculo.Color, vehiculo.NumPolizaSeguro, vehiculo.Año, vehiculo.NumLicenciaConducir, vehiculo.NumPlaca);
 
             string mensaje = JsonSerializer.Serialize(paquete);
 
@@ -87,36 +86,36 @@ namespace DelegacionMunicipal.modelo.dao
             string respuesta = socket.RecibirMensaje();
             socket.TerminarConexion();
 
-            resultado = int.Parse(respuesta);
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
+
             return resultado;
         }
 
-        public static ObservableCollection<Vehiculo> BuscarVehiculos(SocketBD socketServidor)
+        public static int EliminarVehiculo(string numeroPlaca)
         {
-            ObservableCollection<Vehiculo> listaVehiculos = null;
-            /*
-            string mensaje = "";
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
-
-            String consulta = "SELECT x.numPlaca, x.marca, x.modelo, x.color, x.numPolizaSeguro" +
-                ", x.nombreAseguradora, x.ano, x.numLicenciaConducir FROM dbo.vehiculo x" +
-                ", dbo.conductor y WHERE x.numLicenciaConducir = y.numLicenciaConducir";
-
-            paquete.Consulta = consulta;
-            paquete.TipoQuery = TipoConsulta.Select;
+            paquete.TipoQuery = TipoConsulta.Delete;
             paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.Consulta = String.Format("DELETE FROM dbo.vehiculo WHERE numeroPlaca={0}", numeroPlaca);
 
-            mensaje = JsonSerializer.Serialize(paquete);
+            string mensaje = JsonSerializer.Serialize(paquete);
 
-            socketServidor.EnviarMensaje(mensaje);
-            string respuesta = socketServidor.RecibirMensaje();
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
 
             if (respuesta.Length > 0)
             {
-                listaVehiculos = (ObservableCollection<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Vehiculo>)); ;
+                resultado = int.Parse(respuesta);
             }
-            */
-            return listaVehiculos;
+
+            return resultado;
         }
     }
 }
