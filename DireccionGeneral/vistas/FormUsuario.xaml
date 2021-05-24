@@ -8,7 +8,7 @@
         Title="Usuario" Height="305.625" Width="742.812">
     <Grid>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Nombre" HorizontalAlignment="Left" Height="23" Margin="93,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="txt_Nombre" MaxLength="75" HorizontalAlignment="Left" Height="23" Margin="93,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
 
         <Label Content="Cargo" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Cargo" HorizontalAlignment="Left" Margin="93,90,0,0" VerticalAlignment="Top" Width="215"/>
@@ -20,12 +20,12 @@
         <TextBox x:Name="txt_Usuario" HorizontalAlignment="Left" Height="22" Margin="508,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
 
         <Label Content="Contraseña" HorizontalAlignment="Left" Margin="345,86,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="txt_Contrasenia" HorizontalAlignment="Left" Margin="508,87,0,0" VerticalAlignment="Top" Width="205" Height="25"/>
+        <PasswordBox x:Name="txt_Contraseña" HorizontalAlignment="Left" Margin="508,87,0,0" VerticalAlignment="Top" Width="205" Height="25"/>
 
         <Label Content="Confirmar Contraseña" HorizontalAlignment="Left" Margin="345,150,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="txt_ContraseniaConfirmacion" HorizontalAlignment="Left" Margin="508,150,0,0" VerticalAlignment="Top" Width="205" Height="26"/>
+        <PasswordBox x:Name="txt_ContraseñaConfirmacion" HorizontalAlignment="Left" Margin="508,150,0,0" VerticalAlignment="Top" Width="205" Height="26"/>
 
-        <Button x:Name="btn_RegistrarUsuario" Content="Registrar" HorizontalAlignment="Left" Margin="537,227,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarUsuario_Click"/>
+        <Button x:Name="btn_GuardarUsuario" Content="Guardar" HorizontalAlignment="Left" Margin="537,227,0,0" VerticalAlignment="Top" Width="75" Click="btn_GuardarUsuario_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="638,227,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
 
     </Grid>

@@ -70,7 +70,7 @@ namespace DireccionGeneral.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.Usuario;
-            paquete.Consulta = String.Format("INSERT usuario (username, nombreCompleto, password, idDelegacion, idCargo) " +
+            paquete.Consulta = String.Format("INSERT dbo.usuario (username, nombreCompleto, password, idDelegacion, idCargo) " +
                                              "VALUES ('{0}', '{1}', '{2}', {3}, {4})",
                                              nuevoUsuario.Username, nuevoUsuario.NombreCompleto, nuevoUsuario.Password, 
                                              nuevoUsuario.IdDelegacion, nuevoUsuario.IdCargo);
@@ -86,10 +86,27 @@ namespace DireccionGeneral.modelo.dao
             return resultado;
         }
         
-        public static int EditarUsuario(Usuario usuario)
+        public static int EditarUsuario(string username, Usuario usuario)
         {
-            
-            return 0;
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.TipoQuery = TipoConsulta.Insert;
+            paquete.TipoDominio = TipoDato.Usuario;
+            paquete.Consulta = String.Format("UPDATE dbo.usuario SET username='{0}', nombreCompleto='{1}', " +
+                                             "password='{2}', idDelegacion={3}, idCargo={4} WHERE username='{5}'",
+                                             usuario.Username, usuario.NombreCompleto, usuario.Password,
+                                             usuario.IdDelegacion, usuario.IdCargo, username);
+            Console.WriteLine(paquete.Consulta);
+            string mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            resultado = int.Parse(respuesta);
+            return resultado;
         }
         
         public static int EliminarUsuario(string username)

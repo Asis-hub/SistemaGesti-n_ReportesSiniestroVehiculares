@@ -226,6 +226,22 @@ namespace Servidor.servicios
                         respuesta = JsonSerializer.Serialize(listaVehiculos);
                     }
 
+                    //Lista Cargos
+                    if(paquete.TipoDominio == TipoDato.Cargo)
+                    {
+                        List<Cargo> listaCargos = new List<Cargo>();
+                        while (dataReader.Read())
+                        {
+                            Cargo cargo = new Cargo();
+                            cargo.IdCargo = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            cargo.TipoCargo = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            listaCargos.Add(cargo);
+                        }
+
+                        respuesta = JsonSerializer.Serialize(listaCargos);
+                    }
+
+
                     dataReader.Close();
                     comando.Dispose();
                 }

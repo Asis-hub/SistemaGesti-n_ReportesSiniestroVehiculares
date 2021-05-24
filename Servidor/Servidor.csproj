@@ -84,6 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="modelo\db\ConexionBD.cs" />
+    <Compile Include="modelo\poco\Cargo.cs" />
     <Compile Include="modelo\poco\Conductor.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
     <Compile Include="modelo\poco\DelegacionTipo.cs" />

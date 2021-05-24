@@ -23,19 +23,21 @@ namespace DireccionGeneral.vistas
 
         private void btn_RegistrarUsuario_Click(object sender, RoutedEventArgs e)
         {
-            FormUsuario formularioNuevoUsuario = new FormUsuario();
-            formularioNuevoUsuario.Owner = Window.GetWindow(this);
-            formularioNuevoUsuario.ShowDialog();
+            AbrirFormulario(true, null);
         }
 
         private void btn_EditarUsuario_Click(object sender, RoutedEventArgs e)
         {
-
+            int seleccion = tbl_Usuarios.SelectedIndex;
+            if (seleccion >= 0)
+            {
+                AbrirFormulario(false, usuarios[seleccion]);
+            }
         }
 
         private void btn_EliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
-            if(tbl_Usuarios.SelectedIndex > -1)
+            if(tbl_Usuarios.SelectedIndex >= 0)
             {
                 string username = ((Usuario)tbl_Usuarios.SelectedItem).Username;
                 int resultado = UsuarioDAO.EliminarUsuario(username);
@@ -52,5 +54,28 @@ namespace DireccionGeneral.vistas
             usuarios = UsuarioDAO.ConsultarUsuarios();
             tbl_Usuarios.ItemsSource = usuarios;
         }
+
+        private void AbrirFormulario(bool nuevo, Usuario usuario)
+        {
+            FormUsuario formularioUsuario;
+
+            if (nuevo)
+            {
+                formularioUsuario = new FormUsuario();
+            }
+            else
+            {
+                formularioUsuario = new FormUsuario(usuario);
+            }
+
+            formularioUsuario.Owner = Window.GetWindow(this);
+            bool? resultado = formularioUsuario.ShowDialog();
+
+            if (resultado == true)
+            {
+                CargarTabla();
+            }
+        }
+
     }
 }
