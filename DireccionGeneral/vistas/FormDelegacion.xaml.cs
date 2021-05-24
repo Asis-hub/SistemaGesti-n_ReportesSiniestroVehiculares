@@ -48,6 +48,7 @@ namespace DireccionGeneral.vistas
         {
             if (ValidarFormulario())
             {
+                int resultado;
                 Delegacion delegacion = new Delegacion();
                 if (!esNuevo)
                 {
@@ -66,7 +67,7 @@ namespace DireccionGeneral.vistas
                 int indiceTipo = cmb_Tipo.SelectedIndex;
                 delegacion.IdTipo = tiposDelegacion[indiceTipo].IdTipoDelegacion;
 
-                int resultado;
+                
 
                 if (esNuevo)
                 {

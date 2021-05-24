@@ -39,7 +39,7 @@ namespace Servidor.modelo.poco
 
         public override string ToString()
         {
-            return idDelegacion + " - " + nombre;
+            return municipio + " - " + nombre;
         }
     }
 }

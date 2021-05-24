@@ -23,20 +23,24 @@ namespace DireccionGeneral.vistas
 
         private void btn_RegistrarDelegacion_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(true);
+            AbrirFormulario(true, null);
         }
 
         private void btn_EditarDelgación_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(false);
+            int seleccion = tbl_Delegaciones.SelectedIndex;
+            if (seleccion >= 0)
+            {
+                AbrirFormulario(false, delegaciones[seleccion]);
+            }
         }
 
         private void btn_EliminarDelgacion_Click(object sender, RoutedEventArgs e)
         {
-            int indice = tbl_Delegaciones.SelectedIndex;
-            if (indice >= 0)
+            int seleccion = tbl_Delegaciones.SelectedIndex;
+            if (seleccion >= 0)
             {
-                int resultado = DelegacionDAO.EliminarDelegacion(delegaciones[indice].IdDelegacion);
+                int resultado = DelegacionDAO.EliminarDelegacion(delegaciones[seleccion].IdDelegacion);
                 if (resultado == 1)
                 {
                     CargarTabla();
@@ -50,22 +54,20 @@ namespace DireccionGeneral.vistas
             tbl_Delegaciones.ItemsSource = delegaciones;
         }
 
-        private void AbrirFormulario(bool nuevo)
+        private void AbrirFormulario(bool nuevo, Delegacion delegacion)
         {
-            FormDelegacion formularioNuevaDelegacion;
+            FormDelegacion formularioDelegacion;
 
             if (nuevo)
             {
-                formularioNuevaDelegacion = new FormDelegacion();
+                formularioDelegacion = new FormDelegacion();
             }
             else
             {
-                int indice = tbl_Delegaciones.SelectedIndex;
-                Delegacion delegacionEdicion = delegaciones[indice];
-                formularioNuevaDelegacion = new FormDelegacion(delegacionEdicion);
+                formularioDelegacion = new FormDelegacion(delegacion);
             }
-            formularioNuevaDelegacion.Owner = Window.GetWindow(this);
-            bool? resultado = formularioNuevaDelegacion.ShowDialog();
+            formularioDelegacion.Owner = Window.GetWindow(this);
+            bool? resultado = formularioDelegacion.ShowDialog();
             if (resultado == true)
             {
                 CargarTabla();
