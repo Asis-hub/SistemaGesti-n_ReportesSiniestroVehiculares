@@ -40,18 +40,41 @@ namespace DelegacionMunicipal.modelo.dao
             return listaConductores;
         }
 
-        //Los parametros de los métodos pueden cambiarse
-        public static int RegistrarConductor(Conductor nuevoConductor)
+        public static int RegistrarConductor(Conductor conductor)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.Conductor;
-            paquete.Consulta = String.Format("INSERT conductor (numeroLicencia, celular, nombrecompleto, fechaNacimiento) " +
-                                             "VALUES ('{0}', '{1}', '{2}', {3})",
-                                             nuevoConductor.NumeroLicencia, nuevoConductor.Celular, nuevoConductor.NombreCompleto,
-                                             nuevoConductor.FechaNacimiento);
+            paquete.Consulta = String.Format("INSERT INTO dbo.conductor (numeroLicenciaConducir, telefonoCelular, nombreCompleto, fechaNacimiento) " +
+                                             "VALUES ('{0}', '{1}', '{2}', '{3}')",
+                                             conductor.NumeroLicencia, conductor.Celular, conductor.NombreCompleto, conductor.FechaNacimiento.ToString("yyyy-MM-dd"));
+            Console.WriteLine(paquete.Consulta);
+            string mensaje = JsonSerializer.Serialize(paquete);
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
+
+            return resultado;
+        }
+
+        //Los parametros de los métodos pueden cambiarse
+        public static int EditarConductor(Conductor conductor)
+        {
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+            paquete.TipoQuery = TipoConsulta.Update;
+            paquete.TipoDominio = TipoDato.Conductor;
+            paquete.Consulta = String.Format("UPDATE dbo.conductor SET numeroLicenciaConducir='{0}', telefonoCelular='{1}', nombreCompleto='{2}', fechaNacimiento='{3}' WHERE numeroLicenciaConducir='{4}'",
+                                             conductor.NumeroLicencia, conductor.Celular, conductor.NombreCompleto, conductor.FechaNacimiento.ToString("yyyy-MM-dd"), conductor.NumeroLicencia);
 
             string mensaje = JsonSerializer.Serialize(paquete);
 
@@ -60,13 +83,12 @@ namespace DelegacionMunicipal.modelo.dao
             string respuesta = socket.RecibirMensaje();
             socket.TerminarConexion();
 
-            resultado = int.Parse(respuesta);
-            return resultado;
-        }
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
 
-        public static bool Actualizar(Conductor conductor)
-        {
-            return true;
+            return resultado;
         }
 
         public static int EliminarConductor(string numeroLicencia)
@@ -74,10 +96,10 @@ namespace DelegacionMunicipal.modelo.dao
             int resultado = 0;
             SocketBD socket = new SocketBD();
             Paquete paquete = new Paquete();
-            paquete.Consulta = String.Format("DELETE FROM dbo.conductor WHERE numeroLicenciaConducir = '{0}'", numeroLicencia);
-            paquete.TipoDominio = TipoDato.Conductor;
             paquete.TipoQuery = TipoConsulta.Delete;
-
+            paquete.TipoDominio = TipoDato.Conductor;
+            paquete.Consulta = String.Format("DELETE FROM dbo.conductor WHERE numeroLicenciaConducir='{0}'", numeroLicencia);
+            Console.WriteLine(paquete.Consulta);
             string mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();
@@ -85,7 +107,11 @@ namespace DelegacionMunicipal.modelo.dao
             string respuesta = socket.RecibirMensaje();
             socket.TerminarConexion();
 
-            resultado = int.Parse(respuesta);
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
+
             return resultado;
         }
 

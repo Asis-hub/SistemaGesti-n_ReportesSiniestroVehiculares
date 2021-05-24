@@ -28,30 +28,60 @@ namespace DelegacionMunicipal.vistas
         public ConsultarConductores()
         {
             InitializeComponent();
+            conductores = new List<Conductor>();
             CargarTablaConductores();
         }
 
         private void btn_RegistrarConductor_Click(object sender, RoutedEventArgs e)
         {
-            FormConductor formConductor = new FormConductor();
-            formConductor.ShowDialog();
-
+            AbrirFormulario(true);
         }
 
         private void btn_EditarConductor_Click(object sender, RoutedEventArgs e)
         {
-
+            AbrirFormulario(false);
         }
 
         private void btn_EliminarConductor_Click(object sender, RoutedEventArgs e)
         {
-
+            int indice = tbl_Conductores.SelectedIndex;
+            Console.WriteLine(indice);
+            if (indice >= 0)
+            {
+                int resultado = ConductorDAO.EliminarConductor(conductores[indice].NumeroLicencia);
+                if (resultado == 1)
+                {
+                    CargarTablaConductores();
+                }
+            }
         }
 
         private void CargarTablaConductores()
         {
             conductores = ConductorDAO.ConsultarConductores();
             tbl_Conductores.ItemsSource = conductores;
+        }
+
+        private void AbrirFormulario(bool nuevo)
+        {
+            FormConductor formularioNuevoConductor;
+
+            if (nuevo)
+            {
+                formularioNuevoConductor = new FormConductor();
+            }
+            else
+            {
+                int indice = tbl_Conductores.SelectedIndex;
+                Conductor conductorEdicion = conductores[indice];
+                formularioNuevoConductor = new FormConductor(conductorEdicion);
+            }
+            formularioNuevoConductor.Owner = Window.GetWindow(this);
+            bool? resultado = formularioNuevoConductor.ShowDialog();
+            if (resultado == true)
+            {
+                CargarTablaConductores();
+            }
         }
     }
 }
