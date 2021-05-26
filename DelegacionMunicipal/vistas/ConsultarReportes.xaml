@@ -28,7 +28,7 @@
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
             </StackPanel>
 
-            <DataGrid x:Name="tbl_Delegaciones" Grid.Row="1" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
+            <DataGrid x:Name="tbl_reportes" Grid.Row="1" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Folio"/>
                     <DataGridTextColumn Header="Direccion"/>
@@ -43,6 +43,7 @@
                 <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
             </StackPanel>
         </Grid>
+        <Label x:Name="prueba" Content="Label" Height="391" VerticalAlignment="Top"/>
 
 
     </DockPanel>

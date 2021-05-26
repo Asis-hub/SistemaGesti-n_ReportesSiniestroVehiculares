@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DelegacionMunicipal.modelo.dao;
+using DelegacionMunicipal.conexion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +25,18 @@ namespace DelegacionMunicipal.vistas
         public ConsultarReportes()
         {
             InitializeComponent();
+            ReporteDAO reporteDAO = new ReporteDAO();
+            tbl_reportes.ItemsSource = reporteDAO.GetReportes();
+  
+            prueba.Content = reporteDAO.GetReportes().Count;
+
         }
 
         
         private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
         {
-            DetallesReporte ventanaDetalles = new DetallesReporte();
+            int x = 1;
+            DetallesReporte ventanaDetalles = new DetallesReporte(x);
             ventanaDetalles.ShowDialog();
         }
 
@@ -42,5 +50,17 @@ namespace DelegacionMunicipal.vistas
         {
 
         }
+
+        private void tbl_Delegaciones_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cargarReportes()
+        {
+
+        }
+
+        
     }
 }

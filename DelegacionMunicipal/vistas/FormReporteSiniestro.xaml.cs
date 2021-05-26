@@ -1,26 +1,70 @@
-﻿using System.Windows;
+﻿using DelegacionMunicipal.modelo.dao;
+using DelegacionMunicipal.modelo.poco;
+using Microsoft.Win32;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace DelegacionMunicipal.vistas
 {
     /// <summary>
     /// Lógica de interacción para FormReporteSiniestro.xaml
     /// </summary>
+
+    
     public partial class FormReporteSiniestro : Window
     {
+        List<string> listaVehiculos;
         public FormReporteSiniestro()
         {
             InitializeComponent();
+            CargarListaVehiculos();
+        }
+
+        private void CargarListaVehiculos()
+        {
+            cmb_Conductor.Items.Clear();
+            cmb_Conductor.Items.Add("Conductor");
+            List<Conductor> listaConductores = ConductorDAO.ConsultarConductores();
+            foreach (Conductor elemento in listaConductores)
+            {
+                cmb_Conductor.Items.Add(elemento);
+            }
+            cmb_Conductor.SelectedIndex = 0;
+            
         }
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
             //Agregar vehiculos involucrados que se seleccionan en combobox
+            //cmb_Vehiculo
+            listaVehiculos.Add(cmb_Vehiculo.SelectedItem.ToString());
+            
+
 
         }
 
         private void btn_AgregarImagen_Click(object sender, RoutedEventArgs e)
         {
             //Agregar imagenes, minimo 3 y maximo 8
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filename = openFileDialog.FileName;
+              
+                string nombre = openFileDialog.SafeFileName;
+                
+                /*foreach (string filename in openFileDialog.FileNames)
+                {
+                    
+                }*/
+
+                
+
+
+            }
+
 
         }
 

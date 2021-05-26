@@ -30,11 +30,11 @@ namespace DelegacionMunicipal.modelo.dao
             return true;
         }
 
-        public static ObservableCollection<ReporteSiniestro> BuscarReportes(SocketBD socketServidor)
+        public List<ReporteSiniestro> BuscarReportes(SocketBD socketServidor)
         {
-            ObservableCollection<ReporteSiniestro> listaReportes = null;
+            List<ReporteSiniestro> listaReportes = null;
             
-            /*
+            
             string mensaje = "";
             Paquete paquete = new Paquete();
 
@@ -53,10 +53,55 @@ namespace DelegacionMunicipal.modelo.dao
 
             if (respuesta.Length > 0)
             {
-                listaReportes = (ObservableCollection<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(ObservableCollection<Reporte>)); ;
+                listaReportes = (List<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(List<ReporteSiniestro>)); ;
             }
-            */
+            
             return listaReportes;
+        }
+
+        public List<ReporteSiniestro> GetReportes()
+        {
+            List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();
+            SocketLogin socket;
+            socket = new SocketLogin();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+            string consulta = "Select * from reporteSiniestro;";
+            paquete.Consulta = consulta;
+            paquete.TipoQuery = TipoConsulta.Select;
+            paquete.TipoDominio = TipoDato.Reporte;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaReportes = (List<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(List<ReporteSiniestro>)); 
+            }
+
+
+            return listaReportes;
+        }
+
+        public static ReporteSiniestro GetReporte(int id)
+        {
+
+            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+            SocketLogin socket;
+            socket = new SocketLogin();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+            string consulta = "Select * from reporteSiniestro where id = " + id.ToString() + ";";
+            
+
+            return reporteSiniestro;
         }
     }
 }

@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="conexion\ConectorFTP.cs" />
     <Compile Include="conexion\Paquete.cs" />
     <Compile Include="conexion\SocketBD.cs" />
     <Compile Include="conexion\SocketLogin.cs" />
