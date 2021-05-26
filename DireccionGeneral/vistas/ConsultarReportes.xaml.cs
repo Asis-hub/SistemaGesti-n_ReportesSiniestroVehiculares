@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using DireccionGeneral.modelo.poco;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DireccionGeneral.vistas
@@ -8,9 +10,25 @@ namespace DireccionGeneral.vistas
     /// </summary>
     public partial class ConsultarReportes : Page
     {
+        List<ReporteSiniestro> reportes;
+        Usuario usuarioConectado;
+
         public ConsultarReportes()
         {
             InitializeComponent();
+            reportes = new List<ReporteSiniestro>();
+            CargarTabla();
+        }
+
+        public ConsultarReportes(Usuario usuario) : this()
+        {
+            usuarioConectado = usuario;
+        }
+
+        private void CargarTabla()
+        {
+            //reportes = ReportesDAO.Consultar()
+            tbl_Reportes.ItemsSource = reportes;
         }
 
         private void btn_BuscarReportes_Click(object sender, RoutedEventArgs e)
@@ -27,8 +45,15 @@ namespace DireccionGeneral.vistas
 
         private void btn_DictaminarReporte_Click(object sender, RoutedEventArgs e)
         {
-            DictaminarReporte ventanaDictaminarReporte = new DictaminarReporte();
-            ventanaDictaminarReporte.ShowDialog();
+            int seleccion = tbl_Reportes.SelectedIndex;
+            if (seleccion >= 0)
+            {
+                ReporteSiniestro reporte = reportes[seleccion];
+
+                DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, reporte);
+                ventanaDictamen.Owner = Window.GetWindow(this);
+                ventanaDictamen.ShowDialog();
+            }
         }
     }
 }
