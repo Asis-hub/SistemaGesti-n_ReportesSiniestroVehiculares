@@ -28,7 +28,7 @@ namespace DelegacionMunicipal.vistas
             ReporteDAO reporteDAO = new ReporteDAO();
             tbl_reportes.ItemsSource = reporteDAO.GetReportes();
   
-            prueba.Content = reporteDAO.GetReportes().Count;
+            //prueba.Content = reporteDAO.GetReportes().Count;
 
         }
 
