@@ -7,9 +7,10 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class DetallesReporte : Window
     {
-        public DetallesReporte()
+        public DetallesReporte(int id)
         {
             InitializeComponent();
+            
         }
     }
 }

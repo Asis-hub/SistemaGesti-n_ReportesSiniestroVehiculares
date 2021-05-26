@@ -28,6 +28,8 @@ namespace DelegacionMunicipal.modelo.poco
 
         }
 
+        
+
         public override string ToString()
         {
             return "Reporte - " + idReporte;

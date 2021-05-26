@@ -9,8 +9,11 @@ namespace DelegacionMunicipal.vistas
     /// <summary>
     /// Lógica de interacción para FormReporteSiniestro.xaml
     /// </summary>
+
+    
     public partial class FormReporteSiniestro : Window
     {
+        List<string> listaVehiculos;
         public FormReporteSiniestro()
         {
             InitializeComponent();
@@ -33,6 +36,10 @@ namespace DelegacionMunicipal.vistas
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
             //Agregar vehiculos involucrados que se seleccionan en combobox
+            //cmb_Vehiculo
+            listaVehiculos.Add(cmb_Vehiculo.SelectedItem.ToString());
+            
+
 
         }
 
@@ -40,6 +47,7 @@ namespace DelegacionMunicipal.vistas
         {
             //Agregar imagenes, minimo 3 y maximo 8
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
