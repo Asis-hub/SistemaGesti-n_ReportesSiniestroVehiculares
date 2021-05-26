@@ -46,6 +46,7 @@ namespace DelegacionMunicipal.vistas
         {
             if (ValidarFormulario())
             {
+                int resultado;
                 Vehiculo vehiculo = new Vehiculo();
                 if (!esNuevo)
                 {
@@ -61,7 +62,6 @@ namespace DelegacionMunicipal.vistas
                 vehiculo.NumLicenciaConducir = cmb_Conductores.SelectedItem.ToString();
 
 
-                int resultado;
 
                 if (esNuevo)
                 {

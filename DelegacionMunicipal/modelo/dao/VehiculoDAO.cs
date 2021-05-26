@@ -76,8 +76,10 @@ namespace DelegacionMunicipal.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Update;
             paquete.TipoDominio = TipoDato.Vehiculo;
-            paquete.Consulta = String.Format("UPDATE dbo.vehiculo SET numeroPlaca='{0}', marca='{1}', color='{2}', numeroPolizaSeguro='{3}', nombreAseguradora='{4}', ano='{5}', numeroLicenciaConducir='{6}' WHERE numeroPlaca={7}",
-                                             vehiculo.NumPlaca, vehiculo.Marca, vehiculo.Color, vehiculo.NumPolizaSeguro, vehiculo.Año, vehiculo.NumLicenciaConducir, vehiculo.NumPlaca);
+            paquete.Consulta = String.Format("UPDATE dbo.vehiculo SET numeroPlaca='{0}', marca='{1}', modelo='{2}', color='{3}', numeroPolizaSeguro='{4}', " +
+                                                "nombreAseguradora='{5}', ano='{6}', numeroLicenciaConducir='{7}' WHERE numeroPlaca='{8}'",
+                                             vehiculo.NumPlaca, vehiculo.Marca, vehiculo.Modelo, vehiculo.Color, vehiculo.NumPolizaSeguro, vehiculo.NombreAseguradora,
+                                             vehiculo.Año, vehiculo.NumLicenciaConducir, vehiculo.NumPlaca);
 
             string mensaje = JsonSerializer.Serialize(paquete);
 
@@ -101,7 +103,7 @@ namespace DelegacionMunicipal.modelo.dao
             Paquete paquete = new Paquete();
             paquete.TipoQuery = TipoConsulta.Delete;
             paquete.TipoDominio = TipoDato.Vehiculo;
-            paquete.Consulta = String.Format("DELETE FROM dbo.vehiculo WHERE numeroPlaca={0}", numeroPlaca);
+            paquete.Consulta = String.Format("DELETE FROM dbo.vehiculo WHERE numeroPlaca='{0}'", numeroPlaca);
 
             string mensaje = JsonSerializer.Serialize(paquete);
 
