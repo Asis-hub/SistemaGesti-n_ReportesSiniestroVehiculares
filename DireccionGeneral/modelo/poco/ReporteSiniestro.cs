@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DelegacionMunicipal.modelo.poco
+namespace DireccionGeneral.modelo.poco
 {
     public class ReporteSiniestro
     {
