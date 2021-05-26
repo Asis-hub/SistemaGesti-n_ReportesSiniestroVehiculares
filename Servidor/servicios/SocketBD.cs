@@ -241,6 +241,22 @@ namespace Servidor.servicios
                         respuesta = JsonSerializer.Serialize(listaCargos);
                     }
 
+                    //Dictamen de Reporte (Dirección General)
+                    if (paquete.TipoDominio == TipoDato.Dictamen)
+                    {
+                        Dictamen dictamen = new Dictamen();
+                        while (dataReader.Read())
+                        {
+                            dictamen.Folio = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            dictamen.Descripcion = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            dictamen.FechaHora = (!dataReader.IsDBNull(2)) ? dataReader.GetDateTime(2) : System.DateTime.MinValue;
+                            dictamen.IdReporte = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
+                            dictamen.Username = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                        }
+
+                        respuesta = JsonSerializer.Serialize(dictamen);
+                    }
+
 
                     dataReader.Close();
                     comando.Dispose();

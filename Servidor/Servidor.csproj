@@ -88,6 +88,7 @@
     <Compile Include="modelo\poco\Conductor.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
     <Compile Include="modelo\poco\DelegacionTipo.cs" />
+    <Compile Include="modelo\poco\Dictamen.cs" />
     <Compile Include="modelo\poco\Municipio.cs" />
     <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="modelo\poco\Vehiculo.cs" />
