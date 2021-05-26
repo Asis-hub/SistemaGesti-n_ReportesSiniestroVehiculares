@@ -1,4 +1,5 @@
-﻿using Servidor.modelo.db;
+﻿using Servidor.modelo.dao;
+using Servidor.modelo.db;
 using Servidor.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -90,74 +91,22 @@ namespace Servidor.servicios
 
         private void ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
         {
-            SqlConnection conn = null;
             string mensaje = "";
-            try
+
+            if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
             {
-                conn = ConexionBD.GetConnection();
-                if (conn != null)
-                {
-                    SqlCommand comando;
-                    SqlDataReader dataReader;
-
-                    comando = new SqlCommand(paquete.Consulta, conn);
-                    dataReader = comando.ExecuteReader();
-
-                    if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
-                    {
-                        List<Delegacion> listaDelegaciones = new List<Delegacion>();
-                        while (dataReader.Read())
-                        {
-                            Delegacion delegacion = new Delegacion();
-                            delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            delegacion.IdMunicipio = (!dataReader.IsDBNull(1)) ? dataReader.GetInt32(1) : 0;
-                            delegacion.Municipio = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            delegacion.Nombre = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                            delegacion.Correo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                            delegacion.CodigoPostal = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                            delegacion.Colonia = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                            delegacion.Calle = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                            delegacion.Numero = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
-                            delegacion.IdTipo = (!dataReader.IsDBNull(9)) ? dataReader.GetInt32(9) : 0;
-                            delegacion.Tipo = (!dataReader.IsDBNull(10)) ? dataReader.GetString(10) : "";
-                            listaDelegaciones.Add(delegacion);
-                        }
-                        mensaje = JsonSerializer.Serialize(listaDelegaciones);
-                        dataReader.Close();
-                        comando.Dispose();
-
-                    }
-                    else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
-                    {
-                        if (dataReader.Read())
-                        {
-                            Usuario usuario = new Usuario();
-                            usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                            usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            usuario.IdDelegacion = (!dataReader.IsDBNull(2)) ? dataReader.GetInt32(2) : 0;
-                            usuario.IdCargo = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
-                            usuario.Cargo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-
-                            mensaje = JsonSerializer.Serialize(usuario);
-                        }
-                        dataReader.Close();
-                        comando.Dispose();
-                    }
-                }
+                List<Delegacion> listaDelegaciones = DelegacionDAO.ConsultarDelegaciones(paquete.Consulta);
+                mensaje = JsonSerializer.Serialize(listaDelegaciones);
             }
-            catch(Exception e)
+            else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
             {
-                Console.WriteLine("Conexion fallida: " + e.Message);
-            }
-            finally
-            {
-                if(conn != null)
+                Usuario usuario = UsuarioDAO.getInicioSesion(paquete.Consulta);
+                if (usuario != null)
                 {
-                    conn.Close();
+                    mensaje = JsonSerializer.Serialize(usuario);
                 }
             }
 
-            //Si ourre un error solo se enviaria el mensaje <EOF>
             mensaje += "<EOF>";
             byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
             clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
