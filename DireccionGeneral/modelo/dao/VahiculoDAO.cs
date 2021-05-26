@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DelegacionMunicipal.modelo.dao
+namespace DireccionGeneral.modelo.dao
 {
-    class CargoDAO
+    public class VahiculoDAO
     {
     }
 }
