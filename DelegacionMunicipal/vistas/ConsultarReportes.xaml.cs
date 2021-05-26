@@ -27,11 +27,8 @@ namespace DelegacionMunicipal.vistas
             InitializeComponent();
             ReporteDAO reporteDAO = new ReporteDAO();
             tbl_reportes.ItemsSource = reporteDAO.GetReportes();
-            SocketBD socketBD = new SocketBD();
-            socketBD.IniciarConexion();
-
-
-            prueba.Content = reporteDAO.BuscarReportes(socketBD).Count;
+  
+            prueba.Content = reporteDAO.GetReportes().Count;
 
         }
 
