@@ -57,7 +57,9 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_CerrarSesion_Click(object sender, RoutedEventArgs e)
         {
-
+            InicioSesion ventanaInicioSesion = new InicioSesion();
+            ventanaInicioSesion.Show();
+            this.Close();
         }
 
         private void CerrarVentana(object sender, RoutedEventArgs e)
