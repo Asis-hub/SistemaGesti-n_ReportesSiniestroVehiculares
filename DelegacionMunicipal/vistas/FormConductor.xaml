@@ -16,7 +16,7 @@
         <TextBox x:Name="txt_NombreConductor" HorizontalAlignment="Left" Height="23" Margin="141,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
 
         <Label Content="Teléfono" HorizontalAlignment="Left" Margin="15,150,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Telefono" HorizontalAlignment="Left" Height="23" Margin="141,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="txt_Telefono" MaxLength="10" HorizontalAlignment="Left" Height="23" Margin="141,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" PreviewTextInput="txt_Telefono_PreviewTextInput"/>
 
         <Button x:Name="btn_RegistrarConductor" Content="Registrar" HorizontalAlignment="Left" Margin="180,226,0,0" VerticalAlignment="Top" Width="74" Click="btn_GuardarConductor_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="284,226,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>

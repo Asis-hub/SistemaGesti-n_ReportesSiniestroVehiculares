@@ -1,6 +1,7 @@
 ﻿using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace DelegacionMunicipal.vistas
@@ -77,16 +78,21 @@ namespace DelegacionMunicipal.vistas
 
         private bool ValidarFormulario()
         {
-            if (txt_NoLicencia.Text.Length == 0)
+            if (txt_NoLicencia.Text.Length == 0 || txt_Telefono.Text.Length == 0 || txt_NombreConductor.Text.Length == 0 ||
+                dp_FechaNacimiento.SelectedDate.Value.ToString().Length == 0)
+            {
+                MessageBox.Show("Debes llenar todos los campos");
                 return false;
-            if (txt_Telefono.Text.Length == 0)
-                return false;
-            if (txt_NombreConductor.Text.Length == 0)
-                return false;
-            if (dp_FechaNacimiento.SelectedDate.Value.ToString().Length == 0)
-                return false;
+            }
+            //if (txt_Telefono.Text.Length > 10 || txt_Telefono.Text.Contains.)
 
             return true;
+        }
+
+        private void txt_Telefono_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
