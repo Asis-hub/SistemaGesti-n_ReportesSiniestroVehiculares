@@ -23,7 +23,7 @@
                     <DataGridTextColumn Header="Numero de Licencia" Binding="{Binding NumeroLicencia}"/>
                     <DataGridTextColumn Header="Celular" Binding="{Binding Celular}"/>
                     <DataGridTextColumn Header="Nombre Completo" Binding="{Binding NombreCompleto}"/>
-                    <DataGridTextColumn Header="Fecha de Nacimiento" Binding="{Binding FechaNacimiento}"/>
+                    <DataGridTextColumn Header="Fecha de Nacimiento" Binding="{Binding FechaNacimiento, StringFormat={}{0:MM/dd/yyyy}}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

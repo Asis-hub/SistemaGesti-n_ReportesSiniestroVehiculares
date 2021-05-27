@@ -31,7 +31,7 @@ namespace DelegacionMunicipal.vistas
             txt_NoLicencia.Text = conductorEdicion.NumeroLicencia;
             txt_Telefono.Text = conductorEdicion.Celular;
             txt_NombreConductor.Text = conductorEdicion.NombreCompleto;
-            txt_FechaNacimiento.Text = conductorEdicion.FechaNacimiento.ToString();
+            dp_FechaNacimiento.SelectedDate = conductorEdicion.FechaNacimiento;
         }
 
         private void btn_GuardarConductor_Click(object sender, RoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace DelegacionMunicipal.vistas
                 conductor.NumeroLicencia = txt_NoLicencia.Text;
                 conductor.Celular = txt_Telefono.Text;
                 conductor.NombreCompleto = txt_NombreConductor.Text;
-                conductor.FechaNacimiento = Convert.ToDateTime(txt_FechaNacimiento.Text);
+                conductor.FechaNacimiento = dp_FechaNacimiento.SelectedDate.GetValueOrDefault();
 
 
 
@@ -83,7 +83,7 @@ namespace DelegacionMunicipal.vistas
                 return false;
             if (txt_NombreConductor.Text.Length == 0)
                 return false;
-            if (txt_FechaNacimiento.Text.Length == 0)
+            if (dp_FechaNacimiento.SelectedDate.Value.ToString().Length == 0)
                 return false;
 
             return true;
