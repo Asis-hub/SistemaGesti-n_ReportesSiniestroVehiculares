@@ -27,7 +27,19 @@ namespace Servidor.servicios
             socketServer.Listen(200);
 
             encendido = true;
-      
+
+        }
+
+        private void EnviarMensaje(Socket socketCliente, string respuesta)
+        {
+            if (encendido)
+            {
+                respuesta += "<EOF>";
+                byte[] msjEnviar = Encoding.Default.GetBytes(respuesta);
+                socketCliente.SendBufferSize = msjEnviar.Length;
+                socketCliente.Send(msjEnviar, 0, socketCliente.SendBufferSize, 0);
+                Console.WriteLine("Respuesta Enviada");
+            }
         }
 
         public void RecibirMensaje()
@@ -37,35 +49,29 @@ namespace Servidor.servicios
                 while (true)
                 {
                     string mensaje = "";
+                    string respuesta = "";
                     Console.WriteLine("Escuchando...");
                     Socket socketClienteRemoto = socketServer.Accept();
-
-                    //Obtener información del cliente conectado
-                    IPEndPoint cliente = (IPEndPoint)socketClienteRemoto.RemoteEndPoint;
-                    Console.WriteLine("Clente conectado con IP {0} en puerto {1}", cliente.Address, cliente.Port);
-
+                    
                     //Recibir mensaje
-                    while (true)
+                    Byte[] bytesRecibidos = new byte[socketClienteRemoto.SendBufferSize];
+                    int datos = socketClienteRemoto.Receive(bytesRecibidos, 0, bytesRecibidos.Length, 0);
+                    Array.Resize(ref bytesRecibidos, datos);
+                    mensaje = Encoding.ASCII.GetString(bytesRecibidos, 0, datos);
+
+                    if (mensaje.IndexOf("<EOF>") > -1)
                     {
-                        Byte[] bytesRecibidos = new byte[socketClienteRemoto.SendBufferSize];
-                        int datos = socketClienteRemoto.Receive(bytesRecibidos,0,bytesRecibidos.Length,0);
-                        Array.Resize(ref bytesRecibidos, datos);
-                        mensaje = Encoding.ASCII.GetString(bytesRecibidos, 0, datos);
-                        
-                        if (mensaje.IndexOf("<EOF>") > -1)
-                        {
-                            break;
-                        }
+                        //Escribir como cadena la información de socket cliente
+                        mensaje = mensaje.Replace("<EOF>", "");
+
+                        //Deserializar mensaje en clase Paquete
+                        Paquete paquete = JsonSerializer.Deserialize<Paquete>(mensaje);
+
+                        //Se atiende la petición
+                        respuesta = ProcesarPeticion(socketClienteRemoto, paquete);
                     }
 
-                    //Escribir como cadena la información de socket cliente
-                    mensaje = mensaje.Replace("<EOF>","");
-
-                    //Deserializar mensaje en clase Paquete
-                    Paquete paquete = JsonSerializer.Deserialize<Paquete>(mensaje);
-
-                    //Se atiende la petición
-                    ProcesarPeticion(socketClienteRemoto, paquete);
+                    EnviarMensaje(socketClienteRemoto, respuesta);
                 }
             }
             catch (Exception ex)
@@ -79,8 +85,8 @@ namespace Servidor.servicios
             socketServer.Close();
             socketServer.Dispose();
             encendido = false;
-            
-            Console.WriteLine("Conexión del servidor terminada");
+
+            Console.WriteLine("Socket Login apagado");
         }
 
         public bool ConexionActiva()
@@ -89,28 +95,27 @@ namespace Servidor.servicios
         }
 
 
-        private void ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
+        private string ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
         {
-            string mensaje = "";
+            string respuesta = "";
 
             if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Delegacion)
             {
                 List<Delegacion> listaDelegaciones = DelegacionDAO.ConsultarDelegaciones(paquete.Consulta);
-                mensaje = JsonSerializer.Serialize(listaDelegaciones);
+                respuesta = JsonSerializer.Serialize(listaDelegaciones);
             }
             else if (paquete.TipoQuery == TipoConsulta.Select && paquete.TipoDominio == TipoDato.Usuario)
             {
                 Usuario usuario = UsuarioDAO.getInicioSesion(paquete.Consulta);
                 if (usuario != null)
                 {
-                    mensaje = JsonSerializer.Serialize(usuario);
+                    respuesta = JsonSerializer.Serialize(usuario);
                 }
             }
 
-            mensaje += "<EOF>";
-            byte[] msjEnviar = Encoding.Default.GetBytes(mensaje);
-            clienteRemoto.Send(msjEnviar, 0, msjEnviar.Length, 0);
-            Console.WriteLine("Consulta enviada");
+            return respuesta;
+
         }
     }
 }
+
