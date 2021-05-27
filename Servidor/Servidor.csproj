@@ -83,6 +83,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="modelo\dao\CargoDAO.cs" />
+    <Compile Include="modelo\dao\db\ConexionBD.cs" />
+    <Compile Include="modelo\dao\DelegacionDAO.cs" />
+    <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />
+    <Compile Include="modelo\dao\DictamenDAO.cs" />
+    <Compile Include="modelo\dao\MunicipioDAO.cs" />
+    <Compile Include="modelo\dao\UsuarioDAO.cs" />
+    <Compile Include="modelo\dao\VehiculoDAO.cs" />
     <Compile Include="modelo\db\ConexionBD.cs" />
     <Compile Include="modelo\poco\Cargo.cs" />
     <Compile Include="modelo\poco\Conductor.cs" />

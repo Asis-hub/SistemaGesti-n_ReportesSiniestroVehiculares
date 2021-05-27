@@ -87,11 +87,15 @@
     <Compile Include="conexion\SocketBD.cs" />
     <Compile Include="conexion\SocketLogin.cs" />
     <Compile Include="modelo\dao\CargoDAO.cs" />
+    <Compile Include="modelo\dao\ConductorDAO.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />
     <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />
     <Compile Include="modelo\dao\DictamenDAO.cs" />
+    <Compile Include="modelo\dao\FotografiaDAO.cs" />
     <Compile Include="modelo\dao\MunicipioDAO.cs" />
+    <Compile Include="modelo\dao\ReporteSiniestroDAO.cs" />
     <Compile Include="modelo\dao\UsuarioDAO.cs" />
+    <Compile Include="modelo\dao\VahiculoDAO.cs" />
     <Compile Include="modelo\poco\Cargo.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
     <Compile Include="modelo\poco\DelegacionTipo.cs" />
