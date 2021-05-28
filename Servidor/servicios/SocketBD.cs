@@ -257,6 +257,23 @@ namespace Servidor.servicios
                         respuesta = JsonSerializer.Serialize(dictamen);
                     }
 
+                    //Reporte
+                    if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+                    {
+                        List<ReporteSiniestro> listaReporteSiniestro = new List<ReporteSiniestro>();
+                        while (dataReader.Read())
+                        {
+                            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+                            reporteSiniestro.IdReporte = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                            reporteSiniestro.Calle = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                            reporteSiniestro.Numero = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                            reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                            reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
+                            reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                            listaReporteSiniestro.Add(reporteSiniestro);
+                        }
+                        respuesta = JsonSerializer.Serialize(listaReporteSiniestro);
+                    }
 
                     dataReader.Close();
                     comando.Dispose();

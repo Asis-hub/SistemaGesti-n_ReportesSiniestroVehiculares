@@ -18,6 +18,7 @@ namespace DelegacionMunicipal.vistas
             InitializeComponent();
             vehiculos = new List<Vehiculo>();
             CargarTabla();
+            prueba.Content = vehiculos.Count;
         }
 
         private void btn_RegistrarVehiculo_Click(object sender, RoutedEventArgs e)

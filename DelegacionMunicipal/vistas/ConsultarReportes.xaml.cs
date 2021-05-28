@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DelegacionMunicipal.modelo.poco;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -22,13 +23,18 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class ConsultarReportes : Page
     {
+        List<ReporteSiniestro> reporteSiniestro;
         public ConsultarReportes()
         {
             InitializeComponent();
-            ReporteDAO reporteDAO = new ReporteDAO();
-            tbl_reportes.ItemsSource = reporteDAO.GetReportes();
-  
-            prueba.Content = reporteDAO.GetReportes().Count;
+            
+            reporteSiniestro = new List<ReporteSiniestro>();
+
+
+            cargarTabla();
+
+            prueba.Content = ReporteDAO.Hola();
+            
 
         }
 
@@ -56,9 +62,10 @@ namespace DelegacionMunicipal.vistas
 
         }
 
-        private void cargarReportes()
+        private void cargarTabla()
         {
-
+            reporteSiniestro = ReporteDAO.GetReportes();
+            tbl_reportes.ItemsSource = reporteSiniestro;
         }
 
         

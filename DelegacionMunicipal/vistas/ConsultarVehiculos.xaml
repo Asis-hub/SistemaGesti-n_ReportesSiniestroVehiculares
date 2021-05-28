@@ -12,7 +12,7 @@
         <StackPanel DockPanel.Dock="Top">
             <Label Content="Vehiculos" FontSize="22" FontWeight="Bold"/>
         </StackPanel>
-        <Grid Margin="20,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="735">
+        <Grid Margin="20,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="735" Height="198">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -38,5 +38,6 @@
 
             </StackPanel>
         </Grid>
+        <Label x:Name="prueba" Content="Label" Height="491" VerticalAlignment="Top"/>
     </DockPanel>
 </Page>

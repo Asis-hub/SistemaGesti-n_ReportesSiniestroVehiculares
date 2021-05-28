@@ -22,7 +22,7 @@ namespace Servidor.servicios
         Conductor,
         Municipio,
         Dictamen,
-        Reporte,
+        ReporteSiniestro,
         DelegacionTipo,
         Cargo,
         Fotografia
