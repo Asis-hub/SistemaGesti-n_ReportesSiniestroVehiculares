@@ -33,9 +33,11 @@ namespace Servidor.modelo.dao.db
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error Base de Datos: " + ex.Message);
             }
             return conexion;
         }
+
+        
     }
 }

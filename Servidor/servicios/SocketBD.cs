@@ -1,4 +1,5 @@
-﻿using Servidor.modelo.db;
+﻿using Servidor.modelo.dao;
+using Servidor.modelo.dao.db;
 using Servidor.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -23,21 +24,27 @@ namespace Servidor.servicios
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1236);
             socketServer.Bind(direccion);
-            socketServer.Listen(200);
+            socketServer.Listen(2);
             encendido = true;
+        }
+
+        private void EnviarMensaje(Socket socketCliente, string mensaje)
+        {
+            //Si oucrre un error solo se enviaria <EOF>
+            mensaje += "<EOF>";
+            byte[] msgRespuesta = Encoding.Default.GetBytes(mensaje);
+            socketCliente.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
 
         public void RecibirMensaje()
         {
             try
             {
-                while (true)
+                while (encendido)
                 {
                     string mensaje = "";
+                    string respuesta = "";
                     Socket socketClienteRemoto = socketServer.Accept();
-                    
-                    //Obtener información del cliente conectado
-                    IPEndPoint cliente = (IPEndPoint)socketClienteRemoto.RemoteEndPoint;
                     
                     Paquete paqueteRecibido = null;
                     
@@ -59,9 +66,11 @@ namespace Servidor.servicios
                         }
                     }
 
-                    //Se atiende la petición
-                    ProcesarPaquete(socketClienteRemoto, paqueteRecibido);
+                    respuesta = ProcesarPaquete(paqueteRecibido);
+                    EnviarMensaje(socketClienteRemoto, respuesta);
                 }
+                
+                
             }
             catch (Exception ex)
             {
@@ -71,10 +80,9 @@ namespace Servidor.servicios
 
         public void TerminarConexion()
         {
+            encendido = false;
             socketServer.Close();
             socketServer.Dispose();
-            encendido = false;
-            
             Console.WriteLine("Conexión del servidor terminada");
         }
 
@@ -84,217 +92,84 @@ namespace Servidor.servicios
         }
 
         
-        private void ProcesarPaquete(Socket clienteRemoto, Paquete paquete)
+        private string ProcesarPaquete(Paquete paquete)
         {
+            string respuesta = "";
             if(paquete.TipoQuery == TipoConsulta.Select)
             {
-                ProcesarSeleccion(clienteRemoto, paquete);
+                respuesta = ProcesarSeleccion( paquete);
             }
             else if(paquete.TipoQuery == TipoConsulta.Insert)
             {
-                ProcesarModificacion(clienteRemoto, paquete);
+                respuesta = ProcesarInsercion(paquete);
             }
             else if(paquete.TipoQuery == TipoConsulta.Delete)
             {
-                ProcesarModificacion(clienteRemoto, paquete);
+                respuesta = ProcesarEliminacion(paquete);
             }
             else if(paquete.TipoQuery == TipoConsulta.Update)
             {
-                ProcesarModificacion(clienteRemoto, paquete);
+                respuesta = ProcesarModificacion( paquete);
             }
+
+            return respuesta;
         }
 
-        private void ProcesarSeleccion(Socket clienteRemoto, Paquete paquete) 
+        private string ProcesarSeleccion(Paquete paquete) 
         {
-            SqlConnection conexionBD = ConexionBD.GetConnection();
             string respuesta = "";
-            try
+            
+            if (paquete.TipoDominio == TipoDato.Delegacion)
             {
-                if (conexionBD != null)
-                {
-                    SqlCommand comando;
-                    SqlDataReader dataReader;
-
-                    comando = new SqlCommand(paquete.Consulta, conexionBD);
-                    dataReader = comando.ExecuteReader();
-
-                    //Lista de Delegaciones
-                    if (paquete.TipoDominio == TipoDato.Delegacion)
-                    {
-                        List<Delegacion> listaDelegaciones = new List<Delegacion>();
-                        while (dataReader.Read())
-                        {
-                            Delegacion delegacion = new Delegacion();
-                            delegacion.IdDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            delegacion.IdMunicipio = (!dataReader.IsDBNull(1)) ? dataReader.GetInt32(1) : 0;
-                            delegacion.Municipio = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            delegacion.Nombre = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                            delegacion.Correo = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                            delegacion.CodigoPostal = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                            delegacion.Colonia = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                            delegacion.Calle = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                            delegacion.Numero = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
-                            delegacion.IdTipo = (!dataReader.IsDBNull(9)) ? dataReader.GetInt32(9) : 0;
-                            delegacion.Tipo = (!dataReader.IsDBNull(10)) ? dataReader.GetString(10) : "";
-                            listaDelegaciones.Add(delegacion);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaDelegaciones);
-                    }
-
-                    //Lista de Usuarios
-                    if (paquete.TipoDominio == TipoDato.Usuario)
-                    {
-                        List<Usuario> listaUsuarios = new List<Usuario>();
-                        while (dataReader.Read())
-                        {
-                            Usuario usuario = new Usuario();
-                            usuario.Username = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                            usuario.NombreCompleto = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            usuario.Password = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            usuario.IdDelegacion = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
-                            usuario.IdCargo = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
-                            usuario.Cargo = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-
-                            listaUsuarios.Add(usuario);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaUsuarios);
-                    }
-
-                    //Lista Municipios
-                    if (paquete.TipoDominio == TipoDato.Municipio)
-                    {
-                        List<Municipio> listaMunicipios = new List<Municipio>();
-                        while (dataReader.Read())
-                        {
-                            Municipio municipio = new Municipio();
-                            municipio.IdMunicipio = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            municipio.Nombre = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-
-                            listaMunicipios.Add(municipio);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaMunicipios);
-                    }
-
-                    //Lista Tipos de Delegaciones
-                    if (paquete.TipoDominio == TipoDato.DelegacionTipo)
-                    {
-                        List<DelegacionTipo> listaTiposDelegacion = new List<DelegacionTipo>();
-                        while (dataReader.Read())
-                        {
-                            DelegacionTipo delegacionTipo = new DelegacionTipo();
-                            delegacionTipo.IdTipoDelegacion = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            delegacionTipo.TipoDelegacion = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-
-                            listaTiposDelegacion.Add(delegacionTipo);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
-                    }
-
-                    //Lista de Conductores
-                    if (paquete.TipoDominio == TipoDato.Conductor)
-                    {
-                        List<Conductor> listaConductores = new List<Conductor>();
-                        while (dataReader.Read())
-                        {
-                            Conductor conductor = new Conductor();
-                            conductor.NumeroLicencia = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                            conductor.Celular = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            conductor.NombreCompleto = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            conductor.FechaNacimiento = (!dataReader.IsDBNull(3)) ? dataReader.GetDateTime(3) : System.DateTime.MinValue;
-                            listaConductores.Add(conductor);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaConductores);
-                    }
-
-                    //Lista de Vehiculos
-                    if (paquete.TipoDominio == TipoDato.Vehiculo)
-                    {
-                        List<Vehiculo> listaVehiculos = new List<Vehiculo>();
-                        while (dataReader.Read())
-                        {
-                            Vehiculo vehiculo = new Vehiculo();
-                            vehiculo.NumPlaca = (!dataReader.IsDBNull(0)) ? dataReader.GetString(0) : "";
-                            vehiculo.Marca = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            vehiculo.Modelo = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            vehiculo.Color = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                            vehiculo.NumPolizaSeguro = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                            vehiculo.NombreAseguradora = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                            vehiculo.Año = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
-                            vehiculo.NumLicenciaConducir = (!dataReader.IsDBNull(7)) ? dataReader.GetString(7) : "";
-                            listaVehiculos.Add(vehiculo);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaVehiculos);
-                    }
-
-                    //Lista Cargos
-                    if(paquete.TipoDominio == TipoDato.Cargo)
-                    {
-                        List<Cargo> listaCargos = new List<Cargo>();
-                        while (dataReader.Read())
-                        {
-                            Cargo cargo = new Cargo();
-                            cargo.IdCargo = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            cargo.TipoCargo = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            listaCargos.Add(cargo);
-                        }
-
-                        respuesta = JsonSerializer.Serialize(listaCargos);
-                    }
-
-                    //Dictamen de Reporte (Dirección General)
-                    if (paquete.TipoDominio == TipoDato.Dictamen)
-                    {
-                        Dictamen dictamen = new Dictamen();
-                        while (dataReader.Read())
-                        {
-                            dictamen.Folio = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            dictamen.Descripcion = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            dictamen.FechaHora = (!dataReader.IsDBNull(2)) ? dataReader.GetDateTime(2) : System.DateTime.MinValue;
-                            dictamen.IdReporte = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
-                            dictamen.Username = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
-                        }
-
-                        respuesta = JsonSerializer.Serialize(dictamen);
-                    }
-
-                    //Reporte
-                    if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
-                    {
-                        List<ReporteSiniestro> listaReporteSiniestro = new List<ReporteSiniestro>();
-                        while (dataReader.Read())
-                        {
-                            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
-                            reporteSiniestro.IdReporte = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
-                            reporteSiniestro.Calle = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
-                            reporteSiniestro.Numero = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
-                            reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                            reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
-                            reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                            listaReporteSiniestro.Add(reporteSiniestro);
-                        }
-                        respuesta = JsonSerializer.Serialize(listaReporteSiniestro);
-                    }
-
-                    dataReader.Close();
-                    comando.Dispose();
-                }
-                
+                List<Delegacion> listaDelegaciones = DelegacionDAO.ConsultarDelegaciones(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaDelegaciones);
             }
-            catch(Exception e)
+            else if (paquete.TipoDominio == TipoDato.Usuario)
             {
-                Console.WriteLine(e.Message);
-            }finally
+                List<Usuario> listaUsuarios = UsuarioDAO.ConsultarUsuarios(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaUsuarios);
+            }
+            else if (paquete.TipoDominio == TipoDato.Municipio)
             {
-                if (conexionBD != null)
-                {
-                    conexionBD.Close();
-                }
+                List<Municipio> listaMunicipios = MunicipioDAO.ConsultarMunicipios(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaMunicipios);
+            }
+            else if (paquete.TipoDominio == TipoDato.DelegacionTipo)
+            {
+                List<DelegacionTipo> listaTiposDelegacion = DelegacionTipoDAO.ConsultarTipos(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaTiposDelegacion);
+            }
+            else if (paquete.TipoDominio == TipoDato.Conductor)
+            {
+                List<Conductor> listaConductores = ConductorDAO.ConsultarConductores(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaConductores);
+            }
+            else if (paquete.TipoDominio == TipoDato.Vehiculo)
+            {
+                List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculos(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaVehiculos);
+            }
+            else if(paquete.TipoDominio == TipoDato.Cargo)
+            {
+                List<Cargo> listaCargos = CargoDAO.ConsultarCargos(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaCargos);
+            }
+            else if (paquete.TipoDominio == TipoDato.Dictamen)
+            {
+                Dictamen dictamen = DictamenDAO.ConsultarDictamenDeReporte(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(dictamen);
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                List<ReporteSiniestro> listaReporteSiniestro = ReporteSiniestroDAO.ConsultarReportes(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(listaReporteSiniestro);
+            }
+            else if (paquete.TipoDominio == TipoDato.Fotografia)
+            {
+                //Implementar FotografiaDAO
             }
 
-            //Si oucrre un error solo se enviaria <EOF>
-            respuesta += "<EOF>";
-            byte[] msgRespuesta = Encoding.Default.GetBytes(respuesta);
-            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+            return respuesta;
         }
 
         /*
@@ -302,42 +177,148 @@ namespace Servidor.servicios
          *  1 - El query se ejecutó con exito
          * -1 - Error al ejecutar el query
          */
-        private void ProcesarModificacion(Socket clienteRemoto, Paquete paquete)
+        private string ProcesarInsercion(Paquete paquete)
         {
-            SqlConnection conexionBD = ConexionBD.GetConnection();
+            string respuesta = "";
             int resultado = 0;
-            try
+
+            if (paquete.TipoDominio == TipoDato.Delegacion)
             {
-                if (conexionBD != null)
-                {
-                    try
-                    {
-                            SqlCommand comando = new SqlCommand(paquete.Consulta, conexionBD);
-                            resultado = comando.ExecuteNonQuery();
-                            comando.Dispose();
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error de Modificación en la Base de Datos");
-                        resultado = -1;
-                    }
-                }
-                
+                resultado = DelegacionDAO.RegistrarDelegacion(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
-            catch(Exception e)
+            else if (paquete.TipoDominio == TipoDato.Usuario)
             {
-                MessageBox.Show(e.Message, "No es posible conectarse a la base de datos, Base de datos no disponible");
+                resultado = UsuarioDAO.RegistrarUsuario(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
-            finally
+            else if (paquete.TipoDominio == TipoDato.Municipio)
             {
-                if(conexionBD != null)
-                {
-                    conexionBD.Close();
-                }
+                //No se ocupa
+            }
+            else if (paquete.TipoDominio == TipoDato.DelegacionTipo)
+            {
+                //No se ocupa
+            }
+            else if (paquete.TipoDominio == TipoDato.Conductor)
+            {
+                resultado = ConductorDAO.RegistrarConductor(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Vehiculo)
+            {
+                resultado = VehiculoDAO.RegistrarVehiculo(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Cargo)
+            {
+                //No se ocupa
+            }
+            else if (paquete.TipoDominio == TipoDato.Dictamen)
+            {
+                resultado = DictamenDAO.RegistrarDictamen(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                //Falta implementar
+            }
+            else if (paquete.TipoDominio == TipoDato.Fotografia)
+            {
+                //Falta implementar FotografiaDAO
             }
 
-            byte[] msgRespuesta = Encoding.Default.GetBytes(resultado + "<EOF>");
-            clienteRemoto.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
+            return respuesta;
+        }
+
+        private string ProcesarModificacion(Paquete paquete)
+        {
+            string respuesta = "";
+            int resultado = 0;
+
+            if (paquete.TipoDominio == TipoDato.Delegacion)
+            {
+                resultado = DelegacionDAO.EditarDelegacion(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Usuario)
+            {
+                resultado = UsuarioDAO.EditarUsuario(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Conductor)
+            {
+                resultado = ConductorDAO.EditarConductor(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Vehiculo)
+            {
+                resultado = VehiculoDAO.EditarVehiculo(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Cargo)
+            {
+                //No se ocupa
+            }
+            else if (paquete.TipoDominio == TipoDato.Dictamen)
+            {
+                //Falta implementar. Preguntar al maestro
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                //Falta implementar
+            }
+            else if (paquete.TipoDominio == TipoDato.Fotografia)
+            {
+                //Falta implementar FotografiaDAO
+            }
+
+            return respuesta;
+        }
+
+        private string ProcesarEliminacion(Paquete paquete)
+        {
+            string respuesta = "";
+            int resultado = 0;
+
+            if (paquete.TipoDominio == TipoDato.Delegacion)
+            {
+                resultado = DelegacionDAO.EliminarDelegacion(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Usuario)
+            {
+                resultado = UsuarioDAO.EliminarUsuario(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Conductor)
+            {
+                resultado = ConductorDAO.EliminarConductor(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Vehiculo)
+            {
+                resultado = VehiculoDAO.EliminarVehiculo(paquete.Consulta);
+                respuesta = resultado.ToString();
+            }
+            else if (paquete.TipoDominio == TipoDato.Cargo)
+            {
+                //No se ocupa
+            }
+            else if (paquete.TipoDominio == TipoDato.Dictamen)
+            {
+                //Falta implementar. Preguntar maestro
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                //Falta implementar ReporteSiniestroDAO
+            }
+            else if (paquete.TipoDominio == TipoDato.Fotografia)
+            {
+                //Falta implementar FotografiaDAO
+            }
+
+            return respuesta;
         }
     }
 }

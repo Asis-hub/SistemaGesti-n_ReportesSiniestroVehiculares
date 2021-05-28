@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
-    class Dictamen
+    public class Dictamen
     {
         int folio;
         string descripcion;

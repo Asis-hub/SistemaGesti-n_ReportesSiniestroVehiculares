@@ -1,5 +1,5 @@
 ﻿using Servidor.modelo.dao;
-using Servidor.modelo.db;
+using Servidor.modelo.dao.db;
 using Servidor.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -17,17 +17,20 @@ namespace Servidor.servicios
     class SocketLogin
     {
         private Socket socketServer;
-        private bool encendido = false;
+        private bool encendido;
+
+        public SocketLogin()
+        {
+            encendido = false;
+        }
 
         public void IniciarConexion()
         {
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
             socketServer.Bind(direccion);
-            socketServer.Listen(200);
-
-            encendido = true;
-
+            socketServer.Listen(2);
+            encendido = true; 
         }
 
         private void EnviarMensaje(Socket socketCliente, string respuesta)
@@ -46,7 +49,7 @@ namespace Servidor.servicios
         {
             try
             {
-                while (true)
+                while (encendido)
                 {
                     string mensaje = "";
                     string respuesta = "";

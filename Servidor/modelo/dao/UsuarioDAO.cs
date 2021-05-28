@@ -57,7 +57,7 @@ namespace Servidor.modelo.dao
 
         public static List<Usuario> ConsultarUsuarios(string consulta)
         {
-            List<Usuario> lista = new List<Usuario>();
+            List<Usuario> listaUsuarios = new List<Usuario>();
             SqlConnection conn = null;
 
             try
@@ -80,7 +80,7 @@ namespace Servidor.modelo.dao
                         usuario.IdCargo = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
                         usuario.Cargo = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
 
-                        lista.Add(usuario);
+                        listaUsuarios.Add(usuario);
                     }
                     dataReader.Close();
                     comando.Dispose();
@@ -97,7 +97,7 @@ namespace Servidor.modelo.dao
                     conn.Close();
                 }
             }
-            return lista;
+            return listaUsuarios;
         }
 
         public static int RegistrarUsuario(string consulta)

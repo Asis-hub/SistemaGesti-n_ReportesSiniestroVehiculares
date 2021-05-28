@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
-    class Conductor
+    public class Conductor
     {
         private string numeroLicencia;
         private string celular;

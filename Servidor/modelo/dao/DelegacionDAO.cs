@@ -13,7 +13,7 @@ namespace Servidor.modelo.dao
     {
         public static List<Delegacion> ConsultarDelegaciones(string consulta)
         {
-            List<Delegacion> lista = new List<Delegacion>();
+            List<Delegacion> listaDelegaciones = new List<Delegacion>();
             SqlConnection conn = null;
 
             try
@@ -40,7 +40,7 @@ namespace Servidor.modelo.dao
                         delegacion.Numero = (!dataReader.IsDBNull(8)) ? dataReader.GetString(8) : "";
                         delegacion.IdTipo = (!dataReader.IsDBNull(9)) ? dataReader.GetInt32(9) : 0;
                         delegacion.Tipo = (!dataReader.IsDBNull(10)) ? dataReader.GetString(10) : "";
-                        lista.Add(delegacion);
+                        listaDelegaciones.Add(delegacion);
                     }
                     dataReader.Close();
                     comando.Dispose();
@@ -57,7 +57,7 @@ namespace Servidor.modelo.dao
                     conn.Close();
                 }
             }
-            return lista;
+            return listaDelegaciones;
         }
 
         public static int RegistrarDelegacion(string consulta)
