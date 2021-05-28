@@ -19,7 +19,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Margin="0,10">
+            <StackPanel Orientation="Horizontal" Margin="0,10" Grid.Row="0">
                 <Label Content="Fecha" VerticalAlignment="Top"/>
                 <DatePicker x:Name="dpck_Fecha" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="Estado" VerticalAlignment="Top" Margin="30,0,0,0"/>
@@ -30,13 +30,14 @@
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
             </StackPanel>
             
-            <DataGrid x:Name="tbl_Reportes" Grid.Row="1" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
+            <DataGrid x:Name="tbl_Reportes" Grid.Row="1" ColumnWidth="*" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Folio"/>
-                    <DataGridTextColumn Header="Direccion"/>
-                    <DataGridTextColumn Header="Fecha"/>
-                    <DataGridTextColumn Header="Hora"/>
-                    <DataGridTextColumn Header="Estado"/>
+                    <DataGridTextColumn Header="Folio" Binding="{Binding IdReporte}"/>
+                    <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
+                    <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
+                    <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
+                    <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
+                    <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

@@ -93,7 +93,7 @@
     <Compile Include="modelo\dao\DictamenDAO.cs" />
     <Compile Include="modelo\dao\FotografiaDAO.cs" />
     <Compile Include="modelo\dao\MunicipioDAO.cs" />
-    <Compile Include="modelo\dao\ReporteDAO.cs" />
+    <Compile Include="modelo\dao\ReporteSiniestroDAO.cs" />
     <Compile Include="modelo\dao\UsuarioDAO.cs" />
     <Compile Include="modelo\dao\VehiculoDAO.cs" />
     <Compile Include="modelo\poco\Cargo.cs" />

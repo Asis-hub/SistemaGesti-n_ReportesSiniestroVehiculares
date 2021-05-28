@@ -65,7 +65,6 @@ namespace DelegacionMunicipal.modelo.dao
             return resultado;
         }
 
-        //Los parametros de los métodos pueden cambiarse
         public static int EditarConductor(Conductor conductor)
         {
             int resultado = 0;

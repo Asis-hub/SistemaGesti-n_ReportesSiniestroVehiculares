@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DelegacionMunicipal.modelo.poco;
+using System.Windows;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -7,10 +8,12 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class DetallesReporte : Window
     {
-        public DetallesReporte(int id)
+        ReporteSiniestro reporte;
+
+        public DetallesReporte(ReporteSiniestro reporte)
         {
             InitializeComponent();
-            
+            this.reporte = reporte;
         }
     }
 }

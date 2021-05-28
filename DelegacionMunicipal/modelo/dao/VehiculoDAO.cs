@@ -40,7 +40,6 @@ namespace DelegacionMunicipal.modelo.dao
             return listaVehiculos;
         }
 
-        //Los parametros de los métodos pueden cambiarse
         public static int RegistrarVehiculo(Vehiculo nuevoVehiculo)
         {
             int resultado = 0;

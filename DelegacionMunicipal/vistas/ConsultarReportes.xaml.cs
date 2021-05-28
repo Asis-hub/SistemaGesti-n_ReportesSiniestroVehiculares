@@ -23,17 +23,15 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class ConsultarReportes : Page
     {
-        List<ReporteSiniestro> reporteSiniestro;
+        List<ReporteSiniestro> reportesSiniestro;
         public ConsultarReportes()
         {
             InitializeComponent();
             
-            reporteSiniestro = new List<ReporteSiniestro>();
+            reportesSiniestro = new List<ReporteSiniestro>();
 
 
             cargarTabla();
-
-            prueba.Content = ReporteDAO.Hola();
             
 
         }
@@ -41,9 +39,13 @@ namespace DelegacionMunicipal.vistas
         
         private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
         {
-            int x = 1;
-            DetallesReporte ventanaDetalles = new DetallesReporte(x);
-            ventanaDetalles.ShowDialog();
+            int seleccion = tbl_Reportes.SelectedIndex;
+            if(seleccion >= 0)
+            {
+                ReporteSiniestro reporte = reportesSiniestro[seleccion];
+                DetallesReporte ventanaDetalles = new DetallesReporte(reporte);
+                ventanaDetalles.ShowDialog();
+            }
         }
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
@@ -57,15 +59,11 @@ namespace DelegacionMunicipal.vistas
 
         }
 
-        private void tbl_Delegaciones_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        
         private void cargarTabla()
         {
-            reporteSiniestro = ReporteDAO.GetReportes();
-            tbl_reportes.ItemsSource = reporteSiniestro;
+            reportesSiniestro = ReporteSiniestroDAO.ConsultarReportes();
+            tbl_Reportes.ItemsSource = reportesSiniestro;
         }
 
         

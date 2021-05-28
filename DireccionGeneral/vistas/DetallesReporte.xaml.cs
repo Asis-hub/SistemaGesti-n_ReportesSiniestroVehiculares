@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DireccionGeneral.modelo.poco;
+using System.Windows;
 
 namespace DireccionGeneral.vistas
 {
@@ -7,9 +8,11 @@ namespace DireccionGeneral.vistas
     /// </summary>
     public partial class DetallesReporte : Window
     {
-        public DetallesReporte()
+        ReporteSiniestro reporte;
+        public DetallesReporte(ReporteSiniestro reporte)
         {
             InitializeComponent();
+            this.reporte = reporte;
         }
     }
 }

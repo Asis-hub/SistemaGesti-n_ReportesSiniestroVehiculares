@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
-    class ReporteDAO
+    class ReporteSiniestroDAO
     {
         //Los parametros de los métodos pueden cambiarse
        
-        public static List<ReporteSiniestro> GetReportes()
+        public static List<ReporteSiniestro> ConsultarReportes()
         {
             List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();
             SocketBD socket = new SocketBD();
@@ -43,13 +43,5 @@ namespace DelegacionMunicipal.modelo.dao
 
             return listaReportes;
         }
-
-        public static string Hola()
-        {
-            string z = "Hola";
-            return z;
-        }
-       
-        
     }
 }

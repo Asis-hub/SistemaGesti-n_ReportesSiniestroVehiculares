@@ -19,17 +19,19 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="0,10" Grid.Row="0">
                 <Label Content="Fecha" VerticalAlignment="Top"/>
                 <DatePicker x:Name="dpck_Fecha" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="Estado" VerticalAlignment="Top" Margin="30,0,0,0"/>
                 <RadioButton x:Name="rdb_Pendiente" GroupName="gp_Estado" Content="Pendiente" IsChecked="True"/>
                 <RadioButton x:Name="rdb_Dictaminado" GroupName="gp_Estado" Content="Dictaminado" />
+                <Label Content="Delegación:" VerticalAlignment="Top" Margin="30,0,0,0"/>
+                <ComboBox x:Name="cmb_Delegacion" VerticalAlignment="Top" Width="120"/>
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
             </StackPanel>
 
            
-            <DataGrid x:Name="tbl_reportes" Grid.Row="0" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0">
+            <DataGrid x:Name="tbl_Reportes" Grid.Row="1" ColumnWidth="*"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Folio" Binding="{Binding IdReporte}"/>
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
@@ -46,9 +48,7 @@
                 <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
             </StackPanel>
         </Grid>
-        <Label x:Name="prueba" Content="Label" Height="391" VerticalAlignment="Top"/>
-
-
+        
     </DockPanel>
 
 
