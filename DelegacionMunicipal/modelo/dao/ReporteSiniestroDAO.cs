@@ -43,7 +43,13 @@ namespace DelegacionMunicipal.modelo.dao
 
             return listaReportes;
         }
-        asdadfsdf
+        
+        public static ReporteSiniestro ObtenerReporte()
+        {
+            ReporteSiniestro reporteSiniestro = null;
+            return reporteSiniestro;
+
+        }
         
     }
 }
