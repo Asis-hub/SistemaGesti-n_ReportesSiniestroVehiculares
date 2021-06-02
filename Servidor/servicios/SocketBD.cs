@@ -166,7 +166,7 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
             {
-                //ReporteSiniestro reporteSiniestro = ReporteSiniestroDA
+                //ReporteSiniestro reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte()
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {

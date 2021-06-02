@@ -44,8 +44,33 @@ namespace DelegacionMunicipal.modelo.dao
 
             return listaReportes;
         }
-        
-       
+
+        public static ReporteSiniestro ObtenerReporte(int idReporte)
+        {
+            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+            SocketBD socket = new SocketBD();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
+
+            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+            paquete.TipoQuery = TipoConsulta.Select;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+
+            if (respuesta != null)
+            {
+                reporteSiniestro = (ReporteSiniestro)JsonSerializer.Deserialize(respuesta, typeof(ReporteSiniestro));
+            }
+
+            return reporteSiniestro;
+        }
         
     }
 }
