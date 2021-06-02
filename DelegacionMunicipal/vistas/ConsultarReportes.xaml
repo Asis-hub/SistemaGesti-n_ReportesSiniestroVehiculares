@@ -39,7 +39,8 @@
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
                     <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
                     <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
-                    
+                    <DataGridTextColumn Header="Dictamen" Binding="{Binding Dictamen}"/>
+
                 </DataGrid.Columns>
             </DataGrid>
 
