@@ -1,9 +1,11 @@
 ﻿using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -63,12 +65,19 @@ namespace DelegacionMunicipal.vistas
                     output.Content = "Ingrese entre 5 y 8 fotos";
                     output.Foreground = Brushes.Red;
 
+                    Uri fileUri = new Uri(openFileDialog.FileName);
+                    imagen1.Source = new BitmapImage(fileUri);
 
                 }
                 else
                 {
                     output.Content = "Cantidad de fotos correcta";
                     output.Foreground = Brushes.Black;
+
+                    
+
+                    
+
                 }
                 
                 
