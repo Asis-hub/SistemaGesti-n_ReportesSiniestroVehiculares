@@ -48,7 +48,7 @@ namespace DelegacionMunicipal.vistas
             if(seleccion >= 0)
             {
                 ReporteSiniestro reporte = reportesSiniestro[seleccion];
-                DetallesReporte ventanaDetalles = new DetallesReporte(reporte);
+                DetallesReporte ventanaDetalles = new DetallesReporte(3);
                 ventanaDetalles.ShowDialog();
             }
         }
