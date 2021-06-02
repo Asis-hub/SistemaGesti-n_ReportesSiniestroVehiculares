@@ -23,6 +23,7 @@ namespace DelegacionMunicipal.conexion
         Municipio,
         Dictamen,
         ReporteSiniestro,
+        ReportesSiniestro,
         DelegacionTipo,
         Cargo,
         Fotografia

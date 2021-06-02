@@ -23,6 +23,7 @@ namespace Servidor.servicios
         Municipio,
         Dictamen,
         ReporteSiniestro,
+        ReportesSiniestro,
         DelegacionTipo,
         Cargo,
         Fotografia

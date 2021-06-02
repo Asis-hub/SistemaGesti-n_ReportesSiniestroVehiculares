@@ -159,10 +159,14 @@ namespace Servidor.servicios
                 Dictamen dictamen = DictamenDAO.ConsultarDictamenDeReporte(paquete.Consulta);
                 respuesta = JsonSerializer.Serialize(dictamen);
             }
-            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            else if (paquete.TipoDominio == TipoDato.ReportesSiniestro)
             {
                 List<ReporteSiniestro> listaReporteSiniestro = ReporteSiniestroDAO.ConsultarReportes(paquete.Consulta);
                 respuesta = JsonSerializer.Serialize(listaReporteSiniestro);
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                //ReporteSiniestro reporteSiniestro = ReporteSiniestroDA
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
