@@ -167,6 +167,7 @@ namespace Servidor.servicios
             else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
             {
                 ReporteSiniestro reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(reporteSiniestro);
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {

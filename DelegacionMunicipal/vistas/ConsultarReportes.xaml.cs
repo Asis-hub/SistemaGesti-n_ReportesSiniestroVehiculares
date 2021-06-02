@@ -32,6 +32,11 @@ namespace DelegacionMunicipal.vistas
 
 
             cargarTabla();
+
+            ReporteSiniestro reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(2);
+
+            Console.WriteLine(reporteSiniestro.Username.ToString());
+
             
 
         }
