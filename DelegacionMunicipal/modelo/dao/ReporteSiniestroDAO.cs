@@ -23,7 +23,7 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
             
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
@@ -47,6 +47,15 @@ namespace DelegacionMunicipal.modelo.dao
         public static ReporteSiniestro ObtenerReporte()
         {
             ReporteSiniestro reporteSiniestro = null;
+            SocketBD socket = new SocketBD();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+            paquete.Consulta = "Select idReporte, calle, numero, colonia, idDelegacion, username, dictamen";
+
+            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+
+
             return reporteSiniestro;
 
         }
