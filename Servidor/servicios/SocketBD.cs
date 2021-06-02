@@ -97,7 +97,7 @@ namespace Servidor.servicios
             string respuesta = "";
             if(paquete.TipoQuery == TipoConsulta.Select)
             {
-                respuesta = ProcesarSeleccion( paquete);
+                respuesta = ProcesarSeleccion(paquete);
             }
             else if(paquete.TipoQuery == TipoConsulta.Insert)
             {

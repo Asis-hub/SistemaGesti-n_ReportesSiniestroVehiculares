@@ -63,7 +63,9 @@ namespace DelegacionMunicipal.vistas
         private void cargarTabla()
         {
             reportesSiniestro = ReporteSiniestroDAO.ConsultarReportes();
+            btn_BuscarReportes.Content = reportesSiniestro.Count;
             tbl_Reportes.ItemsSource = reportesSiniestro;
+          
         }
 
         

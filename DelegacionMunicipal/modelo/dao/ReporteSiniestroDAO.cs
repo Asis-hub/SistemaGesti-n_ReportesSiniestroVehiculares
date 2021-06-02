@@ -38,6 +38,7 @@ namespace DelegacionMunicipal.modelo.dao
             if (respuesta.Length > 0)
             {
                 listaReportes = (List<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(List<ReporteSiniestro>)); 
+                
             }
 
 

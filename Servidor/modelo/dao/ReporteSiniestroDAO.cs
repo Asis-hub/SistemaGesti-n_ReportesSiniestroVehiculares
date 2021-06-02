@@ -35,6 +35,7 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
                         reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
                         reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                        reporteSiniestro.Dictamen = (!dataReader.IsDBNull(6)) ? dataReader.GetBoolean(6) : false;
                         listaReportes.Add(reporteSiniestro);
                     }
                     dataReader.Close();

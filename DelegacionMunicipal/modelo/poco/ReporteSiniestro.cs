@@ -14,7 +14,7 @@ namespace DelegacionMunicipal.modelo.poco
         private string colonia;
         private int idDelegacion;
         private string username;
-        private int dictamen;
+        private bool dictamen;
 
         public int IdReporte { get => idReporte; set => idReporte = value; }
         public string Calle { get => calle; set => calle = value; }
@@ -22,7 +22,7 @@ namespace DelegacionMunicipal.modelo.poco
         public string Colonia { get => colonia; set => colonia = value; }
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
         public string Username { get => username; set => username = value; }
-        public int Dictamen { get => dictamen; set => dictamen = value; }
+        public bool Dictamen { get => dictamen; set => dictamen = value; }
 
 
         public ReporteSiniestro()
