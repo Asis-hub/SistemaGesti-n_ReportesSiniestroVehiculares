@@ -3,6 +3,7 @@ using DelegacionMunicipal.modelo.poco;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -51,15 +52,27 @@ namespace DelegacionMunicipal.vistas
             openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                string filename = openFileDialog.FileName;
-              
-                string nombre = openFileDialog.SafeFileName;
-                
-                /*foreach (string filename in openFileDialog.FileNames)
-                {
-                    
-                }*/
+                //string filename = openFileDialog.FileName;
 
+                //string nombre = openFileDialog.SafeFileName;
+
+                //output.Content = openFileDialog.FileNames.Length.ToString();
+
+                if (openFileDialog.FileNames.Length > 8 || openFileDialog.FileNames.Length < 5)
+                {
+                    output.Content = "Ingrese entre 5 y 8 fotos";
+                    output.Foreground = Brushes.Red;
+
+
+                }
+                else
+                {
+                    output.Content = "Cantidad de fotos correcta";
+                    output.Foreground = Brushes.Black;
+                }
+                
+                
+               
                 
 
 

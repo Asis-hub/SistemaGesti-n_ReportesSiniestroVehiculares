@@ -31,6 +31,7 @@
         <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Left" Margin="529,463,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarReporte_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="633,463,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
         <ListBox HorizontalAlignment="Left" Height="86" Margin="19,110,0,0" VerticalAlignment="Top" Width="225"/>
+        <Label x:Name="output" Content="Label" HorizontalAlignment="Left" Margin="104,411,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
