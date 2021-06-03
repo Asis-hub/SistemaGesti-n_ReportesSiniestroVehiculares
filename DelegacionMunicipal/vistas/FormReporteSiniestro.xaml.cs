@@ -95,7 +95,10 @@ namespace DelegacionMunicipal.vistas
             //Validar campos 
             //Validar cantidad de imagenes
             //Registrar con DAO, que retorne booleano
+            if (txt_Colonia == )
+            {
 
+            }
 
 
         }
