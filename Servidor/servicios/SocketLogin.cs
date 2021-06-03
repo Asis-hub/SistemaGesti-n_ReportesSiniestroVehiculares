@@ -10,14 +10,18 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Servidor.servicios
 {
-    class SocketLogin
+    public class SocketLogin
     {
         private Socket socketServer;
         private bool encendido;
+        private Thread hiloRecibirMensajes;
+
+        public bool Encendido { get => encendido; }
 
         public SocketLogin()
         {
@@ -29,13 +33,23 @@ namespace Servidor.servicios
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
             socketServer.Bind(direccion);
-            socketServer.Listen(2);
+            socketServer.Listen(10);
+            hiloRecibirMensajes = new Thread(new ThreadStart(RecibirMensaje));
+            hiloRecibirMensajes.Start();
             encendido = true; 
+        }
+
+        public void TerminarConexion()
+        {
+            if (encendido)
+            {
+                socketServer.Close();
+            }
         }
 
         private void EnviarMensaje(Socket socketCliente, string respuesta)
         {
-            if (encendido)
+            if (Encendido)
             {
                 respuesta += "<EOF>";
                 byte[] msjEnviar = Encoding.Default.GetBytes(respuesta);
@@ -45,17 +59,17 @@ namespace Servidor.servicios
             }
         }
 
-        public void RecibirMensaje()
+        private void RecibirMensaje()
         {
-            try
+            while (Encendido)
             {
-                while (encendido)
+                try
                 {
                     string mensaje = "";
                     string respuesta = "";
                     Console.WriteLine("Escuchando...");
                     Socket socketClienteRemoto = socketServer.Accept();
-                    
+
                     //Recibir mensaje
                     Byte[] bytesRecibidos = new byte[socketClienteRemoto.SendBufferSize];
                     int datos = socketClienteRemoto.Receive(bytesRecibidos, 0, bytesRecibidos.Length, 0);
@@ -76,28 +90,22 @@ namespace Servidor.servicios
 
                     EnviarMensaje(socketClienteRemoto, respuesta);
                 }
+                catch (SocketException ex)
+                {
+                    if (ex.ErrorCode == 10004)
+                    {
+                        encendido = false;
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine("Error Json: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
-        }
-
-        public void TerminarConexion()
-        {
-            socketServer.Close();
             socketServer.Dispose();
-            encendido = false;
-
             Console.WriteLine("Socket Login apagado");
         }
-
-        public bool ConexionActiva()
-        {
-            return encendido;
-        }
-
-
+        
         private string ProcesarPeticion(Socket clienteRemoto, Paquete paquete)
         {
             string respuesta = "";

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -18,13 +19,23 @@ namespace Servidor.servicios
     {
         private Socket socketServer;
         private bool encendido = false;
+        private Thread hiloRecibirMensajes;
+
+        public bool Encendido { get => encendido; }
+
+        public SocketBD()
+        {
+            encendido = false;
+        }
 
         public void IniciarConexion()
         {
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1236);
             socketServer.Bind(direccion);
-            socketServer.Listen(2);
+            socketServer.Listen(10);
+            hiloRecibirMensajes = new Thread(new ThreadStart(RecibirMensaje));
+            hiloRecibirMensajes.Start();
             encendido = true;
         }
 
@@ -36,12 +47,13 @@ namespace Servidor.servicios
             socketCliente.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
 
-        public void RecibirMensaje()
+        private void RecibirMensaje()
         {
-            try
+            while (encendido)
             {
-                while (encendido)
+                try
                 {
+                
                     string mensaje = "";
                     string respuesta = "";
                     Socket socketClienteRemoto = socketServer.Accept();
@@ -68,30 +80,33 @@ namespace Servidor.servicios
 
                     respuesta = ProcesarPaquete(paqueteRecibido);
                     EnviarMensaje(socketClienteRemoto, respuesta);
+   
                 }
-                
-                
+                catch (SocketException ex)
+                {
+                    if (ex.ErrorCode == 10004)
+                    {
+                        encendido = false;
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine("Error Json: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
+            socketServer.Dispose();
+
         }
 
         public void TerminarConexion()
         {
-            encendido = false;
-            socketServer.Close();
-            socketServer.Dispose();
-            Console.WriteLine("Conexión del servidor terminada");
+            if (encendido)
+            {
+                socketServer.Close();
+            }
         }
 
-        public bool ConexionActiva()
-        {
-            return encendido;
-        }
-
-        
+       
         private string ProcesarPaquete(Paquete paquete)
         {
             string respuesta = "";

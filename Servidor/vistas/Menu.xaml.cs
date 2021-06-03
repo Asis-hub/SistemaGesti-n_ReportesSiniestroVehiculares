@@ -28,49 +28,35 @@ namespace Servidor.vistas
         public Menu()
         {
             InitializeComponent();
+            socketLogin = new SocketLogin();
+            socketBD = new SocketBD();
         }
 
         private void btn_ServicioLogin_Click(object sender, RoutedEventArgs e)
         {
-            if(socketLogin != null)
+            if (!socketLogin.Encendido)
             {
-                Console.WriteLine(socketLogin.ConexionActiva());
-            }
-
-            if (socketLogin != null && socketLogin.ConexionActiva())
-            {
-                socketLogin.TerminarConexion();
-                btn_ServicioLogin.Content = "Encender";
+                socketLogin.IniciarConexion();
+                btn_ServicioLogin.Content = "Apagar";
             }
             else
             {
-                socketLogin = new SocketLogin();
-                socketLogin.IniciarConexion();
-                Thread procesoLogin = new Thread(new ThreadStart(socketLogin.RecibirMensaje));
-                btn_ServicioLogin.Content = "Apagar";
-                procesoLogin.Start();
+                socketLogin.TerminarConexion();
+                btn_ServicioLogin.Content = "Encender";
             }
         }
 
         private void btn_ServicioBaseDatos_Click(object sender, RoutedEventArgs e)
         {
-            if (socketBD != null)
+            if (!socketBD.Encendido)
             {
-                Console.WriteLine(socketBD.ConexionActiva());
-            }
-
-            if (socketBD != null && socketBD.ConexionActiva())
-            {
-                socketBD.TerminarConexion();
-                btn_ServicioBaseDatos.Content = "Encender";
+                socketBD.IniciarConexion();
+                btn_ServicioBaseDatos.Content = "Apagar";
             }
             else
             {
-                socketBD = new SocketBD();
-                socketBD.IniciarConexion();
-                Thread procesoBaseDatos = new Thread(new ThreadStart(socketBD.RecibirMensaje));
-                btn_ServicioBaseDatos.Content = "Apagar";
-                procesoBaseDatos.Start();
+                socketBD.TerminarConexion();
+                btn_ServicioBaseDatos.Content = "Encender";
             }
         }
 
@@ -81,15 +67,8 @@ namespace Servidor.vistas
 
         private void ApagarServicios(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(socketLogin != null && socketLogin.ConexionActiva())
-            {
-                socketLogin.TerminarConexion();
-            }
-
-            if (socketBD != null && socketBD.ConexionActiva())
-            {
-                socketBD.TerminarConexion();
-            }
+            socketLogin.TerminarConexion();
+            socketBD.TerminarConexion();
         }  
     }
 }
