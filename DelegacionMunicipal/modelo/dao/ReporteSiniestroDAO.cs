@@ -54,7 +54,6 @@ namespace DelegacionMunicipal.modelo.dao
             Paquete paquete = new Paquete();
 
             paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
-                
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 

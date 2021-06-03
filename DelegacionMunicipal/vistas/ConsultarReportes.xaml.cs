@@ -32,13 +32,6 @@ namespace DelegacionMunicipal.vistas
 
 
             cargarTabla();
-
-            ReporteSiniestro reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(2);
-
-            Console.WriteLine(reporteSiniestro.Username.ToString());
-
-            
-
         }
 
         
@@ -48,7 +41,7 @@ namespace DelegacionMunicipal.vistas
             if(seleccion >= 0)
             {
                 ReporteSiniestro reporte = reportesSiniestro[seleccion];
-                DetallesReporte ventanaDetalles = new DetallesReporte(3);
+                DetallesReporte ventanaDetalles = new DetallesReporte(reporte.IdReporte);
                 ventanaDetalles.ShowDialog();
             }
         }
@@ -68,7 +61,6 @@ namespace DelegacionMunicipal.vistas
         private void cargarTabla()
         {
             reportesSiniestro = ReporteSiniestroDAO.ConsultarReportes();
-            btn_BuscarReportes.Content = reportesSiniestro.Count;
             tbl_Reportes.ItemsSource = reportesSiniestro;
           
         }
