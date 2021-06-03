@@ -23,6 +23,7 @@ namespace DireccionGeneral.conexion
         Municipio,
         Dictamen,
         ReporteSiniestro,
+        ReportesSiniestro,
         DelegacionTipo,
         Cargo,
         Fotografia

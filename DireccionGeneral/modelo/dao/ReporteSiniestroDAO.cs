@@ -21,7 +21,7 @@ namespace DireccionGeneral.modelo.dao
 
             paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username from dbo.reporteSiniestro;";
 
-            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+            paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
             mensaje = JsonSerializer.Serialize(paquete);
