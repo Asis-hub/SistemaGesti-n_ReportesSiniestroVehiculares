@@ -20,7 +20,7 @@ namespace DelegacionMunicipal.vistas
         public FormReporteSiniestro()
         {
             InitializeComponent();
-            CargarListaVehiculos();
+            CargarListaVehiculos(); 
         }
 
         private void CargarListaVehiculos()
@@ -95,8 +95,16 @@ namespace DelegacionMunicipal.vistas
             //Validar campos 
             //Validar cantidad de imagenes
             //Registrar con DAO, que retorne booleano
-            if (txt_Colonia.Text.Length == 0 )
+            if (ValidarFormulario())
             {
+                ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+
+                reporteSiniestro.Calle = txt_Calle.ToString();
+                reporteSiniestro.Colonia = txt_Colonia.ToString();
+                reporteSiniestro.Numero = txt_Numero.ToString();
+
+
+                //ReporteSiniestroDAO
 
             }
 
@@ -112,7 +120,8 @@ namespace DelegacionMunicipal.vistas
         {
             if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0)
             {
-                
+                MessageBox.Show("Debes llenar todos los campos");
+                return false;
             }
 
 

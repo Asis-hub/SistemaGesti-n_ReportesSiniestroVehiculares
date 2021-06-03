@@ -226,7 +226,9 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
             {
-                //Falta implementar
+                resultado = ReporteSiniestroDAO.RegistrarReporte(paquete.Consulta);
+                respuesta = resultado.ToString();
+
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
