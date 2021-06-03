@@ -34,18 +34,24 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_RegistrarConductor_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(true);
+            AbrirFormulario(true, null);
         }
 
         private void btn_EditarConductor_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(false);
+            int indice = tbl_Conductores.SelectedIndex;
+            if(indice >= 0)
+            {
+                Conductor conductorEdicion = conductores[indice];
+                AbrirFormulario(false, conductorEdicion);
+            }
+
+            
         }
 
         private void btn_EliminarConductor_Click(object sender, RoutedEventArgs e)
         {
             int indice = tbl_Conductores.SelectedIndex;
-            Console.WriteLine(indice);
             if (indice >= 0)
             {
                 int resultado = ConductorDAO.EliminarConductor(conductores[indice].NumeroLicencia);
@@ -62,7 +68,7 @@ namespace DelegacionMunicipal.vistas
             tbl_Conductores.ItemsSource = conductores;
         }
 
-        private void AbrirFormulario(bool nuevo)
+        private void AbrirFormulario(bool nuevo, Conductor conductorEdicion)
         {
             FormConductor formularioNuevoConductor;
 
@@ -72,8 +78,6 @@ namespace DelegacionMunicipal.vistas
             }
             else
             {
-                int indice = tbl_Conductores.SelectedIndex;
-                Conductor conductorEdicion = conductores[indice];
                 formularioNuevoConductor = new FormConductor(conductorEdicion);
             }
             formularioNuevoConductor.Owner = Window.GetWindow(this);

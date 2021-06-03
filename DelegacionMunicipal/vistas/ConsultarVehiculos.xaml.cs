@@ -18,17 +18,21 @@ namespace DelegacionMunicipal.vistas
             InitializeComponent();
             vehiculos = new List<Vehiculo>();
             CargarTabla();
-            prueba.Content = vehiculos.Count;
         }
 
         private void btn_RegistrarVehiculo_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(true);
+            AbrirFormulario(true, null);
         }
 
         private void btn_EditarVehiculo_Click(object sender, RoutedEventArgs e)
         {
-            AbrirFormulario(false);
+            int indice = tbl_Vehiculos.SelectedIndex;
+            if(indice >= 0)
+            {
+                Vehiculo vehiculoEdicion = vehiculos[indice];
+                AbrirFormulario(false, vehiculoEdicion);
+            }
         }
 
         private void btn_EliminarVehiculo_Click(object sender, RoutedEventArgs e)
@@ -50,7 +54,7 @@ namespace DelegacionMunicipal.vistas
             tbl_Vehiculos.ItemsSource = vehiculos;
         }
 
-        private void AbrirFormulario(bool nuevo)
+        private void AbrirFormulario(bool nuevo, Vehiculo vehiculoEdicion)
         {
             FormVehiculo formularioNuevoVehiculo;
 
@@ -60,8 +64,6 @@ namespace DelegacionMunicipal.vistas
             }
             else
             {
-                int indice = tbl_Vehiculos.SelectedIndex;
-                Vehiculo vehiculoEdicion = vehiculos[indice];
                 formularioNuevoVehiculo = new FormVehiculo(vehiculoEdicion);
             }
             formularioNuevoVehiculo.Owner = Window.GetWindow(this);
