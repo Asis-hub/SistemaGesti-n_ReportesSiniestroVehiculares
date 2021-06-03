@@ -95,7 +95,7 @@ namespace DelegacionMunicipal.vistas
             //Validar campos 
             //Validar cantidad de imagenes
             //Registrar con DAO, que retorne booleano
-            if (txt_Colonia == )
+            if (txt_Colonia.Text.Length == 0 )
             {
 
             }
@@ -106,6 +106,18 @@ namespace DelegacionMunicipal.vistas
         private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
         {
             //Cerrar ventana
+        }
+
+        private bool ValidarFormulario()
+        {
+            if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0)
+            {
+                
+            }
+
+
+
+            return true;
         }
     }
 }
