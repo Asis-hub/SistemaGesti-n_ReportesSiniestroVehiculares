@@ -23,9 +23,9 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
             
-            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+            paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
             mensaje = JsonSerializer.Serialize(paquete);
@@ -38,12 +38,67 @@ namespace DelegacionMunicipal.modelo.dao
             if (respuesta.Length > 0)
             {
                 listaReportes = (List<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(List<ReporteSiniestro>)); 
+                
             }
 
 
             return listaReportes;
         }
 
+        public static ReporteSiniestro ObtenerReporte(int idReporte)
+        {
+            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+            SocketBD socket = new SocketBD();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
+                
+            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+            paquete.TipoQuery = TipoConsulta.Select;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+
+            if (respuesta != null)
+            {
+                reporteSiniestro = (ReporteSiniestro)JsonSerializer.Deserialize(respuesta, typeof(ReporteSiniestro));
+            }
+
+            return reporteSiniestro;
+        }
+
+        public static int RegistrarReporte(ReporteSiniestro reporteSiniestro)
+        {
+            int resultado = 0;
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+
+            paquete.TipoQuery = TipoConsulta.Insert;
+            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+
+            paquete.Consulta = String.Format("insert into reporteSiniestro values ('{0}', '{1}', '{2}','20120618 10:34:09 AM', 1, 'midguet',0);", reporteSiniestro.Calle, reporteSiniestro.Colonia, reporteSiniestro.Numero);
+
+            string mensaje = JsonSerializer.Serialize(paquete);
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                resultado = int.Parse(respuesta);
+            }
+
+
+
+
+            return resultado;
+        }
         
     }
 }

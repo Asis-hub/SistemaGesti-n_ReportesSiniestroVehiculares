@@ -1,8 +1,11 @@
 ﻿using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -17,7 +20,7 @@ namespace DelegacionMunicipal.vistas
         public FormReporteSiniestro()
         {
             InitializeComponent();
-            CargarListaVehiculos();
+            CargarListaVehiculos(); 
         }
 
         private void CargarListaVehiculos()
@@ -51,15 +54,34 @@ namespace DelegacionMunicipal.vistas
             openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                string filename = openFileDialog.FileName;
-              
-                string nombre = openFileDialog.SafeFileName;
-                
-                /*foreach (string filename in openFileDialog.FileNames)
-                {
-                    
-                }*/
+                //string filename = openFileDialog.FileName;
 
+                //string nombre = openFileDialog.SafeFileName;
+
+                //output.Content = openFileDialog.FileNames.Length.ToString();
+
+                if (openFileDialog.FileNames.Length > 8 || openFileDialog.FileNames.Length < 5)
+                {
+                    output.Content = "Ingrese entre 5 y 8 fotos";
+                    output.Foreground = Brushes.Red;
+
+                    Uri fileUri = new Uri(openFileDialog.FileName);
+                    imagen1.Source = new BitmapImage(fileUri);
+
+                }
+                else
+                {
+                    output.Content = "Cantidad de fotos correcta";
+                    output.Foreground = Brushes.Black;
+
+                    
+
+                    
+
+                }
+                
+                
+               
                 
 
 
@@ -73,7 +95,18 @@ namespace DelegacionMunicipal.vistas
             //Validar campos 
             //Validar cantidad de imagenes
             //Registrar con DAO, que retorne booleano
+            if (ValidarFormulario())
+            {
+                ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
 
+                reporteSiniestro.Calle = txt_Calle.ToString();
+                reporteSiniestro.Colonia = txt_Colonia.ToString();
+                reporteSiniestro.Numero = txt_Numero.ToString();
+
+
+                //ReporteSiniestroDAO
+
+            }
 
 
         }
@@ -81,6 +114,19 @@ namespace DelegacionMunicipal.vistas
         private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
         {
             //Cerrar ventana
+        }
+
+        private bool ValidarFormulario()
+        {
+            if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0)
+            {
+                MessageBox.Show("Debes llenar todos los campos");
+                return false;
+            }
+
+
+
+            return true;
         }
     }
 }

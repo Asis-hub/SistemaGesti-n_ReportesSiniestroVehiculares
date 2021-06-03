@@ -97,7 +97,7 @@ namespace Servidor.servicios
             string respuesta = "";
             if(paquete.TipoQuery == TipoConsulta.Select)
             {
-                respuesta = ProcesarSeleccion( paquete);
+                respuesta = ProcesarSeleccion(paquete);
             }
             else if(paquete.TipoQuery == TipoConsulta.Insert)
             {
@@ -159,10 +159,15 @@ namespace Servidor.servicios
                 Dictamen dictamen = DictamenDAO.ConsultarDictamenDeReporte(paquete.Consulta);
                 respuesta = JsonSerializer.Serialize(dictamen);
             }
-            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            else if (paquete.TipoDominio == TipoDato.ReportesSiniestro)
             {
                 List<ReporteSiniestro> listaReporteSiniestro = ReporteSiniestroDAO.ConsultarReportes(paquete.Consulta);
                 respuesta = JsonSerializer.Serialize(listaReporteSiniestro);
+            }
+            else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
+            {
+                ReporteSiniestro reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(reporteSiniestro);
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
@@ -221,7 +226,9 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.ReporteSiniestro)
             {
-                //Falta implementar
+                resultado = ReporteSiniestroDAO.RegistrarReporte(paquete.Consulta);
+                respuesta = resultado.ToString();
+
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {

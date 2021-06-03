@@ -5,18 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegacionMunicipal.vistas"
         mc:Ignorable="d"
-        Title="DetallesReporte" Height="450" Width="800">
-    <Grid>
-        <Label Content="Folio" HorizontalAlignment="Left" Margin="70,63,0,0" VerticalAlignment="Top"/>
-        <Label Content="Calle" HorizontalAlignment="Left" Margin="70,105,0,0" VerticalAlignment="Top"/>
-        <Label Content="Numero" HorizontalAlignment="Left" Margin="70,136,0,0" VerticalAlignment="Top"/>
-        <Label Content="Colonia&#xD;&#xA;" HorizontalAlignment="Left" Margin="70,167,0,0" VerticalAlignment="Top"/>
-        <Label Content="Delegacion" HorizontalAlignment="Left" Margin="70,200,0,0" VerticalAlignment="Top"/>
-        <Label Content="Usuario" HorizontalAlignment="Left" Margin="70,239,0,0" VerticalAlignment="Top"/>
-        <Label Content="Detalles del reporte&#xD;&#xA;" HorizontalAlignment="Left" Margin="281,19,0,0" VerticalAlignment="Top" Height="34" Width="206" FontSize="18" FontWeight="Bold"/>
-        <Label Content="Dictamen" HorizontalAlignment="Left" Margin="70,270,0,0" VerticalAlignment="Top"/>
-        <Label Content="Conductores" HorizontalAlignment="Left" Margin="525,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vehiculos" HorizontalAlignment="Left" Margin="639,103,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label Content="Imagenes" HorizontalAlignment="Left" Margin="70,367,0,0" VerticalAlignment="Top"/>
+        Title="DetallesReporte" Height="764.186" Width="800">
+    <Grid Margin="10,10,13,0" Height="723" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Folio" HorizontalAlignment="Left" Margin="61,63,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="36"/>
+        <Label Content="Calle" HorizontalAlignment="Left" Margin="61,105,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="36"/>
+        <Label Content="Numero" HorizontalAlignment="Left" Margin="61,136,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="54"/>
+        <Label Content="Colonia&#xD;&#xA;" HorizontalAlignment="Left" Margin="61,167,0,0" VerticalAlignment="Top" Grid.Column="1" Height="42" Width="50"/>
+        <Label Content="Delegacion" HorizontalAlignment="Left" Margin="61,200,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="69"/>
+        <Label Content="Usuario" HorizontalAlignment="Left" Margin="61,239,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50"/>
+        <Label Content="Detalles del reporte&#xD;&#xA;" HorizontalAlignment="Left" Margin="272,19,0,0" VerticalAlignment="Top" Height="34" Width="206" FontSize="18" FontWeight="Bold" Grid.Column="1"/>
+        <Label Content="Dictamen" HorizontalAlignment="Left" Margin="61,270,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="60"/>
+        <Label Content="Conductores" HorizontalAlignment="Left" Margin="516,103,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="77"/>
+        <Label Content="Vehiculos" HorizontalAlignment="Left" Margin="630,103,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" Height="26"/>
+        <Label Content="Imagenes" HorizontalAlignment="Left" Margin="61,367,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="61"/>
+        <Label x:Name="folio" Content="" HorizontalAlignment="Left" Margin="166,63,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="calle" Content="" HorizontalAlignment="Left" Margin="179,105,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="numero" Content="" HorizontalAlignment="Left" Margin="166,136,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="colonia" Content="" HorizontalAlignment="Left" Margin="166,167,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="delegacion" Content="" HorizontalAlignment="Left" Margin="166,200,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="usuario" Content="" HorizontalAlignment="Left" Margin="166,239,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Label x:Name="dictamen" Content="" HorizontalAlignment="Left" Margin="166,270,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+        <Image x:Name="image1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="61,415,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="179,415,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="300,415,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image4" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="416,415,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image5" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="545,415,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image6" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="61,584,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image7" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="179,584,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image8" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="300,584,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

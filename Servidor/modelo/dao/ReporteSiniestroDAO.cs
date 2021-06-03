@@ -35,6 +35,7 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
                         reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
                         reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                        reporteSiniestro.Dictamen = (!dataReader.IsDBNull(6)) ? dataReader.GetBoolean(6) : false;
                         listaReportes.Add(reporteSiniestro);
                     }
                     dataReader.Close();
@@ -53,6 +54,73 @@ namespace Servidor.modelo.dao
                 }
             }
             return listaReportes;
+        }
+
+        public static ReporteSiniestro ObtenerReporte(string consulta)
+        {
+            ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
+            SqlConnection conn = null;
+
+            try
+            {
+                conn = ConexionBD.GetConnection();
+                if (conn != null)
+                {
+                    SqlCommand comando;
+                    SqlDataReader dataReader;
+                    comando = new SqlCommand(consulta, conn);
+                    dataReader = comando.ExecuteReader();
+
+                    if (dataReader.Read())
+                    {
+                        reporteSiniestro.IdReporte = (!dataReader.IsDBNull(0)) ? dataReader.GetInt32(0) : 0;
+                        reporteSiniestro.Calle = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
+                        reporteSiniestro.Numero = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
+                        reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
+                        reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
+                        reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
+                        reporteSiniestro.Dictamen = (!dataReader.IsDBNull(6)) ? dataReader.GetBoolean(6) : false;
+                    }
+                }
+            } 
+            catch
+            {
+                Console.WriteLine();
+            }
+
+
+            return reporteSiniestro;
+        }
+
+        public static int RegistrarReporte(String consulta)
+        {
+            SqlConnection conexionDB = ConexionBD.GetConnection();
+            int resultado = 0;
+            try
+            {
+                if (conexionDB != null)
+                {
+                    SqlCommand comando = new SqlCommand(consulta, conexionDB);
+                    resultado = comando.ExecuteNonQuery();
+                    comando.Dispose();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                resultado = -1;
+            }
+            finally
+            {
+                if (conexionDB != null)
+                {
+                    conexionDB.Close();
+                }
+            }
+
+
+
+            return resultado;
         }
     }
 }
