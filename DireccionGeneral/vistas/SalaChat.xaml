@@ -13,8 +13,8 @@
             <Border BorderBrush="#FF918C8C" BorderThickness="1">
                 <StackPanel Margin="10">
                     <TextBlock FontSize="18" TextAlignment="Center">Usuarios Conectados</TextBlock>
-                    <ScrollViewer x:Name="scroll_Usuarios" Margin="0" VerticalScrollBarVisibility="Auto" >
-                        <StackPanel x:Name="pnl_Usurios" />
+                    <ScrollViewer x:Name="scroll_Usuarios" Margin="0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="pnl_Usuarios" Orientation="Vertical" />
                     </ScrollViewer>
                 </StackPanel>
             </Border>

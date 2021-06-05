@@ -68,16 +68,14 @@ namespace DireccionGeneral.vistas
 
         private void MostrarListaUsuarios()
         {
-            foreach(string usuario in listaUsuarios)
+            pnl_Usuarios.Children.Clear();
+            foreach (string usuario in listaUsuarios)
             {
-                pnl_Usurios.Children.Clear();
                 Label lbl_Usuario = new Label();
-                lbl_Usuario.Content = usuario;
+                lbl_Usuario.Content = "> " + usuario;
                 lbl_Usuario.FontSize = 16;
-                lbl_Usuario.Padding = new Thickness(4);
-                pnl_Usurios.Children.Add(lbl_Usuario);
-                //pnl_Usurios.Height = 0;
-                //pnl_Usurios.Height += lbl_Usuario.Height;
+                lbl_Usuario.Padding = new Thickness(5);
+                pnl_Usuarios.Children.Add(lbl_Usuario);
             }
 
         }

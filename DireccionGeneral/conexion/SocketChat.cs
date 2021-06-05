@@ -62,19 +62,18 @@ namespace DireccionGeneral.conexion
 
                 serverStream.Write(msjEnviar, 0, msjEnviar.Length);
                 serverStream.Flush();
-
-
-                
                 encendido = false;
             }
         }
 
         public static void EnviarMensaje(string mensaje)
         {
-            byte[] outStream = Encoding.ASCII.GetBytes(mensaje);
-            serverStream.Write(outStream, 0, outStream.Length);
-
-            serverStream.Flush();
+            if (encendido)
+            {
+                byte[] outStream = Encoding.ASCII.GetBytes(mensaje);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+            }
         }
 
         private static void EscucharMensaje()

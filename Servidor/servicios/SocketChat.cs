@@ -54,34 +54,32 @@ namespace Servidor.servicios
                     clientSocket = serverSocket.AcceptTcpClient();
                     byte[] bytesRecibidos = new byte[tamañoBuffer];
                     NetworkStream networkStream = clientSocket.GetStream();
-                    int numBytes = networkStream.Read(bytesRecibidos, 0, clientSocket.ReceiveBufferSize);
+                    int numBytes = networkStream.Read(bytesRecibidos, 0, bytesRecibidos.Length);
                     networkStream.Flush();
                     Array.Resize(ref bytesRecibidos, numBytes);
 
                     msjCliente = Encoding.ASCII.GetString(bytesRecibidos);
-
-
                     MensajeChat mensajeLogin = JsonSerializer.Deserialize<MensajeChat>(msjCliente); ;
 
                     if (listaClientes.Contains(mensajeLogin.Usuario))
                     {
+                        //Usuario con dos sesiones abiertas
                         List<TcpClient> listaSockets = (List<TcpClient>)listaClientes[mensajeLogin.Usuario];
                         listaSockets.Add(clientSocket);
                         listaClientes[mensajeLogin.Usuario] = listaSockets;
                     }
                     else
                     {
+                        //Usuario se conecta por primera vez
                         string usario = mensajeLogin.Usuario;
                         Console.WriteLine("Nombre cliente: " + usario);
                         List<TcpClient> listaSockets = new List<TcpClient>();
                         listaSockets.Add(clientSocket);
                         listaClientes.Add(usario, listaSockets);
                         Console.WriteLine(usario + " se unio al chat....");
-
                         //Notificación a todos
                         NotificarClientes(mensajeLogin);
                     }
-
                     //Asignacion del reesponsable del socket cliente
                     ClienteRemoto clienteRemoto = new ClienteRemoto();
                     clienteRemoto.InicializarCliente(clientSocket, mensajeLogin.Usuario);
@@ -106,7 +104,6 @@ namespace Servidor.servicios
             {
                 foreach (DictionaryEntry item in listaClientes)
                 {
-                    Console.WriteLine("Usuarios Conectados: " + listaClientes.Count);
                     List<TcpClient> listaSockets = (List<TcpClient>)item.Value;
                     foreach (TcpClient broadcastSocket in listaSockets)
                     {
@@ -120,6 +117,7 @@ namespace Servidor.servicios
                         broadcastStream.Flush();
                     }
                 }
+                
             }
             catch(Exception ex)
             {
@@ -140,9 +138,10 @@ namespace Servidor.servicios
             this.clientSocket = clientSocket;
             this.nomCliente = nomCliente;
             conectado = true;
-            EnviarListaUsuarioConectados();
+            
             Thread hiloEscucharChat = new Thread(EscucharChat);
             hiloEscucharChat.Start();
+            EnviarListaUsuarioConectados();
         }
 
         private void EnviarListaUsuarioConectados()
@@ -177,17 +176,22 @@ namespace Servidor.servicios
                         Array.Resize(ref byteFrom, numBytes);
                         datoFromCliente = Encoding.ASCII.GetString(byteFrom);
                         MensajeChat mensajeRecibido = JsonSerializer.Deserialize<MensajeChat>(datoFromCliente);
-
+                        bool notificar = true;
                         if (mensajeRecibido.Tipo == TipoMensaje.Desconectarse)
                         {
-                            conectado = false;
                             ((List<TcpClient>)SocketChat.listaClientes[nomCliente]).Remove(clientSocket);
+                            notificar = false; //No se notificara si cerro una sesion y tienes más abiertas
                             if(((List<TcpClient>)SocketChat.listaClientes[nomCliente]).Count == 0)
                             {
                                 SocketChat.listaClientes.Remove(nomCliente);
+                                notificar = true;//Se notificara que cerró la última sesión
                             }
+                            conectado = false;
                         }
-                        SocketChat.NotificarClientes(mensajeRecibido);
+                        if (notificar)
+                        {
+                            SocketChat.NotificarClientes(mensajeRecibido);
+                        }
                     }
                 }
                 catch (Exception ex)
