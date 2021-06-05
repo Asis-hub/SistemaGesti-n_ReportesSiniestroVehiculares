@@ -62,13 +62,23 @@ namespace Servidor.vistas
 
         private void btn_ServicioSalaChat_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!SocketChat.Encendido)
+            {
+                SocketChat.IniciarConexion();
+                btn_ServicioSalaChat.Content = "Apagar";
+            }
+            else
+            {
+                SocketChat.TerminarConexion();
+                btn_ServicioSalaChat.Content = "Encender";
+            }
         }
 
         private void ApagarServicios(object sender, System.ComponentModel.CancelEventArgs e)
         {
             socketLogin.TerminarConexion();
             socketBD.TerminarConexion();
+            SocketChat.TerminarConexion();
         }  
     }
 }

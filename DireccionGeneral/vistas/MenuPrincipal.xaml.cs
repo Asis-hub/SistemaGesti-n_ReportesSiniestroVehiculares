@@ -17,7 +17,7 @@ namespace DireccionGeneral.vistas
         public MenuPrincipal()
         {
             InitializeComponent();
-            ventanaSalaChat = new SalaChat();
+            ventanaSalaChat = new SalaChat(usuarioConectado);
             frame_Content.Content = ventanaConsultarUsuarios;
         }
 
@@ -25,7 +25,7 @@ namespace DireccionGeneral.vistas
         {
             InitializeComponent();
             this.usuarioConectado = usuarioConectado;
-            ventanaSalaChat = new SalaChat();
+            ventanaSalaChat = new SalaChat(usuarioConectado);
             ventanaConsultarUsuarios = new ConsultarUsuarios();
             frame_Content.Content = ventanaConsultarUsuarios;
         }
@@ -64,6 +64,7 @@ namespace DireccionGeneral.vistas
 
         private void btn_CerrarSesion_Click(object sender, RoutedEventArgs e)
         {
+            ventanaSalaChat.DesconectarChat();
             InicioSesion ventanaInicioSesion = new InicioSesion();
             ventanaInicioSesion.Show();
             this.Close();
@@ -71,6 +72,7 @@ namespace DireccionGeneral.vistas
 
         private void CerrarVentana(object sender, RoutedEventArgs e)
         {
+            ventanaSalaChat.DesconectarChat();
             this.Close();
         }
 
