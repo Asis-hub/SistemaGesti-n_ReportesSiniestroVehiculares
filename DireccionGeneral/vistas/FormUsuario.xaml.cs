@@ -96,20 +96,22 @@ namespace DireccionGeneral.vistas
 
         private bool ValidarFormulario()
         {
-            if (txt_Usuario.Text.Length == 0)
+            if (txt_Usuario.Text.Length == 0 || txt_Nombre.Text.Length == 0 || txt_Contraseña.Password.Length == 0 || 
+                txt_ContraseñaConfirmacion.Password.Length == 0 || !(cmb_Cargo.SelectedIndex >= 0) || !(cmb_Delegacion.SelectedIndex >= 0))
+            {
+                MessageBox.Show("Faltan campos por llenar, favor de intentar de nuevo", "Campos faltantes", button: MessageBoxButton.OK);
                 return false;
-            if (txt_Nombre.Text.Length == 0)
-                return false;
-            if (txt_Contraseña.Password.Length == 0)
-                return false;
-            if (txt_ContraseñaConfirmacion.Password.Length == 0)
-                return false;
-            if (!(cmb_Cargo.SelectedIndex >= 0))
-                return false;
-            if (!(cmb_Delegacion.SelectedIndex >= 0))
-                return false;
+            }
             if (!ValidarPassword())
+            {
+                MessageBox.Show("La contraseña y su confirmación no coinciden, favor de intentar de nuevo", "Contraseñas no coinciden", button: MessageBoxButton.OK);
                 return false;
+            }
+            if (txt_Usuario.Text.Contains(" ") || txt_Usuario.Text.Contains(" "))
+            {
+                MessageBox.Show("El usuario o contraseña no pueden tener espacios en blancos, favor de intentar de nuevo", "Espacios en blanco no permitidos", button: MessageBoxButton.OK);
+                return false;
+            }
 
             return true;
         }
@@ -121,6 +123,44 @@ namespace DireccionGeneral.vistas
                 return true;
             }
             return false;
+        }
+
+        private void txt_Nombre_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetter(ch) || Char.IsWhiteSpace(ch)))) {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
+        }
+
+        private void txt_Usuario_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetterOrDigit(ch)) || ch == '.' || ch == '-' || ch == '_'))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
+        }
+
+        private void txt_Contraseña_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetterOrDigit(ch)) || ch == '.' || ch == '-' || ch == '_'))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
         }
     }
 }

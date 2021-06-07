@@ -8,22 +8,22 @@
         Title="Delegacion" Height="354.375" Width="684.688">
     <Grid>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Nombre" HorizontalAlignment="Left" Height="23" Margin="93,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="txt_Nombre" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="93,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" PreviewTextInput="txt_Nombre_PreviewTextInput" />
 
         <Label Content="Correo" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Correo" HorizontalAlignment="Left" Height="23" Margin="93,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="txt_Correo" MaxLength="40" HorizontalAlignment="Left" Height="23" Margin="93,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
 
         <Label Content="Código Postal" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_CodigoPostal" HorizontalAlignment="Left" Height="23" Margin="93,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="txt_CodigoPostal" MaxLength="5" HorizontalAlignment="Left" Height="23" Margin="93,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" PreviewTextInput="txt_CodigoPostal_PreviewTextInput"/>
 
         <Label Content="Calle" HorizontalAlignment="Left" Margin="15,206,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="22" Margin="93,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="txt_Calle" MaxLength="30" HorizontalAlignment="Left" Height="22" Margin="93,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" PreviewTextInput="txt_Calle_PreviewTextInput"/>
 
         <Label Content="Número" HorizontalAlignment="Left" Margin="348,34,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="22" Margin="431,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+        <TextBox x:Name="txt_Numero" MaxLength="4" HorizontalAlignment="Left" Height="22" Margin="431,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" PreviewTextInput="txt_Numero_PreviewTextInput"/>
 
         <Label Content="Colonia" HorizontalAlignment="Left" Margin="348,98,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Colonia" HorizontalAlignment="Left" Height="22" Margin="431,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+        <TextBox x:Name="txt_Colonia" MaxLength="30" HorizontalAlignment="Left" Height="22" Margin="431,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" PreviewTextInput="txt_Colonia_PreviewTextInput"/>
 
         <Label Content="Municipio" HorizontalAlignment="Left" Margin="348,150,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Municipio" HorizontalAlignment="Left" Margin="431,150,0,0" VerticalAlignment="Top" Width="205"/>
