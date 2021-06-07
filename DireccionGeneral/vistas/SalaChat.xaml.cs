@@ -42,10 +42,11 @@ namespace DireccionGeneral.vistas
                 if(mensaje.Tipo == TipoMensaje.ListaUsuarios)
                 {
                     listaUsuarios = mensaje.Contenido.Split(';').ToList();
-                    Console.WriteLine(mensaje.Contenido);
                     MostrarListaUsuarios();
                 }
-                else if (mensaje.Tipo == TipoMensaje.Conectarse && !listaUsuarios.Contains(mensaje.Usuario) && mensaje.Usuario != usuario.Username)
+                else if (mensaje.Tipo == TipoMensaje.Conectarse && 
+                         !listaUsuarios.Contains(mensaje.Usuario) && 
+                         mensaje.Usuario != usuario.Username)
                 {
                     listaUsuarios.Add(mensaje.Usuario);
                     MostrarListaUsuarios();
@@ -69,10 +70,16 @@ namespace DireccionGeneral.vistas
         private void MostrarListaUsuarios()
         {
             pnl_Usuarios.Children.Clear();
-            foreach (string usuario in listaUsuarios)
+            foreach (string usuarioChat in listaUsuarios)
             {
                 Label lbl_Usuario = new Label();
-                lbl_Usuario.Content = "> " + usuario;
+                
+                lbl_Usuario.Content = "> " + usuarioChat;
+                if(usuarioChat == usuario.Username)
+                {
+                    lbl_Usuario.Foreground = Brushes.Red;
+                    lbl_Usuario.Content += " (tú)";
+                }
                 lbl_Usuario.FontSize = 16;
                 lbl_Usuario.Padding = new Thickness(5);
                 pnl_Usuarios.Children.Add(lbl_Usuario);

@@ -18,6 +18,8 @@ namespace Servidor.servicios
     public class SocketBD
     {
         private Socket socketServer;
+        private string ip;
+        private int puerto;
         private bool encendido = false;
         private Thread hiloRecibirMensajes;
 
@@ -25,13 +27,15 @@ namespace Servidor.servicios
 
         public SocketBD()
         {
+            ip = Properties.Settings.Default.IP;
+            puerto = Properties.Settings.Default.PuertoBaseDatos;
             encendido = false;
         }
 
         public void IniciarConexion()
         {
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1236);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
             socketServer.Bind(direccion);
             socketServer.Listen(10);
             hiloRecibirMensajes = new Thread(new ThreadStart(RecibirMensaje));

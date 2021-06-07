@@ -18,6 +18,8 @@ namespace Servidor.servicios
     public class SocketLogin
     {
         private Socket socketServer;
+        private string ip;
+        private int puerto;
         private bool encendido;
         private Thread hiloRecibirMensajes;
 
@@ -25,13 +27,15 @@ namespace Servidor.servicios
 
         public SocketLogin()
         {
+            ip = Properties.Settings.Default.IP;//App.config
+            puerto = Properties.Settings.Default.PuertoLogin;
             encendido = false;
         }
 
         public void IniciarConexion()
         {
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
             socketServer.Bind(direccion);
             socketServer.Listen(10);
             hiloRecibirMensajes = new Thread(new ThreadStart(RecibirMensaje));

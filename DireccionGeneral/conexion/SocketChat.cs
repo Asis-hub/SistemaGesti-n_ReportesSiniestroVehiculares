@@ -13,7 +13,7 @@ namespace DireccionGeneral.conexion
 {
     public class SocketChat
     {
-        public static bool encendido = false;
+        public static bool conectado = false;
         private static string usuario;
         private static ObserverChat notificacionChat;
         private static TcpClient clientSocket;
@@ -29,7 +29,7 @@ namespace DireccionGeneral.conexion
                 serverStream = default(NetworkStream);
                 clientSocket.Connect(IPAddress.Parse("127.0.0.1"), 1238);
                 serverStream = clientSocket.GetStream();
-                encendido = true;
+                conectado = true;
                 MensajeChat mensajeLogin = new MensajeChat();
                 mensajeLogin.Usuario = usuario;
                 mensajeLogin.Tipo = TipoMensaje.Conectarse;
@@ -39,7 +39,7 @@ namespace DireccionGeneral.conexion
                 serverStream.Write(outStream, 0, outStream.Length);
                 serverStream.Flush();
 
-                Thread threadListen = new Thread(EscucharMensaje);
+                Thread threadListen = new Thread(RecibirrMensaje);
                 threadListen.Start();
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace DireccionGeneral.conexion
 
         public static void Desconectar()
         {
-            if (encendido)
+            if (conectado)
             {
                 Console.WriteLine("Desconectando");
                 MensajeChat mensajeDesconexion = new MensajeChat();
@@ -62,23 +62,31 @@ namespace DireccionGeneral.conexion
 
                 serverStream.Write(msjEnviar, 0, msjEnviar.Length);
                 serverStream.Flush();
-                encendido = false;
+                conectado = false;
             }
         }
 
         public static void EnviarMensaje(string mensaje)
         {
-            if (encendido)
+            if (conectado)
             {
-                byte[] outStream = Encoding.ASCII.GetBytes(mensaje);
-                serverStream.Write(outStream, 0, outStream.Length);
-                serverStream.Flush();
+                try
+                {
+                    byte[] outStream = Encoding.ASCII.GetBytes(mensaje);
+                    serverStream.Write(outStream, 0, outStream.Length);
+                    serverStream.Flush();
+                }
+                catch (Exception ex)
+                {
+                    //El servidor apago el servicio
+                    clientSocket.Close();
+                }
             }
         }
 
-        private static void EscucharMensaje()
+        private static void RecibirrMensaje()
         {
-            while (encendido)
+            while (conectado)
             {
                 string returnData = "";
                 try
@@ -95,10 +103,15 @@ namespace DireccionGeneral.conexion
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Cliente: " + returnData);
+                    Console.WriteLine("Cliente: " + ex.Message);
+                    conectado = false;
                 }
             }
-            clientSocket.Close();
+            if (conectado)
+            {
+                clientSocket.Close();
+            }
+            
         }
     }
 }
