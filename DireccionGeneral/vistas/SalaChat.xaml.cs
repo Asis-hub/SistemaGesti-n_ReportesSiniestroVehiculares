@@ -14,14 +14,17 @@ using System.Windows.Media;
 namespace DireccionGeneral.vistas
 {
     /// <summary>
-    /// Lógica de interacción para Chat.xaml
+    /// Lógica de interacción para SalaChat.xaml
     /// </summary>
     public partial class SalaChat : Page, ObserverChat
     {
         private Usuario usuario;
         private List<string> listaUsuarios;
 
-
+        /// <summary>
+        /// Constructor de la interfaz de la sala de chat
+        /// </summary>
+        /// <param name="usuario">Usuario que se conecta a la sala</param>
         public SalaChat(Usuario usuario)
         {
             InitializeComponent();
@@ -30,11 +33,18 @@ namespace DireccionGeneral.vistas
             SocketChat.Conectar(usuario.Username, this);
         }
 
+        /// <summary>
+        /// Desconecta el usuario de la sala de chat
+        /// </summary>
         public void DesconectarChat()
         {
             SocketChat.Desconectar();
         }
 
+        /// <summary>
+        /// Mostrar en pantalla los mensajes recibidos
+        /// </summary>
+        /// <param name="mensaje">Mensaje recibido del Servidor del chat</param>
         public void MostrarMensaje(MensajeChat mensaje)
         {
             this.Dispatcher.Invoke(() =>
@@ -67,6 +77,9 @@ namespace DireccionGeneral.vistas
             });
         }
 
+        /// <summary>
+        /// Muestra la lista de usuarios conectados en la sala de chat
+        /// </summary>
         private void MostrarListaUsuarios()
         {
             pnl_Usuarios.Children.Clear();
@@ -87,6 +100,9 @@ namespace DireccionGeneral.vistas
 
         }
 
+        /// <summary>
+        /// Enviar mensaje a los otros usuarios conectados a la sala de chat
+        /// </summary>
         private void btn_EnviarMensaje_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (txt_Mensaje.Text.Length > 0)
@@ -103,11 +119,20 @@ namespace DireccionGeneral.vistas
         }
     }
 
+    /// <summary>
+    /// Contenedor WPF para los mensaje recibidos del chat
+    /// </summary>
     class CuadroMensaje : StackPanel
     {
         TextBlock mensaje;
         Label remitente;
         Label fecha;
+
+        /// <summary>
+        /// Constructor del contenedor WPF de un mensaje
+        /// </summary>
+        /// <param name="mensajeRecibido">Mensaje recibido del servidor de la sala de chat</param>
+        /// <param name="esRemitente">True: El usuario conectado es remitente, False: El usuario conectado es destinatario</param>
         public CuadroMensaje(MensajeChat mensajeRecibido, bool esRemitente)
         {
             remitente = new Label();
@@ -121,6 +146,10 @@ namespace DireccionGeneral.vistas
             ConstruirCuadro(esRemitente);
         }
 
+        /// <summary>
+        /// Da formato al coneteneder del mensaje
+        /// </summary>
+        /// <param name="esRemitente">True: El usuario conectado es remitente, False: El usuario conectado es destinatario</param>
         private void ConstruirCuadro(bool esRemitente)
         {
             Thickness padding = new Thickness(10, 5, 10, 5);
@@ -147,11 +176,11 @@ namespace DireccionGeneral.vistas
             panel.Children.Add(mensaje);
             panel.Children.Add(remitente);
 
-            Border bordes = new Border();
-            bordes.Background = Brushes.White;
-            bordes.CornerRadius = new CornerRadius(10, 10, 10, 10);
-            bordes.Child = panel;
-            this.Children.Add(bordes);
+            Border marco = new Border();
+            marco.Background = Brushes.White;
+            marco.CornerRadius = new CornerRadius(10, 10, 10, 10);
+            marco.Child = panel;
+            this.Children.Add(marco);
         }
     }
 }

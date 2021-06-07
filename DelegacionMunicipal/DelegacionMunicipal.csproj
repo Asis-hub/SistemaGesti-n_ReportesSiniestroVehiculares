@@ -84,9 +84,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="conexion\ConectorFTP.cs" />
+    <Compile Include="conexion\MensajeChat.cs" />
     <Compile Include="conexion\Paquete.cs" />
     <Compile Include="conexion\SocketBD.cs" />
+    <Compile Include="conexion\SocketChat.cs" />
     <Compile Include="conexion\SocketLogin.cs" />
+    <Compile Include="interfaz\ObserverChat.cs" />
     <Compile Include="modelo\dao\ConductorDAO.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />
     <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />

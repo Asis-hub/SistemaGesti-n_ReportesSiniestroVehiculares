@@ -1,4 +1,4 @@
-﻿using DireccionGeneral.interfaz;
+﻿using DelegacionMunicipal.interfaz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DireccionGeneral.conexion
+namespace DelegacionMunicipal.conexion
 {
     public class SocketChat
     {
@@ -110,7 +110,7 @@ namespace DireccionGeneral.conexion
             {
                 clientSocket.Close();
             }
-            
+
         }
     }
 }

@@ -20,10 +20,8 @@ namespace Servidor.servicios
         private static string ip = Properties.Settings.Default.IP;
         private static int puerto = Properties.Settings.Default.PuertoSalaChat;
         private static bool encendido = false;
-        private static ManualResetEvent semaforo = new ManualResetEvent(false);
 
         public static bool Encendido { get => encendido; }
-        public static ManualResetEvent Semaforo { get => semaforo; }
         public static void IniciarConexion()
         {
             serverSocket = new TcpListener(IPAddress.Parse(ip), puerto);
@@ -107,8 +105,6 @@ namespace Servidor.servicios
                     Console.WriteLine("Error conexion json");
                     Console.WriteLine(ex.Message);
                 }
-                ImprimirListaUsuarios();
-                //semaforo.Set();
             }
         }
 
@@ -139,16 +135,6 @@ namespace Servidor.servicios
             catch(Exception ex)
             {
                 Console.WriteLine("Error NotificarCliente");
-            }
-        }
-
-        public static void ImprimirListaUsuarios()
-        {
-            Console.WriteLine("Hay {0} usuarios conectados", listaClientes.Count);
-            foreach (DictionaryEntry item in listaClientes)
-            {
-                List<TcpClient> listaSockets = (List<TcpClient>)item.Value;
-                Console.WriteLine("{0} tiene {1} sesiones abiertas", item.Key, listaSockets.Count);
             }
         }
     }
@@ -198,7 +184,6 @@ namespace Servidor.servicios
                                 notificar = true;//Se notificara que cerró la última sesión
                             }
                             conectado = false;
-                            SocketChat.ImprimirListaUsuarios();
                         }
                         if (notificar)
                         {

@@ -7,8 +7,6 @@
       mc:Ignorable="d" Background="White" d:DesignWidth="800" d:DesignHeight="550">
 
     <DockPanel LastChildFill="True">
-        
-
         <Grid Width="200" DockPanel.Dock="Right" HorizontalAlignment="Right">
             <Border BorderBrush="#FF918C8C" BorderThickness="1">
                 <StackPanel Margin="10">
@@ -30,11 +28,4 @@
             <Button x:Name="btn_EnviarMensaje" Content="Enviar" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75" Margin="0,0,40,40" Click="btn_EnviarMensaje_Click"/>
         </Grid>
     </DockPanel>
-
-        
-
-
-
-
-    
 </Page>

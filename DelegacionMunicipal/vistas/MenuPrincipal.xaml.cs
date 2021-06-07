@@ -8,55 +8,47 @@ namespace DelegacionMunicipal.vistas
     /// </summary>
     public partial class MenuPrincipal : Window
     {
-        private ConsultarConductores consultarConductores;
-        private ConsultarVehiculos consultarVehiculos;
-        private ConsultarReportes consultarReportes;
-        private SalaChat salaChat;
+        private ConsultarConductores ventanaConsultarConductores;
+        private ConsultarVehiculos ventanaConsultarVehiculos;
+        private ConsultarReportes ventanaConsultarReportes;
+        private SalaChat ventanaSalaChat;
 
         private Usuario usuarioConectado;
-        public MenuPrincipal()
-        {
-            InitializeComponent();
-            consultarConductores = new ConsultarConductores();
-            consultarVehiculos = new ConsultarVehiculos();
-            consultarReportes = new ConsultarReportes();
-            salaChat = new SalaChat();
-            frame_Content.Content = consultarConductores;
-        }
-        
+               
         public MenuPrincipal(Usuario usuarioConectado)
         {
             InitializeComponent();
             this.usuarioConectado = usuarioConectado;
-            consultarConductores = new ConsultarConductores();
-            consultarVehiculos = new ConsultarVehiculos();
-            consultarReportes = new ConsultarReportes();
-            salaChat = new SalaChat();
-            frame_Content.Content = consultarConductores;
+            ventanaConsultarConductores = new ConsultarConductores();
+            ventanaConsultarVehiculos = new ConsultarVehiculos();
+            ventanaConsultarReportes = new ConsultarReportes();
+            ventanaSalaChat = new SalaChat(usuarioConectado);
+            frame_Content.Content = ventanaConsultarConductores;
         }
 
         private void btn_Conductores_Click(object sender, RoutedEventArgs e)
         {
-            frame_Content.Content = consultarConductores;
+            frame_Content.Content = ventanaConsultarConductores;
         }
 
         private void btn_Vehiculos_Click(object sender, RoutedEventArgs e)
         {
-            frame_Content.Content = consultarVehiculos;
+            frame_Content.Content = ventanaConsultarVehiculos;
         }
 
         private void btn_Reportes_Click(object sender, RoutedEventArgs e)
         {
-            frame_Content.Content = consultarReportes;
+            frame_Content.Content = ventanaConsultarReportes;
         }
 
         private void btn_Chat_Click(object sender, RoutedEventArgs e)
         {
-            frame_Content.Content = salaChat;
+            frame_Content.Content = ventanaSalaChat;
         }
 
         private void btn_CerrarSesion_Click(object sender, RoutedEventArgs e)
         {
+            ventanaSalaChat.DesconectarChat();
             InicioSesion ventanaInicioSesion = new InicioSesion();
             ventanaInicioSesion.Show();
             this.Close();
@@ -64,6 +56,7 @@ namespace DelegacionMunicipal.vistas
 
         private void CerrarVentana(object sender, RoutedEventArgs e)
         {
+            ventanaSalaChat.DesconectarChat();
             this.Close();
         }
 
