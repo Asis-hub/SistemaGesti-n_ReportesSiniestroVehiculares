@@ -25,6 +25,9 @@ namespace DelegacionMunicipal.vistas
             lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
             lbl_Usuario.Content = reporteSiniestro.Username.ToString();
 
+            //Carga de imagenes
+            //img_imagen1 
+
             if (reporteSiniestro.Dictamen)
             {
                 Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
