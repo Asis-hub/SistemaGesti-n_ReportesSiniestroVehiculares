@@ -16,7 +16,7 @@ namespace DelegacionMunicipal.conexion
         
         
 
-        public static BitmapImage obtenerConexion(string name)
+        public static BitmapImage obtenerImagen(string name)
         {
             string servidor = "ftp://maisonbleue2020.ddns.net/";
             WebClient clienteWeb = new WebClient();
