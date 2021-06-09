@@ -38,10 +38,10 @@ namespace DelegacionMunicipal.vistas
 
             if (reporteSiniestro.Dictamen)
             {
-                Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
-                lbl_Dictamen.Content = dictamen.Folio;
+                /*Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
+                //lbl_Dictamen.Content = dictamen.Folio;
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
-                txt_DescripcionDictamen.Text = dictamen.Descripcion;
+                txt_DescripcionDictamen.Text = dictamen.Descripcion;*/
             }
             else
             {
