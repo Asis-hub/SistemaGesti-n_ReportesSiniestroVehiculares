@@ -18,7 +18,7 @@ namespace DelegacionMunicipal.conexion
 
         public static BitmapImage obtenerImagen(string name)
         {
-            string servidor = "ftp://maisonbleue2020.ddns.net/";
+            string servidor = "ftp://maisonbleue2020.ddns.net/sgsrv/";
             WebClient clienteWeb = new WebClient();
             NetworkCredential credenciales = new NetworkCredential("pi", "raspberry");
             clienteWeb.Credentials = credenciales;
