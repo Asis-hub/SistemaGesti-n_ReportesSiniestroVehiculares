@@ -23,7 +23,7 @@ namespace DelegacionMunicipal.conexion
             NetworkCredential credenciales = new NetworkCredential("pi", "raspberry");
             clienteWeb.Credentials = credenciales;
 
-            MemoryStream memoria = new MemoryStream(clienteWeb.DownloadData(servidor + name));
+            MemoryStream memoria = new MemoryStream(clienteWeb.DownloadData(servidor + name + ".jpg"));
 
             BitmapImage imagen = new BitmapImage();
             imagen.BeginInit();

@@ -15,7 +15,7 @@ namespace DelegacionMunicipal.modelo.dao
 
         public static List<Fotografia> ObtenerFotografias(int idReporte)
         {
-            List<Fotografia> fotografias;
+            List<Fotografia> fotografias = new List<Fotografia>();
             SocketBD socket = new SocketBD();
             
             string mensaje = "";
