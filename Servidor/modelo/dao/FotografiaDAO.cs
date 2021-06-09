@@ -14,7 +14,7 @@ namespace Servidor.modelo.dao
 
         public static List<Fotografia> ObtenerFotografias(string consulta)
         {
-            List<Fotografia> fotografias = new List<Fotografia>;
+            List<Fotografia> fotografias = new List<Fotografia>();
 
             SqlConnection conn = null;
 
