@@ -339,7 +339,8 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
-                //Falta implementar FotografiaDAO
+                resultado = ReporteSiniestroDAO.EliminarReporte(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
 
             return respuesta;

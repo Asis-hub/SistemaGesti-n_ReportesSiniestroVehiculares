@@ -18,6 +18,9 @@ namespace DelegacionMunicipal.vistas
         {
             InitializeComponent();
 
+            reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(idReporte);
+
+
             cargarDatos(idReporte);
             cargarFotos(idReporte);
             
@@ -29,10 +32,10 @@ namespace DelegacionMunicipal.vistas
 
             if (reporteSiniestro.Dictamen)
             {
-                /*Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
-                //lbl_Dictamen.Content = dictamen.Folio;
+                Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
+                lbl_Dictamen.Content = dictamen.Folio;
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
-                txt_DescripcionDictamen.Text = dictamen.Descripcion;*/
+                txt_DescripcionDictamen.Text = dictamen.Descripcion;
             }
             else
             {
@@ -49,7 +52,6 @@ namespace DelegacionMunicipal.vistas
         
         private void cargarDatos(int idReporte)
         {
-            reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(idReporte);
 
             lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
             lbl_Calle.Content = reporteSiniestro.Calle.ToString();
