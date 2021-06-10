@@ -31,15 +31,13 @@ namespace DelegacionMunicipal.vistas
 
 
             img_imagen1.Source = ConectorFTP.obtenerImagen(fotografias[0].IdFotografia.ToString());
-            //Console.WriteLine()
-            //img_imagen1.Source = ConectorFTP.obtenerImagen("1");
-            /*img_imagen2.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen3.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen4.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen5.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen6.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen7.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");
-            img_imagen8.Source = ConectorFTP.obtenerImagen("170507755_681582849281365_8182100796175874432_n.jpg");*/
+            img_imagen2.Source = ConectorFTP.obtenerImagen(fotografias[1].IdFotografia.ToString());
+            img_imagen3.Source = ConectorFTP.obtenerImagen(fotografias[2].IdFotografia.ToString());
+            img_imagen4.Source = ConectorFTP.obtenerImagen(fotografias[3].IdFotografia.ToString());
+            img_imagen5.Source = ConectorFTP.obtenerImagen(fotografias[4].IdFotografia.ToString());
+            img_imagen6.Source = ConectorFTP.obtenerImagen(fotografias[5].IdFotografia.ToString());
+            img_imagen7.Source = ConectorFTP.obtenerImagen(fotografias[6].IdFotografia.ToString());
+            img_imagen8.Source = ConectorFTP.obtenerImagen(fotografias[7].IdFotografia.ToString());
 
             if (reporteSiniestro.Dictamen)
             {
