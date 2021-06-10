@@ -13,8 +13,6 @@ namespace DelegacionMunicipal.modelo.dao
 {
     class ReporteSiniestroDAO
     {
-        //Los parametros de los métodos pueden cambiarse
-       
         public static List<ReporteSiniestro> ConsultarReportes()
         {
             List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();

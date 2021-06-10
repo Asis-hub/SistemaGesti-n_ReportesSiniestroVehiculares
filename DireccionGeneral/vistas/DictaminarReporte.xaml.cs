@@ -10,18 +10,18 @@ namespace DireccionGeneral.vistas
     /// </summary>
     public partial class DictaminarReporte : Window
     {
-        Usuario usuario;
-        ReporteSiniestro reporte;
+        private Usuario usuario;
+        private int idReporte;
 
         public DictaminarReporte()
         {
             InitializeComponent();
         }
 
-        public DictaminarReporte(Usuario usuario, ReporteSiniestro reporte) : this()
+        public DictaminarReporte(Usuario usuario, int idReporte) : this()
         {
             this.usuario = usuario;
-            this.reporte = reporte;
+            this.idReporte = idReporte;
         }
 
         private void btn_RegistrarDictamen_Click(object sender, RoutedEventArgs e)
@@ -32,7 +32,7 @@ namespace DireccionGeneral.vistas
                 dictamen.Descripcion = txt_Descripcion.Text;
                 dictamen.Folio = int.Parse(txt_Folio.Text);
                 dictamen.FechaHora = DateTime.Now;
-                dictamen.IdReporte = reporte.IdReporte;
+                dictamen.IdReporte = idReporte;
                 dictamen.Username = usuario.Username;
 
                 int resultado = DictamenDAO.RegistrarDictamen(dictamen);

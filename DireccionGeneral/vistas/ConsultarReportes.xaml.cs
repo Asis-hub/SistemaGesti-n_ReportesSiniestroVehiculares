@@ -53,11 +53,14 @@ namespace DireccionGeneral.vistas
             int seleccion = tbl_Reportes.SelectedIndex;
             if (seleccion >= 0)
             {
-                ReporteSiniestro reporte = reportesSiniestro[seleccion];
+                int idReporte = reportesSiniestro[seleccion].IdReporte;
 
-                DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, reporte);
-                ventanaDictamen.Owner = Window.GetWindow(this);
-                ventanaDictamen.ShowDialog();
+                if (!reportesSiniestro[seleccion].Dictamen)
+                {
+                    DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, idReporte);
+                    ventanaDictamen.Owner = Window.GetWindow(this);
+                    ventanaDictamen.ShowDialog();
+                }
             }
         }
     }
