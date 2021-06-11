@@ -32,7 +32,7 @@ namespace DelegacionMunicipal.vistas
             lbl_Numero.Content = reporteSiniestro.Numero.ToString();
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
             lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
-            lbl_Usuario.Content = reporteSiniestro.Username.ToString();
+            lbl_Usuario.Content = reporteSiniestro.Username;
 
             if (reporteSiniestro.Dictamen)
             {

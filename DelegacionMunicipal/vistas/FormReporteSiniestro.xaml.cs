@@ -140,7 +140,7 @@ namespace DelegacionMunicipal.vistas
                 reporteSiniestro.Dictamen = true;
                 
                 reporteSiniestro.IdReporte = ReporteSiniestroDAO.RegistrarReporte(reporteSiniestro);
-                //Console.WriteLine(reporteSiniestro.IdReporte + "Hola ");
+                
 
                 foreach (string vehiculo in lb_VehiculosInvolucrados.Items)
                 {
@@ -148,8 +148,8 @@ namespace DelegacionMunicipal.vistas
 
                 }
 
-                /*int x = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
-                Console.WriteLine(x);*/
+                int x = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
+                Console.WriteLine(x);
 
 
             }

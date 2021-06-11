@@ -29,7 +29,7 @@
         <Label x:Name="lbl_Numero"  HorizontalAlignment="Left" Margin="166,136,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
         <Label x:Name="lbl_Colonia"  HorizontalAlignment="Left" Margin="166,167,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
         <Label x:Name="lbl_Delegacion"  HorizontalAlignment="Left" Margin="166,200,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
-        <Label x:Name="lbl_Usuario" HorizontalAlignment="Left" Margin="166,239,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
+        <Label x:Name="lbl_Usuario" HorizontalAlignment="Left" Margin="166,239,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="97"/>
         <Label x:Name="lbl_Dictamen" HorizontalAlignment="Left" Margin="166,270,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
         <Label x:Name="lbl_FechaDictamen" HorizontalAlignment="Left" Margin="272,270,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
         <TextBox x:Name="txt_DescripcionDictamen"  Margin="80,296,80,361" IsEnabled="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  Grid.ColumnSpan="2"/>

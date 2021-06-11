@@ -78,9 +78,10 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.Calle = (!dataReader.IsDBNull(1)) ? dataReader.GetString(1) : "";
                         reporteSiniestro.Numero = (!dataReader.IsDBNull(2)) ? dataReader.GetString(2) : "";
                         reporteSiniestro.Colonia = (!dataReader.IsDBNull(3)) ? dataReader.GetString(3) : "";
-                        reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(4)) ? dataReader.GetInt32(4) : 0;
-                        reporteSiniestro.Username = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
-                        reporteSiniestro.Dictamen = (!dataReader.IsDBNull(6)) ? dataReader.GetBoolean(6) : false;
+                        reporteSiniestro.FechaHora = (!dataReader.IsDBNull(4)) ? dataReader.GetDateTime(4) : System.DateTime.MinValue;
+                        reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(5)) ? dataReader.GetInt32(5) : 0;
+                        reporteSiniestro.Username = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
+                        reporteSiniestro.Dictamen = (!dataReader.IsDBNull(7)) ? dataReader.GetBoolean(7) : false;
                     }
                 }
             } 
