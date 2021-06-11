@@ -20,15 +20,19 @@ namespace DelegacionMunicipal.vistas
 
             reporteSiniestro = ReporteSiniestroDAO.ObtenerReporte(idReporte);
 
-
-            cargarDatos(idReporte);
+            cargarDatos();
             cargarFotos(idReporte);
-            
+        }
+        
+        private void cargarDatos()
+        {
 
-            
-            
-
-            
+            lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
+            lbl_Calle.Content = reporteSiniestro.Calle.ToString();
+            lbl_Numero.Content = reporteSiniestro.Numero.ToString();
+            lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
+            lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
+            lbl_Usuario.Content = reporteSiniestro.Username.ToString();
 
             if (reporteSiniestro.Dictamen)
             {
@@ -41,24 +45,6 @@ namespace DelegacionMunicipal.vistas
             {
                 lbl_Dictamen.Content = "Pendiente";
             }
-            
-
-
-
-            
-
-
-        }
-        
-        private void cargarDatos(int idReporte)
-        {
-
-            lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
-            lbl_Calle.Content = reporteSiniestro.Calle.ToString();
-            lbl_Numero.Content = reporteSiniestro.Numero.ToString();
-            lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
-            lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
-            lbl_Usuario.Content = reporteSiniestro.Username.ToString();
         }
         private void cargarFotos(int idReporte)
         {
