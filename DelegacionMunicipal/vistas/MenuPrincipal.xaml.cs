@@ -21,7 +21,7 @@ namespace DelegacionMunicipal.vistas
             this.usuarioConectado = usuarioConectado;
             ventanaConsultarConductores = new ConsultarConductores();
             ventanaConsultarVehiculos = new ConsultarVehiculos();
-            ventanaConsultarReportes = new ConsultarReportes();
+            ventanaConsultarReportes = new ConsultarReportes(usuarioConectado);
             ventanaSalaChat = new SalaChat(usuarioConectado);
             frame_Content.Content = ventanaConsultarConductores;
         }

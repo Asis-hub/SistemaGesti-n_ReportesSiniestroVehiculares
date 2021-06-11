@@ -254,7 +254,8 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
-                //Falta implementar FotografiaDAO
+                resultado = FotografiaDAO.InsertarFotografia(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
             else if (paquete.TipoDominio == TipoDato.VehiculosInvolucrados)
             {

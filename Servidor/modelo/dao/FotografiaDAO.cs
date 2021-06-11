@@ -54,5 +54,36 @@ namespace Servidor.modelo.dao
 
             return fotografias;
         }
+
+        public static int InsertarFotografia(string consulta)
+        {
+            SqlConnection conexionDB = ConexionBD.GetConnection();
+            int resultado = 0;
+            try
+            {
+                if (conexionDB != null)
+                {
+                    SqlCommand comando = new SqlCommand(consulta, conexionDB);
+                    resultado = comando.ExecuteNonQuery();
+                    comando.Dispose();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                resultado = -1;
+            }
+            finally
+            {
+                if (conexionDB != null)
+                {
+                    conexionDB.Close();
+                }
+            }
+
+
+
+            return resultado;
+        }
     }
 }
