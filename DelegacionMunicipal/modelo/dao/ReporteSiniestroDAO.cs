@@ -78,9 +78,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
 
-            //paquete.Consulta = String.Format("insert into reporteSiniestro values " +
-            //    "('{0}', '{1}', '{2}','{3}', {4}, '{5}', {6}) " +
-            //  "SELECT SCOPE_IDENTITY();", reporteSiniestro.Calle, reporteSiniestro.Colonia, reporteSiniestro.Numero, "20120618 10:34:09 AM", reporteSiniestro.IdDelegacion, reporteSiniestro.Username, Convert.ToByte(reporteSiniestro.Dictamen));
+            
             paquete.Consulta = "insert into reporteSiniestro values ('" + reporteSiniestro.Calle + "', '"+ reporteSiniestro.Numero +"', '"+ reporteSiniestro.Colonia + "','"+ reporteSiniestro.FechaHora.ToString("yyyyMMdd hh:mm:ss") + "',"+ reporteSiniestro.IdDelegacion + ", '" + reporteSiniestro.Username + "', '" + reporteSiniestro.Dictamen+"') Select SCOPE_IDENTITY() as identificador;";
 
             string mensaje = JsonSerializer.Serialize(paquete);
