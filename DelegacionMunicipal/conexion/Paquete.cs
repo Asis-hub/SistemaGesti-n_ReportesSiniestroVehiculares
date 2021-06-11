@@ -26,7 +26,8 @@ namespace DelegacionMunicipal.conexion
         ReportesSiniestro,
         DelegacionTipo,
         Cargo,
-        Fotografia
+        Fotografia,
+        VehiculosInvolucrados
     }
 
     public class Paquete
