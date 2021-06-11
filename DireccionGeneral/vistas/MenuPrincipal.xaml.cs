@@ -52,7 +52,7 @@ namespace DireccionGeneral.vistas
         {
             if(ventanaConsultarReportes == null)
             {
-                ventanaConsultarReportes = new ConsultarReportes();
+                ventanaConsultarReportes = new ConsultarReportes(usuarioConectado);
             }
             frame_Content.Content = ventanaConsultarReportes;
         }

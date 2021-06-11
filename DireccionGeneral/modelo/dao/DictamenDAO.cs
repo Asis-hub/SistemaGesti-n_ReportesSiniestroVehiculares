@@ -45,10 +45,10 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
             paquete.Consulta = String.Format("INSERT INTO dbo.dictamen (folio, descripcion, fechaHora, idReporte, username) VALUES ({0}, '{1}', '{2}', {3}, '{4}')",
-                                             nuevoDictamen.Folio, nuevoDictamen.Descripcion, nuevoDictamen.FechaHora.ToString("yyyy-MM-dd hh:mm tt"), nuevoDictamen.IdReporte, nuevoDictamen.Username);
+                                             nuevoDictamen.Folio, nuevoDictamen.Descripcion, nuevoDictamen.FechaHora.ToString("yyyy-MM-dd HH:mm"), nuevoDictamen.IdReporte, nuevoDictamen.Username);
             paquete.TipoDominio = TipoDato.Dictamen;
             paquete.TipoQuery = TipoConsulta.Insert;
-
+            Console.WriteLine(paquete.Consulta);
             mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();
