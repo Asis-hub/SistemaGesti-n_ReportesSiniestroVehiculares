@@ -104,6 +104,7 @@
     <Compile Include="modelo\poco\ReporteSiniestro.cs" />
     <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="modelo\poco\Vehiculo.cs" />
+    <Compile Include="modelo\VehiculosInvolucradosDAO.cs" />
     <Compile Include="servicios\MensajeChat.cs" />
     <Compile Include="servicios\Paquete.cs" />
     <Compile Include="servicios\SocketBD.cs" />

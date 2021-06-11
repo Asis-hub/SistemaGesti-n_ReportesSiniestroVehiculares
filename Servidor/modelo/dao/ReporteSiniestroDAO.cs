@@ -108,7 +108,8 @@ namespace Servidor.modelo.dao
             }
             catch (SqlException ex)
             {
-                
+                Console.WriteLine(ex.Message);
+                resultado = -1;
             }
             finally
             {

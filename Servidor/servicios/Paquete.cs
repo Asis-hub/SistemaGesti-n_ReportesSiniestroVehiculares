@@ -26,7 +26,8 @@ namespace Servidor.servicios
         ReportesSiniestro,
         DelegacionTipo,
         Cargo,
-        Fotografia
+        Fotografia,
+        VehiculosInvolucrados
     }
 
     public class Paquete

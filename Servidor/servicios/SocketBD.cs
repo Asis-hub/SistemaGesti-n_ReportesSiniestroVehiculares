@@ -1,4 +1,5 @@
-﻿using Servidor.modelo.dao;
+﻿using Servidor.modelo;
+using Servidor.modelo.dao;
 using Servidor.modelo.dao.db;
 using Servidor.modelo.poco;
 using System;
@@ -254,6 +255,11 @@ namespace Servidor.servicios
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
                 //Falta implementar FotografiaDAO
+            }
+            else if (paquete.TipoDominio == TipoDato.VehiculosInvolucrados)
+            {
+                resultado = VehiculosInvolucradosDAO.InsertarVehiculo(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
 
             return respuesta;
