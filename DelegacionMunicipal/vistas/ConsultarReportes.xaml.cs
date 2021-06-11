@@ -25,10 +25,11 @@ namespace DelegacionMunicipal.vistas
     public partial class ConsultarReportes : Page
     {
         List<ReporteSiniestro> reportesSiniestro;
-        public ConsultarReportes()
+        Usuario usuarioConectado;
+        public ConsultarReportes(Usuario usuarioConectado)
         {
             InitializeComponent();
-            
+            this.usuarioConectado = usuarioConectado;
             reportesSiniestro = new List<ReporteSiniestro>();
 
 
@@ -49,7 +50,7 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
         {
-            FormReporteSiniestro formReporteSiniestro = new FormReporteSiniestro();
+            FormReporteSiniestro formReporteSiniestro = new FormReporteSiniestro(usuarioConectado);
             formReporteSiniestro.ShowDialog();
         }
 

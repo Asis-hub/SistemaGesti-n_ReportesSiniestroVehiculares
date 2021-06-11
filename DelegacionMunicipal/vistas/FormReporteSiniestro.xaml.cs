@@ -18,12 +18,13 @@ namespace DelegacionMunicipal.vistas
     {
         List<string> listaVehiculos;
         string licencia;
-        public FormReporteSiniestro()
+        Usuario usuarioConectado;
+        public FormReporteSiniestro(Usuario usuarioConectado)
         {
             InitializeComponent();
             CargarListaConductores();
             cargarDelegaciones();
-
+            this.usuarioConectado = usuarioConectado;
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
             
@@ -128,21 +129,27 @@ namespace DelegacionMunicipal.vistas
                 
 
 
-                reporteSiniestro.Calle = txt_Calle.ToString();
-                reporteSiniestro.Numero = txt_Numero.ToString();
-                reporteSiniestro.Colonia = txt_Colonia.ToString();
-                reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, Convert.ToInt32(cmb_Hora.SelectedValue), Convert.ToInt32(cmb_Minuto.SelectedValue), 0 );
+                reporteSiniestro.Calle = txt_Calle.Text.ToString();
+                reporteSiniestro.Numero = txt_Numero.Text.ToString();
+                reporteSiniestro.Colonia = txt_Colonia.Text.ToString();
+                
+                reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, int.Parse(cmb_Hora.Text), int.Parse(cmb_Minuto.Text), 0);
+               
                 reporteSiniestro.IdDelegacion = cmb_delegacion.SelectedIndex;
-                reporteSiniestro.Username = "midguet";
+                reporteSiniestro.Username = usuarioConectado.Username;
                 reporteSiniestro.Dictamen = true;
-
+                
                 reporteSiniestro.IdReporte = ReporteSiniestroDAO.RegistrarReporte(reporteSiniestro);
+                Console.WriteLine(reporteSiniestro.IdReporte);
 
-                foreach (string vehiculo in lb_VehiculosInvolucrados.Items)
+                /*foreach (string vehiculo in lb_VehiculosInvolucrados.Items)
                 {
                     VehiculosInvolucradosDAO.InsertarVehiculo(vehiculo, reporteSiniestro.IdReporte);
 
                 }
+
+                int x = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
+                Console.WriteLine(x);*/
 
 
             }

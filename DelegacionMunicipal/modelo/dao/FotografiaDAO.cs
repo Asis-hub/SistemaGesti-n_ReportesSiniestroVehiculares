@@ -45,5 +45,34 @@ namespace DelegacionMunicipal.modelo.dao
 
         }
 
+        public static int InsertarFotografia(int idReporte)
+        {
+
+            int respuesta = 0;
+            SocketBD socket = new SocketBD();
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+            paquete.Consulta = "insert into fotografia values (" + idReporte.ToString() + ") SELECT SCOPE_IDENTITY();";
+
+            paquete.TipoDominio = TipoDato.Fotografia;
+            paquete.TipoQuery = TipoConsulta.Insert;
+
+            mensaje = JsonSerializer.Serialize(mensaje);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            respuesta = int.Parse(socket.RecibirMensaje());
+            socket.TerminarConexion();
+
+            if (respuesta > 0)
+            {
+                return respuesta;
+            }
+
+            return respuesta;
+        }
+
+
     }
 }
