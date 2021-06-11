@@ -99,6 +99,7 @@
     <Compile Include="modelo\dao\ReporteSiniestroDAO.cs" />
     <Compile Include="modelo\dao\UsuarioDAO.cs" />
     <Compile Include="modelo\dao\VehiculoDAO.cs" />
+    <Compile Include="modelo\dao\VehiculosInvolucradosDAO.cs" />
     <Compile Include="modelo\poco\Cargo.cs" />
     <Compile Include="modelo\poco\Conductor.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="modelo\poco\DelegacionTipo.cs" />
     <Compile Include="modelo\poco\Usuario.cs" />
     <Compile Include="modelo\poco\Vehiculo.cs" />
+    <Compile Include="modelo\poco\VehiculosInvolucrados.cs" />
     <Compile Include="vistas\FormConductor.xaml.cs">
       <DependentUpon>FormConductor.xaml</DependentUpon>
     </Compile>
