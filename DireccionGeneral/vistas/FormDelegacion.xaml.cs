@@ -86,7 +86,7 @@ namespace DireccionGeneral.vistas
                     this.DialogResult = true;
                     this.Close();
                 }
-                else (resultado == -1)
+                else if (resultado == -1)
                 {
                     MessageBox.Show("La delegacion ya se encuentra registrada", "Delegacion no registrada");
                 }
