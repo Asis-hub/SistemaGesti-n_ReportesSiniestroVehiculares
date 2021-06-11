@@ -36,7 +36,7 @@
         <DatePicker x:Name="dpc_fecha" HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top" Width="228"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
         <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_Minuto" HorizontalAlignment="Left" Margin="442,195,0,0" VerticalAlignment="Top" Width="74" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox x:Name="cmb_Minuto" HorizontalAlignment="Left" Margin="445,195,0,0" VerticalAlignment="Top" Width="74" SelectionChanged="ComboBox_SelectionChanged">
             <ListBoxItem Content="Minuto"/>
             <ListBoxItem Content="00"/>
             <ListBoxItem Content="30"/>
