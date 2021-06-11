@@ -64,8 +64,9 @@ namespace Servidor.modelo.dao
                 if (conexionBD != null)
                 {
                     SqlCommand comando = new SqlCommand(consulta, conexionBD);
-                    resultado = comando.ExecuteNonQuery();
+                    comando.ExecuteNonQuery();
                     comando.Dispose();
+                    resultado = 1;
                 }
             }
             catch (SqlException ex)

@@ -82,8 +82,13 @@ namespace DireccionGeneral.vistas
 
                 if (resultado == 1)
                 {
-                    this.DialogResult = true; ;
+                    MessageBox.Show("Delegacion registrada correctamente", "Delegacion registrada");
+                    this.DialogResult = true;
                     this.Close();
+                }
+                else (resultado == -1)
+                {
+                    MessageBox.Show("La delegacion ya se encuentra registrada", "Delegacion no registrada");
                 }
             }
             

@@ -38,8 +38,13 @@ namespace DireccionGeneral.vistas
                 int resultado = DictamenDAO.RegistrarDictamen(dictamen);
                 if (resultado == 1)
                 {
+                    MessageBox.Show("Dictamen registrado", "Dictamen");
                     this.DialogResult = true;
                     this.Close();
+                }
+                else if (resultado == -1)
+                {
+                    MessageBox.Show("Error al registrar el dictamen. Verifica el folio", "Error dictamen");
                 }
             }
         }

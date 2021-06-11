@@ -70,8 +70,13 @@ namespace DireccionGeneral.vistas
 
                 if (resultado == 1)
                 {
-                    this.DialogResult = true; ;
+                    MessageBox.Show(usuario.NombreCompleto + " se registró correctamente","Usuario registrado");
+                    this.DialogResult = true;
                     this.Close();
+                } 
+                else if (resultado == -1)
+                {
+                    MessageBox.Show(usuario.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }
