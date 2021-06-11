@@ -79,7 +79,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
 
             
-            paquete.Consulta = "insert into reporteSiniestro values ('" + reporteSiniestro.Calle + "', '"+ reporteSiniestro.Numero +"', '"+ reporteSiniestro.Colonia + "','"+ reporteSiniestro.FechaHora.ToString("yyyyMMdd hh:mm:ss") + "',"+ reporteSiniestro.IdDelegacion + ", '" + reporteSiniestro.Username + "', '" + reporteSiniestro.Dictamen+"') Select SCOPE_IDENTITY() as identificador;";
+            paquete.Consulta = "insert into reporteSiniestro values ('" + reporteSiniestro.Calle + "', '"+ reporteSiniestro.Numero +"', '"+ reporteSiniestro.Colonia + "','"+ reporteSiniestro.FechaHora.ToString("yyyyMMdd hh:mm:ss") + "',"+ reporteSiniestro.IdDelegacion + ", '" + reporteSiniestro.Username + "', '" + reporteSiniestro.Dictamen+"') Select SCOPE_IDENTITY();";
 
             string mensaje = JsonSerializer.Serialize(paquete);
             socket.IniciarConexion();

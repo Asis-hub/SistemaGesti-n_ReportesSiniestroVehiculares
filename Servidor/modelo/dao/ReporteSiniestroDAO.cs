@@ -107,8 +107,10 @@ namespace Servidor.modelo.dao
 
                     if (resultado.Read())
                     {
-                       
-                        identificador = (int) (!resultado.IsDBNull(0) ? resultado.GetInt32(0) : 0);
+                        //Console.WriteLine(resultado);
+
+                        identificador = int.Parse((!resultado.IsDBNull(0) ? resultado[0].ToString() : "0"));
+
                     }
 
                     comando.Dispose();
