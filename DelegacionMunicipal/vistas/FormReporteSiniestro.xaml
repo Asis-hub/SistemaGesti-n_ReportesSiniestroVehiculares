@@ -34,7 +34,14 @@
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>
         <Image x:Name="imagen1" HorizontalAlignment="Left" Height="100" Margin="28,349,0,0" VerticalAlignment="Top" Width="100"/>
         <DatePicker HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top"/>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="294,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
+        <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_Hora" HorizontalAlignment="Left" Margin="361,195,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="ComboBox_SelectionChanged">
+            <ListBoxItem Content="Hora"/>
+        </ComboBox>
+        <ComboBox x:Name="cmb_Minutos" HorizontalAlignment="Left" Margin="430,195,0,0" VerticalAlignment="Top" Width="76">
+            <ListBoxItem Content="Minutos"/>
+        </ComboBox>
 
     </Grid>
 </Window>

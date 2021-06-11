@@ -20,7 +20,9 @@ namespace DelegacionMunicipal.vistas
         public FormReporteSiniestro()
         {
             InitializeComponent();
-            CargarListaVehiculos(); 
+            CargarListaVehiculos();
+
+            cmb_Hora.SelectedIndex = 0;
         }
 
         private void CargarListaVehiculos()
@@ -32,8 +34,9 @@ namespace DelegacionMunicipal.vistas
             {
                 cmb_Conductor.Items.Add(elemento);
             }
+                
             cmb_Conductor.SelectedIndex = 0;
-            
+            cmb_Minutos.SelectedIndex = 0;
         }
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
@@ -127,6 +130,11 @@ namespace DelegacionMunicipal.vistas
 
 
             return true;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
