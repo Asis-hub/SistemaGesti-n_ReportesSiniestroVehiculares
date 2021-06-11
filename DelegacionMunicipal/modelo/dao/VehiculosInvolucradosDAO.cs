@@ -20,7 +20,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.VehiculosInvolucrados;
 
-            paquete.Consulta = String.Format("insert into vehiculosInvolucrados values ('uvj4064', " + idReporte.ToString() + ");");
+            paquete.Consulta = String.Format("insert into vehiculosInvolucrados values ('"+ numeroPlaca +"', " + idReporte.ToString() + ");");
 
             string mensaje = JsonSerializer.Serialize(paquete);
             socket.IniciarConexion();
