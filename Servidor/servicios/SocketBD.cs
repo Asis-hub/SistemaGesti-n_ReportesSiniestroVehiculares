@@ -190,7 +190,9 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
-                //Implementar FotografiaDAO
+                List<Fotografia> fotografia = FotografiaDAO.ObtenerFotografias(paquete.Consulta);
+                respuesta = JsonSerializer.Serialize(fotografia);
+
             }
 
             return respuesta;
@@ -341,7 +343,8 @@ namespace Servidor.servicios
             }
             else if (paquete.TipoDominio == TipoDato.Fotografia)
             {
-                //Falta implementar FotografiaDAO
+                resultado = ReporteSiniestroDAO.EliminarReporte(paquete.Consulta);
+                respuesta = resultado.ToString();
             }
 
             return respuesta;

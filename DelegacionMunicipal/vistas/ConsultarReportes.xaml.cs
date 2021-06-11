@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DelegacionMunicipal.modelo.poco;
+using System.Data.SqlClient;
 
 namespace DelegacionMunicipal.vistas
 {
@@ -65,6 +66,11 @@ namespace DelegacionMunicipal.vistas
           
         }
 
-        
+        private void botonPruebas_Click(object sender, RoutedEventArgs e)
+        {
+            //string x = dpck_Fecha.SelectedDate.Value.Date.ToString("dd-MM-YYYY");
+            DateTime x = dpck_Fecha.SelectedDate.GetValueOrDefault();
+            Console.WriteLine(x);
+        }
     }
 }

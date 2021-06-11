@@ -13,8 +13,6 @@ namespace DelegacionMunicipal.modelo.dao
 {
     class ReporteSiniestroDAO
     {
-        //Los parametros de los métodos pueden cambiarse
-       
         public static List<ReporteSiniestro> ConsultarReportes()
         {
             List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();
@@ -99,5 +97,33 @@ namespace DelegacionMunicipal.modelo.dao
             return resultado;
         }
         
+        public static int EliminarReporte(int idReporte)
+        {
+            int resultado = 0;
+
+            SocketBD socket = new SocketBD();
+            Paquete paquete = new Paquete();
+
+            paquete.TipoQuery = TipoConsulta.Delete;
+            paquete.TipoDominio = TipoDato.ReporteSiniestro;
+
+            paquete.Consulta = String.Format("delete from reporteSiniestro where idReporte = " + idReporte.ToString() + ";");
+
+            string mensaje = JsonSerializer.Serialize(paquete);
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length >0)
+            {
+                resultado = int.Parse(respuesta);
+                
+            }
+
+
+            return resultado;
+
+        }
     }
 }

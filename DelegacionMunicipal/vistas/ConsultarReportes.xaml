@@ -44,9 +44,10 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0" Width="314">
                 <Button x:Name="btn_RegistrarReporte" Content="Registrar" Margin="10,10,10,10" FontSize="16" Click="btn_RegistrarReporte_Click" />
                 <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
+                <Button x:Name="botonPruebas" Content="prueba" Width="75" Click="botonPruebas_Click"/>
             </StackPanel>
         </Grid>
         
