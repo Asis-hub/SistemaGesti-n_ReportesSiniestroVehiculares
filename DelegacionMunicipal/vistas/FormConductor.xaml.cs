@@ -65,8 +65,13 @@ namespace DelegacionMunicipal.vistas
 
                 if (resultado == 1)
                 {
-                    this.DialogResult = true; ;
+                    MessageBox.Show(conductor.NombreCompleto + " se registró correctamente", "Conductor registrado");
+                    this.DialogResult = true;
                     this.Close();
+                }
+                else if (resultado == -1)
+                {
+                    MessageBox.Show(conductor.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }

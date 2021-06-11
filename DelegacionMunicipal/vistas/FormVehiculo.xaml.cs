@@ -74,8 +74,13 @@ namespace DelegacionMunicipal.vistas
 
                 if (resultado == 1)
                 {
-                    this.DialogResult = true; ;
+                    MessageBox.Show("vehiculo con placas: " + vehiculo.NumPlaca + " se registró correctamente", "Vehículo registrado");
+                    this.DialogResult = true;
                     this.Close();
+                }
+                else if (resultado == -1)
+                {
+                    MessageBox.Show("vehiculo con placas: " + vehiculo.NumPlaca + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }
