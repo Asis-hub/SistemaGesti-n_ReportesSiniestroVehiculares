@@ -58,20 +58,28 @@ namespace Servidor.modelo.dao
         public static int InsertarFotografia(string consulta)
         {
             SqlConnection conexionDB = ConexionBD.GetConnection();
-            int resultado = 0;
+            int identificador = 0;
+            
+            SqlDataReader resultado;
             try
             {
                 if (conexionDB != null)
                 {
                     SqlCommand comando = new SqlCommand(consulta, conexionDB);
-                    resultado = comando.ExecuteNonQuery();
+                    resultado = comando.ExecuteReader();
+
+                    if (resultado.Read())
+                    {
+                        Console.WriteLine(resultado[0].ToString());
+                        //identificador = int.Parse((!resultado.IsDBNull(0) ? resultado[0].ToString() : "0"));
+                    }
                     comando.Dispose();
                 }
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                resultado = -1;
+                identificador = 0;
             }
             finally
             {
@@ -83,7 +91,7 @@ namespace Servidor.modelo.dao
 
 
 
-            return resultado;
+            return identificador;
         }
     }
 }

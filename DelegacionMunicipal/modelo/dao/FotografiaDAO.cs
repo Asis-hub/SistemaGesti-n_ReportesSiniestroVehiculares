@@ -53,22 +53,25 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "insert into fotografia values (" + idReporte.ToString() + ") SELECT SCOPE_IDENTITY();";
+            paquete.Consulta = "insert into fotografia values ('" + idReporte.ToString() + "') SELECT SCOPE_IDENTITY();";
 
-            paquete.TipoDominio = TipoDato.Fotografia;
             paquete.TipoQuery = TipoConsulta.Insert;
+            paquete.TipoDominio = TipoDato.Fotografia;
+            
 
-            mensaje = JsonSerializer.Serialize(mensaje);
+            mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();
             socket.EnviarMensaje(mensaje);
-            respuesta = int.Parse(socket.RecibirMensaje());
+            mensaje = socket.RecibirMensaje();
             socket.TerminarConexion();
 
-            if (respuesta > 0)
+            if (mensaje.Length > 0)
             {
-                return respuesta;
+                respuesta = int.Parse(mensaje);
+                
             }
+            
 
             return respuesta;
         }

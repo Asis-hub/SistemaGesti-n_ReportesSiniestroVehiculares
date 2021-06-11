@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegacionMunicipal.vistas"
         mc:Ignorable="d"
-        Title="Levantar Reporte de Siniestro" Height="562.729" Width="951.681">
-    <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,-82">
+        Title="Levantar Reporte de Siniestro" Height="683.729" Width="951.681">
+    <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,1">
         <Label Content="Seleccionar Vehiculo" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Conductor" HorizontalAlignment="Left" Margin="53,48,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Conductor" HorizontalAlignment="Left" Margin="124,52,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmb_Conductor_SelectionChanged"/>
@@ -28,11 +28,11 @@
         <Button x:Name="btn_AgregarImagen" Content="Agregar imagen" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top" Click="btn_AgregarImagen_Click" />
 
 
-        <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Left" Margin="593,495,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarReporte_Click"/>
-        <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="709,495,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
+        <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Left" Margin="602,596,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarReporte_Click"/>
+        <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="720,596,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
         <ListBox x:Name="lb_VehiculosInvolucrados" HorizontalAlignment="Left" Height="72" Margin="611,36,0,0" VerticalAlignment="Top" Width="197"/>
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="imagen1" HorizontalAlignment="Left" Height="100" Margin="28,349,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="imagen1" HorizontalAlignment="Left" Height="100" Margin="28,374,0,0" VerticalAlignment="Top" Width="100"/>
         <DatePicker x:Name="dpc_fecha" HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top" Width="228"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
         <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>

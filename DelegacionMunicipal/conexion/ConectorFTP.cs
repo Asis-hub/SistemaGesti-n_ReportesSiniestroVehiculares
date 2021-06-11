@@ -35,6 +35,20 @@ namespace DelegacionMunicipal.conexion
 
         }
 
+        public static void insertarFoto(string nombre, string identificador)
+        {
+
+            string servidor = "ftp://maisonbleue2020.ddns.net/sgsrv/";
+            WebClient clienteWeb = new WebClient();
+            NetworkCredential credenciales = new NetworkCredential("pi", "raspberry");
+            clienteWeb.Credentials = credenciales;
+
+            string ruta = nombre;
+            string destino = servidor + identificador + ".jpg";
+            clienteWeb.UploadFile(destino, ruta);
+
+        }
+
 
     }
 

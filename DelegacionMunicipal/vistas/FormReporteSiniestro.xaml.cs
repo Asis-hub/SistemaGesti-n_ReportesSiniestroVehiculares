@@ -1,4 +1,5 @@
-﻿using DelegacionMunicipal.modelo.dao;
+﻿using DelegacionMunicipal.conexion;
+using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using Microsoft.Win32;
 using System;
@@ -19,6 +20,7 @@ namespace DelegacionMunicipal.vistas
         List<string> listaVehiculos;
         string licencia;
         Usuario usuarioConectado;
+        List<string> fotos;
         public FormReporteSiniestro(Usuario usuarioConectado)
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace DelegacionMunicipal.vistas
             this.usuarioConectado = usuarioConectado;
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
+            fotos = new List<string>();
             
             
         }
@@ -103,6 +106,13 @@ namespace DelegacionMunicipal.vistas
                     Uri fileUri = new Uri(openFileDialog.FileName);
                     imagen1.Source = new BitmapImage(fileUri);
 
+                    foreach (string filenames in openFileDialog.FileNames)
+                    {
+                        fotos.Add(filenames);
+
+                    }
+
+
                 }
                 else
                 {
@@ -137,7 +147,7 @@ namespace DelegacionMunicipal.vistas
                
                 reporteSiniestro.IdDelegacion = cmb_delegacion.SelectedIndex;
                 reporteSiniestro.Username = usuarioConectado.Username;
-                reporteSiniestro.Dictamen = true;
+                reporteSiniestro.Dictamen = false;
                 
                 reporteSiniestro.IdReporte = ReporteSiniestroDAO.RegistrarReporte(reporteSiniestro);
                 
@@ -148,9 +158,16 @@ namespace DelegacionMunicipal.vistas
 
                 }
 
-                int x = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
-                Console.WriteLine(x);
 
+
+              
+
+                foreach (string archivo in fotos)
+                {
+                    int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
+                    ConectorFTP.insertarFoto(archivo, identificador.ToString());
+
+                }
 
             }
 
