@@ -26,7 +26,8 @@ namespace DireccionGeneral.conexion
         ReportesSiniestro,
         DelegacionTipo,
         Cargo,
-        Fotografia
+        Fotografia,
+        VehiculosInvolucrados
     }
 
     public class Paquete
