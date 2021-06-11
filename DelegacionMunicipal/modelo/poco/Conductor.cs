@@ -24,6 +24,7 @@ namespace DelegacionMunicipal.modelo.poco
         public string NombreCompleto { get => nombreCompleto; set => nombreCompleto = value; }
         public DateTime FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
 
+
         public override string ToString()
         {
             return NumeroLicencia;

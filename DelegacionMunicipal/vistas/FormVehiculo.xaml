@@ -12,25 +12,25 @@
         <ComboBox x:Name="cmb_Conductores" HorizontalAlignment="Left" Margin="125,28,0,0" VerticalAlignment="Top" Width="602"/>
 
         <Label Content="No. Placas" HorizontalAlignment="Left" Margin="34,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.766,2.272"/>
-        <TextBox x:Name="txt_NoPlacas" HorizontalAlignment="Left" Height="23" Margin="125,71,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_NoPlacas" MaxLength="8" HorizontalAlignment="Left" Height="23" Margin="125,71,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Marca" HorizontalAlignment="Left" Margin="34,114,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Marca" HorizontalAlignment="Left" Height="23" Margin="125,114,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Marca" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="125,114,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Modelo" HorizontalAlignment="Left" Margin="34,159,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Modelo" HorizontalAlignment="Left" Height="23" Margin="125,159,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Modelo" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="125,159,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Color" HorizontalAlignment="Left" Margin="38,198,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Color" HorizontalAlignment="Left" Height="23" Margin="125,202,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Color" MaxLength="15" HorizontalAlignment="Left" Height="23" Margin="125,202,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Año" HorizontalAlignment="Left" Margin="393,67,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Anio" HorizontalAlignment="Left" Height="23" Margin="502,68,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="txt_Anio" MaxLength="4" HorizontalAlignment="Left" Height="23" Margin="502,68,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="70"/>
 
         <Label Content="No. Póliza" HorizontalAlignment="Left" Margin="393,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.499,1.106"/>
-        <TextBox x:Name="txt_Poliza" HorizontalAlignment="Left" Height="23" Margin="502,110,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Poliza" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="502,110,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Aseguradora" HorizontalAlignment="Left" Margin="393,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.499,1.106"/>
-        <TextBox x:Name="txt_Aseguradora" HorizontalAlignment="Left" Height="23" Margin="502,159,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Aseguradora" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="502,159,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Button x:Name="btn_GuardarVehiculo" Content="Guardar" HorizontalAlignment="Left" Margin="546,272,0,0" VerticalAlignment="Top" Width="75" Click="btn_GuardarVehiculo_Click"/>
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="652,272,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>

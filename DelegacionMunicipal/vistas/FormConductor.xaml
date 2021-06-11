@@ -8,12 +8,12 @@
         Title="Conductor" Height="302.812" Width="394.062">
     <Grid>
         <Label Content="No. Licencia:" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_NoLicencia" HorizontalAlignment="Left" Height="23" Margin="141,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="txt_NoLicencia" MaxLength="10" HorizontalAlignment="Left" Height="23" Margin="141,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
 
         <Label Content="Nombre:" HorizontalAlignment="Left" Margin="15,70,0,0" VerticalAlignment="Top"/>
 
         <Label Content="Fecha de Nacimiento" HorizontalAlignment="Left" Margin="15,110,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_NombreConductor" HorizontalAlignment="Left" Height="23" Margin="141,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="txt_NombreConductor" MaxLength="75" HorizontalAlignment="Left" Height="23" Margin="141,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" PreviewTextInput="txt_NombreConductor_PreviewTextInput"/>
 
         <Label Content="Teléfono" HorizontalAlignment="Left" Margin="15,150,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_Telefono" MaxLength="10" HorizontalAlignment="Left" Height="23" Margin="141,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" PreviewTextInput="txt_Telefono_PreviewTextInput"/>

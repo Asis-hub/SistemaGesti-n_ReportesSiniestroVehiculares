@@ -47,9 +47,10 @@ namespace DelegacionMunicipal.vistas
                 conductor.NumeroLicencia = txt_NoLicencia.Text;
                 conductor.Celular = txt_Telefono.Text;
                 conductor.NombreCompleto = txt_NombreConductor.Text;
-                conductor.FechaNacimiento = dp_FechaNacimiento.SelectedDate.GetValueOrDefault();
-
-
+                if (dp_FechaNacimiento.SelectedDate.HasValue)
+                {
+                    conductor.FechaNacimiento = dp_FechaNacimiento.SelectedDate.Value.Date;
+                }
 
                 int resultado;
 
@@ -78,21 +79,67 @@ namespace DelegacionMunicipal.vistas
 
         private bool ValidarFormulario()
         {
-            if (txt_NoLicencia.Text.Length == 0 || txt_Telefono.Text.Length == 0 || txt_NombreConductor.Text.Length == 0 ||
-                dp_FechaNacimiento.SelectedDate.Value.ToString().Length == 0)
+            if (txt_NoLicencia.Text.Length == 0 || txt_Telefono.Text.Length == 0 || txt_NombreConductor.Text.Length == 0 || !dp_FechaNacimiento.SelectedDate.HasValue)
             {
                 MessageBox.Show("Debes llenar todos los campos");
                 return false;
             }
-            //if (txt_Telefono.Text.Length > 10 || txt_Telefono.Text.Contains.)
+            int edad = DiferenciaAnios(dp_FechaNacimiento.SelectedDate.Value, DateTime.Today);
+
+            if (edad < 16)
+            {
+                MessageBox.Show("Edad no permitida, menor a la edad permitida para tener licencia");
+                return false;
+            }
+
+            if(txt_Telefono.Text.Length < 10)
+            {
+                MessageBox.Show("El número de teléfono debe contener 10 digitos, favor de intentar de nuevo");
+                return false;
+            }
 
             return true;
         }
 
         private void txt_Telefono_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void txt_NombreConductor_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetter(ch) || Char.IsWhiteSpace(ch))))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
+            /*
+             * Regex regex = new Regex("[^a-zA-ZáéúíóÁÉÍÓÚüÜ]");
+             * e.Handled = regex.IsMatch(e.Text);
+             */
+        }
+        /*
+        private void dp_FechaNacimiento_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            int edad = DiferenciaAnios(dp_FechaNacimiento.SelectedDate.Value, DateTime.Today);
+            if (edad < 18)
+            {
+                MessageBox.Show("Edad inválida, menor a la fecha permitida");
+                dp_FechaNacimiento.SelectedDate = null;
+            }
+        }
+        */
+
+        private int DiferenciaAnios(DateTime fechaSeleccionada, DateTime fechaActual)
+        {
+            return (fechaActual.Year - fechaSeleccionada.Year - 1) +
+                (((fechaActual.Month > fechaSeleccionada.Month) ||
+                ((fechaActual.Month == fechaSeleccionada.Month) && (fechaActual.Day >= fechaSeleccionada.Day))) ? 1 : 0);
         }
     }
 }
