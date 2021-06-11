@@ -17,28 +17,45 @@ namespace DelegacionMunicipal.vistas
     public partial class FormReporteSiniestro : Window
     {
         List<string> listaVehiculos;
+        string licencia;
         public FormReporteSiniestro()
         {
             InitializeComponent();
-            CargarListaVehiculos();
+            CargarListaConductores();
 
             cmb_Hora.SelectedIndex = 0;
+            cmb_Minuto.SelectedIndex = 0;
+            cmb_Meridiano.SelectedIndex = 0;
+            
         }
 
-        private void CargarListaVehiculos()
+        private void CargarListaConductores()
         {
             cmb_Conductor.Items.Clear();
             cmb_Conductor.Items.Add("Conductor");
             List<Conductor> listaConductores = ConductorDAO.ConsultarConductores();
-            foreach (Conductor elemento in listaConductores)
+            foreach (Conductor conductor in listaConductores)
             {
-                cmb_Conductor.Items.Add(elemento);
+                cmb_Conductor.Items.Add(conductor);
             }
-                
-            cmb_Hora.SelectedIndex = 0;
-            cmb_Minuto.SelectedIndex = 0;
-            cmb_Meridiano.SelectedIndex = 0;
+
+            
         }
+
+        private void CargarVehiculos()
+        {
+            licencia = cmb_Conductor.SelectedItem.ToString();
+            cmb_Vehiculo.Items.Clear();
+            cmb_Vehiculo.Items.Add("Vehiculo");
+            List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosConductor(licencia);
+            foreach (Vehiculo vehiculo in listaVehiculos)
+            {
+                cmb_Vehiculo.Items.Add(vehiculo.NumPlaca);
+            }
+
+        }
+
+
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
@@ -135,6 +152,18 @@ namespace DelegacionMunicipal.vistas
 
         private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void cmb_Conductor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            CargarVehiculos();
+            //Console.WriteLine(cmb_Conductor.SelectedItem.ToString());
+            /*List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosConductor("124324");
+            foreach (Vehiculo vehiculo in listaVehiculos)
+            {
+                Console.WriteLine(vehiculo.NumPlaca);
+            }*/
 
         }
     }

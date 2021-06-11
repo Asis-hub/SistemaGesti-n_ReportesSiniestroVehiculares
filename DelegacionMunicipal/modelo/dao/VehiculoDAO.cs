@@ -40,6 +40,35 @@ namespace DelegacionMunicipal.modelo.dao
             return listaVehiculos;
         }
 
+        public static List<Vehiculo> ConsultarVehiculosConductor(string licencia)
+        {
+            List<Vehiculo> listaVehiculos = new List<Vehiculo>();
+            SocketBD socket = new SocketBD();
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+            paquete.Consulta = "SELECT numeroPlaca AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
+                "nombreAseguradora, ano, numeroLicenciaConducir FROM dbo.vehiculo where numeroLicenciaConducir =" + licencia +  ";";
+            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.TipoQuery = TipoConsulta.Select;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaVehiculos = (List<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(List<Vehiculo>));
+            }   
+
+
+
+
+            return listaVehiculos;
+        }
+
         public static int RegistrarVehiculo(Vehiculo nuevoVehiculo)
         {
             int resultado = 0;

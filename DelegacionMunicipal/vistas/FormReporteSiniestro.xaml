@@ -9,7 +9,7 @@
     <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,-2">
         <Label Content="Seleccionar Vehiculo" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Conductor" HorizontalAlignment="Left" Margin="53,48,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_Conductor" HorizontalAlignment="Left" Margin="124,52,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cmb_Conductor" HorizontalAlignment="Left" Margin="124,52,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmb_Conductor_SelectionChanged"/>
         <Label Content="Vehiculo" HorizontalAlignment="Left" Margin="280,51,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Vehiculo" HorizontalAlignment="Left" Margin="361,52,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btn_AgregarVehiculo" Content="Agregar" HorizontalAlignment="Left" Margin="504,52,0,0" VerticalAlignment="Top" Width="74" Click="btn_AgregarVehiculo_Click" RenderTransformOrigin="-0.5,0.7"/>
