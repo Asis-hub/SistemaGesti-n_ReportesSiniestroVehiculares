@@ -47,6 +47,7 @@ namespace DelegacionMunicipal.conexion
             string destino = servidor + identificador + ".jpg";
             clienteWeb.UploadFile(destino, ruta);
 
+
         }
 
 

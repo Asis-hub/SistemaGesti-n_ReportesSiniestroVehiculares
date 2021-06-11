@@ -21,6 +21,7 @@ namespace DelegacionMunicipal.vistas
         string licencia;
         Usuario usuarioConectado;
         List<string> fotos;
+        OpenFileDialog openFileDialog;
         public FormReporteSiniestro(Usuario usuarioConectado)
         {
             InitializeComponent();
@@ -87,8 +88,8 @@ namespace DelegacionMunicipal.vistas
         private void btn_AgregarImagen_Click(object sender, RoutedEventArgs e)
         {
             //Agregar imagenes, minimo 3 y maximo 8
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
+            openFileDialog = new OpenFileDialog();
+            //openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
@@ -98,29 +99,32 @@ namespace DelegacionMunicipal.vistas
 
                 //output.Content = openFileDialog.FileNames.Length.ToString();
 
-                if (openFileDialog.FileNames.Length > 8 || openFileDialog.FileNames.Length < 5)
-                {
-                    output.Content = "Ingrese entre 5 y 8 fotos";
-                    output.Foreground = Brushes.Red;
+                /*if (openFileDialog.FileNames.Length > 8 || openFileDialog.FileNames.Length < 5)
+                {*/
+                    //output.Content = "Ingrese entre 5 y 8 fotos";
+                    //output.Foreground = Brushes.Red;
 
                     Uri fileUri = new Uri(openFileDialog.FileName);
                     imagen1.Source = new BitmapImage(fileUri);
 
-                    foreach (string filenames in openFileDialog.FileNames)
+
+
+
+                    /*foreach (string filenames in openFileDialog.FileNames)
                     {
                         fotos.Add(filenames);
 
-                    }
+                    }*/
 
 
-                }
+             /*}
                 else
                 {
                     output.Content = "Cantidad de fotos correcta";
                     output.Foreground = Brushes.Black;
 
 
-                }
+                }*/
 
             }
 
@@ -158,16 +162,19 @@ namespace DelegacionMunicipal.vistas
 
                 }
 
+                int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
 
-
+                ConectorFTP.insertarFoto(openFileDialog.FileName, identificador.ToString());
+                
               
 
-                foreach (string archivo in fotos)
+                /*foreach (string archivo in fotos)
                 {
-                    int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
-                    ConectorFTP.insertarFoto(archivo, identificador.ToString());
+                    //int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
+                    //ConectorFTP.insertarFoto(archivo, identificador.ToString());
+                    Console.WriteLine(archivo);
 
-                }
+                }*/
 
             }
 
