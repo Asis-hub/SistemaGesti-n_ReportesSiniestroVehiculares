@@ -12,6 +12,7 @@ namespace Servidor.modelo.poco
         private string calle;
         private string numero;
         private string colonia;
+        private DateTime fechaHora;
         private int idDelegacion;
         private string username;
         private bool dictamen;
@@ -20,6 +21,7 @@ namespace Servidor.modelo.poco
         public string Calle { get => calle; set => calle = value; }
         public string Numero { get => numero; set => numero = value; }
         public string Colonia { get => colonia; set => colonia = value; }
+        public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
         public string Username { get => username; set => username = value; }
         public bool Dictamen { get => dictamen; set => dictamen = value; }

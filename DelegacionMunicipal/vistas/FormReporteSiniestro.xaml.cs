@@ -61,8 +61,9 @@ namespace DelegacionMunicipal.vistas
         {
             //Agregar vehiculos involucrados que se seleccionan en combobox
             //cmb_Vehiculo
-            listaVehiculos.Add(cmb_Vehiculo.SelectedItem.ToString());
-            
+            //listaVehiculos.Add(cmb_Vehiculo.SelectedItem.ToString());
+            lb_VehiculosInvolucrados.Items.Add(cmb_Vehiculo.SelectedItem.ToString());
+
 
 
         }
@@ -95,16 +96,8 @@ namespace DelegacionMunicipal.vistas
                     output.Content = "Cantidad de fotos correcta";
                     output.Foreground = Brushes.Black;
 
-                    
-
-                    
 
                 }
-                
-                
-               
-                
-
 
             }
 
@@ -122,6 +115,7 @@ namespace DelegacionMunicipal.vistas
 
                 reporteSiniestro.Calle = txt_Calle.ToString();
                 reporteSiniestro.Colonia = txt_Colonia.ToString();
+                reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, Convert.ToInt32(cmb_Hora.SelectedValue), Convert.ToInt32(cmb_Minuto.SelectedValue), 0 );
                 reporteSiniestro.Numero = txt_Numero.ToString();
 
 
@@ -145,8 +139,6 @@ namespace DelegacionMunicipal.vistas
                 return false;
             }
 
-
-
             return true;
         }
 
@@ -158,12 +150,7 @@ namespace DelegacionMunicipal.vistas
         private void cmb_Conductor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             CargarVehiculos();
-            //Console.WriteLine(cmb_Conductor.SelectedItem.ToString());
-            /*List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosConductor("124324");
-            foreach (Vehiculo vehiculo in listaVehiculos)
-            {
-                Console.WriteLine(vehiculo.NumPlaca);
-            }*/
+            
 
         }
     }

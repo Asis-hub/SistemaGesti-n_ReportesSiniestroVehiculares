@@ -68,9 +68,12 @@ namespace DelegacionMunicipal.vistas
 
         private void botonPruebas_Click(object sender, RoutedEventArgs e)
         {
-            //string x = dpck_Fecha.SelectedDate.Value.Date.ToString("dd-MM-YYYY");
-            DateTime x = dpck_Fecha.SelectedDate.GetValueOrDefault();
-            Console.WriteLine(x);
+            List<ReporteSiniestro> reporteSiniestro = ReporteSiniestroDAO.ConsultarReportes();
+            foreach (ReporteSiniestro reporte in reporteSiniestro)
+            {
+                Console.WriteLine(reporte.FechaHora + reporte.Calle);
+            }
+            
         }
     }
 }

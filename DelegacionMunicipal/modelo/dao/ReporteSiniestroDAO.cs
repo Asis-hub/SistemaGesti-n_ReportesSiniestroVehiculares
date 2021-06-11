@@ -21,7 +21,7 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
             
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
@@ -51,7 +51,7 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
