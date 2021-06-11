@@ -35,8 +35,9 @@ namespace DelegacionMunicipal.vistas
                 cmb_Conductor.Items.Add(elemento);
             }
                 
-            cmb_Conductor.SelectedIndex = 0;
-            cmb_Minutos.SelectedIndex = 0;
+            cmb_Hora.SelectedIndex = 0;
+            cmb_Minuto.SelectedIndex = 0;
+            cmb_Meridiano.SelectedIndex = 0;
         }
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)

@@ -33,14 +33,33 @@
         <ListBox HorizontalAlignment="Left" Height="72" Margin="611,36,0,0" VerticalAlignment="Top" Width="197"/>
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>
         <Image x:Name="imagen1" HorizontalAlignment="Left" Height="100" Margin="28,349,0,0" VerticalAlignment="Top" Width="100"/>
-        <DatePicker HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top" Width="228"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
         <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_Hora" HorizontalAlignment="Left" Margin="361,195,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="ComboBox_SelectionChanged">
-            <ListBoxItem Content="Hora"/>
+        <ComboBox x:Name="cmb_Minuto" HorizontalAlignment="Left" Margin="442,195,0,0" VerticalAlignment="Top" Width="74" SelectionChanged="ComboBox_SelectionChanged">
+            <ListBoxItem Content="Minuto"/>
+            <ListBoxItem Content="00"/>
+            <ListBoxItem Content="30"/>
         </ComboBox>
-        <ComboBox x:Name="cmb_Minutos" HorizontalAlignment="Left" Margin="430,195,0,0" VerticalAlignment="Top" Width="76">
-            <ListBoxItem Content="Minutos"/>
+        <ComboBox x:Name="cmb_Hora" HorizontalAlignment="Left" Margin="361,195,0,0" VerticalAlignment="Top" Width="61">
+            <ListBoxItem Content="Hora"/>
+            <ListBoxItem Content="01"/>
+            <ListBoxItem Content="02"/>
+            <ListBoxItem Content="03"/>
+            <ListBoxItem Content="04"/>
+            <ListBoxItem Content="05"/>
+            <ListBoxItem Content="06"/>
+            <ListBoxItem Content="07"/>
+            <ListBoxItem Content="08"/>
+            <ListBoxItem Content="09"/>
+            <ListBoxItem Content="10"/>
+            <ListBoxItem Content="11"/>
+            <ListBoxItem Content="12"/>
+        </ComboBox>
+        <Label Content=":" HorizontalAlignment="Left" Margin="427,191,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_Meridiano" HorizontalAlignment="Left" Margin="534,195,0,0" VerticalAlignment="Top" Width="55">
+            <ListBoxItem Content="AM"/>
+            <ListBoxItem Content="PM"/>
         </ComboBox>
 
     </Grid>
