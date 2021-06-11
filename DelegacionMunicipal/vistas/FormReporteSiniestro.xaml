@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DelegacionMunicipal.vistas"
         mc:Ignorable="d"
         Title="Levantar Reporte de Siniestro" Height="562.729" Width="951.681">
-    <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,-2">
+    <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,-82">
         <Label Content="Seleccionar Vehiculo" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Conductor" HorizontalAlignment="Left" Margin="53,48,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_Conductor" HorizontalAlignment="Left" Margin="124,52,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmb_Conductor_SelectionChanged"/>
@@ -24,8 +24,8 @@
         <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="23" Margin="138,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Número:" HorizontalAlignment="Left" Margin="14,224,0,0" VerticalAlignment="Top" Width="71"/>
         <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="23" Margin="138,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Imágenes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,273,0,0"/>
-        <Button x:Name="btn_AgregarImagen" Content="Agregar imagen" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Click="btn_AgregarImagen_Click" />
+        <Label Content="Imágenes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,303,0,0"/>
+        <Button x:Name="btn_AgregarImagen" Content="Agregar imagen" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top" Click="btn_AgregarImagen_Click" />
 
 
         <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Left" Margin="593,495,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarReporte_Click"/>
@@ -57,6 +57,8 @@
             <ListBoxItem Content="12"/>
         </ComboBox>
         <Label Content=":" HorizontalAlignment="Left" Margin="427,191,0,0" VerticalAlignment="Top"/>
+        <Label Content="Delegacion" HorizontalAlignment="Left" Margin="14,272,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="138,276,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

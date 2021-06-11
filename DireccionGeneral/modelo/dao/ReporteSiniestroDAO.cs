@@ -19,7 +19,7 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
 
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
@@ -49,7 +49,7 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
@@ -76,7 +76,9 @@ namespace DireccionGeneral.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
 
-            paquete.Consulta = String.Format("insert into reporteSiniestro values ('{0}', '{1}', '{2}','20120618 10:34:09 AM', 1, 'midguet',0);", reporteSiniestro.Calle, reporteSiniestro.Colonia, reporteSiniestro.Numero);
+            paquete.Consulta = String.Format("insert into reporteSiniestro values " +
+                "('{0}', '{1}', '{2}','{3}', {4}, '{5}', {6}) " +
+                "SELECT SCOPE_IDENTITY();", reporteSiniestro.Calle, reporteSiniestro.Colonia, reporteSiniestro.Numero, reporteSiniestro.FechaHora, reporteSiniestro.IdDelegacion, reporteSiniestro.Username, reporteSiniestro.Dictamen);
 
             string mensaje = JsonSerializer.Serialize(paquete);
             socket.IniciarConexion();
