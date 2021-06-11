@@ -11,7 +11,7 @@ namespace DelegacionMunicipal.modelo.dao
     class VehiculosInvolucradosDAO
     {
 
-        public static int InsertarVehiculos(string numeroPlaca, int idReporte)
+        public static int InsertarVehiculo(string numeroPlaca, int idReporte)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();

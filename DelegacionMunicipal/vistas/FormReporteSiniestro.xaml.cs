@@ -25,7 +25,7 @@ namespace DelegacionMunicipal.vistas
 
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
-            cmb_Meridiano.SelectedIndex = 0;
+            
             
         }
 
@@ -113,13 +113,21 @@ namespace DelegacionMunicipal.vistas
             {
                 ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
 
+                foreach (VehiculosInvolucrados vehiculo in lb_VehiculosInvolucrados.Items)
+                {
+                    VehiculosInvolucradosDAO.InsertarVehiculo(vehiculo.NumeroPlaca, reporteSiniestro.IdReporte);
+
+                }
+
+
                 reporteSiniestro.Calle = txt_Calle.ToString();
                 reporteSiniestro.Colonia = txt_Colonia.ToString();
                 reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, Convert.ToInt32(cmb_Hora.SelectedValue), Convert.ToInt32(cmb_Minuto.SelectedValue), 0 );
                 reporteSiniestro.Numero = txt_Numero.ToString();
 
+                
 
-                //ReporteSiniestroDAO
+                
 
             }
 
