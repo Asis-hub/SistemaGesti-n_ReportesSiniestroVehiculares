@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DelegacionMunicipal.vistas"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="White"
+      d:DesignHeight="450" d:DesignWidth="1000" Background="White"
       Title="ConsultarReportes">
 
     <DockPanel LastChildFill="True" Margin="10" >
@@ -20,39 +20,33 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" Margin="0,10" Grid.Row="0">
-                <Label Content="Fecha" VerticalAlignment="Top"/>
-                <DatePicker x:Name="dpck_Fecha" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Content="Estado" VerticalAlignment="Top" Margin="30,0,0,0"/>
-                <RadioButton x:Name="rdb_Pendiente" GroupName="gp_Estado" Content="Pendiente" IsChecked="True"/>
-                <RadioButton x:Name="rdb_Dictaminado" GroupName="gp_Estado" Content="Dictaminado" />
-                <Label Content="Delegación:" VerticalAlignment="Top" Margin="30,0,0,0"/>
-                <ComboBox x:Name="cmb_Delegacion" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Fecha" FontSize="14" VerticalAlignment="Top"/>
+                <DatePicker x:Name="dpck_Fecha" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Content="Estado" FontSize="14" VerticalAlignment="Top" Margin="30,0,0,0"/>
+                <RadioButton x:Name="rdb_Pendiente" FontSize="14" GroupName="gp_Estado" Content="Pendiente" IsChecked="True"/>
+                <RadioButton x:Name="rdb_Dictaminado" FontSize="14" GroupName="gp_Estado" Content="Dictaminado" />
+                <Label Content="Delegación:" FontSize="14" VerticalAlignment="Top" Margin="30,0,0,0"/>
+                <ComboBox x:Name="cmb_Delegacion" FontSize="14" VerticalAlignment="Top" Width="180"/>
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
             </StackPanel>
 
-           
-            <DataGrid x:Name="tbl_Reportes" Grid.Row="1" ColumnWidth="*"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0" Width="314">
+                <Button x:Name="btn_RegistrarReporte" Content="Registrar" Margin="10,10,10,10" FontSize="16" Click="btn_RegistrarReporte_Click" />
+                <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
+            </StackPanel>
+
+            <DataGrid x:Name="tbl_Reportes" Grid.Row="2" ColumnWidth="*"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Folio" Binding="{Binding IdReporte}"/>
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
                     <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
                     <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
-                    <DataGridTextColumn Header="Dictamen" Binding="{Binding Dictamen}"/>
-
+                    <DataGridTextColumn Header="Estatus" Binding="{Binding Estatus}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0" Width="314">
-                <Button x:Name="btn_RegistrarReporte" Content="Registrar" Margin="10,10,10,10" FontSize="16" Click="btn_RegistrarReporte_Click" />
-                <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
-                <Button x:Name="botonPruebas" Content="prueba" Width="75" Click="botonPruebas_Click"/>
-            </StackPanel>
+
         </Grid>
-        
     </DockPanel>
-
-
-
 </Page>

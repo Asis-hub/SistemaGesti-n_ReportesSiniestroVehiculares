@@ -19,7 +19,7 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen, fechaRegistro from dbo.reporteSiniestro;";
 
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;

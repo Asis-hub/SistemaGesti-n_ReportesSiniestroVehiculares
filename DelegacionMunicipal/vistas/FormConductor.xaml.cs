@@ -1,4 +1,5 @@
-﻿using DelegacionMunicipal.modelo.dao;
+﻿using DelegacionMunicipal.interfaz;
+using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using System;
 using System.Text.RegularExpressions;
@@ -13,14 +14,16 @@ namespace DelegacionMunicipal.vistas
     {
         private Conductor conductorEdicion;
         private bool esNuevo;
+        private ObserverRespuesta notificacion;
 
-        public FormConductor()
+        public FormConductor(ObserverRespuesta notificacion)
         {
             InitializeComponent();
+            this.notificacion = notificacion;
             esNuevo = true;
         }
 
-        public FormConductor(Conductor conductorEdicion) : this()
+        public FormConductor(Conductor conductorEdicion, ObserverRespuesta notificacion) : this(notificacion)
         {
             this.conductorEdicion = conductorEdicion;
             esNuevo = false;
@@ -65,13 +68,13 @@ namespace DelegacionMunicipal.vistas
 
                 if (resultado == 1)
                 {
-                    MessageBox.Show(conductor.NombreCompleto + " se registró correctamente", "Conductor registrado");
+                    notificacion.ActualizaInformacion(conductor.NombreCompleto + " se registró correctamente", "Conductor registrado");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else if (resultado == -1)
                 {
-                    MessageBox.Show(conductor.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
+                    notificacion.ActualizaInformacion(conductor.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }

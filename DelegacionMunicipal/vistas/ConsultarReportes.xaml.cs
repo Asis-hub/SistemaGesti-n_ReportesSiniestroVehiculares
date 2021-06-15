@@ -25,15 +25,15 @@ namespace DelegacionMunicipal.vistas
     public partial class ConsultarReportes : Page
     {
         List<ReporteSiniestro> reportesSiniestro;
+        List<Delegacion> listaDelegaciones;
         Usuario usuarioConectado;
         public ConsultarReportes(Usuario usuarioConectado)
         {
             InitializeComponent();
             this.usuarioConectado = usuarioConectado;
             reportesSiniestro = new List<ReporteSiniestro>();
-
-
-            cargarTabla();
+            listaDelegaciones = new List<Delegacion>();
+            CargarTabla();
         }
 
         
@@ -59,22 +59,16 @@ namespace DelegacionMunicipal.vistas
 
         }
 
-        
-        private void cargarTabla()
+        private void CargarTabla()
         {
             reportesSiniestro = ReporteSiniestroDAO.ConsultarReportes();
             tbl_Reportes.ItemsSource = reportesSiniestro;
-          
         }
 
-        private void botonPruebas_Click(object sender, RoutedEventArgs e)
+        private void CargarCcmb_Delegacion()
         {
-            List<ReporteSiniestro> reporteSiniestro = ReporteSiniestroDAO.ConsultarReportes();
-            foreach (ReporteSiniestro reporte in reporteSiniestro)
-            {
-                Console.WriteLine(reporte.FechaHora + reporte.Calle);
-            }
-            
+            listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
+            cmb_Delegacion.ItemsSource = listaDelegaciones;
         }
     }
 }

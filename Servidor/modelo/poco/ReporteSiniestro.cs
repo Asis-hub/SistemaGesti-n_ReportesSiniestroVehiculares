@@ -13,6 +13,7 @@ namespace Servidor.modelo.poco
         private string numero;
         private string colonia;
         private DateTime fechaHora;
+        private DateTime fechaRegistro;
         private int idDelegacion;
         private string username;
         private bool dictamen;
@@ -25,7 +26,12 @@ namespace Servidor.modelo.poco
         public int IdDelegacion { get => idDelegacion; set => idDelegacion = value; }
         public string Username { get => username; set => username = value; }
         public bool Dictamen { get => dictamen; set => dictamen = value; }
-
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
+        public string Estatus {
+            get {
+                return dictamen ? "Dictaminado" : "Pendiente";
+            }
+        }
 
         public ReporteSiniestro()
         {

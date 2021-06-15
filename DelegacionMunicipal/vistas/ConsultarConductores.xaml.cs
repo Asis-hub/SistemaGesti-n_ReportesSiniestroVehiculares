@@ -1,4 +1,5 @@
-﻿using DelegacionMunicipal.modelo.dao;
+﻿using DelegacionMunicipal.interfaz;
+using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace DelegacionMunicipal.vistas
     /// <summary>
     /// Lógica de interacción para ConsultarConductores.xaml
     /// </summary>
-    public partial class ConsultarConductores : Page
+    public partial class ConsultarConductores : Page , ObserverRespuesta
     {
         List<Conductor> conductores;
 
@@ -74,11 +75,11 @@ namespace DelegacionMunicipal.vistas
 
             if (nuevo)
             {
-                formularioNuevoConductor = new FormConductor();
+                formularioNuevoConductor = new FormConductor(this);
             }
             else
             {
-                formularioNuevoConductor = new FormConductor(conductorEdicion);
+                formularioNuevoConductor = new FormConductor(conductorEdicion, this);
             }
             formularioNuevoConductor.Owner = Window.GetWindow(this);
             bool? resultado = formularioNuevoConductor.ShowDialog();
@@ -86,6 +87,11 @@ namespace DelegacionMunicipal.vistas
             {
                 CargarTablaConductores();
             }
+        }
+
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
         }
     }
 }
