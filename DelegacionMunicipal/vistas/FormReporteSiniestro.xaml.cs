@@ -187,60 +187,7 @@ namespace DelegacionMunicipal.vistas
             button.Foreground = Brushes.Black;
         }
 
-        private void btn_img0_Click(object sender, RoutedEventArgs e)
-        {
-            if (img0.Source != null)
-            {
-                
-                fotos[0] = null;
-                img0.Source = null;
-                cambiarSinPresionar(btn_img0);
-             
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-                
-                fotos[0] = openFileDialog.FileName;
-                
-                cambiarPresionado(btn_img0);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img0.Source = new BitmapImage(uri);
-
-            }
-            
-        }
-
         
-
-        private void btn_img2_Click(object sender, RoutedEventArgs e)
-        {
-            if (img2.Source != null)
-            {
-                
-                fotos[1] = null;
-                img2.Source = null;
-                cambiarSinPresionar(btn_img2);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[1] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img2);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img2.Source = new BitmapImage(uri);
-
-            }
-        }
 
         private void cmb_Hora_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -256,7 +203,219 @@ namespace DelegacionMunicipal.vistas
         {
             foreach (string ruta in fotos)
             {
-                Console.WriteLine(ruta);
+                //Console.WriteLine(ruta);
+                int x = FotografiaDAO.InsertarFotografia(1);
+                //Console.WriteLine(x);
+                ConectorFTP.insertarFoto(ruta,x.ToString());
+
+            }
+        }
+
+        private void btn_img0_Click(object sender, RoutedEventArgs e)
+        {
+            if (img0.Source != null)
+            {
+
+                fotos[0] = null;
+                img0.Source = null;
+                cambiarSinPresionar(btn_img0);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[0] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img0);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img0.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img1_Click(object sender, RoutedEventArgs e)
+        {
+            if (img1.Source != null)
+            {
+
+                fotos[1] = null;
+                img1.Source = null;
+                cambiarSinPresionar(btn_img1);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[1] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img1);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img1.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img2_Click(object sender, RoutedEventArgs e)
+        {
+            if (img2.Source != null)
+            {
+
+                fotos[2] = null;
+                img2.Source = null;
+                cambiarSinPresionar(btn_img2);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[2] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img2);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img2.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img3_Click(object sender, RoutedEventArgs e)
+        {
+            if (img3.Source != null)
+            {
+
+                fotos[3] = null;
+                img3.Source = null;
+                cambiarSinPresionar(btn_img3);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[3] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img3);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img3.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img4_Click(object sender, RoutedEventArgs e)
+        {
+            if (img4.Source != null)
+            {
+
+                fotos[4] = null;
+                img4.Source = null;
+                cambiarSinPresionar(btn_img4);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[4] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img4);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img4.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img5_Click(object sender, RoutedEventArgs e)
+        {
+            if (img5.Source != null)
+            {
+
+                fotos[5] = null;
+                img5.Source = null;
+                cambiarSinPresionar(btn_img5);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[5] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img5);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img5.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img6_Click(object sender, RoutedEventArgs e)
+        {
+            if (img6.Source != null)
+            {
+
+                fotos[6] = null;
+                img6.Source = null;
+                cambiarSinPresionar(btn_img6);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[6] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img6);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img6.Source = new BitmapImage(uri);
+
+            }
+        }
+
+        private void btn_img7_Click(object sender, RoutedEventArgs e)
+        {
+            if (img7.Source != null)
+            {
+
+                fotos[7] = null;
+                img7.Source = null;
+                cambiarSinPresionar(btn_img7);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[7] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img7);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img7.Source = new BitmapImage(uri);
+
             }
         }
     }

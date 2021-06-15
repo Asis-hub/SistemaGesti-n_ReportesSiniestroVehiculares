@@ -58,22 +58,22 @@
         <Label Content=":" HorizontalAlignment="Left" Margin="427,191,0,0" VerticalAlignment="Top"/>
         <Label Content="Delegacion" HorizontalAlignment="Left" Margin="14,272,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="138,276,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btn_img0" Content="Agregar imagen" HorizontalAlignment="Left" Margin="29,359,0,0" VerticalAlignment="Top" Width="102" Click="btn_img1_Click" Height="22"/>
-        <Button x:Name="btn_img1" Content="Agregar imagen" HorizontalAlignment="Left" Margin="158,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img2_Click"/>
+        <Button x:Name="btn_img0" Content="Agregar imagen" HorizontalAlignment="Left" Margin="29,359,0,0" VerticalAlignment="Top" Width="102" Click="btn_img0_Click" Height="22"/>
+        <Button x:Name="btn_img1" Content="Agregar imagen" HorizontalAlignment="Left" Margin="158,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img1_Click"/>
         <Image x:Name="img1" HorizontalAlignment="Left" Height="100" Margin="158,386,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="mostrarLista" Content="Button" HorizontalAlignment="Left" Margin="622,288,0,0" VerticalAlignment="Top" Width="75" Click="mostrarLista_Click"/>
-        <Button x:Name="btn_img2" Content="Agregar imagen" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img2" Content="Agregar imagen" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img2_Click"/>
         <Image x:Name="img2" HorizontalAlignment="Left" Height="100" Margin="280,386,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="img3" HorizontalAlignment="Left" Height="100" Margin="405,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img3" Content="Agregar imagen" HorizontalAlignment="Left" Margin="406,361,0,0" VerticalAlignment="Top" Width="99"/>
-        <Button x:Name="btn_img4" Content="Agregar imagen" HorizontalAlignment="Left" Margin="526,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img3" Content="Agregar imagen" HorizontalAlignment="Left" Margin="406,361,0,0" VerticalAlignment="Top" Width="99" Click="btn_img3_Click"/>
+        <Button x:Name="btn_img4" Content="Agregar imagen" HorizontalAlignment="Left" Margin="526,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img4_Click"/>
         <Image x:Name="img4" HorizontalAlignment="Left" Height="100" Margin="526,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img5" Content="Agregar imagen" HorizontalAlignment="Left" Margin="643,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img5" Content="Agregar imagen" HorizontalAlignment="Left" Margin="643,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img5_Click"/>
         <Image x:Name="img5" HorizontalAlignment="Left" Height="100" Margin="643,386,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="img6" HorizontalAlignment="Left" Height="100" Margin="765,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img6" Content="Agregar imagen" HorizontalAlignment="Left" Margin="765,361,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <Button x:Name="btn_img6" Content="Agregar imagen" HorizontalAlignment="Left" Margin="765,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img6_Click"/>
         <Image x:Name="img7" HorizontalAlignment="Left" Height="100" Margin="887,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img7" Content="Agregar imagen" HorizontalAlignment="Left" Margin="887,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img7" Content="Agregar imagen" HorizontalAlignment="Left" Margin="887,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img7_Click"/>
 
     </Grid>
 </Window>
