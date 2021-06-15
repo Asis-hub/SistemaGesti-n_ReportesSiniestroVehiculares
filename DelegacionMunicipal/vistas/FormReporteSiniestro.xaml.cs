@@ -27,9 +27,11 @@ namespace DelegacionMunicipal.vistas
             InitializeComponent();
             CargarListaConductores();
             cargarDelegaciones();
+            cargarBotones();
             this.usuarioConectado = usuarioConectado;
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
+
             fotos = new List<string>();
             
             
@@ -76,60 +78,14 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
-            //Agregar vehiculos involucrados que se seleccionan en combobox
-            //cmb_Vehiculo
-            //listaVehiculos.Add(cmb_Vehiculo.SelectedItem.ToString());
+            
             lb_VehiculosInvolucrados.Items.Add(cmb_Vehiculo.SelectedItem.ToString());
 
 
 
         }
 
-        private void btn_AgregarImagen_Click(object sender, RoutedEventArgs e)
-        {
-            //Agregar imagenes, minimo 3 y maximo 8
-            openFileDialog = new OpenFileDialog();
-            //openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Imagenes (*.jpg)|*.jpg|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                //string filename = openFileDialog.FileName;
-
-                //string nombre = openFileDialog.SafeFileName;
-
-                //output.Content = openFileDialog.FileNames.Length.ToString();
-
-                /*if (openFileDialog.FileNames.Length > 8 || openFileDialog.FileNames.Length < 5)
-                {*/
-                    //output.Content = "Ingrese entre 5 y 8 fotos";
-                    //output.Foreground = Brushes.Red;
-
-                    Uri fileUri = new Uri(openFileDialog.FileName);
-                    imagen1.Source = new BitmapImage(fileUri);
-
-
-
-
-                    /*foreach (string filenames in openFileDialog.FileNames)
-                    {
-                        fotos.Add(filenames);
-
-                    }*/
-
-
-             /*}
-                else
-                {
-                    output.Content = "Cantidad de fotos correcta";
-                    output.Foreground = Brushes.Black;
-
-
-                }*/
-
-            }
-
-
-        }
+        
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
         {
@@ -164,17 +120,10 @@ namespace DelegacionMunicipal.vistas
 
                 int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
 
-                ConectorFTP.insertarFoto(openFileDialog.FileName, identificador.ToString());
+                Console.WriteLine(identificador.ToString());
                 
               
 
-                /*foreach (string archivo in fotos)
-                {
-                    //int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
-                    //ConectorFTP.insertarFoto(archivo, identificador.ToString());
-                    Console.WriteLine(archivo);
-
-                }*/
 
             }
 
@@ -197,15 +146,63 @@ namespace DelegacionMunicipal.vistas
             return true;
         }
 
-        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
         private void cmb_Conductor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             CargarVehiculos();
             
+
+        }
+
+        private void cargarBotones()
+        {
+            if (img1.Source !=null)
+            {
+                btn_img1.Content = "Eliminar imagen";
+                btn_img1.Background = Brushes.Red;
+                btn_img1.Foreground = Brushes.White;
+            }
+            else
+            {
+                btn_img1.Content = "Agregar imagen";
+                btn_img1.Background = Brushes.White;
+                btn_img1.Foreground = Brushes.Black;
+            }
+        }
+
+        private void btn_img1_Click(object sender, RoutedEventArgs e)
+        {
+            if (img1.Source != null)
+            {
+                img1.Source = null;
+                btn_img1.Content = "Agregar imagen";
+                btn_img1.Background = Brushes.White;
+                btn_img1.Foreground = Brushes.Black;
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+                fotos.Add(openFileDialog.FileName);
+                btn_img1.Content = "Eliminar imagen";
+                btn_img1.Background = Brushes.Red;
+                btn_img1.Foreground = Brushes.White;
+                Uri uri = new Uri(openFileDialog.FileName);
+                img1.Source = new BitmapImage(uri);
+
+            }
+            
+        }
+
+        private void cmb_Hora_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cmb_Minuto_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
 
         }
     }
