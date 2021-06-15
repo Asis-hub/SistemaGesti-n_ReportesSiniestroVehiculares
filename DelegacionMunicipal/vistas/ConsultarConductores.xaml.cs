@@ -46,6 +46,10 @@ namespace DelegacionMunicipal.vistas
                 Conductor conductorEdicion = conductores[indice];
                 AbrirFormulario(false, conductorEdicion);
             }
+            else
+            {
+                ActualizaInformacion("Para editar un conductor debes seleccionarlo", "Sin selección");
+            }
         }
 
         private void btn_EliminarConductor_Click(object sender, RoutedEventArgs e)
@@ -53,12 +57,24 @@ namespace DelegacionMunicipal.vistas
             int indice = tbl_Conductores.SelectedIndex;
             if (indice >= 0)
             {
-                int resultado = ConductorDAO.EliminarConductor(conductores[indice].NumeroLicencia);
-                if (resultado == 1)
+                Conductor conductorEliminar = conductores[indice];
+                MessageBoxResult resultado = MessageBox.Show("¿Estás seguro de eliminar el conductor " + conductorEliminar.NombreCompleto + "?",
+                    "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if(resultado == MessageBoxResult.OK)
                 {
-                    CargarTablaConductores();
+                    ConductorDAO.EliminarConductor(conductorEliminar.NumeroLicencia);
+                    Console.WriteLine("BOTON OK");
+                }
+                else
+                {
+                    Console.WriteLine("BOTON CANCELAR");
                 }
             }
+            else
+            {
+                ActualizaInformacion("Para eliminar un conductor debes seleccionarlo", "Sin selección");
+            }
+            CargarTablaConductores();
         }
 
         private void CargarTablaConductores()

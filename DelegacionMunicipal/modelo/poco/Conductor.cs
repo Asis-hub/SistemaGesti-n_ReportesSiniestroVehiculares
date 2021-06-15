@@ -24,7 +24,7 @@ namespace DelegacionMunicipal.modelo.poco
 
         public override string ToString()
         {
-            return numeroLicencia + " - " + nombreCompleto;
+            return nombreCompleto + " con número de licencia " + NumeroLicencia;
         }
     }
 }

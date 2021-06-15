@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DireccionGeneral.vistas
     /// <summary>
     /// Lógica de interacción para ConsultarUsuarios.xaml
     /// </summary>
-    public partial class ConsultarUsuarios : Page
+    public partial class ConsultarUsuarios : Page , ObserverRespuesta
     {
         List<Usuario> usuarios;
 
@@ -18,7 +19,7 @@ namespace DireccionGeneral.vistas
         {
             InitializeComponent();
             usuarios = new List<Usuario>();
-            CargarTabla();
+            CargarTablaUsuarios();
         }
 
         private void btn_RegistrarUsuario_Click(object sender, RoutedEventArgs e)
@@ -33,23 +34,39 @@ namespace DireccionGeneral.vistas
             {
                 AbrirFormulario(false, usuarios[seleccion]);
             }
+            else
+            {
+                ActualizaInformacion("Para editar un usuario debes seleccionarlo", "Sin selección");
+            }
         }
 
         private void btn_EliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
-            if(tbl_Usuarios.SelectedIndex >= 0)
+            int indice = tbl_Usuarios.SelectedIndex;
+            if (indice >= 0)
             {
-                string username = ((Usuario)tbl_Usuarios.SelectedItem).Username;
-                int resultado = UsuarioDAO.EliminarUsuario(username);
-                if(resultado == 1)
+                Usuario usuarioEliminar = usuarios[indice];
+                MessageBoxResult resultado = MessageBox.Show("¿Estás seguro de eliminar el usuario " + usuarioEliminar.Username +
+                    " perteneciente a " + usuarioEliminar.NombreCompleto + "?",
+                    "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (resultado == MessageBoxResult.OK)
                 {
-                    MessageBox.Show("El usuario fue eliminado exitosamente.", "Usuario eliminado");
+                    UsuarioDAO.EliminarUsuario(usuarioEliminar.Username);
+                    Console.WriteLine("BOTON OK");
                 }
-                CargarTabla();
+                else
+                {
+                    Console.WriteLine("BOTON CANCELAR");
+                }
             }
+            else
+            {
+                ActualizaInformacion("Para eliminar un usuario debes seleccionarlo", "Sin selección");
+            }
+            CargarTablaUsuarios();
         }
 
-        public void CargarTabla()
+        public void CargarTablaUsuarios()
         {
             usuarios = UsuarioDAO.ConsultarUsuarios();
             tbl_Usuarios.ItemsSource = usuarios;
@@ -61,21 +78,23 @@ namespace DireccionGeneral.vistas
 
             if (nuevo)
             {
-                formularioUsuario = new FormUsuario();
+                formularioUsuario = new FormUsuario(this);
             }
             else
             {
-                formularioUsuario = new FormUsuario(usuario);
+                formularioUsuario = new FormUsuario(usuario, this);
             }
 
             formularioUsuario.Owner = Window.GetWindow(this);
             bool? resultado = formularioUsuario.ShowDialog();
-
             if (resultado == true)
             {
-                CargarTabla();
+                CargarTablaUsuarios();
             }
         }
-
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
+        }
     }
 }

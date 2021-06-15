@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.interfaz
 {
-    interface ObserverRespuesta
+    public interface ObserverRespuesta
     {
         void ActualizaInformacion(string contenido, String titulo);
     }

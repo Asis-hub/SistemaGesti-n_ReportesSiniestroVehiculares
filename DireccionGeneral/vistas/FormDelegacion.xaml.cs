@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,9 @@ namespace DireccionGeneral.vistas
         private List<DelegacionTipo> tiposDelegacion;
         private Delegacion delegacionEdicion;
         private bool esNuevo;
+        private ObserverRespuesta notificacion;
 
-        public FormDelegacion()
+        public FormDelegacion(ObserverRespuesta notificacion)
         {
             InitializeComponent();
             esNuevo = true;
@@ -25,9 +27,10 @@ namespace DireccionGeneral.vistas
             tiposDelegacion = new List<DelegacionTipo>();
             CargarCmb_Municipios();
             CargarCmb_TiposDelegacion();
+            this.notificacion = notificacion;
         }
 
-        public FormDelegacion(Delegacion delegacionEdicion) : this()
+        public FormDelegacion(Delegacion delegacionEdicion, ObserverRespuesta notificacion) : this(notificacion)
         {
             this.delegacionEdicion = delegacionEdicion;
             esNuevo = false;
@@ -82,13 +85,13 @@ namespace DireccionGeneral.vistas
 
                 if (resultado == 1)
                 {
-                    MessageBox.Show("Delegacion registrada correctamente", "Delegacion registrada");
+                    notificacion.ActualizaInformacion("Delegacion registrada correctamente", "Delegacion registrada");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else if (resultado == -1)
                 {
-                    MessageBox.Show("La delegacion ya se encuentra registrada", "Delegacion no registrada");
+                    notificacion.ActualizaInformacion("La delegacion ya se encuentra registrada", "Delegacion no registrada");
                 }
             }
             
@@ -118,12 +121,12 @@ namespace DireccionGeneral.vistas
             if (txt_Nombre.Text.Length == 0 || txt_CodigoPostal.Text.Length == 0 || txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 ||
                 txt_Correo.Text.Length == 0 || txt_Numero.Text.Length == 0 || !(cmb_Municipio.SelectedIndex >= 0) || !(cmb_Tipo.SelectedIndex >= 0))
             {
-                MessageBox.Show("Faltan campos por llenar, favor de intentar de nuevo", "Campos faltantes", button: MessageBoxButton.OK);
+                notificacion.ActualizaInformacion("Faltan campos por llenar, favor de intentar de nuevo", "Campos faltantes");
                 return false;
             }
             if (!validarCorreo(txt_Correo.Text))
             {
-                MessageBox.Show("Correo no válido, intentar de nuevo", "Correo no válido", button: MessageBoxButton.OK);
+                notificacion.ActualizaInformacion("Correo no válido, intentar de nuevo", "Correo no válido");
                 return false;
             }
 
