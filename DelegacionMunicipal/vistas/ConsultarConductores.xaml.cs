@@ -46,8 +46,6 @@ namespace DelegacionMunicipal.vistas
                 Conductor conductorEdicion = conductores[indice];
                 AbrirFormulario(false, conductorEdicion);
             }
-
-            
         }
 
         private void btn_EliminarConductor_Click(object sender, RoutedEventArgs e)

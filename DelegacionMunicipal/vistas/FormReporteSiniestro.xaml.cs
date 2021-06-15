@@ -18,75 +18,83 @@ namespace DelegacionMunicipal.vistas
     
     public partial class FormReporteSiniestro : Window
     {
-        List<string> listaVehiculos;
-        string licencia;
-        Usuario usuarioConectado;
+        private Usuario usuarioConectado;
+        private List<Vehiculo> listaVehiculosInvolucrados;
+        private List<Vehiculo> listaVehiculos;
+        private List<Delegacion> listaDelegaciones;
+        private List<string> listaImagenes;
+
+        
         //List<string> fotos;
         string[] fotos = new string[8];
         OpenFileDialog openFileDialog;
         public FormReporteSiniestro(Usuario usuarioConectado)
         {
             InitializeComponent();
+            this.usuarioConectado = usuarioConectado;
+            listaVehiculosInvolucrados = new List<Vehiculo>();
+            listaDelegaciones = new List<Delegacion>();
+            listaVehiculosInvolucrados = new List<Vehiculo>();
+            listaImagenes = new List<string>();
+            dpc_fecha.DisplayDateEnd = DateTime.Now;
+
             CargarListaConductores();
             cargarDelegaciones();
             //cargarBotones();
-            this.usuarioConectado = usuarioConectado;
+            
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
-
-            
-            
         }
 
         private void CargarListaConductores()
         {
             cmb_Conductor.Items.Clear();
-            cmb_Conductor.Items.Add("Conductor");
             List<Conductor> listaConductores = ConductorDAO.ConsultarConductores();
-            foreach (Conductor conductor in listaConductores)
-            {
-                cmb_Conductor.Items.Add(conductor);
-            }
-
-            
+            cmb_Conductor.ItemsSource = listaConductores;
         }
 
         private void CargarVehiculos()
         {
-            licencia = cmb_Conductor.SelectedItem.ToString();
-            cmb_Vehiculo.Items.Clear();
-            cmb_Vehiculo.Items.Add("Vehiculo");
-            List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosConductor(licencia);
-            foreach (Vehiculo vehiculo in listaVehiculos)
+            if(cmb_Conductor.SelectedIndex >= 0)
             {
-                cmb_Vehiculo.Items.Add(vehiculo.NumPlaca);
+                string licencia = ((Conductor)cmb_Conductor.SelectedItem).NumeroLicencia;
+                listaVehiculos = VehiculoDAO.ConsultarVehiculosConductor(licencia);
+                cmb_Vehiculo.ItemsSource = listaVehiculos;
             }
-
         }
 
         private void cargarDelegaciones()
         {
-            cmb_delegacion.Items.Clear();
-            cmb_delegacion.Items.Add("Delegacion");
-            List<Delegacion> listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
-            foreach (Delegacion delegacion in listaDelegaciones)
-            {
-                cmb_delegacion.Items.Add(delegacion.Municipio);
-            }
+            listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
+            cmb_delegacion.ItemsSource = listaDelegaciones;
         }
-
-
 
         private void btn_AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
-            
-            lb_VehiculosInvolucrados.Items.Add(cmb_Vehiculo.SelectedItem.ToString());
-
-
-
+            int seleccion = cmb_Vehiculo.SelectedIndex;
+            if(seleccion >= 0)
+            {
+                int resultado = listaVehiculosInvolucrados.FindIndex(x => x.NumPlaca == listaVehiculos[seleccion].NumPlaca);
+                if(resultado == -1)
+                {
+                    listaVehiculosInvolucrados.Add(listaVehiculos[seleccion]);
+                    tbl_VehiculosInvolucrados.ItemsSource = null;
+                    tbl_VehiculosInvolucrados.ItemsSource = listaVehiculosInvolucrados;
+                }
+            }
         }
 
-        
+        private void btn_RemoverVehiculo_Click(object sender, RoutedEventArgs e)
+        {
+            int seleccion = tbl_VehiculosInvolucrados.SelectedIndex;
+            if (seleccion >= 0)
+            {
+                listaVehiculosInvolucrados.RemoveAt(seleccion);
+                tbl_VehiculosInvolucrados.ItemsSource = null;
+                tbl_VehiculosInvolucrados.ItemsSource = listaVehiculosInvolucrados;
+            }
+        }
+
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
         {
@@ -97,54 +105,63 @@ namespace DelegacionMunicipal.vistas
             {
                 ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
 
-                
-
-
-                reporteSiniestro.Calle = txt_Calle.Text.ToString();
-                reporteSiniestro.Numero = txt_Numero.Text.ToString();
-                reporteSiniestro.Colonia = txt_Colonia.Text.ToString();
-                
+                reporteSiniestro.Calle = txt_Calle.Text;
+                reporteSiniestro.Numero = txt_Numero.Text;
+                reporteSiniestro.Colonia = txt_Colonia.Text;
                 reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, int.Parse(cmb_Hora.Text), int.Parse(cmb_Minuto.Text), 0);
-               
+                reporteSiniestro.FechaRegistro = DateTime.Now;
                 reporteSiniestro.IdDelegacion = cmb_delegacion.SelectedIndex;
                 reporteSiniestro.Username = usuarioConectado.Username;
                 reporteSiniestro.Dictamen = false;
-                
                 reporteSiniestro.IdReporte = ReporteSiniestroDAO.RegistrarReporte(reporteSiniestro);
                 
-
-                foreach (string vehiculo in lb_VehiculosInvolucrados.Items)
+                if (reporteSiniestro.IdReporte > 0)
                 {
-                    VehiculosInvolucradosDAO.InsertarVehiculo(vehiculo, reporteSiniestro.IdReporte);
+                    foreach (Vehiculo vehiculoInvolucrado in listaVehiculosInvolucrados)
+                    {
+                        VehiculosInvolucradosDAO.InsertarVehiculo(vehiculoInvolucrado.NumPlaca, reporteSiniestro.IdReporte);
+                    }
+                    listaImagenes.Clear();
+                    foreach (ContenedorImagen imagenSeleccionada in pnl_Imagenes.Children)
+                    {
+                        listaImagenes.Add(imagenSeleccionada.RutaImagen);
+                    }
+                    FotografiaDAO.InsertarFotografias(listaImagenes, reporteSiniestro.IdReporte);
 
+                    //notificacion
+                    this.DialogResult = true;
+                    this.Close();
                 }
-
-                int identificador = FotografiaDAO.InsertarFotografia(reporteSiniestro.IdReporte);
-
-                Console.WriteLine(identificador.ToString());
-                
-              
-
-
             }
-
-
         }
 
         private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
         {
-            //Cerrar ventana
+            this.DialogResult = false;
+            this.Close();
         }
 
         private bool ValidarFormulario()
         {
+            bool esValido = true;
+
             if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0)
             {
                 MessageBox.Show("Debes llenar todos los campos");
-                return false;
+                esValido = false;
+            }
+            else if (pnl_Imagenes.Children.Count < 3)//Validacion del minimo de imagenes
+            {
+                //notificacionç
+                esValido = false;
+            }
+            else if (listaVehiculosInvolucrados.Count < 1)//no son suficientes vehiculos
+            {
+                //notificacion
+                esValido = false;
             }
 
-            return true;
+            return esValido;
         }
 
        
@@ -152,8 +169,6 @@ namespace DelegacionMunicipal.vistas
         private void cmb_Conductor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             CargarVehiculos();
-            
-
         }
 
         private void cargarBotones()
@@ -167,10 +182,6 @@ namespace DelegacionMunicipal.vistas
             {
                 cambiarSinPresionar(btn_img1);
             }*/
-
-
-
-
         }
 
         private void cambiarPresionado(Button button)
@@ -199,224 +210,65 @@ namespace DelegacionMunicipal.vistas
 
         }
 
-        private void mostrarLista_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (string ruta in fotos)
-            {
-                //Console.WriteLine(ruta);
-                int x = FotografiaDAO.InsertarFotografia(1);
-                //Console.WriteLine(x);
-                ConectorFTP.insertarFoto(ruta,x.ToString());
 
+        private void btn_SeleccionImagenes_Click(object sender, RoutedEventArgs e)
+        {
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+            openFileDialog.Multiselect = true;
+            if (pnl_Imagenes.Children.Count < 8)
+            {
+                openFileDialog.ShowDialog();
+                int cantidadImagenes = openFileDialog.FileNames.Length;
+
+                for (int indice = 0; indice < cantidadImagenes && pnl_Imagenes.Children.Count < 8; indice++)
+                {
+                    ContenedorImagen imagenSeleccionada = new ContenedorImagen(openFileDialog.FileNames[indice], pnl_Imagenes);
+                    pnl_Imagenes.Children.Add(imagenSeleccionada);
+                }
             }
         }
 
-        private void btn_img0_Click(object sender, RoutedEventArgs e)
+        
+
+    }
+
+    public class ContenedorImagen : StackPanel
+    {
+        private string rutaImagen;
+        private Image imagen;
+        private Button btn_Eliminar;
+        private StackPanel contenedorPadre;
+
+        public ContenedorImagen(string rutaImagen, StackPanel contenedorPadre)
         {
-            if (img0.Source != null)
-            {
-
-                fotos[0] = null;
-                img0.Source = null;
-                cambiarSinPresionar(btn_img0);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[0] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img0);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img0.Source = new BitmapImage(uri);
-
-            }
+            this.rutaImagen = rutaImagen;
+            this.contenedorPadre = contenedorPadre;
+            CargarComponente();
         }
 
-        private void btn_img1_Click(object sender, RoutedEventArgs e)
+        public string RutaImagen { get => rutaImagen;}
+
+        private void CargarComponente()
         {
-            if (img1.Source != null)
-            {
+            imagen = new Image();
+            imagen.Source = new BitmapImage(new Uri(RutaImagen));
+            imagen.Height = 180;
+            
 
-                fotos[1] = null;
-                img1.Source = null;
-                cambiarSinPresionar(btn_img1);
+            btn_Eliminar = new Button();
+            btn_Eliminar.Content = "Quitar";
+            btn_Eliminar.HorizontalAlignment = HorizontalAlignment.Right;
+            btn_Eliminar.Click += new RoutedEventHandler(EliminarImagen);
 
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[1] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img1);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img1.Source = new BitmapImage(uri);
-
-            }
+            this.Children.Add(btn_Eliminar);
+            this.Children.Add(imagen);
         }
 
-        private void btn_img2_Click(object sender, RoutedEventArgs e)
+        private void EliminarImagen(object sender, RoutedEventArgs e)
         {
-            if (img2.Source != null)
-            {
-
-                fotos[2] = null;
-                img2.Source = null;
-                cambiarSinPresionar(btn_img2);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[2] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img2);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img2.Source = new BitmapImage(uri);
-
-            }
-        }
-
-        private void btn_img3_Click(object sender, RoutedEventArgs e)
-        {
-            if (img3.Source != null)
-            {
-
-                fotos[3] = null;
-                img3.Source = null;
-                cambiarSinPresionar(btn_img3);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[3] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img3);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img3.Source = new BitmapImage(uri);
-
-            }
-        }
-
-        private void btn_img4_Click(object sender, RoutedEventArgs e)
-        {
-            if (img4.Source != null)
-            {
-
-                fotos[4] = null;
-                img4.Source = null;
-                cambiarSinPresionar(btn_img4);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[4] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img4);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img4.Source = new BitmapImage(uri);
-
-            }
-        }
-
-        private void btn_img5_Click(object sender, RoutedEventArgs e)
-        {
-            if (img5.Source != null)
-            {
-
-                fotos[5] = null;
-                img5.Source = null;
-                cambiarSinPresionar(btn_img5);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[5] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img5);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img5.Source = new BitmapImage(uri);
-
-            }
-        }
-
-        private void btn_img6_Click(object sender, RoutedEventArgs e)
-        {
-            if (img6.Source != null)
-            {
-
-                fotos[6] = null;
-                img6.Source = null;
-                cambiarSinPresionar(btn_img6);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[6] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img6);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img6.Source = new BitmapImage(uri);
-
-            }
-        }
-
-        private void btn_img7_Click(object sender, RoutedEventArgs e)
-        {
-            if (img7.Source != null)
-            {
-
-                fotos[7] = null;
-                img7.Source = null;
-                cambiarSinPresionar(btn_img7);
-
-            }
-            else
-            {
-                openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
-                openFileDialog.ShowDialog();
-
-                fotos[7] = openFileDialog.FileName;
-
-                cambiarPresionado(btn_img7);
-
-                Uri uri = new Uri(openFileDialog.FileName);
-                img7.Source = new BitmapImage(uri);
-
-            }
+            contenedorPadre.Children.Remove(this);
         }
     }
+
 }

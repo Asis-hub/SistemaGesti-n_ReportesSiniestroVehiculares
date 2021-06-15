@@ -70,8 +70,7 @@ namespace Servidor.modelo.dao
 
                     if (resultado.Read())
                     {
-                        Console.WriteLine(resultado[0].ToString());
-                        //identificador = int.Parse((!resultado.IsDBNull(0) ? resultado[0].ToString() : "0"));
+                        identificador = int.Parse(!resultado.IsDBNull(0) ? resultado[0].ToString() : "0");
                     }
                     comando.Dispose();
                 }

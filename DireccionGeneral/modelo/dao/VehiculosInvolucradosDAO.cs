@@ -19,7 +19,7 @@ namespace DireccionGeneral.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.VehiculosInvolucrados;
 
-            paquete.Consulta = String.Format("insert into vehiculosInvolucrados values ('uvj4064', " + idReporte.ToString() + ");");
+            paquete.Consulta = String.Format("insert into vehiculosInvolucrados values ('{0}', {1})", numeroPlaca, idReporte);
 
             string mensaje = JsonSerializer.Serialize(paquete);
             socket.IniciarConexion();

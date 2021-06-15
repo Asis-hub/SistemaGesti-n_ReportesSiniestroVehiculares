@@ -14,33 +14,29 @@
         <ComboBox x:Name="cmb_Vehiculo" HorizontalAlignment="Left" Margin="361,52,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btn_AgregarVehiculo" Content="Agregar" HorizontalAlignment="Left" Margin="504,52,0,0" VerticalAlignment="Top" Width="74" Click="btn_AgregarVehiculo_Click" RenderTransformOrigin="-0.5,0.7"/>
 
-        <Label Content="Vehiculos involucrados" HorizontalAlignment="Left" Margin="602,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.12,0.2"/>
+        <Label Content="Vehiculos involucrados" HorizontalAlignment="Left" Margin="53,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.12,0.2" Width="159"/>
 
 
-        <Label Content="Dirección" HorizontalAlignment="Left" Margin="91,111,0,0" VerticalAlignment="Top"/>
-        <Label Content="Colonia:" HorizontalAlignment="Left" Margin="14,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,0.435"/>
-        <TextBox x:Name="txt_Colonia" HorizontalAlignment="Left" Height="23" Margin="138,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Calle:" HorizontalAlignment="Left" Margin="14,186,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="23" Margin="138,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Número:" HorizontalAlignment="Left" Margin="14,224,0,0" VerticalAlignment="Top" Width="71"/>
-        <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="23" Margin="138,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Imágenes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,303,0,0"/>
+        <Label Content="Dirección" HorizontalAlignment="Left" Margin="28,254,0,0" VerticalAlignment="Top"/>
+        <Label Content="Colonia:" HorizontalAlignment="Left" Margin="25,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,0.435"/>
+        <TextBox x:Name="txt_Colonia" HorizontalAlignment="Left" Height="23" Margin="149,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Calle:" HorizontalAlignment="Left" Margin="25,327,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="23" Margin="149,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Número:" HorizontalAlignment="Left" Margin="25,365,0,0" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="23" Margin="149,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Imágenes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,444,0,0"/>
 
 
-        <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Left" Margin="602,596,0,0" VerticalAlignment="Top" Width="75" Click="btn_RegistrarReporte_Click"/>
-        <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="720,596,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
-        <ListBox x:Name="lb_VehiculosInvolucrados" HorizontalAlignment="Left" Height="72" Margin="611,36,0,0" VerticalAlignment="Top" Width="197"/>
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="img0" HorizontalAlignment="Left" Height="100" Margin="29,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <DatePicker x:Name="dpc_fecha" HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top" Width="228"/>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
-        <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_Minuto" HorizontalAlignment="Left" Margin="445,195,0,0" VerticalAlignment="Top" Width="74" SelectionChanged="cmb_Minuto_SelectionChanged">
+        <DatePicker x:Name="dpc_fecha" HorizontalAlignment="Left" Margin="372,288,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="314,288,0,0" VerticalAlignment="Top"/>
+        <Label Content="Hora" HorizontalAlignment="Left" Margin="319,332,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_Minuto" HorizontalAlignment="Left" Margin="456,336,0,0" VerticalAlignment="Top" Width="74" SelectionChanged="cmb_Minuto_SelectionChanged">
             <ListBoxItem Content="Minuto"/>
             <ListBoxItem Content="00"/>
             <ListBoxItem Content="30"/>
         </ComboBox>
-        <ComboBox x:Name="cmb_Hora" HorizontalAlignment="Left" Margin="361,195,0,0" VerticalAlignment="Top" Width="61" SelectionChanged="cmb_Hora_SelectionChanged">
+        <ComboBox x:Name="cmb_Hora" HorizontalAlignment="Left" Margin="372,336,0,0" VerticalAlignment="Top" Width="61" SelectionChanged="cmb_Hora_SelectionChanged">
             <ListBoxItem Content="Hora"/>
             <ListBoxItem Content="01"/>
             <ListBoxItem Content="02"/>
@@ -56,24 +52,28 @@
             <ListBoxItem Content="12"/>
         </ComboBox>
         <Label Content=":" HorizontalAlignment="Left" Margin="427,191,0,0" VerticalAlignment="Top"/>
-        <Label Content="Delegacion" HorizontalAlignment="Left" Margin="14,272,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="138,276,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btn_img0" Content="Agregar imagen" HorizontalAlignment="Left" Margin="29,359,0,0" VerticalAlignment="Top" Width="102" Click="btn_img0_Click" Height="22"/>
-        <Button x:Name="btn_img1" Content="Agregar imagen" HorizontalAlignment="Left" Margin="158,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img1_Click"/>
-        <Image x:Name="img1" HorizontalAlignment="Left" Height="100" Margin="158,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="mostrarLista" Content="Button" HorizontalAlignment="Left" Margin="622,288,0,0" VerticalAlignment="Top" Width="75" Click="mostrarLista_Click"/>
-        <Button x:Name="btn_img2" Content="Agregar imagen" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img2_Click"/>
-        <Image x:Name="img2" HorizontalAlignment="Left" Height="100" Margin="280,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="img3" HorizontalAlignment="Left" Height="100" Margin="405,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img3" Content="Agregar imagen" HorizontalAlignment="Left" Margin="406,361,0,0" VerticalAlignment="Top" Width="99" Click="btn_img3_Click"/>
-        <Button x:Name="btn_img4" Content="Agregar imagen" HorizontalAlignment="Left" Margin="526,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img4_Click"/>
-        <Image x:Name="img4" HorizontalAlignment="Left" Height="100" Margin="526,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img5" Content="Agregar imagen" HorizontalAlignment="Left" Margin="643,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img5_Click"/>
-        <Image x:Name="img5" HorizontalAlignment="Left" Height="100" Margin="643,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="img6" HorizontalAlignment="Left" Height="100" Margin="765,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img6" Content="Agregar imagen" HorizontalAlignment="Left" Margin="765,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img6_Click"/>
-        <Image x:Name="img7" HorizontalAlignment="Left" Height="100" Margin="887,386,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_img7" Content="Agregar imagen" HorizontalAlignment="Left" Margin="887,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img7_Click"/>
+        <Label Content="Delegacion" HorizontalAlignment="Left" Margin="25,413,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="149,417,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="tbl_VehiculosInvolucrados" HorizontalAlignment="Left" ColumnWidth="*" Height="100" Margin="53,130,0,0" VerticalAlignment="Top" Width="525"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Matricula" Binding="{Binding NumPlaca}"/>
+                <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"/>
+                <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}"/>
+                <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+                <DataGridTextColumn Header="Poliza" Binding="{Binding NumPolizaSeguro}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btn_RemoverVehiculo" Content="Remover Vehiculo" HorizontalAlignment="Left" Margin="446,99,0,0" VerticalAlignment="Top" Width="132" Click="btn_RemoverVehiculo_Click"/>
+        <Label Content="Imagenes" HorizontalAlignment="Left" Margin="639,48,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button x:Name="btn_SeleccionarImagenes" Content="Agregar imagen" HorizontalAlignment="Left" Margin="642,97,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btn_SeleccionImagenes_Click"/>
+        <Border BorderBrush="#FF918C8C" BorderThickness="1">
+            <ScrollViewer x:Name="scroll_Imagenes" Margin="610,130,20,80" VerticalScrollBarVisibility="Auto" >
+                <StackPanel Background="#F5F5F5" x:Name="pnl_Imagenes"/>
+            </ScrollViewer>
+        </Border>
+
+        <Button x:Name="btn_RegistrarReporte" Content="Registrar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,120,20" FontSize="16" Width="75" Click="btn_RegistrarReporte_Click"/>
+        <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,20" FontSize="16" Width="75" Click="btn_CancelarRegistro_Click"/>
 
     </Grid>
 </Window>

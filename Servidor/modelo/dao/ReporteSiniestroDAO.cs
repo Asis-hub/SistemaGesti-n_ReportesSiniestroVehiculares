@@ -109,12 +109,8 @@ namespace Servidor.modelo.dao
 
                     if (resultado.Read())
                     {
-                        //Console.WriteLine(resultado);
-
-                        identificador = int.Parse((!resultado.IsDBNull(0) ? resultado[0].ToString() : "0"));
-
+                        identificador = int.Parse(!resultado.IsDBNull(0) ? resultado[0].ToString() : "0");
                     }
-
                     comando.Dispose();
                 }
             }
@@ -130,7 +126,6 @@ namespace Servidor.modelo.dao
                     conexionDB.Close();
                 }
             }
-
             return identificador;
         }
 

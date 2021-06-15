@@ -96,6 +96,7 @@
     <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />
     <Compile Include="modelo\dao\DictamenDAO.cs" />
     <Compile Include="modelo\dao\FotografiaDAO.cs" />
+    <Compile Include="modelo\dao\ftp\ConexionFTP.cs" />
     <Compile Include="modelo\dao\MunicipioDAO.cs" />
     <Compile Include="modelo\dao\ReporteSiniestroDAO.cs" />
     <Compile Include="modelo\dao\UsuarioDAO.cs" />
