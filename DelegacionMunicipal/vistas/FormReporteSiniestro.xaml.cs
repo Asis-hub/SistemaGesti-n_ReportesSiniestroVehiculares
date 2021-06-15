@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -20,19 +21,19 @@ namespace DelegacionMunicipal.vistas
         List<string> listaVehiculos;
         string licencia;
         Usuario usuarioConectado;
-        List<string> fotos;
+        //List<string> fotos;
+        string[] fotos = new string[8];
         OpenFileDialog openFileDialog;
         public FormReporteSiniestro(Usuario usuarioConectado)
         {
             InitializeComponent();
             CargarListaConductores();
             cargarDelegaciones();
-            cargarBotones();
+            //cargarBotones();
             this.usuarioConectado = usuarioConectado;
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
 
-            fotos = new List<string>();
             
             
         }
@@ -157,43 +158,88 @@ namespace DelegacionMunicipal.vistas
 
         private void cargarBotones()
         {
-            if (img1.Source !=null)
+           /* if (img1.Source !=null)
             {
-                btn_img1.Content = "Eliminar imagen";
-                btn_img1.Background = Brushes.Red;
-                btn_img1.Foreground = Brushes.White;
+                cambiarPresionado(btn_img1);
+
             }
             else
             {
-                btn_img1.Content = "Agregar imagen";
-                btn_img1.Background = Brushes.White;
-                btn_img1.Foreground = Brushes.Black;
-            }
+                cambiarSinPresionar(btn_img1);
+            }*/
+
+
+
+
         }
 
-        private void btn_img1_Click(object sender, RoutedEventArgs e)
+        private void cambiarPresionado(Button button)
         {
-            if (img1.Source != null)
+            button.Content = "Eliminar imagen";
+            button.Background = Brushes.Red;
+            button.Foreground = Brushes.White;
+        }
+
+        private void cambiarSinPresionar(Button button)
+        {
+            button.Content = "Agregar imagen";
+            button.Background = Brushes.LightGray;
+            button.Foreground = Brushes.Black;
+        }
+
+        private void btn_img0_Click(object sender, RoutedEventArgs e)
+        {
+            if (img0.Source != null)
             {
-                img1.Source = null;
-                btn_img1.Content = "Agregar imagen";
-                btn_img1.Background = Brushes.White;
-                btn_img1.Foreground = Brushes.Black;
+                
+                fotos[0] = null;
+                img0.Source = null;
+                cambiarSinPresionar(btn_img0);
+             
             }
             else
             {
                 openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
                 openFileDialog.ShowDialog();
-                fotos.Add(openFileDialog.FileName);
-                btn_img1.Content = "Eliminar imagen";
-                btn_img1.Background = Brushes.Red;
-                btn_img1.Foreground = Brushes.White;
+                
+                fotos[0] = openFileDialog.FileName;
+                
+                cambiarPresionado(btn_img0);
+
                 Uri uri = new Uri(openFileDialog.FileName);
-                img1.Source = new BitmapImage(uri);
+                img0.Source = new BitmapImage(uri);
 
             }
             
+        }
+
+        
+
+        private void btn_img2_Click(object sender, RoutedEventArgs e)
+        {
+            if (img2.Source != null)
+            {
+                
+                fotos[1] = null;
+                img2.Source = null;
+                cambiarSinPresionar(btn_img2);
+
+            }
+            else
+            {
+                openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Imagenes(*.jpg) | *.jpg";
+                openFileDialog.ShowDialog();
+
+                fotos[1] = openFileDialog.FileName;
+
+                cambiarPresionado(btn_img2);
+
+                Uri uri = new Uri(openFileDialog.FileName);
+                img2.Source = new BitmapImage(uri);
+
+            }
         }
 
         private void cmb_Hora_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -204,6 +250,14 @@ namespace DelegacionMunicipal.vistas
         private void cmb_Minuto_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void mostrarLista_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (string ruta in fotos)
+            {
+                Console.WriteLine(ruta);
+            }
         }
     }
 }

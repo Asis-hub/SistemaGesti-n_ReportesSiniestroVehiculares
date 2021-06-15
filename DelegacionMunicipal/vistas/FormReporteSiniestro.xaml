@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegacionMunicipal.vistas"
         mc:Ignorable="d"
-        Title="Levantar Reporte de Siniestro" Height="683.729" Width="951.681">
+        Title="Levantar Reporte de Siniestro" Height="683.729" Width="1053.681">
     <Grid ScrollViewer.CanContentScroll="True" Margin="0,0,2,1">
         <Label Content="Seleccionar Vehiculo" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Conductor" HorizontalAlignment="Left" Margin="53,48,0,0" VerticalAlignment="Top"/>
@@ -31,7 +31,7 @@
         <Button x:Name="btn_CancelarRegistro" Content="Cancelar" HorizontalAlignment="Left" Margin="720,596,0,0" VerticalAlignment="Top" Width="75" Click="btn_CancelarRegistro_Click"/>
         <ListBox x:Name="lb_VehiculosInvolucrados" HorizontalAlignment="Left" Height="72" Margin="611,36,0,0" VerticalAlignment="Top" Width="197"/>
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="img1" HorizontalAlignment="Left" Height="100" Margin="29,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img0" HorizontalAlignment="Left" Height="100" Margin="29,386,0,0" VerticalAlignment="Top" Width="100"/>
         <DatePicker x:Name="dpc_fecha" HorizontalAlignment="Left" Margin="361,147,0,0" VerticalAlignment="Top" Width="228"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="303,147,0,0" VerticalAlignment="Top"/>
         <Label Content="Hora" HorizontalAlignment="Left" Margin="308,191,0,0" VerticalAlignment="Top"/>
@@ -58,7 +58,22 @@
         <Label Content=":" HorizontalAlignment="Left" Margin="427,191,0,0" VerticalAlignment="Top"/>
         <Label Content="Delegacion" HorizontalAlignment="Left" Margin="14,272,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="138,276,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btn_img1" Content="Agregar imagen" HorizontalAlignment="Left" Margin="29,359,0,0" VerticalAlignment="Top" Width="102" Click="btn_img1_Click" Height="22"/>
+        <Button x:Name="btn_img0" Content="Agregar imagen" HorizontalAlignment="Left" Margin="29,359,0,0" VerticalAlignment="Top" Width="102" Click="btn_img1_Click" Height="22"/>
+        <Button x:Name="btn_img1" Content="Agregar imagen" HorizontalAlignment="Left" Margin="158,361,0,0" VerticalAlignment="Top" Width="100" Click="btn_img2_Click"/>
+        <Image x:Name="img1" HorizontalAlignment="Left" Height="100" Margin="158,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="mostrarLista" Content="Button" HorizontalAlignment="Left" Margin="622,288,0,0" VerticalAlignment="Top" Width="75" Click="mostrarLista_Click"/>
+        <Button x:Name="btn_img2" Content="Agregar imagen" HorizontalAlignment="Left" Margin="280,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img2" HorizontalAlignment="Left" Height="100" Margin="280,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img3" HorizontalAlignment="Left" Height="100" Margin="405,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img3" Content="Agregar imagen" HorizontalAlignment="Left" Margin="406,361,0,0" VerticalAlignment="Top" Width="99"/>
+        <Button x:Name="btn_img4" Content="Agregar imagen" HorizontalAlignment="Left" Margin="526,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img4" HorizontalAlignment="Left" Height="100" Margin="526,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img5" Content="Agregar imagen" HorizontalAlignment="Left" Margin="643,361,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img5" HorizontalAlignment="Left" Height="100" Margin="643,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="img6" HorizontalAlignment="Left" Height="100" Margin="765,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img6" Content="Agregar imagen" HorizontalAlignment="Left" Margin="765,361,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <Image x:Name="img7" HorizontalAlignment="Left" Height="100" Margin="887,386,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_img7" Content="Agregar imagen" HorizontalAlignment="Left" Margin="887,361,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>
