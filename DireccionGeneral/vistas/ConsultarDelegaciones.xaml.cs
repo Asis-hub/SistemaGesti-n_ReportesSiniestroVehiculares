@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DireccionGeneral.vistas
     /// <summary>
     /// Lógica de interacción para ConsultarDelegaciones.xaml
     /// </summary>
-    public partial class ConsultarDelegaciones : Page
+    public partial class ConsultarDelegaciones : Page , ObserverRespuesta
     {
         List<Delegacion> delegaciones;
 
@@ -18,7 +19,7 @@ namespace DireccionGeneral.vistas
         {
             InitializeComponent();
             delegaciones = new List<Delegacion>();
-            CargarTabla();
+            CargarTablaDelegaciones();
         }
 
         private void btn_RegistrarDelegacion_Click(object sender, RoutedEventArgs e)
@@ -33,22 +34,38 @@ namespace DireccionGeneral.vistas
             {
                 AbrirFormulario(false, delegaciones[seleccion]);
             }
+            else
+            {
+                ActualizaInformacion("Para editar una delegación debes seleccionarlo", "Sin selección");
+            }
         }
 
         private void btn_EliminarDelgacion_Click(object sender, RoutedEventArgs e)
         {
-            int seleccion = tbl_Delegaciones.SelectedIndex;
-            if (seleccion >= 0)
+            int indice = tbl_Delegaciones.SelectedIndex;
+            if (indice >= 0)
             {
-                int resultado = DelegacionDAO.EliminarDelegacion(delegaciones[seleccion].IdDelegacion);
-                if (resultado == 1)
+                Delegacion delegacionEliminar = delegaciones[indice];
+                MessageBoxResult resultado = MessageBox.Show("¿Estás seguro de eliminar la delegación " + delegacionEliminar.Nombre + "del municipio " + delegacionEliminar.Municipio +"?",
+                    "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (resultado == MessageBoxResult.OK)
                 {
-                    CargarTabla();
+                    DelegacionDAO.EliminarDelegacion(delegacionEliminar.IdDelegacion);
+                    Console.WriteLine("BOTON OK");
+                }
+                else
+                {
+                    Console.WriteLine("BOTON CANCELAR");
                 }
             }
+            else
+            {
+                ActualizaInformacion("Para eliminar una delegación debes seleccionarlo", "Sin selección");
+            }
+            CargarTablaDelegaciones();
         }
 
-        public void CargarTabla()
+        public void CargarTablaDelegaciones()
         {
             delegaciones = DelegacionDAO.ConsultarDelegaciones();
             tbl_Delegaciones.ItemsSource = delegaciones;
@@ -60,18 +77,22 @@ namespace DireccionGeneral.vistas
 
             if (nuevo)
             {
-                formularioDelegacion = new FormDelegacion();
+                formularioDelegacion = new FormDelegacion(this);
             }
             else
             {
-                formularioDelegacion = new FormDelegacion(delegacion);
+                formularioDelegacion = new FormDelegacion(delegacion, this);
             }
             formularioDelegacion.Owner = Window.GetWindow(this);
             bool? resultado = formularioDelegacion.ShowDialog();
             if (resultado == true)
             {
-                CargarTabla();
+                CargarTablaDelegaciones();
             }
+        }
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
         }
     }
 }

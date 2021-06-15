@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,9 @@ namespace DireccionGeneral.vistas
         List<Delegacion> delegaciones;
         Usuario usuarioEdicion;
         bool esNuevo;
+        private ObserverRespuesta notificacion;
 
-        public FormUsuario()
+        public FormUsuario(ObserverRespuesta notificacion)
         {
             InitializeComponent();
             cargos = new List<Cargo>();
@@ -24,9 +26,10 @@ namespace DireccionGeneral.vistas
             CargarCmb_Cargo();
             CargarCmb_Delegacion();
             esNuevo = true;
+            this.notificacion = notificacion;
         }
 
-        public FormUsuario(Usuario usuarioEdicion) : this()
+        public FormUsuario(Usuario usuarioEdicion, ObserverRespuesta notificacion) : this(notificacion)
         {
             this.usuarioEdicion = usuarioEdicion;
             esNuevo = false;
@@ -70,13 +73,13 @@ namespace DireccionGeneral.vistas
 
                 if (resultado == 1)
                 {
-                    MessageBox.Show(usuario.NombreCompleto + " se registró correctamente","Usuario registrado");
+                    notificacion.ActualizaInformacion(usuario.NombreCompleto + " se registró correctamente","Usuario registrado");
                     this.DialogResult = true;
                     this.Close();
                 } 
                 else if (resultado == -1)
                 {
-                    MessageBox.Show(usuario.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
+                    notificacion.ActualizaInformacion(usuario.NombreCompleto + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }
@@ -104,20 +107,19 @@ namespace DireccionGeneral.vistas
             if (txt_Usuario.Text.Length == 0 || txt_Nombre.Text.Length == 0 || txt_Contraseña.Password.Length == 0 || 
                 txt_ContraseñaConfirmacion.Password.Length == 0 || !(cmb_Cargo.SelectedIndex >= 0) || !(cmb_Delegacion.SelectedIndex >= 0))
             {
-                MessageBox.Show("Faltan campos por llenar, favor de intentar de nuevo", "Campos faltantes", button: MessageBoxButton.OK);
+                notificacion.ActualizaInformacion("Faltan campos por llenar, favor de intentar de nuevo", "Campos faltantes");
                 return false;
             }
             if (!ValidarPassword())
             {
-                MessageBox.Show("La contraseña y su confirmación no coinciden, favor de intentar de nuevo", "Contraseñas no coinciden", button: MessageBoxButton.OK);
+                notificacion.ActualizaInformacion("La contraseña y su confirmación no coinciden, favor de intentar de nuevo", "Contraseñas no coinciden");
                 return false;
             }
             if (txt_Usuario.Text.Contains(" ") || txt_Usuario.Text.Contains(" "))
             {
-                MessageBox.Show("El usuario o contraseña no pueden tener espacios en blancos, favor de intentar de nuevo", "Espacios en blanco no permitidos", button: MessageBoxButton.OK);
+                notificacion.ActualizaInformacion("El usuario o contraseña no pueden tener espacios en blancos, favor de intentar de nuevo", "Espacios en blanco no permitidos");
                 return false;
             }
-
             return true;
         }
 
