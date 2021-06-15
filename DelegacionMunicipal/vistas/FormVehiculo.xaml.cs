@@ -1,4 +1,5 @@
-﻿using DelegacionMunicipal.modelo.dao;
+﻿using DelegacionMunicipal.interfaz;
+using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,18 @@ namespace DelegacionMunicipal.vistas
         private List<Conductor> conductores;
         private Vehiculo vehiculoEdicion;
         private bool esNuevo;
+        private ObserverRespuesta notificacion;
 
-        public FormVehiculo()
+        public FormVehiculo(ObserverRespuesta notificacion)
         {
             InitializeComponent();
             esNuevo = true;
             conductores = new List<Conductor>();
             CargarCmb_Conductores();
+            this.notificacion = notificacion;
         }
 
-        public FormVehiculo(Vehiculo vehiculoEdicion) : this()
+        public FormVehiculo(Vehiculo vehiculoEdicion, ObserverRespuesta notificacion) : this(notificacion)
         {
             this.vehiculoEdicion = vehiculoEdicion;
             esNuevo = false;
@@ -74,20 +77,19 @@ namespace DelegacionMunicipal.vistas
 
                 if (resultado == 1)
                 {
-                    MessageBox.Show("vehiculo con placas: " + vehiculo.NumPlaca + " se registró correctamente", "Vehículo registrado");
+                    notificacion.ActualizaInformacion("vehiculo con placas: " + vehiculo.NumPlaca + " se registró correctamente", "Vehículo registrado");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else if (resultado == -1)
                 {
-                    MessageBox.Show("vehiculo con placas: " + vehiculo.NumPlaca + " ya se encuentra registrado en el sistema", "Registro duplicado");
+                    notificacion.ActualizaInformacion("vehiculo con placas: " + vehiculo.NumPlaca + " ya se encuentra registrado en el sistema", "Registro duplicado");
                 }
             }
         }
 
         private void btn_CancelarRegistro_Click(object sender, RoutedEventArgs e)
         {
-
             this.DialogResult = false;
             this.Close();
         }
@@ -100,22 +102,22 @@ namespace DelegacionMunicipal.vistas
 
         private bool ValidarFormulario()
         {
-            if (txt_NoPlacas.Text.Length == 0)
+            if (txt_NoPlacas.Text.Length == 0 || txt_Marca.Text.Length == 0 || txt_Modelo.Text.Length == 0 || txt_Color.Text.Length == 0 || 
+                txt_Anio.Text.Length == 0 || !(cmb_Conductores.SelectedIndex >= 0))
+            {
+                notificacion.ActualizaInformacion("Debes llenar todos los campos", "Faltan campos por llenar");
                 return false;
-            if (txt_Marca.Text.Length == 0)
+            }
+            if (txt_Poliza.Text.Length > 0 && txt_Aseguradora.Text.Length == 0)
+            {
+                notificacion.ActualizaInformacion("Debes ingresar el nombre de la aseguradora que proporcionó la póliza", "Falta ingresar aseguradora");
                 return false;
-            if (txt_Modelo.Text.Length == 0)
+            }
+            if (txt_Aseguradora.Text.Length > 0 && txt_Poliza.Text.Length == 0)
+            {
+                notificacion.ActualizaInformacion("Debes ingresar el número de poliza", "Falta ingresar número de póliza");
                 return false;
-            if (txt_Color.Text.Length == 0)
-                return false;
-            if (txt_Poliza.Text.Length == 0)
-                return false;
-            if (txt_Aseguradora.Text.Length == 0)
-                return false;
-            if (txt_Anio.Text.Length == 0)
-                return false;
-            if (!(cmb_Conductores.SelectedIndex >= 0))
-                return false;
+            }
 
             return true;
         }

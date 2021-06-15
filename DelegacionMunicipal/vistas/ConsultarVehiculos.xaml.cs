@@ -1,5 +1,7 @@
-﻿using DelegacionMunicipal.modelo.dao;
+﻿using DelegacionMunicipal.interfaz;
+using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +11,7 @@ namespace DelegacionMunicipal.vistas
     /// <summary>
     /// Lógica de interacción para ConsultarVehiculos.xaml
     /// </summary>
-    public partial class ConsultarVehiculos : Page
+    public partial class ConsultarVehiculos : Page, ObserverRespuesta
     {
         List<Vehiculo> vehiculos;
 
@@ -17,7 +19,7 @@ namespace DelegacionMunicipal.vistas
         {
             InitializeComponent();
             vehiculos = new List<Vehiculo>();
-            CargarTabla();
+            CargarTablaVehiculos();
         }
 
         private void btn_RegistrarVehiculo_Click(object sender, RoutedEventArgs e)
@@ -33,6 +35,10 @@ namespace DelegacionMunicipal.vistas
                 Vehiculo vehiculoEdicion = vehiculos[indice];
                 AbrirFormulario(false, vehiculoEdicion);
             }
+            else
+            {
+                ActualizaInformacion("Para editar un vehículo debes seleccionarlo", "Sin selección");
+            }
         }
 
         private void btn_EliminarVehiculo_Click(object sender, RoutedEventArgs e)
@@ -40,15 +46,27 @@ namespace DelegacionMunicipal.vistas
             int indice = tbl_Vehiculos.SelectedIndex;
             if (indice >= 0)
             {
-                int resultado = VehiculoDAO.EliminarVehiculo(vehiculos[indice].NumPlaca);
-                if (resultado == 1)
+                Vehiculo vehiculoEliminar = vehiculos[indice];
+                MessageBoxResult resultado = MessageBox.Show("¿Estás seguro de eliminar el vehículo con placas: " + vehiculoEliminar.NumPlaca + "?",
+                    "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (resultado == MessageBoxResult.OK)
                 {
-                    CargarTabla();
+                    VehiculoDAO.EliminarVehiculo(vehiculoEliminar.NumPlaca);
+                    Console.WriteLine("BOTON OK");
+                }
+                else
+                {
+                    Console.WriteLine("BOTON CANCELAR");
                 }
             }
+            else
+            {
+                ActualizaInformacion("Para eliminar un vehículo debes seleccionarlo", "Sin selección");
+            }
+            CargarTablaVehiculos();
         }
 
-        public void CargarTabla()
+        public void CargarTablaVehiculos()
         {
             vehiculos = VehiculoDAO.ConsultarVehiculos();
             tbl_Vehiculos.ItemsSource = vehiculos;
@@ -60,18 +78,23 @@ namespace DelegacionMunicipal.vistas
 
             if (nuevo)
             {
-                formularioNuevoVehiculo = new FormVehiculo();
+                formularioNuevoVehiculo = new FormVehiculo(this);
             }
             else
             {
-                formularioNuevoVehiculo = new FormVehiculo(vehiculoEdicion);
+                formularioNuevoVehiculo = new FormVehiculo(vehiculoEdicion, this);
             }
             formularioNuevoVehiculo.Owner = Window.GetWindow(this);
             bool? resultado = formularioNuevoVehiculo.ShowDialog();
             if (resultado == true)
             {
-                CargarTabla();
+                CargarTablaVehiculos();
             }
+        }
+
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
         }
     }
 }
