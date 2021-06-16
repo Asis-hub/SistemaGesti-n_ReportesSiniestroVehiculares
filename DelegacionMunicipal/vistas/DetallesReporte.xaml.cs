@@ -40,6 +40,8 @@ namespace DelegacionMunicipal.vistas
                 lbl_Dictamen.Content = dictamen.Folio;
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
                 txt_DescripcionDictamen.Text = dictamen.Descripcion;
+
+
             }
             else
             {

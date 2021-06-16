@@ -1,4 +1,5 @@
 ﻿using DelegacionMunicipal.conexion;
+using DelegacionMunicipal.modelo.poco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +37,7 @@ namespace DelegacionMunicipal.modelo.dao
 
             return resultado;
         }
+        
+        
     }
 }
