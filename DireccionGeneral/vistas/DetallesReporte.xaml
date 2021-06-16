@@ -31,7 +31,7 @@
             <Label Content="Imágenes" HorizontalAlignment="Left" Margin="360,430,0,0" VerticalAlignment="Top" Grid.Column="1" Height="59" FontSize="23" FontWeight="Bold" Width="130" RenderTransformOrigin="0.549,0.698" />
 
             <!--Label x:Name="lbl_Folio"  HorizontalAlignment="Left" Margin="161,111,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/-->
-            <Label x:Name="lbl_Calle"  HorizontalAlignment="Left" Margin="174,153,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
+            <Label x:Name="lbl_Calle"  HorizontalAlignment="Left" Margin="161,153,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Numero"  HorizontalAlignment="Left" Margin="161,184,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Colonia"  HorizontalAlignment="Left" Margin="161,224,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Delegacion"  HorizontalAlignment="Left" Margin="161,266,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto" RenderTransformOrigin="0.5,1.231"/>
@@ -50,6 +50,7 @@
                     <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}"/>
                     <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
                     <DataGridTextColumn Header="Poliza" Binding="{Binding NumPolizaSeguro}"/>
+                    
                 </DataGrid.Columns>
             </DataGrid>
 
