@@ -33,17 +33,22 @@ namespace DelegacionMunicipal.vistas
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
             lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
             lbl_Usuario.Content = reporteSiniestro.Username;
+            List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosReporte(reporteSiniestro.IdReporte);
+
+            tbl_VehiculosInvolucrados.ItemsSource = listaVehiculos;
 
             if (reporteSiniestro.Dictamen)
             {
                 Dictamen dictamen = DictamenDAO.ConsultarDictamen(reporteSiniestro.IdReporte);
-                lbl_Dictamen.Content = dictamen.Folio;
+                
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
                 txt_DescripcionDictamen.Text = dictamen.Descripcion;
             }
             else
             {
-                lbl_Dictamen.Content = "Pendiente";
+
+                txt_DescripcionDictamen.Visibility = System.Windows.Visibility.Hidden;
+
             }
         }
         private void cargarFotos(int idReporte)
@@ -138,7 +143,6 @@ namespace DelegacionMunicipal.vistas
                 img_imagen8.Source = ConectorFTP.obtenerImagen("NF");
             }
         }
-
 
         
     }

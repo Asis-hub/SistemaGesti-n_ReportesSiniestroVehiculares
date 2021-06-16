@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
 {
-    class Vehiculo
+    public class Vehiculo
     {
         private string numPlaca;
         private string marca;

@@ -11,6 +11,7 @@ namespace DireccionGeneral.modelo.dao
 {
     public class DictamenDAO
     {
+        
         public static Dictamen ConsultarDictamenDeReporte(int idReporte)
         {
             int IdReporte = idReporte;

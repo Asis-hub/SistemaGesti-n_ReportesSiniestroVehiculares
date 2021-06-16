@@ -98,11 +98,13 @@
     <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />
     <Compile Include="modelo\dao\DictamenDAO.cs" />
     <Compile Include="modelo\dao\FotografiaDAO.cs" />
+    <Compile Include="modelo\dao\ftp\ConexionFTP.cs" />
     <Compile Include="modelo\dao\MunicipioDAO.cs" />
     <Compile Include="modelo\dao\ReporteSiniestroDAO.cs" />
     <Compile Include="modelo\dao\UsuarioDAO.cs" />
     <Compile Include="modelo\dao\VehiculoDAO.cs" />
     <Compile Include="modelo\dao\VehiculosInvolucradosDAO.cs" />
+    <Compile Include="modelo\poco\Fotografia.cs" />
     <Compile Include="modelo\poco\VehiculosInvolucrados.cs" />
     <Compile Include="modelo\poco\Cargo.cs" />
     <Compile Include="modelo\poco\Delegacion.cs" />

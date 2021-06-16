@@ -2,14 +2,17 @@
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
 
 namespace DireccionGeneral.modelo.dao
 {
-    class VehiculoDAO
+    public class VehiculoDAO
     {
         public static List<Vehiculo> ConsultarVehiculos()
         {
@@ -65,7 +68,38 @@ namespace DireccionGeneral.modelo.dao
 
             return listaVehiculos;
         }
+        public static List<Vehiculo> ConsultarVehiculosReporte(int idReporte)
+        {
+            List<Vehiculo> listaVehiculos = new List<Vehiculo>();
+            SocketBD socket = new SocketBD();
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+            paquete.Consulta = String.Format("SELECT a.numeroPlaca " +
+                "AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
+                "nombreAseguradora, ano, numeroLicenciaConducir " +
+                "FROM dbo.vehiculo as a INNER JOIN vehiculosInvolucrados as b on " +
+                "a.numeroPlaca = b.numeroPlaca inner join reporteSiniestro as c on " +
+                "b.idReporte = {0};", idReporte);
+            paquete.TipoDominio = TipoDato.Vehiculo;
+            paquete.TipoQuery = TipoConsulta.Select;
 
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaVehiculos = (List<Vehiculo>)JsonSerializer.Deserialize(respuesta, typeof(List<Vehiculo>));
+            }
+
+
+
+
+            return listaVehiculos;
+        }
         public static int RegistrarVehiculo(Vehiculo nuevoVehiculo)
         {
             int resultado = 0;
