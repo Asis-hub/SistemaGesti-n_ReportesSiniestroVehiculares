@@ -40,17 +40,13 @@ namespace DireccionGeneral.vistas
             int dictaminado = 0;
             string fecha = "";
             string delegacion = "";
-
             if (dpck_Fecha.SelectedDate != null)
             {
-
                 fecha = dpck_Fecha.SelectedDate.Value.ToString("yyyy-MM-dd");
-
             }
             else
             {
                 fecha = "%";
-
             }
 
             if (rdb_Dictaminado.IsChecked == true)
@@ -63,7 +59,6 @@ namespace DireccionGeneral.vistas
             }
 
             int seleccion = cmb_Delegacion.SelectedIndex;
-
             if (seleccion >= 0)
             {
                 delegacion = listaDelegaciones[seleccion].IdDelegacion.ToString();
@@ -82,8 +77,6 @@ namespace DireccionGeneral.vistas
             cmb_Delegacion.SelectedIndex = -1;
             btn_DictaminarReporte.IsEnabled = false;
             //Notificacion de resultados, observer respuesta
-
-
         }
 
         private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
@@ -108,7 +101,11 @@ namespace DireccionGeneral.vistas
                 {
                     DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, idReporte);
                     ventanaDictamen.Owner = Window.GetWindow(this);
-                    ventanaDictamen.ShowDialog();
+                    bool? resultado = ventanaDictamen.ShowDialog();
+                    if(resultado == true)
+                    {
+                        CargarTabla();
+                    }
                 }
             }
         }

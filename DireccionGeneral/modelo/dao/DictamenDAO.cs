@@ -19,7 +19,7 @@ namespace DireccionGeneral.modelo.dao
             SocketBD socket = new SocketBD();
             string mensaje = "";
             Paquete paquete = new Paquete();
-            paquete.Consulta = String.Format("SELECT folio, descripcion, fechaHora, idReporte, username FROM dbo.dictamen WHERE idReporte = {0}", IdReporte);
+            paquete.Consulta = String.Format("SELECT DISTINCT a.folio, a.descripcion, a.fechaHora, a.idReporte, a.username, b.nombreCompleto FROM dbo.dictamen AS a INNER JOIN dbo.usuario AS b ON a.username = b.username WHERE a.idReporte = {0}", IdReporte);
             paquete.TipoDominio = TipoDato.Dictamen;
             paquete.TipoQuery = TipoConsulta.Select;
 
@@ -45,8 +45,8 @@ namespace DireccionGeneral.modelo.dao
             SocketBD socket = new SocketBD();
             string mensaje = "";
             Paquete paquete = new Paquete();
-            paquete.Consulta = String.Format("INSERT INTO dbo.dictamen (folio, descripcion, fechaHora, idReporte, username) VALUES ({0}, '{1}', '{2}', {3}, '{4}')",
-                                             nuevoDictamen.Folio, nuevoDictamen.Descripcion, nuevoDictamen.FechaHora.ToString("yyyy-MM-dd HH:mm"), nuevoDictamen.IdReporte, nuevoDictamen.Username);
+            paquete.Consulta = String.Format("INSERT INTO dbo.dictamen (descripcion, fechaHora, idReporte, username) VALUES ('{0}', '{1}', {2}, '{3}')",
+                                             nuevoDictamen.Descripcion, nuevoDictamen.FechaHora.ToString("yyyy-MM-dd HH:mm"), nuevoDictamen.IdReporte, nuevoDictamen.Username);
             paquete.TipoDominio = TipoDato.Dictamen;
             paquete.TipoQuery = TipoConsulta.Insert;
             Console.WriteLine(paquete.Consulta);

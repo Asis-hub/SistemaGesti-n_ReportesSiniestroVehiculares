@@ -30,12 +30,13 @@ namespace DireccionGeneral.vistas
             {
                 Dictamen dictamen = new Dictamen();
                 dictamen.Descripcion = txt_Descripcion.Text;
-                dictamen.Folio = int.Parse(txt_Folio.Text);
+                
                 dictamen.FechaHora = DateTime.Now;
                 dictamen.IdReporte = idReporte;
                 dictamen.Username = usuario.Username;
 
                 int resultado = DictamenDAO.RegistrarDictamen(dictamen);
+                
                 if (resultado == 1)
                 {
                     MessageBox.Show("Dictamen registrado", "Dictamen");
@@ -60,20 +61,9 @@ namespace DireccionGeneral.vistas
         {
             if (txt_Descripcion.Text.Length == 0)
                 return false;
-            if (txt_Descripcion.Text.Length > 250)
-                return false;
-            if (txt_Folio.Text.Length == 0)
-                return false;
+            
 
-            try
-            {
-                int folio = int.Parse(txt_Folio.Text);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            return true;
         }
     }
 }

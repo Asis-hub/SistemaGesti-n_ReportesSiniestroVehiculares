@@ -34,6 +34,7 @@ namespace Servidor.modelo.dao
                         dictamen.FechaHora = (!dataReader.IsDBNull(2)) ? dataReader.GetDateTime(2) : System.DateTime.MinValue;
                         dictamen.IdReporte = (!dataReader.IsDBNull(3)) ? dataReader.GetInt32(3) : 0;
                         dictamen.Username = (!dataReader.IsDBNull(4)) ? dataReader.GetString(4) : "";
+                        dictamen.Perito = (!dataReader.IsDBNull(5)) ? dataReader.GetString(5) : "";
                     }
 
                     dataReader.Close();
