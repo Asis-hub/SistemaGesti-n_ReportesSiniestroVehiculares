@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System;
 using System.Windows;
@@ -12,13 +13,15 @@ namespace DireccionGeneral.vistas
     {
         private Usuario usuario;
         private int idReporte;
+        private ObserverRespuesta notificacion;
 
-        public DictaminarReporte()
+        public DictaminarReporte(ObserverRespuesta notificacion)
         {
             InitializeComponent();
+            this.notificacion = notificacion;
         }
 
-        public DictaminarReporte(Usuario usuario, int idReporte) : this()
+        public DictaminarReporte(Usuario usuario, int idReporte, ObserverRespuesta notificacion) : this(notificacion)
         {
             this.usuario = usuario;
             this.idReporte = idReporte;
@@ -39,13 +42,13 @@ namespace DireccionGeneral.vistas
                 
                 if (resultado == 1)
                 {
-                    MessageBox.Show("Dictamen registrado", "Dictamen");
+                    notificacion.ActualizaInformacion("Dictamen registrado", "Dictamen");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else if (resultado == -1)
                 {
-                    MessageBox.Show("Error al registrar el dictamen. Verifica el folio", "Error dictamen");
+                    notificacion.ActualizaInformacion("Error al registrar el dictamen. Verifica el folio", "Error dictamen");
                 }
             }
         }
