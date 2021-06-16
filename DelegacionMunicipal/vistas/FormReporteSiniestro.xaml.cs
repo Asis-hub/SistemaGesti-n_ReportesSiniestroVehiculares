@@ -1,4 +1,5 @@
 ﻿using DelegacionMunicipal.conexion;
+using DelegacionMunicipal.interfaz;
 using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using Microsoft.Win32;
@@ -23,12 +24,13 @@ namespace DelegacionMunicipal.vistas
         private List<Vehiculo> listaVehiculos;
         private List<Delegacion> listaDelegaciones;
         private List<string> listaImagenes;
+        private ObserverRespuesta notificacion;
 
-        
+
         //List<string> fotos;
         string[] fotos = new string[8];
         OpenFileDialog openFileDialog;
-        public FormReporteSiniestro(Usuario usuarioConectado)
+        public FormReporteSiniestro(Usuario usuarioConectado, ObserverRespuesta notificacion)
         {
             InitializeComponent();
             this.usuarioConectado = usuarioConectado;
@@ -37,10 +39,10 @@ namespace DelegacionMunicipal.vistas
             listaVehiculosInvolucrados = new List<Vehiculo>();
             listaImagenes = new List<string>();
             dpc_fecha.DisplayDateEnd = DateTime.Now;
+            this.notificacion = notificacion;
 
             CargarListaConductores();
             cargarDelegaciones();
-            //cargarBotones();
             
             cmb_Hora.SelectedIndex = 0;
             cmb_Minuto.SelectedIndex = 0;
@@ -128,7 +130,7 @@ namespace DelegacionMunicipal.vistas
                     }
                     FotografiaDAO.InsertarFotografias(listaImagenes, reporteSiniestro.IdReporte);
 
-                    //notificacion
+                    notificacion.ActualizaInformacion("Reporte de siniestros vehiculares registrado correctamente", "Reporte registrado");
                     this.DialogResult = true;
                     this.Close();
                 }
@@ -147,17 +149,17 @@ namespace DelegacionMunicipal.vistas
 
             if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0 || !(cmb_delegacion.SelectedIndex >= 0))
             {
-                MessageBox.Show("Debes llenar todos los campos");
+                notificacion.ActualizaInformacion("Debes llenar todos los campos del reporte", "Campos faltantes");
                 esValido = false;
             }
             else if (pnl_Imagenes.Children.Count < 3)//Validacion del minimo de imagenes
             {
-                //notificacionç
+                notificacion.ActualizaInformacion("El reporte de siniestro debe contener mínimo 3 fotografías", "Fotografías faltantes");
                 esValido = false;
             }
             else if (listaVehiculosInvolucrados.Count < 1)//no son suficientes vehiculos
             {
-                //notificacion
+                notificacion.ActualizaInformacion("En el reporte de siniestro debe haber al menos un vehículo registrado", "No hay vehículos involucrados");
                 esValido = false;
             }
 
@@ -169,45 +171,6 @@ namespace DelegacionMunicipal.vistas
         private void cmb_Conductor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             CargarVehiculos();
-        }
-
-        private void cargarBotones()
-        {
-           /* if (img1.Source !=null)
-            {
-                cambiarPresionado(btn_img1);
-
-            }
-            else
-            {
-                cambiarSinPresionar(btn_img1);
-            }*/
-        }
-
-        private void cambiarPresionado(Button button)
-        {
-            button.Content = "Eliminar imagen";
-            button.Background = Brushes.Red;
-            button.Foreground = Brushes.White;
-        }
-
-        private void cambiarSinPresionar(Button button)
-        {
-            button.Content = "Agregar imagen";
-            button.Background = Brushes.LightGray;
-            button.Foreground = Brushes.Black;
-        }
-
-        
-
-        private void cmb_Hora_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void cmb_Minuto_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
         }
 
 

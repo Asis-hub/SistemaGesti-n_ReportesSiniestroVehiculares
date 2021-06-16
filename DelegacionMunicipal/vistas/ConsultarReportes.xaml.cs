@@ -16,13 +16,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DelegacionMunicipal.modelo.poco;
 using System.Data.SqlClient;
+using DelegacionMunicipal.interfaz;
 
 namespace DelegacionMunicipal.vistas
 {
     /// <summary>
     /// Lógica de interacción para ConsultarReportes.xaml
     /// </summary>
-    public partial class ConsultarReportes : Page
+    public partial class ConsultarReportes : Page , ObserverRespuesta
     {
         List<ReporteSiniestro> reportesSiniestro;
         List<Delegacion> listaDelegaciones;
@@ -34,8 +35,7 @@ namespace DelegacionMunicipal.vistas
             reportesSiniestro = new List<ReporteSiniestro>();
             listaDelegaciones = new List<Delegacion>();
             CargarTabla();
-            listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
-            cmb_Delegacion.ItemsSource = listaDelegaciones;
+            CargarCmb_Delegacion();
         }
 
         
@@ -52,7 +52,7 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
         {
-            FormReporteSiniestro formReporteSiniestro = new FormReporteSiniestro(usuarioConectado);
+            FormReporteSiniestro formReporteSiniestro = new FormReporteSiniestro(usuarioConectado, this);
             bool? resultado = formReporteSiniestro.ShowDialog();
             if (resultado == true)
             {
@@ -117,10 +117,15 @@ namespace DelegacionMunicipal.vistas
             tbl_Reportes.ItemsSource = reportesSiniestro;
         }
 
-        private void CargarCcmb_Delegacion()
+        private void CargarCmb_Delegacion()
         {
             listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
             cmb_Delegacion.ItemsSource = listaDelegaciones;
+        }
+
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
         }
     }
 }
