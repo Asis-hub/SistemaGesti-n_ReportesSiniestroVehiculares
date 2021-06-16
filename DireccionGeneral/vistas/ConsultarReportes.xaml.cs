@@ -1,4 +1,5 @@
-﻿using DireccionGeneral.modelo.dao;
+﻿using DireccionGeneral.interfaz;
+using DireccionGeneral.modelo.dao;
 using DireccionGeneral.modelo.poco;
 using System.Collections.Generic;
 using System.Windows;
@@ -9,7 +10,7 @@ namespace DireccionGeneral.vistas
     /// <summary>
     /// Lógica de interacción para ConsultarReportes.xaml
     /// </summary>
-    public partial class ConsultarReportes : Page
+    public partial class ConsultarReportes : Page , ObserverRespuesta
     {
         List<ReporteSiniestro> reportesSiniestro;
         Usuario usuarioConectado;
@@ -76,7 +77,18 @@ namespace DireccionGeneral.vistas
             rdb_Pendiente.IsChecked = true;
             cmb_Delegacion.SelectedIndex = -1;
             btn_DictaminarReporte.IsEnabled = false;
-            //Notificacion de resultados, observer respuesta
+            if(tbl_Reportes.Items.Count == 1)
+            {
+                ActualizaInformacion("Se encontró " + tbl_Reportes.Items.Count.ToString() + " resultado", "Resultado de búsqueda");
+            }
+            if(tbl_Reportes.Items.Count > 1)
+            {
+                ActualizaInformacion("Se encontraron " + tbl_Reportes.Items.Count.ToString() + " resultados", "Resultado de búsqueda");
+            }
+            if(tbl_Reportes.Items.Count == 0)
+            {
+                ActualizaInformacion("No se encontraron resultados que coincidan con los filtros de la búsqueda", "Resultado de búsqueda");
+            }
         }
 
         private void btn_VerDetalles_Click(object sender, RoutedEventArgs e)
@@ -99,7 +111,7 @@ namespace DireccionGeneral.vistas
 
                 if (!reportesSiniestro[seleccion].Dictamen)
                 {
-                    DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, idReporte);
+                    DictaminarReporte ventanaDictamen = new DictaminarReporte(usuarioConectado, idReporte, this);
                     ventanaDictamen.Owner = Window.GetWindow(this);
                     bool? resultado = ventanaDictamen.ShowDialog();
                     if(resultado == true)
@@ -117,6 +129,11 @@ namespace DireccionGeneral.vistas
             {
                 btn_DictaminarReporte.IsEnabled = reportesSiniestro[seleccion].Dictamen == false;
             }
+        }
+
+        public void ActualizaInformacion(string contenido, string titulo)
+        {
+            MessageBox.Show(contenido, titulo);
         }
     }
 }
