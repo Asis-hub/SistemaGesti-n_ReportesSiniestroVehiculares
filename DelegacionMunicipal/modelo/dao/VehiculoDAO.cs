@@ -46,7 +46,7 @@ namespace DelegacionMunicipal.modelo.dao
             SocketBD socket = new SocketBD();
             string mensaje = "";
             Paquete paquete = new Paquete();
-            paquete.Consulta = "SELECT numeroPlaca AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
+            paquete.Consulta = "SELECT distinct numeroPlaca AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
                 "nombreAseguradora, ano, numeroLicenciaConducir FROM dbo.vehiculo WHERE numeroLicenciaConducir ='" + licencia +  "';";
             
             paquete.TipoDominio = TipoDato.Vehiculo;
@@ -75,12 +75,13 @@ namespace DelegacionMunicipal.modelo.dao
             SocketBD socket = new SocketBD();
             string mensaje = "";
             Paquete paquete = new Paquete();
-            paquete.Consulta = String.Format("SELECT a.numeroPlaca " +
+            paquete.Consulta = String.Format("SELECT distinct a.numeroPlaca " +
                 "AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
                 "nombreAseguradora, ano, numeroLicenciaConducir " +
                 "FROM dbo.vehiculo AS a INNER JOIN vehiculosInvolucrados AS b on " +
                 "a.numeroPlaca = b.numeroPlaca inner join reporteSiniestro as c on " +
                 "b.idReporte = {0};", idReporte);
+            Console.WriteLine(paquete.Consulta);
             paquete.TipoDominio = TipoDato.Vehiculo;
             paquete.TipoQuery = TipoConsulta.Select;
 

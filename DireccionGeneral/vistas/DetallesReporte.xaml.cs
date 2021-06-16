@@ -27,12 +27,12 @@ namespace DireccionGeneral.vistas
         private void cargarDatos()
         {
 
-            //lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
             lbl_Calle.Content = reporteSiniestro.Calle.ToString();
             lbl_Numero.Content = reporteSiniestro.Numero.ToString();
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
-            lbl_Delegacion.Content = reporteSiniestro.IdDelegacion.ToString();
-            lbl_Usuario.Content = reporteSiniestro.Username;
+            lbl_Delegacion.Content = reporteSiniestro.NombreDelegacion;
+            lbl_Usuario.Content = reporteSiniestro.NombreUsuario;
+
             List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosReporte(reporteSiniestro.IdReporte);
 
             tbl_VehiculosInvolucrados.ItemsSource = listaVehiculos;

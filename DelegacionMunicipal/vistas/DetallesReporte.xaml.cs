@@ -27,18 +27,20 @@ namespace DelegacionMunicipal.vistas
         private void cargarDatos()
         {
 
-            //lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
+            
             lbl_Calle.Content = reporteSiniestro.Calle.ToString();
             lbl_Numero.Content = reporteSiniestro.Numero.ToString();
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
             lbl_Delegacion.Content = reporteSiniestro.NombreDelegacion;
-            //lbl_Usuario.Content = reporteSiniestro.Username;
             lbl_Usuario.Content = reporteSiniestro.NombreUsuario;
             
 
 
             List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosReporte(reporteSiniestro.IdReporte);
-
+            foreach (Vehiculo vehiculo in listaVehiculos)
+            {
+                //Console.WriteLine(vehiculo.NumPlaca);
+            }
             tbl_VehiculosInvolucrados.ItemsSource = listaVehiculos;
 
             if (reporteSiniestro.Dictamen)

@@ -19,7 +19,8 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion;";
+            paquete.Consulta = "SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre, c.nombreCompleto FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion INNER JOIN usuario AS c ON a.username = c.username;";
+
 
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
@@ -50,7 +51,7 @@ namespace DireccionGeneral.modelo.dao
             Paquete paquete = new Paquete();
 
 
-            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion WHERE dictamen = {0} AND b.idDelegacion LIKE '{1}' AND fechaRegistro LIKE '{2}';", dictaminado, idDelegacion, fecha);
+            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre, c.nombreCompleto FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion INNER JOIN usuario AS c ON a.username = c.username WHERE dictamen = {0} AND b.idDelegacion LIKE '{1}' AND fechaRegistro LIKE '{2}'", dictaminado, idDelegacion, fecha);
             Console.WriteLine(paquete.Consulta);
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
@@ -80,8 +81,7 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion WHERE idReporte = {0}",idReporte);
-
+            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre, c.nombreCompleto FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion INNER JOIN usuario AS c ON a.username = c.username WHERE idReporte = {0}", idReporte);
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
@@ -108,9 +108,8 @@ namespace DireccionGeneral.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
 
-            paquete.Consulta = String.Format("insert into reporteSiniestro values " +
-                "('{0}', '{1}', '{2}','{3}', {4}, '{5}', {6}) " +
-                "SELECT SCOPE_IDENTITY();", reporteSiniestro.Calle, reporteSiniestro.Colonia, reporteSiniestro.Numero, reporteSiniestro.FechaHora, reporteSiniestro.IdDelegacion, reporteSiniestro.Username, reporteSiniestro.Dictamen);
+
+            paquete.Consulta = "insert into reporteSiniestro values ('" + reporteSiniestro.Calle + "', '" + reporteSiniestro.Numero + "', '" + reporteSiniestro.Colonia + "','" + reporteSiniestro.FechaHora.ToString("yyyy-MM-dd HH:mm") + "','" + reporteSiniestro.FechaRegistro.ToString("yyyy-MM-dd HH:mm") + "'," + +reporteSiniestro.IdDelegacion + ", '" + reporteSiniestro.Username + "', '" + reporteSiniestro.Dictamen + "') Select SCOPE_IDENTITY();";
 
             string mensaje = JsonSerializer.Serialize(paquete);
             socket.IniciarConexion();
@@ -122,10 +121,6 @@ namespace DireccionGeneral.modelo.dao
             {
                 resultado = int.Parse(respuesta);
             }
-
-
-
-
             return resultado;
         }
 

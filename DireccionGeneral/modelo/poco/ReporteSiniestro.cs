@@ -18,6 +18,7 @@ namespace DireccionGeneral.modelo.poco
         private string username;
         private bool dictamen;
         private string nombreDelegacion;
+        private string nombreUsuario;
 
         public int IdReporte { get => idReporte; set => idReporte = value; }
         public string Calle { get => calle; set => calle = value; }
@@ -29,6 +30,7 @@ namespace DireccionGeneral.modelo.poco
         public bool Dictamen { get => dictamen; set => dictamen = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
         public string NombreDelegacion { get => nombreDelegacion; set => nombreDelegacion = value; }
+        public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
         public string Estatus {
             get {
                 return dictamen ? "Dictaminado" : "Pendiente";
