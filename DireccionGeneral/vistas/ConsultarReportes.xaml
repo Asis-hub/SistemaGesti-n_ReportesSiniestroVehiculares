@@ -29,22 +29,25 @@
                 <ComboBox x:Name="cmb_Delegacion" VerticalAlignment="Top" Width="120"/>
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
             </StackPanel>
-            
-            <DataGrid x:Name="tbl_Reportes" Grid.Row="1" ColumnWidth="*" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
+                <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
+                <Button x:Name="btn_DictaminarReporte" Content="Dictaminar Reporte" Margin="10,10,10,10" FontSize="16" Click="btn_DictaminarReporte_Click"/>
+            </StackPanel>
+
+
+            <DataGrid x:Name="tbl_Reportes" Grid.Row="2" ColumnWidth="*" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Folio" Binding="{Binding IdReporte}"/>
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
                     <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
                     <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
+                    <DataGridTextColumn Header="Estatus" Binding="{Binding Estatus}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
-                <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
-                <Button x:Name="btn_DictaminarReporte" Content="Dictaminar Reporte" Margin="10,10,10,10" FontSize="16" Click="btn_DictaminarReporte_Click"/>
-            </StackPanel>
+            
         </Grid>
         
 
