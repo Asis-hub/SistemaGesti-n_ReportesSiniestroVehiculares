@@ -45,6 +45,8 @@ namespace DireccionGeneral.vistas
 
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
                 txt_DescripcionDictamen.Text = dictamen.Descripcion;
+                lbl_PeritoDictamen.Content = dictamen.Perito;
+                Console.WriteLine(dictamen.Perito);
             }
             else
             {

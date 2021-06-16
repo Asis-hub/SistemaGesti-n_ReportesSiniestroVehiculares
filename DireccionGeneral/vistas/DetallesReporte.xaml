@@ -8,6 +8,10 @@
         Title="DetallesReporte" Height="600" Width="900">
     <ScrollViewer  VerticalScrollBarVisibility="Auto">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="284*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0*"/>
                 <ColumnDefinition/>
@@ -20,7 +24,9 @@
             <Label Content="Usuario" HorizontalAlignment="Left" Margin="28,298,0,0" VerticalAlignment="Top" Grid.Column="1" Height="31" Width="92" FontSize="16" FontWeight="Bold"/>
             <Label Content="Detalles del reporte" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" Height="52" Width="285" FontSize="28" FontWeight="Bold" Grid.Column="1"/>
             <Label Content="Dictamen" HorizontalAlignment="Left" Margin="62,787,0,0" VerticalAlignment="Top" Grid.Column="1" Height="43" Width="135" FontSize="23" FontWeight="Bold"/>
-            <Label Content="Fecha de dictamen:" HorizontalAlignment="Left" Margin="62,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35"/>
+            <Label Content="Fecha de dictamen:" HorizontalAlignment="Left" Margin="62,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35" Grid.RowSpan="2"/>
+            <Label Content="Perito:" HorizontalAlignment="Left" Margin="350,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35" Grid.RowSpan="2"/>
+
             <Label Content="Vehículos" HorizontalAlignment="Left" Margin="421,68,0,0" VerticalAlignment="Top" Width="123" Grid.Column="1" Height="38" FontSize="23" FontWeight="Bold"/>
             <Label Content="Imágenes" HorizontalAlignment="Left" Margin="360,430,0,0" VerticalAlignment="Top" Grid.Column="1" Height="59" FontSize="23" FontWeight="Bold" Width="130" RenderTransformOrigin="0.549,0.698" />
 
@@ -30,8 +36,12 @@
             <Label x:Name="lbl_Colonia"  HorizontalAlignment="Left" Margin="161,224,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Delegacion"  HorizontalAlignment="Left" Margin="161,266,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto" RenderTransformOrigin="0.5,1.231"/>
             <Label x:Name="lbl_Usuario" HorizontalAlignment="Left" Margin="161,303,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
-            <Label x:Name="lbl_FechaDictamen" HorizontalAlignment="Left" Margin="232,827,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
-            <TextBox x:Name="txt_DescripcionDictamen"  Margin="62,868,98,-25" IsEnabled="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  Grid.ColumnSpan="2" Height="66" VerticalAlignment="Top" />
+            <Label x:Name="lbl_FechaDictamen" HorizontalAlignment="Left" Margin="232,830,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto" Grid.RowSpan="2"/>
+            <Label x:Name="lbl_PeritoDictamen" HorizontalAlignment="Left" Margin="415,830,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto" Grid.RowSpan="2"/>
+
+            <TextBox x:Name="txt_DescripcionDictamen"  Margin="62,50,50,20" IsEnabled="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top" Grid.Row="1" BorderBrush="Black" FontSize="16" />
+            
+
 
             <DataGrid x:Name="tbl_VehiculosInvolucrados" HorizontalAlignment="Left" ColumnWidth="*" Height="203" Margin="421,126,0,0" VerticalAlignment="Top" Width="427"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2">
                 <DataGrid.Columns>

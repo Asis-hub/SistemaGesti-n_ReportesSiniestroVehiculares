@@ -24,7 +24,7 @@ namespace DireccionGeneral.modelo.poco
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public int IdReporte { get => idReporte; set => idReporte = value; }
         public string Username { get => username; set => username = value; }
-        public string Perito { get => perito; }
+        public string Perito { get => perito; set => perito = value; }
 
         public override string ToString()
         {
