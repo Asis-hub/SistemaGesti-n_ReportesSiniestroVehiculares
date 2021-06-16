@@ -36,5 +36,6 @@ namespace DelegacionMunicipal.modelo.dao
 
             return resultado;
         }
+
     }
 }

@@ -33,7 +33,7 @@ namespace DelegacionMunicipal.modelo.poco
 
         public override string ToString()
         {
-            return numPlaca + " - " + numLicenciaConducir;
+            return numPlaca + " - " + modelo;
         }
     }
 }
