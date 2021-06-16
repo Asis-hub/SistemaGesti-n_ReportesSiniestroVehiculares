@@ -39,6 +39,7 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.Dictamen = (!dataReader.IsDBNull(7)) ? dataReader.GetBoolean(7) : false;
                         reporteSiniestro.FechaRegistro = (!dataReader.IsDBNull(8)) ? dataReader.GetDateTime(8) : System.DateTime.MinValue;
                         reporteSiniestro.NombreDelegacion = (!dataReader.IsDBNull(9) ? dataReader.GetString(9) : "");
+                        reporteSiniestro.NombreUsuario = (!dataReader.IsDBNull(10) ? dataReader.GetString(10) : "");
                         listaReportes.Add(reporteSiniestro);
                     }
                     dataReader.Close();
@@ -84,6 +85,9 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.IdDelegacion = (!dataReader.IsDBNull(5)) ? dataReader.GetInt32(5) : 0;
                         reporteSiniestro.Username = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
                         reporteSiniestro.Dictamen = (!dataReader.IsDBNull(7)) ? dataReader.GetBoolean(7) : false;
+                        reporteSiniestro.FechaRegistro = (!dataReader.IsDBNull(8)) ? dataReader.GetDateTime(8) : System.DateTime.MinValue;
+                        reporteSiniestro.NombreDelegacion = (!dataReader.IsDBNull(9) ? dataReader.GetString(9) : "");
+                        reporteSiniestro.NombreUsuario = (!dataReader.IsDBNull(10) ? dataReader.GetString(10) : "");
                     }
                 }
             } 

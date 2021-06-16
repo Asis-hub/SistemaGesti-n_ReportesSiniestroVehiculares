@@ -49,12 +49,15 @@ namespace DelegacionMunicipal.vistas
         {
             if (ValidarFormulario())
             {
+                string numPlaca = "";
                 int resultado;
                 Vehiculo vehiculo = new Vehiculo();
                 if (!esNuevo)
                 {
+                    
                     vehiculo.NumPlaca = vehiculoEdicion.NumPlaca;
                 }
+                numPlaca = vehiculo.NumPlaca;
                 vehiculo.NumPlaca = txt_NoPlacas.Text;
                 vehiculo.Marca = txt_Marca.Text;
                 vehiculo.Modelo = txt_Modelo.Text;
@@ -72,7 +75,7 @@ namespace DelegacionMunicipal.vistas
                 }
                 else
                 {
-                    resultado = VehiculoDAO.EditarVehiculo(vehiculo);
+                    resultado = VehiculoDAO.EditarVehiculo(numPlaca,vehiculo);
                 }
 
                 if (resultado == 1)

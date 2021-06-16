@@ -29,7 +29,7 @@
             <Label x:Name="lbl_Numero"  HorizontalAlignment="Left" Margin="161,189,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Colonia"  HorizontalAlignment="Left" Margin="161,224,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_Delegacion"  HorizontalAlignment="Left" Margin="161,266,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
-            <Label x:Name="lbl_Usuario" HorizontalAlignment="Left" Margin="161,303,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="10"/>
+            <Label x:Name="lbl_Usuario" HorizontalAlignment="Left" Margin="161,303,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <Label x:Name="lbl_FechaDictamen" HorizontalAlignment="Left" Margin="232,827,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="Auto"/>
             <TextBox x:Name="txt_DescripcionDictamen"  Margin="62,868,98,-25" IsEnabled="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  Grid.ColumnSpan="2" Height="66" VerticalAlignment="Top" />
 

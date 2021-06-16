@@ -47,7 +47,8 @@ namespace DelegacionMunicipal.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
             paquete.Consulta = "SELECT numeroPlaca AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
-                "nombreAseguradora, ano, numeroLicenciaConducir FROM dbo.vehiculo where numeroLicenciaConducir =" + licencia +  ";";
+                "nombreAseguradora, ano, numeroLicenciaConducir FROM dbo.vehiculo WHERE numeroLicenciaConducir ='" + licencia +  "';";
+            
             paquete.TipoDominio = TipoDato.Vehiculo;
             paquete.TipoQuery = TipoConsulta.Select;
 
@@ -108,7 +109,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoQuery = TipoConsulta.Insert;
             paquete.TipoDominio = TipoDato.Vehiculo;
             paquete.Consulta = String.Format("INSERT vehiculo (numeroPlaca, marca, modelo, color, numeroPolizaSeguro, nombreAseguradora, ano, numeroLicenciaConducir) " +
-                                             "VALUES ('{0}', '{1}', '{2}', '{3}',  '{4}', '{5}', '{6}', {7})",
+                                             "VALUES ('{0}', '{1}', '{2}', '{3}',  '{4}', '{5}', '{6}', '{7}')",
                                              nuevoVehiculo.NumPlaca, nuevoVehiculo.Marca, nuevoVehiculo.Modelo, nuevoVehiculo.Color,
                                              nuevoVehiculo.NumPolizaSeguro, nuevoVehiculo.NombreAseguradora, nuevoVehiculo.Año,
                                              nuevoVehiculo.NumLicenciaConducir);
@@ -128,7 +129,7 @@ namespace DelegacionMunicipal.modelo.dao
             return resultado;
         }
 
-        public static int EditarVehiculo(Vehiculo vehiculo)
+        public static int EditarVehiculo(string numPlaca, Vehiculo vehiculo)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();
@@ -138,8 +139,8 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.Consulta = String.Format("UPDATE dbo.vehiculo SET numeroPlaca='{0}', marca='{1}', modelo='{2}', color='{3}', numeroPolizaSeguro='{4}', " +
                                                 "nombreAseguradora='{5}', ano='{6}', numeroLicenciaConducir='{7}' WHERE numeroPlaca='{8}'",
                                              vehiculo.NumPlaca, vehiculo.Marca, vehiculo.Modelo, vehiculo.Color, vehiculo.NumPolizaSeguro, vehiculo.NombreAseguradora,
-                                             vehiculo.Año, vehiculo.NumLicenciaConducir, vehiculo.NumPlaca);
-
+                                             vehiculo.Año, vehiculo.NumLicenciaConducir, numPlaca);
+            Console.WriteLine(paquete.Consulta);
             string mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();

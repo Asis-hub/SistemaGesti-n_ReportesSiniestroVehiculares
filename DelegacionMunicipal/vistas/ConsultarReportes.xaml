@@ -43,7 +43,7 @@
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
                     <DataGridTextColumn Header="Delegacion" Binding="{Binding NombreDelegacion}"/>
-                    <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
+                    <DataGridTextColumn Header="Fecha Registro" Binding="{Binding FechaRegistro}"/>
                     <DataGridTextColumn Header="Estatus" Binding="{Binding Estatus}"/>
                 </DataGrid.Columns>
             </DataGrid>
