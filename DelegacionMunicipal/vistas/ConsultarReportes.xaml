@@ -23,8 +23,10 @@
                 <Label Content="Fecha" FontSize="14" VerticalAlignment="Top"/>
                 <DatePicker x:Name="dpck_Fecha" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="Estado" FontSize="14" VerticalAlignment="Top" Margin="30,0,0,0"/>
+                
                 <RadioButton x:Name="rdb_Pendiente" FontSize="14" GroupName="gp_Estado" Content="Pendiente" IsChecked="True"/>
                 <RadioButton x:Name="rdb_Dictaminado" FontSize="14" GroupName="gp_Estado" Content="Dictaminado" />
+                
                 <Label Content="Delegación:" FontSize="14" VerticalAlignment="Top" Margin="30,0,0,0"/>
                 <ComboBox x:Name="cmb_Delegacion" FontSize="14" VerticalAlignment="Top" Width="180"/>
                 <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
@@ -40,7 +42,7 @@
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
-                    <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
+                    <DataGridTextColumn Header="Delegacion" Binding="{Binding NombreDelegacion}"/>
                     <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
                     <DataGridTextColumn Header="Estatus" Binding="{Binding Estatus}"/>
                 </DataGrid.Columns>

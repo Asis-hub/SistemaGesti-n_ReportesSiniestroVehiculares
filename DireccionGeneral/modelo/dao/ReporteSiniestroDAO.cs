@@ -19,8 +19,39 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen, fechaRegistro from dbo.reporteSiniestro;";
+            paquete.Consulta = "SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion;";
 
+            paquete.TipoDominio = TipoDato.ReportesSiniestro;
+            paquete.TipoQuery = TipoConsulta.Select;
+
+            mensaje = JsonSerializer.Serialize(paquete);
+
+            socket.IniciarConexion();
+            socket.EnviarMensaje(mensaje);
+            string respuesta = socket.RecibirMensaje();
+            socket.TerminarConexion();
+
+            if (respuesta.Length > 0)
+            {
+                listaReportes = (List<ReporteSiniestro>)JsonSerializer.Deserialize(respuesta, typeof(List<ReporteSiniestro>));
+
+            }
+
+
+            return listaReportes;
+        }
+
+        public static List<ReporteSiniestro> BuscarReportes(int dictaminado, string idDelegacion, string fecha)
+        {
+            List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();
+            SocketBD socket = new SocketBD();
+
+            string mensaje = "";
+            Paquete paquete = new Paquete();
+
+
+            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion WHERE dictamen = {0} AND b.idDelegacion LIKE '{1}' AND fechaRegistro LIKE '{2}';", dictaminado, idDelegacion, fecha);
+            Console.WriteLine(paquete.Consulta);
             paquete.TipoDominio = TipoDato.ReportesSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 
@@ -49,7 +80,8 @@ namespace DireccionGeneral.modelo.dao
             string mensaje = "";
             Paquete paquete = new Paquete();
 
-            paquete.Consulta = "SELECT idReporte, calle, numero, colonia, fechaHora, idDelegacion, username, dictamen from dbo.reporteSiniestro where idReporte =" + idReporte.ToString() + ";";
+            paquete.Consulta = String.Format("SELECT a.idReporte, a.calle, a.numero, a.colonia, a.fechaHora, a.idDelegacion, a.username, a.dictamen, a.fechaRegistro, b.nombre FROM dbo.reporteSiniestro AS a INNER JOIN delegacion AS b ON a.idDelegacion = b.idDelegacion WHERE idReporte = {0}",idReporte);
+
             paquete.TipoDominio = TipoDato.ReporteSiniestro;
             paquete.TipoQuery = TipoConsulta.Select;
 

@@ -62,7 +62,7 @@ namespace DelegacionMunicipal.vistas
                 vehiculo.NumPolizaSeguro = txt_Poliza.Text;
                 vehiculo.NombreAseguradora = txt_Aseguradora.Text;
                 vehiculo.Año = txt_Anio.Text;
-                vehiculo.NumLicenciaConducir = cmb_Conductores.SelectedItem.ToString();
+                vehiculo.NumLicenciaConducir = conductores[cmb_Conductores.SelectedIndex].NumeroLicencia;
 
 
 

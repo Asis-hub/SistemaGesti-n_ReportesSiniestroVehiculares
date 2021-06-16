@@ -13,12 +13,15 @@ namespace DireccionGeneral.vistas
     {
         List<ReporteSiniestro> reportesSiniestro;
         Usuario usuarioConectado;
-
+        List<Delegacion> listaDelegaciones;
         public ConsultarReportes()
         {
             InitializeComponent();
             reportesSiniestro = new List<ReporteSiniestro>();
             CargarTabla();
+
+            listaDelegaciones = DelegacionDAO.ConsultarDelegaciones();
+            cmb_Delegacion.ItemsSource = listaDelegaciones;
         }
 
         public ConsultarReportes(Usuario usuario) : this()
@@ -34,6 +37,52 @@ namespace DireccionGeneral.vistas
 
         private void btn_BuscarReportes_Click(object sender, RoutedEventArgs e)
         {
+            int dictaminado = 0;
+            string fecha = "";
+            string delegacion = "";
+
+            if (dpck_Fecha.SelectedDate != null)
+            {
+
+                fecha = dpck_Fecha.SelectedDate.Value.ToString("yyyy-MM-dd");
+
+            }
+            else
+            {
+                fecha = "%";
+
+            }
+
+            if (rdb_Dictaminado.IsChecked == true)
+            {
+                dictaminado = 1;
+            }
+            else if (rdb_Pendiente.IsChecked == true)
+            {
+                dictaminado = 0;
+            }
+
+            int seleccion = cmb_Delegacion.SelectedIndex;
+
+            if (seleccion >= 0)
+            {
+                delegacion = listaDelegaciones[seleccion].IdDelegacion.ToString();
+            }
+            else
+            {
+                delegacion = "%";
+            }
+
+            reportesSiniestro = ReporteSiniestroDAO.BuscarReportes(dictaminado, delegacion, fecha);
+
+            tbl_Reportes.ItemsSource = reportesSiniestro;
+
+            dpck_Fecha.SelectedDate = null;
+            rdb_Pendiente.IsChecked = true;
+            cmb_Delegacion.SelectedIndex = -1;
+
+            //Notificacion de resultados, observer respuesta
+
 
         }
 

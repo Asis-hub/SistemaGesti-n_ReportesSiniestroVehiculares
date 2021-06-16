@@ -110,7 +110,7 @@ namespace DelegacionMunicipal.vistas
                 reporteSiniestro.Colonia = txt_Colonia.Text;
                 reporteSiniestro.FechaHora = new DateTime(dpc_fecha.SelectedDate.Value.Year, dpc_fecha.SelectedDate.Value.Month, dpc_fecha.SelectedDate.Value.Day, int.Parse(cmb_Hora.Text), int.Parse(cmb_Minuto.Text), 0);
                 reporteSiniestro.FechaRegistro = DateTime.Now;
-                reporteSiniestro.IdDelegacion = cmb_delegacion.SelectedIndex;
+                reporteSiniestro.IdDelegacion = listaDelegaciones[cmb_delegacion.SelectedIndex].IdDelegacion;
                 reporteSiniestro.Username = usuarioConectado.Username;
                 reporteSiniestro.Dictamen = false;
                 reporteSiniestro.IdReporte = ReporteSiniestroDAO.RegistrarReporte(reporteSiniestro);
@@ -145,7 +145,7 @@ namespace DelegacionMunicipal.vistas
         {
             bool esValido = true;
 
-            if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0)
+            if (txt_Colonia.Text.Length == 0 || txt_Calle.Text.Length == 0 || txt_Numero.Text.Length ==0 || !(cmb_delegacion.SelectedIndex >= 0))
             {
                 MessageBox.Show("Debes llenar todos los campos");
                 esValido = false;

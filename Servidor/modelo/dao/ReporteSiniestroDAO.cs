@@ -38,6 +38,7 @@ namespace Servidor.modelo.dao
                         reporteSiniestro.Username = (!dataReader.IsDBNull(6)) ? dataReader.GetString(6) : "";
                         reporteSiniestro.Dictamen = (!dataReader.IsDBNull(7)) ? dataReader.GetBoolean(7) : false;
                         reporteSiniestro.FechaRegistro = (!dataReader.IsDBNull(8)) ? dataReader.GetDateTime(8) : System.DateTime.MinValue;
+                        reporteSiniestro.NombreDelegacion = (!dataReader.IsDBNull(9) ? dataReader.GetString(9) : "");
                         listaReportes.Add(reporteSiniestro);
                     }
                     dataReader.Close();

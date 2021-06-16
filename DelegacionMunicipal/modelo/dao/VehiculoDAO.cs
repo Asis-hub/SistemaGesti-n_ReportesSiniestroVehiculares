@@ -77,7 +77,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.Consulta = String.Format("SELECT a.numeroPlaca " +
                 "AS numPlaca, marca, modelo, color, numeroPolizaSeguro, " +
                 "nombreAseguradora, ano, numeroLicenciaConducir " +
-                "FROM dbo.vehiculo as a INNER JOIN vehiculosInvolucrados as b on " +
+                "FROM dbo.vehiculo AS a INNER JOIN vehiculosInvolucrados AS b on " +
                 "a.numeroPlaca = b.numeroPlaca inner join reporteSiniestro as c on " +
                 "b.idReporte = {0};", idReporte);
             paquete.TipoDominio = TipoDato.Vehiculo;
@@ -112,7 +112,7 @@ namespace DelegacionMunicipal.modelo.dao
                                              nuevoVehiculo.NumPlaca, nuevoVehiculo.Marca, nuevoVehiculo.Modelo, nuevoVehiculo.Color,
                                              nuevoVehiculo.NumPolizaSeguro, nuevoVehiculo.NombreAseguradora, nuevoVehiculo.Año,
                                              nuevoVehiculo.NumLicenciaConducir);
-
+            Console.WriteLine(paquete.Consulta);
             string mensaje = JsonSerializer.Serialize(paquete);
 
             socket.IniciarConexion();

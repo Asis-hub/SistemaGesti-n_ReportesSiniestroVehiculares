@@ -27,7 +27,7 @@
                 <RadioButton x:Name="rdb_Dictaminado" GroupName="gp_Estado" Content="Dictaminado" />
                 <Label Content="Delegación:" VerticalAlignment="Top" Margin="30,0,0,0"/>
                 <ComboBox x:Name="cmb_Delegacion" VerticalAlignment="Top" Width="120"/>
-                <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click"/>
+                <Button x:Name="btn_BuscarReportes" Content="Buscar" Margin="30,0,0,0" FontSize="16" Click="btn_BuscarReportes_Click" Height="26" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
@@ -41,7 +41,7 @@
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Colonia" Binding="{Binding Colonia}"/>
-                    <DataGridTextColumn Header="Delegacion" Binding="{Binding IdDelegacion}"/>
+                    <DataGridTextColumn Header="Delegacion" Binding="{Binding NombreDelegacion}"/>
                     <DataGridTextColumn Header="Usuario" Binding="{Binding Username}"/>
                     <DataGridTextColumn Header="Estatus" Binding="{Binding Estatus}"/>
                 </DataGrid.Columns>
