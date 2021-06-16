@@ -34,6 +34,7 @@ namespace DelegacionMunicipal.vistas
         private void btn_Vehiculos_Click(object sender, RoutedEventArgs e)
         {
             frame_Content.Content = ventanaConsultarVehiculos;
+            ventanaConsultarVehiculos.CargarTablaVehiculos();
         }
 
         private void btn_Reportes_Click(object sender, RoutedEventArgs e)

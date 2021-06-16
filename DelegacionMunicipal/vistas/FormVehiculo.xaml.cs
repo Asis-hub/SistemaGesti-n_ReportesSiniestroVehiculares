@@ -78,9 +78,16 @@ namespace DelegacionMunicipal.vistas
                     resultado = VehiculoDAO.EditarVehiculo(numPlaca,vehiculo);
                 }
 
-                if (resultado == 1)
+                if (resultado >= 1)
                 {
-                    notificacion.ActualizaInformacion("vehiculo con placas: " + vehiculo.NumPlaca + " se registró correctamente", "Vehículo registrado");
+                    if (esNuevo)
+                    {
+                        notificacion.ActualizaInformacion("vehiculo con placas: " + vehiculo.NumPlaca + " se registró correctamente", "Vehículo registrado");
+                    }
+                    else
+                    {
+                        notificacion.ActualizaInformacion("vehiculo con placas: " + vehiculo.NumPlaca + " se actualizó correctamente", "Vehículo actualizado");
+                    }
                     this.DialogResult = true;
                     this.Close();
                 }

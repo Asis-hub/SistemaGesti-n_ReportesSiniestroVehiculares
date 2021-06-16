@@ -71,9 +71,16 @@ namespace DireccionGeneral.vistas
                     resultado = UsuarioDAO.EditarUsuario(usuarioEdicion.Username, usuario);
                 }
 
-                if (resultado == 1)
+                if (resultado >= 1)
                 {
-                    notificacion.ActualizaInformacion(usuario.NombreCompleto + " se registró correctamente","Usuario registrado");
+                    if (esNuevo)
+                    {
+                        notificacion.ActualizaInformacion(usuario.NombreCompleto + " se registró correctamente", "Usuario registrado");
+                    }
+                    else
+                    {
+                        notificacion.ActualizaInformacion(usuario.NombreCompleto + " se actaulizó correctamente", "Usuario actualizado");
+                    }
                     this.DialogResult = true;
                     this.Close();
                 } 
@@ -120,6 +127,7 @@ namespace DireccionGeneral.vistas
                 notificacion.ActualizaInformacion("El usuario o contraseña no pueden tener espacios en blancos, favor de intentar de nuevo", "Espacios en blanco no permitidos");
                 return false;
             }
+
             return true;
         }
 

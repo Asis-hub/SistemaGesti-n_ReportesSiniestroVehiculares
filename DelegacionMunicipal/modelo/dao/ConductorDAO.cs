@@ -65,7 +65,7 @@ namespace DelegacionMunicipal.modelo.dao
             return resultado;
         }
 
-        public static int EditarConductor(Conductor conductor)
+        public static int EditarConductor(string numeroLicencia, Conductor conductor)
         {
             int resultado = 0;
             SocketBD socket = new SocketBD();
@@ -73,7 +73,7 @@ namespace DelegacionMunicipal.modelo.dao
             paquete.TipoQuery = TipoConsulta.Update;
             paquete.TipoDominio = TipoDato.Conductor;
             paquete.Consulta = String.Format("UPDATE dbo.conductor SET numeroLicenciaConducir='{0}', telefonoCelular='{1}', nombreCompleto='{2}', fechaNacimiento='{3}' WHERE numeroLicenciaConducir='{4}'",
-                                             conductor.NumeroLicencia, conductor.Celular, conductor.NombreCompleto, conductor.FechaNacimiento.ToString("yyyy-MM-dd"), conductor.NumeroLicencia);
+                                             conductor.NumeroLicencia, conductor.Celular, conductor.NombreCompleto, conductor.FechaNacimiento.ToString("yyyy-MM-dd"), numeroLicencia);
 
             string mensaje = JsonSerializer.Serialize(paquete);
 

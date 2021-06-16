@@ -43,10 +43,12 @@ namespace DelegacionMunicipal.vistas
             if (ValidarFormulario())
             {
                 Conductor conductor = new Conductor();
+                int resultado;
                 if (!esNuevo)
                 {
                     conductor.NumeroLicencia = conductorEdicion.NumeroLicencia;
                 }
+                
                 conductor.NumeroLicencia = txt_NoLicencia.Text;
                 conductor.Celular = txt_Telefono.Text;
                 conductor.NombreCompleto = txt_NombreConductor.Text;
@@ -55,7 +57,7 @@ namespace DelegacionMunicipal.vistas
                     conductor.FechaNacimiento = dp_FechaNacimiento.SelectedDate.Value.Date;
                 }
 
-                int resultado;
+                
 
                 if (esNuevo)
                 {
@@ -63,12 +65,19 @@ namespace DelegacionMunicipal.vistas
                 }
                 else
                 {
-                    resultado = ConductorDAO.EditarConductor(conductor);
+                    resultado = ConductorDAO.EditarConductor(conductorEdicion.NumeroLicencia ,conductor);
                 }
 
-                if (resultado == 1)
+                if (resultado >= 1)
                 {
-                    notificacion.ActualizaInformacion(conductor.NombreCompleto + " se registró correctamente", "Conductor registrado");
+                    if (esNuevo)
+                    {
+                        notificacion.ActualizaInformacion(conductor.NombreCompleto + " se registró correctamente", "Conductor registrado");
+                    }
+                    else
+                    {
+                        notificacion.ActualizaInformacion(conductor.NombreCompleto + " se actualizó correctamente", "Conductor actualizado");
+                    }
                     this.DialogResult = true;
                     this.Close();
                 }
