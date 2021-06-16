@@ -80,7 +80,7 @@ namespace DireccionGeneral.vistas
             dpck_Fecha.SelectedDate = null;
             rdb_Pendiente.IsChecked = true;
             cmb_Delegacion.SelectedIndex = -1;
-
+            btn_DictaminarReporte.IsEnabled = false;
             //Notificacion de resultados, observer respuesta
 
 
@@ -110,6 +110,15 @@ namespace DireccionGeneral.vistas
                     ventanaDictamen.Owner = Window.GetWindow(this);
                     ventanaDictamen.ShowDialog();
                 }
+            }
+        }
+
+        private void HabilitarRegistroDictamen(object sender, SelectionChangedEventArgs e)
+        {
+            int seleccion = tbl_Reportes.SelectedIndex;
+            if (seleccion >= 0 )
+            {
+                btn_DictaminarReporte.IsEnabled = reportesSiniestro[seleccion].Dictamen == false;
             }
         }
     }

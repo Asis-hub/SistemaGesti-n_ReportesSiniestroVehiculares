@@ -27,7 +27,7 @@ namespace DelegacionMunicipal.vistas
         private void cargarDatos()
         {
 
-            lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
+            //lbl_Folio.Content = reporteSiniestro.IdReporte.ToString();
             lbl_Calle.Content = reporteSiniestro.Calle.ToString();
             lbl_Numero.Content = reporteSiniestro.Numero.ToString();
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
