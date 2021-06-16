@@ -8,13 +8,12 @@ namespace DireccionGeneral.modelo.poco
 {
     public class Dictamen
     {
-        int folio;
-        string descripcion;
-        DateTime fechaHora;
-        int idReporte;
-        string username;
-
-
+        private int folio;
+        private string descripcion;
+        private DateTime fechaHora;
+        private int idReporte;
+        private string username;
+        private string perito;
 
         public Dictamen()
         {
@@ -25,6 +24,7 @@ namespace DireccionGeneral.modelo.poco
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public int IdReporte { get => idReporte; set => idReporte = value; }
         public string Username { get => username; set => username = value; }
+        public string Perito { get => perito; }
 
         public override string ToString()
         {

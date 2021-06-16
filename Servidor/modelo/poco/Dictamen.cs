@@ -13,8 +13,7 @@ namespace Servidor.modelo.poco
         DateTime fechaHora;
         int idReporte;
         string username;
-
-
+        private string perito;
 
         public Dictamen()
         {
@@ -25,6 +24,7 @@ namespace Servidor.modelo.poco
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public int IdReporte { get => idReporte; set => idReporte = value; }
         public string Username { get => username; set => username = value; }
+        public string Perito { get => perito; set => perito = value; }
 
         public override string ToString()
         {
