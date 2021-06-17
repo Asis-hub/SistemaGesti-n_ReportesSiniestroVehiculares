@@ -90,22 +90,21 @@ namespace Servidor.servicios
                     if (ex.ErrorCode == 10004)//Excepcion producida por serverSocket.Stop();
                     {
                         encendido = false;
-                        Console.WriteLine("error Socket Close()");
                         Console.WriteLine(ex.Message);
                     }
                     else
                     {
-                        Console.WriteLine("error Socket");
                         Console.WriteLine(ex.Message);
                     }
                     
                 }
                 catch (JsonException ex)
                 {
-                    Console.WriteLine("Error conexion json");
+                    Console.WriteLine("Error formato json json");
                     Console.WriteLine(ex.Message);
                 }
             }
+            CerrarConexionDeUsuarios();
         }
 
         public static void NotificarClientes(MensajeChat mensaje)
@@ -136,6 +135,20 @@ namespace Servidor.servicios
             {
                 Console.WriteLine("Error NotificarCliente");
             }
+        }
+
+        public static void CerrarConexionDeUsuarios()
+        {
+            foreach (DictionaryEntry item in listaClientes)
+            {
+                List<TcpClient> listaSockets = (List<TcpClient>)item.Value;
+                foreach (TcpClient soxketCliente in listaSockets)
+                {
+                    soxketCliente.Close(); 
+                }
+                listaSockets.Clear();
+            }
+            listaClientes.Clear();
         }
     }
 
