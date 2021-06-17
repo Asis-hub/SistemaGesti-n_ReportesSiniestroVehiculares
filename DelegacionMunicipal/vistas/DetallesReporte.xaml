@@ -24,8 +24,8 @@
             <Label Content="Usuario" HorizontalAlignment="Left" Margin="28,298,0,0" VerticalAlignment="Top" Grid.Column="1" Height="31" Width="92" FontSize="16" FontWeight="Bold"/>
             <Label Content="Detalles del reporte" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" Height="52" Width="285" FontSize="28" FontWeight="Bold" Grid.Column="1"/>
             <Label Content="Dictamen" HorizontalAlignment="Left" Margin="62,787,0,0" VerticalAlignment="Top" Grid.Column="1" Height="43" Width="135" FontSize="23" FontWeight="Bold"/>
-            <Label Content="Fecha de dictamen:" HorizontalAlignment="Left" Margin="62,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35"/>
-            <Label Content="Perito:" HorizontalAlignment="Left" Margin="350,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35" Grid.RowSpan="2"/>
+            <Label x:Name ="fechaDictamen" Content="Fecha de dictamen:" HorizontalAlignment="Left" Margin="62,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35"/>
+            <Label x:Name ="perito" Content="Perito:" HorizontalAlignment="Left" Margin="350,827,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="165" FontSize="16" FontWeight="Bold" Height="35" Grid.RowSpan="2"/>
 
             <Label Content="Vehículos" HorizontalAlignment="Left" Margin="421,68,0,0" VerticalAlignment="Top" Width="123" Grid.Column="1" Height="38" FontSize="23" FontWeight="Bold"/>
             <Label Content="Imágenes" HorizontalAlignment="Left" Margin="360,430,0,0" VerticalAlignment="Top" Grid.Column="1" Height="59" FontSize="23" FontWeight="Bold" Width="130" RenderTransformOrigin="0.549,0.698" />

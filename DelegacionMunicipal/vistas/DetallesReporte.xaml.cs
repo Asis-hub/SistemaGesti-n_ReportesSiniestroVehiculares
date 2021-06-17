@@ -50,12 +50,17 @@ namespace DelegacionMunicipal.vistas
                 lbl_FechaDictamen.Content = dictamen.FechaHora;
                 txt_DescripcionDictamen.Text = dictamen.Descripcion;
                 lbl_PeritoDictamen.Content = dictamen.Perito;
-                Console.WriteLine(dictamen.Perito);
+                
             }
             else
             {
-
+                fechaDictamen.Content = "Sin dictamen";
+                perito.Visibility = System.Windows.Visibility.Hidden;
+                lbl_FechaDictamen.Visibility = System.Windows.Visibility.Hidden;
                 txt_DescripcionDictamen.Visibility = System.Windows.Visibility.Hidden;
+                lbl_PeritoDictamen.Visibility = System.Windows.Visibility.Hidden;
+
+
 
             }
         }

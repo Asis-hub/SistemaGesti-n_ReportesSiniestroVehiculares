@@ -51,7 +51,13 @@ namespace DireccionGeneral.vistas
             else
             {
 
+                fechaDictamen.Content = "Sin dictamen";
+                perito.Visibility = System.Windows.Visibility.Hidden;
+                lbl_FechaDictamen.Visibility = System.Windows.Visibility.Hidden;
                 txt_DescripcionDictamen.Visibility = System.Windows.Visibility.Hidden;
+                lbl_PeritoDictamen.Visibility = System.Windows.Visibility.Hidden;
+
+                
 
             }
         }
