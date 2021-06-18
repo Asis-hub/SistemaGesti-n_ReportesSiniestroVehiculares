@@ -51,8 +51,12 @@ namespace DelegacionMunicipal.vistas
                     "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (resultado == MessageBoxResult.OK)
                 {
-                    VehiculoDAO.EliminarVehiculo(vehiculoEliminar.NumPlaca);
+                    int resultadoEliminar = VehiculoDAO.EliminarVehiculo(vehiculoEliminar.NumPlaca);
                     Console.WriteLine("BOTON OK");
+                    if(resultadoEliminar == -1)
+                    {
+                        ActualizaInformacion("No se pudo eliminar el vehículo ya que es parte de un reporte de un siniestro", "Eliminación no pudo realizarse");
+                    }
                 }
                 else
                 {

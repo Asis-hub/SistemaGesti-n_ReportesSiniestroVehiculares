@@ -62,8 +62,12 @@ namespace DelegacionMunicipal.vistas
                     "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if(resultado == MessageBoxResult.OK)
                 {
-                    ConductorDAO.EliminarConductor(conductorEliminar.NumeroLicencia);
+                    int resultadoEliminar = ConductorDAO.EliminarConductor(conductorEliminar.NumeroLicencia);
                     Console.WriteLine("BOTON OK");
+                    if(resultadoEliminar == -1)
+                    {
+                        ActualizaInformacion("No se pudo eliminar el conductor ya que hay un vehículo asignado a el", "Eliminación no pudo realizarse");
+                    }
                 }
                 else
                 {

@@ -51,8 +51,12 @@ namespace DireccionGeneral.vistas
                     "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (resultado == MessageBoxResult.OK)
                 {
-                    UsuarioDAO.EliminarUsuario(usuarioEliminar.Username);
+                    int resultadoEliminar = UsuarioDAO.EliminarUsuario(usuarioEliminar.Username);
                     Console.WriteLine("BOTON OK");
+                    if(resultadoEliminar == -1)
+                    {
+                        ActualizaInformacion("No se pudo eliminar el usuario ya que el usuario registró un reporte o un dictamen", "Eliminación no pudo realizarse");
+                    }
                 }
                 else
                 {

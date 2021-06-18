@@ -50,8 +50,12 @@ namespace DireccionGeneral.vistas
                     "Confirmar acción", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (resultado == MessageBoxResult.OK)
                 {
-                    DelegacionDAO.EliminarDelegacion(delegacionEliminar.IdDelegacion);
+                    int resultadoEliminar = DelegacionDAO.EliminarDelegacion(delegacionEliminar.IdDelegacion);
                     Console.WriteLine("BOTON OK");
+                    if(resultadoEliminar == -1)
+                    {
+                        ActualizaInformacion("No se pudo eliminar la delegación ya que hay un usuario asignado a ella", "Eliminación no pudo realizarse");
+                    }
                 }
                 else
                 {
