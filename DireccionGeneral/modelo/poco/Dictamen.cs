@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// 
+    /// </summary>
     public class Dictamen
     {
         private int folio;
