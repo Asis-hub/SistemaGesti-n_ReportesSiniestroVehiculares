@@ -18,6 +18,10 @@ namespace DelegacionMunicipal.modelo.dao
 
     public class VehiculoDAO
     {
+        /// <summary>
+        /// Obtener todos los vehiculos
+        /// </summary>
+        /// <returns></returns>
         public static List<Vehiculo> ConsultarVehiculos()
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -44,6 +48,11 @@ namespace DelegacionMunicipal.modelo.dao
             return listaVehiculos;
         }
 
+        /// <summary>
+        /// Obtener vehiculos con conductor especifico
+        /// </summary>
+        /// <param name="licencia">licencia de conductor</param>
+        /// <returns></returns>
         public static List<Vehiculo> ConsultarVehiculosConductor(string licencia)
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -73,6 +82,12 @@ namespace DelegacionMunicipal.modelo.dao
 
             return listaVehiculos;
         }
+
+        /// <summary>
+        /// Obtener vehiculos de reporte de siniestro especifico
+        /// </summary>
+        /// <param name="idReporte">identificador reporte</param>
+        /// <returns></returns>
         public static List<Vehiculo> ConsultarVehiculosReporte(int idReporte)
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -106,6 +121,8 @@ namespace DelegacionMunicipal.modelo.dao
 
             return listaVehiculos;
         }
+
+        
         public static int RegistrarVehiculo(Vehiculo nuevoVehiculo)
         {
             int resultado = 0;

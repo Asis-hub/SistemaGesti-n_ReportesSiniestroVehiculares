@@ -17,6 +17,7 @@ namespace DelegacionMunicipal.modelo.dao
 
     public class DictamenDAO
     {
+        
         public static Dictamen ConsultarDictamen(int idReporte)
         {
             int IdReporte = idReporte;

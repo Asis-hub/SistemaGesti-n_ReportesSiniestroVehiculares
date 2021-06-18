@@ -48,6 +48,13 @@ namespace DelegacionMunicipal.modelo.dao
             return listaReportes;
         }
 
+        /// <summary>
+        /// Metodo para obtener reportes con caracteristicas especificas
+        /// </summary>
+        /// <param name="dictaminado">booleano de dictaminado</param>
+        /// <param name="idDelegacion">identificador de delegacion</param>
+        /// <param name="fecha">fecha de reporte</param>
+        /// <returns></returns>
         public static List<ReporteSiniestro> BuscarReportes(int dictaminado, string idDelegacion, string fecha)
         {
             List<ReporteSiniestro> listaReportes = new List<ReporteSiniestro>();
@@ -79,6 +86,11 @@ namespace DelegacionMunicipal.modelo.dao
             return listaReportes;
         }
 
+        /// <summary>
+        /// Obtener reporte especifico
+        /// </summary>
+        /// <param name="idReporte">identificador de reporte</param>
+        /// <returns></returns>
         public static ReporteSiniestro ObtenerReporte(int idReporte)
         {
             ReporteSiniestro reporteSiniestro = new ReporteSiniestro();

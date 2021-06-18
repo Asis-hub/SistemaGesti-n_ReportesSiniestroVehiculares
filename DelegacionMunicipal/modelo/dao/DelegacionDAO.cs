@@ -18,6 +18,7 @@ namespace DelegacionMunicipal.modelo.dao
     
     class DelegacionDAO
     {
+        //Delegaciones para inicio de sesion
         public static List<Delegacion> GetDelegacionesLogin()
         {
             List<Delegacion> listaDelegaciones = new List<Delegacion>();
@@ -47,6 +48,7 @@ namespace DelegacionMunicipal.modelo.dao
             return listaDelegaciones;
         }
 
+        //Delegaciones para resto de sistema
         public static List<Delegacion> ConsultarDelegaciones()
         {
             List<Delegacion> listaDelegaciones = new List<Delegacion>();
