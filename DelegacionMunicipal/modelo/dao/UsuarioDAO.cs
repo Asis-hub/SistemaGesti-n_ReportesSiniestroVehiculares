@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
-    //DAO para obtener Usuario
+    /// <summary>
+    /// DAO para obtener Usuario
+    /// </summary>
+
     public class UsuarioDAO
     {
         public static Usuario getInicioSesion(string username, string password, int idDelegacion)

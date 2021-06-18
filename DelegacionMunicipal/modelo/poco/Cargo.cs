@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
-    //POCO para operaciones de Cargo
+    /// <summary>
+    /// POCO para operaciones de Cargo
+    /// </summary>
+
     public class Cargo
     {
         private int idCargo;

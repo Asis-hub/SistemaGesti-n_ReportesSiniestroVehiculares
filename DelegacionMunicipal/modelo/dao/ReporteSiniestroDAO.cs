@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
-    //DAO para obtener, registrar y eliminar reportes de siniestro
+    /// <summary>
+    /// DAO para obtener, registrar y eliminar reportes de siniestro
+    /// </summary>
+    
     class ReporteSiniestroDAO
     {
         public static List<ReporteSiniestro> ConsultarReportes()

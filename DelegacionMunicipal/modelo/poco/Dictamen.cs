@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
-    //POCO para operaciones de Dictamen
+    /// <summary>
+    /// POCO para operaciones de Dictamen
+    /// </summary>
+
 
     public class Dictamen
     {

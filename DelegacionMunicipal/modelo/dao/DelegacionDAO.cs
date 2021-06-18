@@ -12,7 +12,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
-    //DAO para Obtener delegaciones
+    /// <summary>
+    /// DAO para Obtener delegaciones
+    /// </summary>
+    
     class DelegacionDAO
     {
         public static List<Delegacion> GetDelegacionesLogin()

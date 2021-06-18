@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
-    //POCO para operaciones de Vehiculos Involucrados
+    /// <summary>
+    /// POCO para operaciones de Vehiculos Involucrados
+    /// </summary>
+
 
     class VehiculosInvolucrados
     {

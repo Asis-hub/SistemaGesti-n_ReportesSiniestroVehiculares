@@ -10,7 +10,13 @@ namespace DelegacionMunicipal.modelo.dao
 {
     class VehiculosInvolucradosDAO
     {
-        // DAO para tabla que relaciona Vehiculos con Reportes
+        /// <summary>
+        /// DAO para tabla que relaciona Vehiculos con Reportes
+        /// </summary>
+        /// <param name="numeroPlaca"> Numero de Placa del vehiculo </param>
+        /// <param name="idReporte"> Numero del reporte</param>
+
+        
         public static int InsertarVehiculo(string numeroPlaca, int idReporte)
         {
             int resultado = 0;
