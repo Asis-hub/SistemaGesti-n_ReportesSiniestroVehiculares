@@ -9,9 +9,11 @@ using System.Windows.Media.Imaging;
 
 namespace DelegacionMunicipal.conexion
 {
-    
-    //Clase para conectar con el servidor FTP
-    //Exclusivamente archivos con extension .jpg
+    /// <summary>
+    /// Clase para conectar con el servidor FTP
+    /// Exclusivamente archivos con extension .jpg
+    /// </summary>
+
     class ConectorFTP
     {
         

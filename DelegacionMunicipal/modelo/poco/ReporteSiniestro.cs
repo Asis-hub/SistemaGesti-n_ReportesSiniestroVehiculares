@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
-    //POCO para operaciones de Reporte Siniestro
+    /// <summary>
+    /// POCO para Registrar y Obtener de Reporte Siniestro
+    /// </summary>
+
 
     public class ReporteSiniestro
     {

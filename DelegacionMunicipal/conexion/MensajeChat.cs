@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
-    //POCO mensajes chat
+    /// <summary>
+    /// POCO mensajes chat
+    /// </summary>
+
     public enum TipoMensaje
     {
         Conectarse,
