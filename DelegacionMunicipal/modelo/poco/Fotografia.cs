@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
+    /// <summary>
+    /// POCO para operaciones de Fotografia
+    /// </summary>
+
+
     class Fotografia
     {
         private int idFotografia;

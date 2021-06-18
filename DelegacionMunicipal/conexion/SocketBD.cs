@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
+    /// <summary>
+    /// Socket para conexion con el servidor
+    /// Manda mensajes
+    /// </summary>
+
     public class SocketBD
     {
         private Socket socketCliente;

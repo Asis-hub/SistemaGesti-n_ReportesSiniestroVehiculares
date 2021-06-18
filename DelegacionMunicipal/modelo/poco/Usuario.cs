@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
+    /// <summary>
+    /// POCO para operaciones de Usuario
+    /// </summary>
+
     public class Usuario
     {
         private string username;
