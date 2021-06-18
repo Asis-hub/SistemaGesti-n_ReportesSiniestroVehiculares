@@ -19,11 +19,11 @@
 
         <Label Content="Dirección" HorizontalAlignment="Left" Margin="25,246,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label Content="Colonia:" HorizontalAlignment="Left" Margin="25,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,0.435" FontSize="16"/>
-        <TextBox x:Name="txt_Colonia" HorizontalAlignment="Left" Height="23" Margin="149,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_Colonia" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="149,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Calle:" HorizontalAlignment="Left" Margin="25,327,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name="txt_Calle" HorizontalAlignment="Left" Height="23" Margin="149,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_Calle" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="149,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Número:" HorizontalAlignment="Left" Margin="25,365,0,0" VerticalAlignment="Top" Width="71" FontSize="16"/>
-        <TextBox x:Name="txt_Numero" HorizontalAlignment="Left" Height="23" Margin="149,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_Numero" MaxLength="5" HorizontalAlignment="Left" Height="23" Margin="149,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
 
         <Label x:Name="output" Content="" HorizontalAlignment="Left" Margin="40,474,0,0" VerticalAlignment="Top"/>

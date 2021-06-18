@@ -3,6 +3,7 @@ using DelegacionMunicipal.modelo.dao;
 using DelegacionMunicipal.modelo.poco;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace DelegacionMunicipal.vistas
@@ -130,6 +131,38 @@ namespace DelegacionMunicipal.vistas
             }
 
             return true;
+        }
+
+        private void txt_Marca_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetter(ch) || Char.IsWhiteSpace(ch))))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
+        }
+
+        private void txt_Color_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsLetter(ch) || Char.IsWhiteSpace(ch))))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
+        }
+
+        private void txt_Anio_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

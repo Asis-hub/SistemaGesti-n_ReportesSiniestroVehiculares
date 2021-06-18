@@ -15,16 +15,16 @@
         <TextBox x:Name="txt_NoPlacas" MaxLength="8" HorizontalAlignment="Left" Height="23" Margin="125,71,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Marca" HorizontalAlignment="Left" Margin="34,114,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Marca" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="125,114,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Marca" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="125,114,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225" PreviewTextInput="txt_Marca_PreviewTextInput"/>
 
         <Label Content="Modelo" HorizontalAlignment="Left" Margin="34,159,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_Modelo" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="125,159,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
 
         <Label Content="Color" HorizontalAlignment="Left" Margin="38,198,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Color" MaxLength="15" HorizontalAlignment="Left" Height="23" Margin="125,202,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
+        <TextBox x:Name="txt_Color" MaxLength="15" HorizontalAlignment="Left" Height="23" Margin="125,202,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225" PreviewTextInput="txt_Color_PreviewTextInput"/>
 
         <Label Content="Año" HorizontalAlignment="Left" Margin="393,67,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Anio" MaxLength="4" HorizontalAlignment="Left" Height="23" Margin="502,68,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="txt_Anio" MaxLength="4" HorizontalAlignment="Left" Height="23" Margin="502,68,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="70" PreviewTextInput="txt_Anio_PreviewTextInput"/>
 
         <Label Content="No. Póliza" HorizontalAlignment="Left" Margin="393,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.499,1.106"/>
         <TextBox x:Name="txt_Poliza" MaxLength="20" HorizontalAlignment="Left" Height="23" Margin="502,110,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="225"/>
