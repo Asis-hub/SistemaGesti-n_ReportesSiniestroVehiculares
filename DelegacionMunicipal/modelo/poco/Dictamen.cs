@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
+    //POCO para operaciones de Dictamen
+
     public class Dictamen
     {
         private int folio;

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.poco
 {
+    //POCO para operaciones de Delegacion
+
     public class Delegacion
     {
         private int idDelegacion;
