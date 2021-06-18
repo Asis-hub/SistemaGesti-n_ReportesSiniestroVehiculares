@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
+    //Clasifica el tipo de mensaje a mandar a servidor
     public enum TipoConsulta
     {
         Select,

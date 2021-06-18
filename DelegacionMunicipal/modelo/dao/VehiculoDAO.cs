@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    //DAO para Obtener, Registrar, Editar y Eliminar vehiculo
     public class VehiculoDAO
     {
         public static List<Vehiculo> ConsultarVehiculos()

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
+    //Lleva a cabo la conexion con servidor unicamente para inicio de sesion
     public class SocketLogin
     {
         private Socket socketCliente;

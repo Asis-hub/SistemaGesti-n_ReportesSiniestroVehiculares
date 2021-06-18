@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    //DAO para Consultar conductores, Registrar conductor, Editar Conductor, Eliminar Conductor
     public class ConductorDAO
     {
         public static List<Conductor> ConsultarConductores()

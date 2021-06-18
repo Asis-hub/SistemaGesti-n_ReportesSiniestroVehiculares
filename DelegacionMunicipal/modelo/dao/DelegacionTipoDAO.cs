@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+
+    //DAO para obtener los tipos de delegaciones
     public class DelegacionTipoDAO
     {
         public static List<DelegacionTipo> ConsultarTipos()

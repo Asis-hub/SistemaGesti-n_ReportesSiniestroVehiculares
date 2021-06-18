@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    //DAO de Fotografia para obtener e insertar fotografias
+
     class FotografiaDAO
     {
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    // DAO de Dictamen para Consultar
     public class DictamenDAO
     {
         public static Dictamen ConsultarDictamen(int idReporte)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao.ftp
 {
+    //DAO organizacion FTP
     public class ConexionFTP
     {
         public static String SERVER = "ftp://maisonbleue2020.ddns.net/sgsrv/";

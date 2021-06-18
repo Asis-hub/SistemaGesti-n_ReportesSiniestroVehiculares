@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    //DAO para obtener municipios
     public class MunicipioDAO
     {
         public static List<Municipio> ConsultarMunicipios()
