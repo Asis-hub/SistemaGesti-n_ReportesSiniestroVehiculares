@@ -51,6 +51,10 @@ namespace DireccionGeneral.vistas
                     notificacion.ActualizaInformacion("Error al registrar el dictamen. Verifica el folio", "Error dictamen");
                 }
             }
+            else
+            {
+                notificacion.ActualizaInformacion("No se ha ingresado nada", "Falta informacion");
+            }
         }
 
 
