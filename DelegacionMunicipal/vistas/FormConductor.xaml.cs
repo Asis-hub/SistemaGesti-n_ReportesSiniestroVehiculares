@@ -45,7 +45,7 @@ namespace DelegacionMunicipal.vistas
                 Conductor conductor = new Conductor();
                 int resultado;
                 if (!esNuevo)
-                {
+                {   
                     conductor.NumeroLicencia = conductorEdicion.NumeroLicencia;
                 }
                 
@@ -118,12 +118,15 @@ namespace DelegacionMunicipal.vistas
             return true;
         }
 
+
+        //Metodo para limitar a numeros el txt_Telefono, solo se permiten numeros en este campo
         private void txt_Telefono_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        //Metodo para limitar a numeros el txt_NombreConductor, solo se permiten letras en este campo
         private void txt_NombreConductor_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -137,6 +140,7 @@ namespace DelegacionMunicipal.vistas
             }
         }
 
+        //Metodo para obtener la edad de acuerdo a la fecha de nacimiento
         private int DiferenciaAnios(DateTime fechaSeleccionada, DateTime fechaActual)
         {
             return (fechaActual.Year - fechaSeleccionada.Year - 1) +
