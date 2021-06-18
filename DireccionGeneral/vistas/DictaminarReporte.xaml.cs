@@ -53,7 +53,7 @@ namespace DireccionGeneral.vistas
             }
             else
             {
-                notificacion.ActualizaInformacion("No se ha ingresado nada", "Falta informacion");
+                notificacion.ActualizaInformacion("No se ha ingresado dictamen", "Falta informacion");
             }
         }
 
