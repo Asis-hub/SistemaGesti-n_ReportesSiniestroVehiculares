@@ -45,7 +45,9 @@ namespace DireccionGeneral.vistas
             txt_Calle.Text = delegacionEdicion.Calle;
             txt_Correo.Text = delegacionEdicion.Correo;
             txt_Numero.Text = delegacionEdicion.Numero;
-            cmb_Municipio.SelectedIndex = municipios.FindIndex(x => x.IdMunicipio == delegacionEdicion.IdMunicipio);
+            // Carga los municipios que corresponden a una delegación que se está editando
+            cmb_Municipio.SelectedIndex = municipios.FindIndex(x => x.IdMunicipio == delegacionEdicion.IdMunicipio); 
+            // Carga el tipo de delegación a la que corresponde la delegación que se está editando
             cmb_Tipo.SelectedIndex = tiposDelegacion.FindIndex(x => x.IdTipoDelegacion == delegacionEdicion.IdTipo);
         }
 
@@ -132,7 +134,7 @@ namespace DireccionGeneral.vistas
 
             return true;
         }
-
+        //Metodo para limitar solo texto para el txt_Nombre, solo se permiten letras
         private void txt_Nombre_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -145,7 +147,7 @@ namespace DireccionGeneral.vistas
                 }
             }
         }
-
+        //Metodo para limitar solo texto que se considera una dirección de correo por la clase MailAddress
         bool validarCorreo(string correo)
         {
             try
@@ -158,13 +160,13 @@ namespace DireccionGeneral.vistas
                 return false;
             }
         }
-
+        //Metodo para limitar solo texto para el txt_CodigoPostal, solo se permiten numeros
         private void txt_CodigoPostal_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        //Metodo para limitar solo texto para el txt_Calle, solo se permiten letras y los caracteres en la condición if dentro del método
         private void txt_Calle_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -177,13 +179,13 @@ namespace DireccionGeneral.vistas
                 }
             }
         }
-
+        //Metodo para limitar solo texto para el txt_Numero, solo se permiten numeros
         private void txt_Numero_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        //Metodo para limitar solo texto para el txt_Colonia, solo se permiten letras
         private void txt_Colonia_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^A-Za-z]+");

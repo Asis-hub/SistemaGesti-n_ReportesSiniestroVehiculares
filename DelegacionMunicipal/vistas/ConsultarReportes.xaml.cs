@@ -107,8 +107,19 @@ namespace DelegacionMunicipal.vistas
             dpck_Fecha.SelectedDate = null;
             rdb_Pendiente.IsChecked = true;
             cmb_Delegacion.SelectedIndex = -1;
-
-            //Notificacion de resultados, observer respuesta
+            // Se muestra un mensaje que notifica cuantos resultados se encontraron de acuerdo a los filtros de búsqueda
+            if (tbl_Reportes.Items.Count == 1)
+            {
+                ActualizaInformacion("Se encontró " + tbl_Reportes.Items.Count.ToString() + " resultado", "Resultado de búsqueda");
+            }
+            if (tbl_Reportes.Items.Count > 1)
+            {
+                ActualizaInformacion("Se encontraron " + tbl_Reportes.Items.Count.ToString() + " resultados", "Resultado de búsqueda");
+            }
+            if (tbl_Reportes.Items.Count == 0)
+            {
+                ActualizaInformacion("No se encontraron resultados que coincidan con los filtros de la búsqueda", "Resultado de búsqueda");
+            }
 
         }
 

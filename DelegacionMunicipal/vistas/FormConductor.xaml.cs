@@ -94,6 +94,7 @@ namespace DelegacionMunicipal.vistas
             this.Close();
         }
 
+        // Método par validar que los formularios para registrar conductores tienen los campos requeridos y cumplen con la información solicitada
         private bool ValidarFormulario()
         {
             if (txt_NoLicencia.Text.Length == 0 || txt_Telefono.Text.Length == 0 || txt_NombreConductor.Text.Length == 0 || !dp_FechaNacimiento.SelectedDate.HasValue)
@@ -126,7 +127,7 @@ namespace DelegacionMunicipal.vistas
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        //Metodo para limitar a numeros el txt_NombreConductor, solo se permiten letras en este campo
+        //Metodo para limitar a letras el txt_NombreConductor, solo se permiten letras en este campo
         private void txt_NombreConductor_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)

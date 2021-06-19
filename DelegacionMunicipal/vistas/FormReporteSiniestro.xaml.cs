@@ -100,9 +100,6 @@ namespace DelegacionMunicipal.vistas
 
         private void btn_RegistrarReporte_Click(object sender, RoutedEventArgs e)
         {
-            //Validar campos 
-            //Validar cantidad de imagenes
-            //Registrar con DAO, que retorne booleano
             if (ValidarFormulario())
             {
                 ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
@@ -143,6 +140,7 @@ namespace DelegacionMunicipal.vistas
             this.Close();
         }
 
+        // Método que donde se validan los campos y la cantidad de imagenes
         private bool ValidarFormulario()
         {
             bool esValido = true;

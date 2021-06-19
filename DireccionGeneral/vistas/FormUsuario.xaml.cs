@@ -108,7 +108,7 @@ namespace DireccionGeneral.vistas
             delegaciones = DelegacionDAO.ConsultarDelegaciones();
             cmb_Delegacion.ItemsSource = delegaciones;
         }
-
+        // Método que valida que no falten campos requeridos en el formulario al registrar un Usuario
         private bool ValidarFormulario()
         {
             if (txt_Usuario.Text.Length == 0 || txt_Nombre.Text.Length == 0 || txt_Contraseña.Password.Length == 0 || 
@@ -130,7 +130,7 @@ namespace DireccionGeneral.vistas
 
             return true;
         }
-
+        // Método que valida que las contraseñas del formulario coincidan
         private bool ValidarPassword()
         {
             if(txt_Contraseña.Password == txt_ContraseñaConfirmacion.Password)
@@ -139,7 +139,7 @@ namespace DireccionGeneral.vistas
             }
             return false;
         }
-
+        //Metodo para limitar a letras el txt_Nombre, solo se permiten letras en este campo
         private void txt_Nombre_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -151,7 +151,7 @@ namespace DireccionGeneral.vistas
                 }
             }
         }
-
+        //Metodo para limitar la entrada de teclas a txt_Usuario, solo se permiten letras y caracteres definidos en la condición if del método
         private void txt_Usuario_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -164,7 +164,7 @@ namespace DireccionGeneral.vistas
                 }
             }
         }
-
+        //Metodo para limitar la entrada de teclas a txt_Contraseña, solo se permiten letras, dígitos y caracteres definidos en la condición if del método
         private void txt_Contraseña_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)

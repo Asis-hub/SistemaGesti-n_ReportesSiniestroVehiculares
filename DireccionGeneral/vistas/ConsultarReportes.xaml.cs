@@ -77,6 +77,7 @@ namespace DireccionGeneral.vistas
             rdb_Pendiente.IsChecked = true;
             cmb_Delegacion.SelectedIndex = -1;
             btn_DictaminarReporte.IsEnabled = false;
+            // Se muestra un mensaje que notifica cuantos resultados se encontraron de acuerdo a los filtros de búsqueda
             if(tbl_Reportes.Items.Count == 1)
             {
                 ActualizaInformacion("Se encontró " + tbl_Reportes.Items.Count.ToString() + " resultado", "Resultado de búsqueda");
@@ -121,7 +122,7 @@ namespace DireccionGeneral.vistas
                 }
             }
         }
-
+        // Si el reporte ya está dictaminado se deshabilita el botón de dictaminar
         private void HabilitarRegistroDictamen(object sender, SelectionChangedEventArgs e)
         {
             int seleccion = tbl_Reportes.SelectedIndex;

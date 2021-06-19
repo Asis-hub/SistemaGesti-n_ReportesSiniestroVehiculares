@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao.ftp
-{
+{   /// <summary>
+    /// DAO organizacion FTP
+    /// </summary>
     public class ConexionFTP
     {
         public static String SERVER = "ftp://maisonbleue2020.ddns.net/sgsrv/";
