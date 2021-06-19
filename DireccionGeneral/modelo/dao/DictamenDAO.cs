@@ -8,7 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Registrar y Obtener dictamenes 
+    /// </summary>
     public class DictamenDAO
     {
         

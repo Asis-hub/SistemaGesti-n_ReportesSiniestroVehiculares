@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
 {   /// <summary>
-    /// 
+    /// POCO para Registrar y Obtener Dictamenes en la BD
     /// </summary>
     public class Dictamen
     {

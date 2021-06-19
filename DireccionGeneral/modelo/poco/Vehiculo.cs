@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
 {
+    /// <summary>
+    /// POCO para Registrar, Obtener, Modificar y Eliminar vehiculos de la BD
+    /// </summary>
     public class Vehiculo
     {
         private string numPlaca;

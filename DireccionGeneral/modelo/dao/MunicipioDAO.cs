@@ -8,7 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Obtener los Municipios de la BD
+    /// </summary>
     public class MunicipioDAO
     {
         public static List<Municipio> ConsultarMunicipios()

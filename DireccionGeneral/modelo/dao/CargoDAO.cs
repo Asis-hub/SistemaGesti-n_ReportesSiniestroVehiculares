@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
 {
+    /// <summary>
+    /// DAO para Consultar Cargos
+    /// </summary>
     public class CargoDAO
     {
         public static List<Cargo> ConsultarCargos()

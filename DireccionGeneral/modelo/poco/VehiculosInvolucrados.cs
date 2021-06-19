@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// POCO para Registrar y Obtener Vehículos Involucrados en siniestros
+    /// </summary>
     class VehiculosInvolucrados
     {
         private string numeroPlaca;

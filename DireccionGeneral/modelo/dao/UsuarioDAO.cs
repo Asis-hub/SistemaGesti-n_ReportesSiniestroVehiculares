@@ -8,7 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Obtener para inicio de sesión, Consultar, Registrar, Modificar y Eliminar Usuarios
+    /// </summary>
     public class UsuarioDAO
     {
         public static Usuario getInicioSesion(string username, string password)

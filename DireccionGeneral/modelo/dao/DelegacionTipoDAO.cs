@@ -8,7 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Consultar tipos de delegaciones almacenadas en la BD
+    /// </summary>
     public class DelegacionTipoDAO
     {
         public static List<DelegacionTipo> ConsultarTipos()

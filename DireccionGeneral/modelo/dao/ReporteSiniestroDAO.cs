@@ -8,7 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Obtener, Buscar, Registrar y Eliminar Reportes de Siniestros Vehiculares
+    /// </summary>
     public class ReporteSiniestroDAO
     {
         public static List<ReporteSiniestro> ConsultarReportes()

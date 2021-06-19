@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Obtener, Registrar, Modificar y Eliminar vehículos de la BD
+    /// </summary>
     public class VehiculoDAO
     {
         public static List<Vehiculo> ConsultarVehiculos()
@@ -39,7 +41,7 @@ namespace DireccionGeneral.modelo.dao
 
             return listaVehiculos;
         }
-
+        //Método para obtener vehículos de acuerdo a la licencia de un conductor
         public static List<Vehiculo> ConsultarVehiculosConductor(string licencia)
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -69,6 +71,7 @@ namespace DireccionGeneral.modelo.dao
 
             return listaVehiculos;
         }
+        //Método para obtener los vehículos involucrados en un siniestro reportado
         public static List<Vehiculo> ConsultarVehiculosReporte(int idReporte)
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();

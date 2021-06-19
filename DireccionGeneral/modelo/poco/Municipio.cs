@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// POCO para Obtener Municipios de la BD
+    /// </summary>
     public class Municipio
     {
         private int idMunicipio;

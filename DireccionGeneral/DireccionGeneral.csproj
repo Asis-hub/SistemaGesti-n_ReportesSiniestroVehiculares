@@ -93,7 +93,6 @@
     <Compile Include="interfaz\ObserverChat.cs" />
     <Compile Include="interfaz\ObserverRespuesta.cs" />
     <Compile Include="modelo\dao\CargoDAO.cs" />
-    <Compile Include="modelo\dao\ConductorDAO.cs" />
     <Compile Include="modelo\dao\DelegacionDAO.cs" />
     <Compile Include="modelo\dao\DelegacionTipoDAO.cs" />
     <Compile Include="modelo\dao\DictamenDAO.cs" />

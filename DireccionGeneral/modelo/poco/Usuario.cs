@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// POCO para Registrar, Obtener, Modificar y Eliminar usuarios de la BD 
+    /// </summary>
     public class Usuario
     {
         private string username;
