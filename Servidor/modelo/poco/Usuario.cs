@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase poco de los usuarios que pueden acceder al sistema
+    /// </summary>
     public class Usuario
     {
         private string username;

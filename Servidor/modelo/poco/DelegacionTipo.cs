@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase POCO 
+    /// </summary>
     public class DelegacionTipo
     {
         private int idTipoDelegacion;

@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que permite administrar las Delegaciones
+    /// </summary>
     public class DelegacionDAO
     {
+        /// <summary>
+        /// Obtiene una lista de las delegaciones registradas
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Lista de Delegaciones</returns>
         public static List<Delegacion> ConsultarDelegaciones(string consulta)
         {
             List<Delegacion> listaDelegaciones = new List<Delegacion>();
@@ -60,6 +68,11 @@ namespace Servidor.modelo.dao
             return listaDelegaciones;
         }
 
+        /// <summary>
+        /// Registra una delegación
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int RegistrarDelegacion(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -89,6 +102,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Edita el registro de una Delegación
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - editado correctamente, -1 - Error al editar</returns>
         public static int EditarDelegacion(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -118,6 +136,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Elimina el registro de una Delegación
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - editado correctamente, -1 - Error al eliminar</returns>
         public static int EliminarDelegacion(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();

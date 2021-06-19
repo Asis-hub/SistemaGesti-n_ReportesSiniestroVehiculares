@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.servicios
 {
+    /// <summary>
+    /// Tipo de operaciones que se pueden realizar en la base de datos
+    /// </summary>
     public enum TipoConsulta
     {
         Select,
@@ -14,6 +17,9 @@ namespace Servidor.servicios
         Update
     }
 
+    /// <summary>
+    /// Tipos de dato que se modifican en la base de datos
+    /// </summary>
     public enum TipoDato
     {
         Usuario,
@@ -30,6 +36,9 @@ namespace Servidor.servicios
         VehiculosInvolucrados
     }
 
+    /// <summary>
+    /// Plantilla del formato de Paquetes para atender las peticiones para la base de datos
+    /// </summary>
     public class Paquete
     {
         private TipoConsulta tipoQuery;

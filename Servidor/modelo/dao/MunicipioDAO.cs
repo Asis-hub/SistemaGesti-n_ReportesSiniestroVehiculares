@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que administra el Catálogo de municipios
+    /// </summary>
     public class MunicipioDAO
     {
+        /// <summary>
+        /// Obtiene la lista de municipios registrados
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Lista de Municipios</returns>
         public static List<Municipio> ConsultarMunicipios(string consulta)
         {
             List<Municipio> listaMunicipios = new List<Municipio>();

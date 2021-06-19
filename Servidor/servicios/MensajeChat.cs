@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.servicios
 {
+    /// <summary>
+    /// Tipos de Mensajes en la sala de chat
+    /// </summary>
     public enum TipoMensaje
     {
         Conectarse,
@@ -14,6 +17,9 @@ namespace Servidor.servicios
         ListaUsuarios
     }
 
+    /// <summary>
+    /// Plantilla del formato de mensajes para la sala de chat
+    /// </summary>
     public class MensajeChat
     {
         private string contenido;

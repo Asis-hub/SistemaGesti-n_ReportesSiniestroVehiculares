@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo
 {
+    /// <summary>
+    /// DAO para administrar el registro de los vehiculos de un reporte de siniestro
+    /// </summary>
     class VehiculosInvolucradosDAO
     {
+        /// <summary>
+        /// Registra los vehiculos involucrados en un reporte de siniestro
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns></returns>
         internal static int InsertarVehiculo(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
