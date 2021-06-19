@@ -37,7 +37,7 @@
                 <Button x:Name="btn_VerDetalles" Content="Ver detalles" Margin="10,10,10,10" FontSize="16" Click="btn_VerDetalles_Click"/>
             </StackPanel>
 
-            <DataGrid x:Name="tbl_Reportes" Grid.Row="2" ColumnWidth="*"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0">
+            <DataGrid x:Name="tbl_Reportes" Grid.Row="2" ColumnWidth="*"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Margin="10,0" CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Calle" Binding="{Binding Calle}"/>
                     <DataGridTextColumn Header="Numero" Binding="{Binding Numero}"/>

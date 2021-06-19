@@ -53,7 +53,7 @@
 
         <Label Content="Delegación:" HorizontalAlignment="Left" Margin="25,413,0,0" VerticalAlignment="Top" FontSize="16"/>
         <ComboBox x:Name="cmb_delegacion" HorizontalAlignment="Left" Margin="149,417,0,0" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="tbl_VehiculosInvolucrados" HorizontalAlignment="Left" ColumnWidth="*" Height="100" Margin="53,130,0,0" VerticalAlignment="Top" Width="525"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="tbl_VehiculosInvolucrados" HorizontalAlignment="Left" ColumnWidth="*" Height="100" Margin="53,130,0,0" VerticalAlignment="Top" Width="525"  AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserSortColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Matricula" Binding="{Binding NumPlaca}"/>
                 <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"/>
