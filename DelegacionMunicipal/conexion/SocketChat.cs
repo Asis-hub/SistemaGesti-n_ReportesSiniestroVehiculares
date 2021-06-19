@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.conexion
 {
+    /// <summary>
+    /// Socket para conexion con servidor para todas las clases excepto el chat y pantalla de inicio de sesion 
+    /// </summary>
+
+
     public class SocketChat
     {
         public static bool conectado = false;

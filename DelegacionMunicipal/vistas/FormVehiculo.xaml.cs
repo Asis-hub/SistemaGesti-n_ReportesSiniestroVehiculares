@@ -133,6 +133,7 @@ namespace DelegacionMunicipal.vistas
             return true;
         }
 
+        //Metodo para limitar solo texto para el txt_Marca, solo se permiten letras
         private void txt_Marca_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -146,6 +147,8 @@ namespace DelegacionMunicipal.vistas
             }
         }
 
+        //Metodo para limitar solo texto para el txt_Color, solo se permiten letras
+
         private void txt_Color_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             foreach (var ch in e.Text)
@@ -158,6 +161,8 @@ namespace DelegacionMunicipal.vistas
                 }
             }
         }
+
+        //Metodo para limitar solo texto para el txt_Anio, solo se permiten numeros
 
         private void txt_Anio_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {

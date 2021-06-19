@@ -27,15 +27,12 @@ namespace DelegacionMunicipal.vistas
         private void cargarDatos()
         {
 
-            
             lbl_Calle.Content = reporteSiniestro.Calle.ToString();
             lbl_Numero.Content = reporteSiniestro.Numero.ToString();
             lbl_Colonia.Content = reporteSiniestro.Colonia.ToString();
             lbl_Delegacion.Content = reporteSiniestro.NombreDelegacion;
             lbl_Usuario.Content = reporteSiniestro.NombreUsuario;
             
-
-
             List<Vehiculo> listaVehiculos = VehiculoDAO.ConsultarVehiculosReporte(reporteSiniestro.IdReporte);
             foreach (Vehiculo vehiculo in listaVehiculos)
             {
@@ -64,6 +61,7 @@ namespace DelegacionMunicipal.vistas
 
             }
         }
+        // Método para cargar las 8 fotografías permitidas por reporte de siniestro vehicular
         private void cargarFotos(int idReporte)
         {
             List<Fotografia> fotografias = FotografiaDAO.ObtenerFotografias(idReporte);

@@ -12,7 +12,9 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Obtener, Insertar y Subir por FTP fotografías
+    /// </summary>
     class FotografiaDAO
     {
 

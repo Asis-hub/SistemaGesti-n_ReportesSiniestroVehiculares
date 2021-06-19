@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// POCO para Obtener el tipo de delegación de la BD
+    /// </summary>
     public class DelegacionTipo
     {
         private int idTipoDelegacion;

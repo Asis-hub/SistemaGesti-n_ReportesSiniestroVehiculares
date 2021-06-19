@@ -13,9 +13,18 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    /// <summary>
+    /// DAO de Fotografia para obtener e insertar fotografias
+    /// </summary>
+    
+
     class FotografiaDAO
     {
-
+        /// <summary>
+        /// Obtener lista de fotografias
+        /// </summary>
+        /// <param name="idReporte">identificador de reporte</param>
+        /// <returns>Lista de fotografias para solicitarlas al ftp</returns>
         public static List<Fotografia> ObtenerFotografias(int idReporte)
         {
             List<Fotografia> fotografias = new List<Fotografia>();
@@ -48,6 +57,12 @@ namespace DelegacionMunicipal.modelo.dao
 
         }
 
+        /// <summary>
+        /// Se suben fotos de lista proporcionada
+        /// </summary>
+        /// <param name="listaImagenes">Se inserta la lista de rutas de las imagenes</param>
+        /// <param name="idReporte">El reporte al que pertenecen las imagenes</param>
+        /// <returns>Se obtiene confirmacion</returns>
         public static int InsertarFotografias(List<string> listaImagenes ,int idReporte)
         {
             int respuesta = 0;
@@ -85,6 +100,12 @@ namespace DelegacionMunicipal.modelo.dao
             return respuesta;
         }
 
+        /// <summary>
+        /// Metodo para subir imagenes individuales
+        /// </summary>
+        /// <param name="origen">Ruta de imagen a subir</param>
+        /// <param name="nombre">Nombre como se llamara en la ruta de destino</param>
+        /// <returns>Confirmacion</returns>
         private static bool SubirImagenFTP(string origen, int nombre)
         {
             WebClient clienteWeb = ConexionFTP.GetConnection();

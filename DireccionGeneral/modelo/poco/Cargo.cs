@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// POCO para Registrar y Obtener tipo de cargo de los usuarios en la BD
+    /// </summary>
     public class Cargo
     {
         private int idCargo;

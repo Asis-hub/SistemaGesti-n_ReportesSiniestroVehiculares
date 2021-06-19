@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase POCO de los Vehiculos de los Conductores
+    /// </summary>
     public class Vehiculo
     {
         private string numPlaca;

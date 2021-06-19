@@ -24,6 +24,7 @@ namespace DireccionGeneral.vistas
             cargarFotos(idReporte);
         }
 
+        // Método que llena los campos para ver los detalles del reporte
         private void cargarDatos()
         {
 
@@ -61,6 +62,7 @@ namespace DireccionGeneral.vistas
 
             }
         }
+        // Método para cargar las 8 fotografías permitidas por reporte de siniestro vehicular
         private void cargarFotos(int idReporte)
         {
             List<Fotografia> fotografias = FotografiaDAO.ObtenerFotografias(idReporte);

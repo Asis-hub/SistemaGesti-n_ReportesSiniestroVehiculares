@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
-{
+{   /// <summary>
+    /// POCO para Registrar y Obtener fotografías
+    /// </summary>
     class Fotografia
     {
         private int idFotografia;

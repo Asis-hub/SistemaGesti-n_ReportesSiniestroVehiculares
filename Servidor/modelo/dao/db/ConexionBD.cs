@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao.db
 {
+    /// <summary>
+    /// ConexionBD proporciona métodos para la conexion de la base de datos
+    /// </summary>
     public class ConexionBD
     {
         private static String SERVER = "maisonbleue2020.ddns.net";
@@ -17,6 +20,10 @@ namespace Servidor.modelo.dao.db
         //private static String USER = "db_sgrsv";
         //private static String PASSWORD = "01052021";
 
+        /// <summary>
+        /// Proporciona una conexión a la base de datos
+        /// </summary>
+        /// <returns>una conexion SQLConnection de la base de datos</returns>
         public static SqlConnection GetConnection()
         {
             SqlConnection conexion = null;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.poco
 {
+    /// <summary>
+    /// POCO para Registrar y Obtener detalles de Reporte de Siniestro
+    /// </summary>
     public class ReporteSiniestro
     {
         private int idReporte;

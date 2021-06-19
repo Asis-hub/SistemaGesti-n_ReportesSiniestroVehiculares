@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que permite administrar los conductores
+    /// </summary>
     public class ConductorDAO
     {
+        /// <summary>
+        /// Obtiene una lista de los conductores registrados
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns>Lista de conductores</returns>
         public static List<Conductor> ConsultarConductores(string consulta)
         {
             List<Conductor> listaConductores = new List<Conductor>();
@@ -53,6 +61,11 @@ namespace Servidor.modelo.dao
             return listaConductores;
         }
 
+        /// <summary>
+        /// Registrar conductor en la base de datos
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int RegistrarConductor(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -82,6 +95,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Modifica el registro de un conductor
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns>1 - actualizado correctamente, -1 - Error al actualizar</returns>
         public static int EditarConductor(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -111,6 +129,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Elimina un coductor del registro
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns>1 - eliminado correctamente, -1 - Error al eliminar</returns>
         public static int EliminarConductor(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();

@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CargoDAO
     {
+        /// <summary>
+        /// Obtiene una lista de los cargos
+        /// </summary>
+        /// <param name="consulta">Consulta SQL</param>
+        /// <returns></returns>
         public static List<Cargo> ConsultarCargos(string consulta)
         {
             List<Cargo> lista = new List<Cargo>();

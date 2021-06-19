@@ -7,7 +7,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para registrar en un reporte a vehiculos involucrados en un siniestro
+    /// </summary>
     class VehiculosInvolucradosDAO
     {
         public static int InsertarVehiculo(string numeroPlaca, int idReporte)

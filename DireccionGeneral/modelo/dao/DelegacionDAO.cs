@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 
 namespace DireccionGeneral.modelo.dao
-{
+{   /// <summary>
+    /// DAO para Consultar delegaciones, Registrar Delegación, Editar Delegación, Eliminar Delegación
+    /// </summary>
     public class DelegacionDAO
     {
         public static List<Delegacion> GetDelegacionesLogin()

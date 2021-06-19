@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.servicios
 {
+    /// <summary>
+    /// Socket encargado de administrar el envio y recepción de mensaje de la sala de chat
+    /// </summary>
     public class SocketChat
     {
         public static Hashtable listaClientes = new Hashtable();
@@ -22,13 +25,15 @@ namespace Servidor.servicios
         private static bool encendido = false;
 
         public static bool Encendido { get => encendido; }
+        
+        /// <summary>
+        /// Enciende el socket  
+        /// </summary>
         public static void IniciarConexion()
         {
             serverSocket = new TcpListener(IPAddress.Parse(ip), puerto);
             clientSocket = default(TcpClient);
             listaClientes = new Hashtable();
-            
-
             serverSocket.Start();
             Console.WriteLine("Servidor de Chat iniciado");
             encendido = true;
@@ -36,6 +41,9 @@ namespace Servidor.servicios
             hiloRecibirConezion.Start();
         }
 
+        /// <summary>
+        /// Apaga el socket de la sala de chat
+        /// </summary>
         public static void TerminarConexion()
         {
             if (encendido)
@@ -45,6 +53,9 @@ namespace Servidor.servicios
             }
         }
 
+        /// <summary>
+        /// Recibe los mensaje que los clientes que se conectan a la sala de chat
+        /// </summary>
         private static void RecibirConexion()
         {
             while (encendido)
@@ -107,6 +118,10 @@ namespace Servidor.servicios
             CerrarConexionDeUsuarios();
         }
 
+        /// <summary>
+        /// Notifica a todos los clientes conectados del mensaje que se recibió
+        /// </summary>
+        /// <param name="mensaje">Mensaje recibido</param>
         public static void NotificarClientes(MensajeChat mensaje)
         {
             try
@@ -116,16 +131,14 @@ namespace Servidor.servicios
                     if(!(mensaje.Usuario == (string)item.Key && mensaje.Tipo == TipoMensaje.Conectarse))
                     {
                         List<TcpClient> listaSockets = (List<TcpClient>)item.Value;
-                        foreach (TcpClient broadcastSocket in listaSockets)
+                        foreach (TcpClient clienteSocket in listaSockets)
                         {
-                            NetworkStream broadcastStream = broadcastSocket.GetStream();
-                            Byte[] broadcastBytes = new byte[tamañoBuffer];
-
+                            NetworkStream clienteStream = clienteSocket.GetStream();
+                            Byte[] bytesMensaje = new byte[tamañoBuffer];
                             String msjTodos = JsonSerializer.Serialize(mensaje);
-
-                            broadcastBytes = Encoding.ASCII.GetBytes(msjTodos);
-                            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-                            broadcastStream.Flush();
+                            bytesMensaje = Encoding.ASCII.GetBytes(msjTodos);
+                            clienteStream.Write(bytesMensaje, 0, bytesMensaje.Length);
+                            clienteStream.Flush();
                         }
                     }
                 }
@@ -137,6 +150,9 @@ namespace Servidor.servicios
             }
         }
 
+        /// <summary>
+        /// Cuando se apaga el socket las conexiones de los usuario conectados son cerradas
+        /// </summary>
         public static void CerrarConexionDeUsuarios()
         {
             foreach (DictionaryEntry item in listaClientes)
@@ -152,34 +168,43 @@ namespace Servidor.servicios
         }
     }
 
+    /// <summary>
+    /// Clase a la que se le delega el control del usuario conectado
+    /// </summary>
     public class ClienteRemoto
     {
-        TcpClient clientSocket;
-        String nomCliente;
+        TcpClient clienteSocket;
+        String nombreCliente;
         int tamañoBuffer = 65537;
         bool conectado = false;
 
-        public void InicializarCliente(TcpClient clientSocket, string nomCliente)
+        /// <summary>
+        /// Inicia el control del usuario que se conecto a la sala de chat
+        /// </summary>
+        /// <param name="clientSocket">Socket del cliente que se conectó</param>
+        /// <param name="nombreCliente">nombre del cliente que se conectó</param>
+        public void InicializarCliente(TcpClient clientSocket, string nombreCliente)
         {
-            this.clientSocket = clientSocket;
-            this.nomCliente = nomCliente;
+            this.clienteSocket = clientSocket;
+            this.nombreCliente = nombreCliente;
             conectado = true;
             Thread hiloEscucharChat = new Thread(EscucharChat);
             hiloEscucharChat.Start();
         }
 
+        /// <summary>
+        /// Se encarga de recibir los mensaje que envie el cliente conectado y eviarselos a los demas clientes
+        /// </summary>
         private void EscucharChat()
         {
-            //SocketChat.Semaforo.WaitOne();
             EnviarListaUsuarioConectados();
-            //SocketChat.Semaforo.Reset();
             string datoFromCliente = "";
             while (conectado && SocketChat.Encendido)
             {
                 try
                 {
                     byte[] byteFrom = new byte[tamañoBuffer];
-                    NetworkStream networkStream = clientSocket.GetStream();
+                    NetworkStream networkStream = clienteSocket.GetStream();
                     int numBytes = networkStream.Read(byteFrom, 0, byteFrom.Length);
                     if(numBytes > 0)
                     {
@@ -187,13 +212,15 @@ namespace Servidor.servicios
                         datoFromCliente = Encoding.ASCII.GetString(byteFrom);
                         MensajeChat mensajeRecibido = JsonSerializer.Deserialize<MensajeChat>(datoFromCliente);
                         bool notificar = true;
+
+                        //El cliente se desconecta de la sala de chat
                         if (mensajeRecibido.Tipo == TipoMensaje.Desconectarse)
                         {
-                            ((List<TcpClient>)SocketChat.listaClientes[nomCliente]).Remove(clientSocket);
+                            ((List<TcpClient>)SocketChat.listaClientes[nombreCliente]).Remove(clienteSocket);
                             notificar = false; //No se notificara si cerro una sesion y tienes más abiertas
-                            if(((List<TcpClient>)SocketChat.listaClientes[nomCliente]).Count == 0)
+                            if(((List<TcpClient>)SocketChat.listaClientes[nombreCliente]).Count == 0)
                             {
-                                SocketChat.listaClientes.Remove(nomCliente);
+                                SocketChat.listaClientes.Remove(nombreCliente);
                                 notificar = true;//Se notificara que cerró la última sesión
                             }
                             conectado = false;
@@ -211,19 +238,20 @@ namespace Servidor.servicios
             }
         }
 
+        /// <summary>
+        /// Se le envia al usuario que se conecta la lista de usuarios conectados a la sala de chat
+        /// </summary>
         private void EnviarListaUsuarioConectados()
         {
             List<string> listaUsuarios = SocketChat.listaClientes.Keys.OfType<string>().ToList(); ;
             string usuarios = string.Join(";", listaUsuarios);
             MensajeChat mensajeListaUsuario = new MensajeChat();
-            mensajeListaUsuario.Usuario = nomCliente;
+            mensajeListaUsuario.Usuario = nombreCliente;
             mensajeListaUsuario.Tipo = TipoMensaje.ListaUsuarios;
             mensajeListaUsuario.Contenido = usuarios;
-
             string msjEnviar = JsonSerializer.Serialize(mensajeListaUsuario);
-
             Byte[] bytesEnviados = Encoding.ASCII.GetBytes(msjEnviar);
-            NetworkStream broadcastStream = clientSocket.GetStream();
+            NetworkStream broadcastStream = clienteSocket.GetStream();
             broadcastStream.Write(bytesEnviados, 0, bytesEnviados.Length);
             broadcastStream.Flush();
         }

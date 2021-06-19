@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace DelegacionMunicipal.modelo.dao
 {
+    /// <summary>
+    /// DAO para tabla que relaciona Vehiculos con Reportes
+    /// </summary>
+
     class VehiculosInvolucradosDAO
     {
+        
 
+        
         public static int InsertarVehiculo(string numeroPlaca, int idReporte)
         {
             int resultado = 0;
