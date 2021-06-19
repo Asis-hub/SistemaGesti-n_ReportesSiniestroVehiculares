@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase poco que 
+    /// </summary>
     class Fotografia
     {
         private int idFotografia;

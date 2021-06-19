@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase POCO de los conductores
+    /// </summary>
     public class Conductor
     {
         private string numeroLicencia;
         private string celular;
         private string nombreCompleto;
         private DateTime fechaNacimiento;
-
-        
 
         public Conductor()
         {

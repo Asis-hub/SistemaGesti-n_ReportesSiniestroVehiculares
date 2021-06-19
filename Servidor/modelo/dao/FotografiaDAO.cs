@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que administra el registro de fotografias
+    /// </summary>
     class FotografiaDAO
     {
-
+        /// <summary>
+        /// Obtiene lista de Fotografias
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Lista de fotografias de un reporte</returns>
         public static List<Fotografia> ObtenerFotografias(string consulta)
         {
             List<Fotografia> fotografias = new List<Fotografia>();
@@ -55,6 +62,11 @@ namespace Servidor.modelo.dao
             return fotografias;
         }
 
+        /// <summary>
+        /// Guarda el registro de una fotografia de un reporte
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int InsertarFotografia(string consulta)
         {
             SqlConnection conexionDB = ConexionBD.GetConnection();
@@ -87,9 +99,6 @@ namespace Servidor.modelo.dao
                     conexionDB.Close();
                 }
             }
-
-
-
             return identificador;
         }
     }

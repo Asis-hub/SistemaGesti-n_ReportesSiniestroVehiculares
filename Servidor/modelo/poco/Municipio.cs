@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase POCO de municipio
+    /// </summary>
     public class Municipio
     {
         private int idMunicipio;

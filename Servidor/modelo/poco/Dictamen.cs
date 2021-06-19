@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.poco
 {
+    /// <summary>
+    /// Clase POCO del Dictamen de un reporte de siniestro
+    /// </summary>
     public class Dictamen
     {
         int folio;

@@ -16,6 +16,9 @@ using System.Windows;
 
 namespace Servidor.servicios
 {
+    /// <summary>
+    /// Socket encargado de atender las peticiones de administracion de los registro de la base de datos
+    /// </summary>
     public class SocketBD
     {
         private Socket socketServer;
@@ -33,6 +36,9 @@ namespace Servidor.servicios
             encendido = false;
         }
 
+        /// <summary>
+        /// Enciende el socket
+        /// </summary>
         public void IniciarConexion()
         {
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -44,6 +50,11 @@ namespace Servidor.servicios
             encendido = true;
         }
 
+        /// <summary>
+        /// Envia mensaje al socket del cliente
+        /// </summary>
+        /// <param name="socketCliente">Cliente que realizó la petición</param>
+        /// <param name="mensaje">Mensaje que se le enviará al cliente</param>
         private void EnviarMensaje(Socket socketCliente, string mensaje)
         {
             //Si oucrre un error solo se enviaria <EOF>
@@ -52,6 +63,9 @@ namespace Servidor.servicios
             socketCliente.Send(msgRespuesta, 0, msgRespuesta.Length, 0);
         }
 
+        /// <summary>
+        /// Recibe los mensaje del lado del cliente
+        /// </summary>
         private void RecibirMensaje()
         {
             while (encendido)
@@ -103,6 +117,9 @@ namespace Servidor.servicios
 
         }
 
+        /// <summary>
+        /// Apaga el la el socket
+        /// </summary>
         public void TerminarConexion()
         {
             if (encendido)

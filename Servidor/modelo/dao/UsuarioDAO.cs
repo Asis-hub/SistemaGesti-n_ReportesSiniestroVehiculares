@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que administra a los usuarios
+    /// </summary>
     public class UsuarioDAO
     {
+        /// <summary>
+        /// Permite a un usuario ingresar al sistema
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Objeto tipo usuario si se encuntra registrado</returns>
         public static Usuario getInicioSesion(string consulta)
         {
             Usuario usuario = null;
@@ -55,6 +63,11 @@ namespace Servidor.modelo.dao
             return usuario;
         }
 
+        /// <summary>
+        /// Obtiene lista de los usuarios registrados
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns></returns>
         public static List<Usuario> ConsultarUsuarios(string consulta)
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
@@ -100,6 +113,11 @@ namespace Servidor.modelo.dao
             return listaUsuarios;
         }
 
+        /// <summary>
+        /// Registra un usuario
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int RegistrarUsuario(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -129,6 +147,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns></returns>
         public static int EditarUsuario(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -158,6 +181,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Elimina un usuario registrado
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns></returns>
         public static int EliminarUsuario(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();

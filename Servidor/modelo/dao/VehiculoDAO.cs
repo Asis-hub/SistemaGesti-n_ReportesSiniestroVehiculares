@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que administra los vehiculos.Permite registrar, editar y eliminar vehiculos
+    /// </summary>
     public class VehiculoDAO
     {
+        /// <summary>
+        /// Lista de vehiculos registrados
+        /// </summary>
+        /// <param name="consulta">Consulta en formato en SQL</param>
+        /// <returns>Lista de vehiculos</returns>
         public static List<Vehiculo> ConsultarVehiculos(string consulta)
         {
             List<Vehiculo> listaVehiculos = new List<Vehiculo>();
@@ -57,6 +65,11 @@ namespace Servidor.modelo.dao
             return listaVehiculos;
         }
 
+        /// <summary>
+        /// Permite registrar un nuevo vehiculo
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int RegistrarVehiculo(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -86,6 +99,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Edita un vehiculo registrado
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - editado correctamente, -1 - Error al editar</returns>
         public static int EditarVehiculo(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
@@ -115,6 +133,11 @@ namespace Servidor.modelo.dao
             return resultado;
         }
 
+        /// <summary>
+        /// Elimina el registro de un Vehiculo
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - eliminado correctamente, -1 - Error al eliminar</returns>
         public static int EliminarVehiculo(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();

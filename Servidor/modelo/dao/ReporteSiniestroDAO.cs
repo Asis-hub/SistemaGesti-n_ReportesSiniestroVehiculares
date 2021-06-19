@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que permite el administrar los reportes de Siniestor
+    /// </summary>
     public class ReporteSiniestroDAO
     {
         public static List<ReporteSiniestro> ConsultarReportes(string consulta)
@@ -60,6 +63,11 @@ namespace Servidor.modelo.dao
             return listaReportes;
         }
 
+        /// <summary>
+        /// Obtiene un reporte de acuredo al id espicificado en la consulta
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Reporte de Siniestro</returns>
         public static ReporteSiniestro ObtenerReporte(string consulta)
         {
             ReporteSiniestro reporteSiniestro = new ReporteSiniestro();
@@ -95,11 +103,14 @@ namespace Servidor.modelo.dao
             {
                 Console.WriteLine();
             }
-
-
             return reporteSiniestro;
         }
 
+        /// <summary>
+        /// Registra el reporte de un siniestro
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrar</returns>
         public static int RegistrarReporte(String consulta)
         {
             SqlConnection conexionDB = ConexionBD.GetConnection();
@@ -134,6 +145,11 @@ namespace Servidor.modelo.dao
             return identificador;
         }
 
+        /// <summary>
+        /// Elimina un reporte de siniestro
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns></returns>
         public static int EliminarReporte(string consulta)
         {
             SqlConnection conexionDB = ConexionBD.GetConnection();

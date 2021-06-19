@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Servidor.modelo.dao
 {
+    /// <summary>
+    /// Clase DAO que permite administrar los dictamentes
+    /// </summary>
     public class DictamenDAO
     {
+        /// <summary>
+        /// Obtener Dictamen de un ReporteSiniestro
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>Dictame de un reporte</returns>
         public static Dictamen ConsultarDictamenDeReporte(string consulta)
         {
             Dictamen dictamen = null;
@@ -56,6 +64,11 @@ namespace Servidor.modelo.dao
             return dictamen;
         }
 
+        /// <summary>
+        /// Registra Dictamen de un Reporte
+        /// </summary>
+        /// <param name="consulta">Consulta en formato SQL</param>
+        /// <returns>1 - registrado correctamente, -1 - Error al registrarr</returns>
         public static int RegistrarDictamen(string consulta)
         {
             SqlConnection conexionBD = ConexionBD.GetConnection();
