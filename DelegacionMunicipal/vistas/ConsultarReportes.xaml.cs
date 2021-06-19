@@ -61,6 +61,7 @@ namespace DelegacionMunicipal.vistas
 
         }
 
+        // Metodo para determinar los filtros
         private void btn_BuscarReportes_Click(object sender, RoutedEventArgs e)
         {
             int dictaminado = 0;
